@@ -2,13 +2,13 @@
 
 **This has been tested with reveal.js 3.6.0**
 
-1. Make a copy of the 00_Template folder, e.g. 01_MyModule
+1. Make a copy of the `00_Template` folder. As an example, we will call ours `01_MyModule`
 
 2. Download the latest release version of reveal.js from https://github.com/hakimel/reveal.js/releases
 
 3. Unzip and drop the contents into the `reveal.js` folder, e.g `01_MyModule/reveal.js`
 
-4. Replace `index.html` with index.html.template
+4. Replace `index.html` with `index.html.template`, which uses the stackup theme.
 
 5. The resulting folder should look like this:
 
