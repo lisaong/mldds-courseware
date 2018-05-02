@@ -24,34 +24,79 @@
     <body>
         <div class="reveal">
             <div class="slides">
-                <section> Introduction to Time Series Forecasting </section>
                 <section data-markdown>
                     <textarea data-template>
-                        ## Time Series
-
-                        Observations at regular time intervals
-
-                        ![time series](https://i.stack.imgur.com/1bpSS.png)
+                        ## Time Series Forecasting
                     </textarea>
                 </section>
                 <section data-markdown>
                     <textarea data-template>
-                        ## Time Series Types
+                        ## What is a time series
 
-                        * Univariate: forecast 1 variable
-                          * Stock price vs time
+                        A set of observations at regular time intervals
 
-                        * Multivariate: model the interactions of multiple variables
-                          * Temperature, humidity, and energy use vs time
+                        ![time series](https://i.stack.imgur.com/1bpSS.png)
                     </textarea>
                 </section>
                 <section>
                     <section data-markdown>
                         <textarea data-template>
-                            ## Time Series Components
+                            ## Types of time series
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ## Univariate
 
-                            Decomposition: split time series into components
-                            <img src="https://assets.digitalocean.com/articles/eng_python/Timeseries/part_1_fig_2.png" width="500"/>
+                            Forecast a single value
+
+                            What's the price of AAPL tomorrow?
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ## Multivariate
+                            Model interactions between multiple variables
+
+                            What's the pollution level at 7am, based on today's temperature, humidity, and UV index?
+                        </textarea>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ## Time series decomposition
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ## Components
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Trend</td>
+                                        <td>long-term progression</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cyclical</td>
+                                        <td>long-term, repeated, non-periodic fluctuations</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Seasonal</td>
+                                        <td>fixed and periodic fluctuations</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Noise</td>
+                                        <td>random, residual, remainder</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ## Decomposition
+                            ![decomposition](https://assets.digitalocean.com/articles/eng_python/Timeseries/part_1_fig_2.png)
                         </textarea>
                     </section>
                     <section data-markdown>
@@ -59,7 +104,7 @@
                             ## Additive Model
                             Linear, consistent changes by the same amount
                             ![additive](http://support.minitab.com/en-us/minitab-express/1/time_series_plot_additive_data.png)
-                            <pre><code class="nohighlight">y(t) = Level + Trend + Seasonality + Noise</code></pre>
+                            <pre><code class="nohighlight">y(t) = Trend + Cyclical + Seasonal + Noise</code></pre>
                         </textarea>
                     </section>
                     <section data-markdown>
@@ -67,7 +112,7 @@
                             ## Multiplicative Model
                             Non-linear frequency and amplitude changes
                             ![multiplicative](http://support.minitab.com/en-us/minitab-express/1/time_series_plot_multiplicative_data.png)
-                            <pre><code class="nohighlight">y(t) = Level * Trend * Seasonality * Noise</code></pre>
+                            <pre><code class="nohighlight">y(t) = Trend * Cyclical * Seasonal * Noise</code></pre>
                         </textarea>
                     </section>
                 </section>
