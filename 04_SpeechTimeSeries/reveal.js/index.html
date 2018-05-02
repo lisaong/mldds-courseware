@@ -24,13 +24,94 @@
     <body>
         <div class="reveal">
             <div class="slides">
-                <section> Slide 1 </section>
-                <section> Slide 2 </section>
+                <section> Introduction to Time Series Forecasting </section>
                 <section data-markdown>
                     <textarea data-template>
-                        ## Page title
-                
+                        ## Time Series
+
+                        Observations at regular time intervals
+
+                        ![time series](https://i.stack.imgur.com/1bpSS.png)
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Time Series Types
+
+                        * Univariate: forecast 1 variable
+                          * Stock price vs time
+
+                        * Multivariate: model the interactions of multiple variables
+                          * Temperature, humidity, and energy use vs time
+                    </textarea>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ## Time Series Components
+
+                            Decomposition: split time series into components
+                            <img src="https://assets.digitalocean.com/articles/eng_python/Timeseries/part_1_fig_2.png" width="500"/>
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ## Additive Model
+                            Linear, consistent changes by the same amount
+                            ![additive](http://support.minitab.com/en-us/minitab-express/1/time_series_plot_additive_data.png)
+                            <pre><code class="nohighlight">y(t) = Level + Trend + Seasonality + Noise</code></pre>
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ## Multiplicative Model
+                            Non-linear frequency and amplitude changes
+                            ![multiplicative](http://support.minitab.com/en-us/minitab-express/1/time_series_plot_multiplicative_data.png)
+                            <pre><code class="nohighlight">y(t) = Level * Trend * Seasonality * Noise</code></pre>
+                        </textarea>
+                    </section>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Forecasting Models
+
+                        * Statistical Analysis
+                        * Recurrent Neural Networks
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## ARIMA
+
+                        Some text here
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Challenges of Time Series Forecasting
+
                         A paragraph with some text and a [link](http://hakim.se).
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## LSTM
+
+                        Some text here
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Comparison
+
+                        ARIMA vs. LSTM
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Workshop
+
+                        Some text here
                     </textarea>
                 </section>
             </div>
