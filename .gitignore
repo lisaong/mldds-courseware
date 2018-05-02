@@ -1,0 +1,15 @@
+desktop.ini
+*.docx
+*.xlsx
+*.gsheet
+*.gform
+*.gdoc
+*.log
+*.pdf
+*.tmp
+~*.*
+
+# Ignore the drop-in reveal.js, except for content we create
+*/reveal.js/*
+!*/reveal.js/index.html
+!*/reveal.js/assets/
