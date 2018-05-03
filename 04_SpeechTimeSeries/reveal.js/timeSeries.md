@@ -145,7 +145,7 @@ $X\_t=c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i X\_{t-i} + \sum\_{i=1}^q\the
 
 $ARIMA\(p, d, q\):$
 
-$\biggl(1-\sum\_{i=1}^p\varphi\_iB\_i\biggr)(1 - B)^dX\_t = c + \biggl(1 + \sum\_{i=1}^q\theta\_iB^i\biggr)\varepsilon\_t$
+$\biggl(1-\sum\_{i=1}^p\varphi\_iB^i\biggr)(1 - B)^dX\_t = c + \biggl(1 + \sum\_{i=1}^q\theta\_iB^i\biggr)\varepsilon\_t$
 
 * $p$ = order of $AR$ part
 * $d$ = degree of differentiation
