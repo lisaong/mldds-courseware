@@ -150,7 +150,7 @@ $\biggl(1-\sum\_{i=1}^p\varphi\_iB^i\biggr)(1 - B)^dX\_t = c + \biggl(1 + \sum\_
 * $p$ = order of $AR$ part
 * $d$ = degree of differentiation
 * $q$ = order of $MA$ part
-* $B$ = lag operator (shifts $X\_t$ back in time)
+* $B^i$ = lag operator (adds lag of $i$ to $X\_t$)
 * ... rest same as $MA$, $AR$
 
 --
