@@ -165,7 +165,7 @@ $$X'\_t = c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i X'\_{t-i} + \sum\_{i=1}^
 ### Stationarity
 
 * Statistical techniques (AR, MA, ...) may expect a stationary time series
-* Stationary time series: mean, variance, covariance don't depend on time
+  * Stationarity: mean, variance, covariance are time-invariant
 * Solution: differentiation
   * Transforms a non-stationary series to stationary 
 
@@ -180,7 +180,7 @@ Spot the stationary series...
 --
 
 * Differentiation degree $d$ in $ARIMA\(p,q,d\)$
-* Generalized form of other time series models
+* Can represent other series
 
 | Series | Model |
 |--|--|
