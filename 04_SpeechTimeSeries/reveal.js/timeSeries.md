@@ -74,12 +74,10 @@ Non-linear changes in frequency and magnitude (e.g. quadratic, exponential)
 
 ### Forcasting models
 
-* Statistical
-  * AR, MA, ARMA, ARIMA
-  * VAR
-* LSTM
+* Statistical methods: AR, MA, ARMA, ARIMA, VAR
+* Deep learning: LSTM
 
---
+---
 
 ### Autoregressive model
 
@@ -228,6 +226,8 @@ Basically $AR(p)$ for multivariate time series (vector $Y\_t$)
 * Partial Autocorrelation
 
 https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-autocorrelation/
+
+---
 
 ### LSTM
 
