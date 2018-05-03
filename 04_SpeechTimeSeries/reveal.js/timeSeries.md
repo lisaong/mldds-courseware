@@ -81,13 +81,13 @@ Non-linear changes in frequency and magnitude (e.g. quadratic, exponential)
 
 ### Autoregressive model
 
-$AR(p): X\_t=c + \sum\_{i=1}^p \varphi\_iX\_{t-i} + \varepsilon\_t$
+$AR\(p\): X\_t=c + \sum\_{i=1}^p \varphi\_iX\_{t-i} + \varepsilon\_t$
 
 Output depends on past values + white noise
 
 --
 
-$AR(p): X\_t=c + \sum\_{i=1}^p \varphi\_iX\_{t-i} + \varepsilon\_t$
+$AR\(p\): X\_t=c + \sum\_{i=1}^p \varphi\_iX\_{t-i} + \varepsilon\_t$
 
 * $X\_t$ = current value
 * $X\_{t-i}$ = past values
@@ -98,8 +98,8 @@ $AR(p): X\_t=c + \sum\_{i=1}^p \varphi\_iX\_{t-i} + \varepsilon\_t$
 
 --
 
-* $AR(0): X\_t=c + \varepsilon\_t$
-* $AR(1): X\_t=c + \varphi\_1X\_{t-1} + \varepsilon\_t$
+* $AR\(0\): X\_t=c + \varepsilon\_t$
+* $AR\(1\): X\_t=c + \varphi\_1X\_{t-1} + \varepsilon\_t$
 * ...
 
 <img src="assets/time-series/wikipedia_685px-ArTimeSeries.svg.png" height=350px/>
@@ -108,13 +108,13 @@ $AR(p): X\_t=c + \sum\_{i=1}^p \varphi\_iX\_{t-i} + \varepsilon\_t$
 
 ### Moving-average model
 
-$MA(p): X\_t=\mu + \varepsilon\_t + \sum\_{i=1}^p\theta\_i\varepsilon\_{t-i}$
+$MA\(p\): X\_t=\mu + \varepsilon\_t + \sum\_{i=1}^p\theta\_i\varepsilon\_{t-i}$
 
 Output depends on past + current white noise
 
 --
 
-$MA(p): X\_t=\mu + \varepsilon\_t + \sum\_{i=1}^p\theta\_i\varepsilon\_{t-i}$
+$MA\(p\): X\_t=\mu + \varepsilon\_t + \sum\_{i=1}^p\theta\_i\varepsilon\_{t-i}$
 
 * $X\_t$ = current value
 * $p$ = order (time lag)
@@ -124,9 +124,9 @@ $MA(p): X\_t=\mu + \varepsilon\_t + \sum\_{i=1}^p\theta\_i\varepsilon\_{t-i}$
 
 --
 
-* $MA(0): X\_t=\mu + \varepsilon\_t$
-* $MA(1): X\_t=\mu + \varepsilon\_t + \theta\_1\varepsilon\_{t-1}$
-* $MA(2): X\_t=\mu + \varepsilon\_t + \theta\_1\varepsilon\_{t-1} + \theta\_2\varepsilon\_{t-2}$
+* $MA\(0\): X\_t=\mu + \varepsilon\_t$
+* $MA\(1\): X\_t=\mu + \varepsilon\_t + \theta\_1\varepsilon\_{t-1}$
+* $MA\(2\): X\_t=\mu + \varepsilon\_t + \theta\_1\varepsilon\_{t-1} + \theta\_2\varepsilon\_{t-2}$
 * ...
 
 <img src="assets/time-series/otexts_maq-570x306.png" height=350px/>
@@ -135,17 +135,17 @@ $MA(p): X\_t=\mu + \varepsilon\_t + \sum\_{i=1}^p\theta\_i\varepsilon\_{t-i}$
 
 #### Autoregressive-moving-average model
 
-$$ARMA(p, q): AR(p) + MA(q)$$
+$ARMA\(p, q\): AR\(p\) + MA\(q\)$
 
-$$X\_t=c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i B^i X\_{t-i} + \sum\_{i=1}^q\theta\_i\varepsilon\_{t-i}$$
+$X\_t=c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i X\_{t-i} + \sum\_{i=1}^q\theta\_i\varepsilon\_{t-i}$
 
 --
 
 ##### Autoregressive-integrated-moving-average
 
-$$ARIMA(p, d, q):$$
+$ARIMA\(p, d, q\):$
 
-$$\biggl(1-\sum\_{i=1}^p\varphi\_iB\_i\biggr)(1 - B)^dX\_t = c + \biggl(1 + \sum\_{i=1}^q\theta\_iB^i\biggr)\varepsilon\_t$$
+$\biggl(1-\sum\_{i=1}^p\varphi\_iB\_i\biggr)(1 - B)^dX\_t = c + \biggl(1 + \sum\_{i=1}^q\theta\_iB^i\biggr)\varepsilon\_t$
 
 * $p$ = order of $AR$ part
 * $d$ = degree of differentiation
@@ -155,9 +155,9 @@ $$\biggl(1-\sum\_{i=1}^p\varphi\_iB\_i\biggr)(1 - B)^dX\_t = c + \biggl(1 + \sum
 
 --
 
-$$X'\_t = c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i B^i X'\_{t-i} + \sum\_{i=1}^q\theta\_i\varepsilon\_{t-i}$$
+$$X'\_t = c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i X'\_{t-i} + \sum\_{i=1}^q\theta\_i\varepsilon\_{t-i}$$
 
-* $X'\_t$ = time series, differentiated $d$ times
+* $X'\_t$ = time series $X\_t$, differentiated $d$ times
 * Why differentiated?
 
 --
@@ -166,10 +166,12 @@ $$X'\_t = c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i B^i X'\_{t-i} + \sum\_{i
 
 * Statistical techniques (AR, MA, ...) may expect a stationary time series
 * Stationary time series: mean, variance, covariance don't depend on time
+* Solution: differentiation
+  * Transforms a non-stationary series to stationary 
 
 --
 
-### Which are stationary?
+Spot the stationary series...
 
 <img src="assets/time-series/otexts_stationary-570x533.png" height=400px/>
 
@@ -177,35 +179,36 @@ $$X'\_t = c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i B^i X'\_{t-i} + \sum\_{i
 
 --
 
-* Differentiation transforms a non-stationary series to stationary ($d$ in ARIMA)
+* Differentiation degree $d$ in $ARIMA\(p,q,d\)$
+* Generalized form of other time series models
 
 | Series | Model |
 |--|--|
-| White noise | $ARIMA(0,0,0)$ |
-| Random walk | $ARIMA(0,1,0), c = 0$ |
-| Random walk + drift | $ARIMA(0,1,0), c \neq 0$ |
-| $AR(p)$ | $ARIMA(p,0,0)$ |
-| $MA(q)$ | $ARIMA(0,0,q)$ |
+| White noise | $ARIMA\(0,0,0\)$ |
+| Random walk | $ARIMA\(0,1,0\), c = 0$ |
+| Random walk + drift | $ARIMA\(0,1,0\), c \neq 0$ |
+| $AR\(p\)$ | $ARIMA\(p,0,0\)$ |
+| $MA\(q\)$ | $ARIMA\(0,0,q\)$ |
 
 --
 
 ### ARIMA variants
 
-* Seasonal ARIMA: $SARIMA(p, d, q)(P, D, Q)\_m$
+* Seasonal ARIMA: $SARIMA\(p, d, q\)\(P, D, Q\)\_m$
   * $m$ = number of periods per season (e.g. weekly = 52)
-  * $ARIMA(p, d, q)$ multiplied by $ARIMA(P, D, Q)\_m$
+  * $ARIMA\(p, d, q\)$ multiplied by $ARIMA\(P, D, Q\)\_m$
 
-* ARIMAX: ARIMA + explanatory variables
+* ARIMAX: ARIMA + eXplanatory variable $X\beta$
 
 --
 
 ### Vector Autoregression
 
-$$AR(p): X\_t=c + \sum\_{i=1}^p \varphi\_iX\_{t-i} + \varepsilon\_t$$
+$AR\(p\): X\_t=c + \sum\_{i=1}^p \varphi\_iX\_{t-i} + \varepsilon\_t$
 
-$$VAR(p): Y\_t=c + \sum\_{i=1}^p \Pi\_iY\_{t-i} + \epsilon\_t$$
+$VAR\(p\): Y\_t=c + \sum\_{i=1}^p \Pi\_iY\_{t-i} + \epsilon\_t$
 
-Basically $AR(p)$ for multivariate time series (vector $Y\_t$)
+Basically $AR\(p\)$ for multivariate time series (vector $Y\_t$)
 
 --
 
@@ -213,9 +216,11 @@ Basically $AR(p)$ for multivariate time series (vector $Y\_t$)
 
 * Transformation: [pandas.series](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html)
 
-* Time Series Analysis: [statsmodels.tsa](https://www.statsmodels.org/stable/tsa.html)
+* Statistical Analysis: [statsmodels.tsa](https://www.statsmodels.org/stable/tsa.html)
 
-* Plotting: [statsmodels.graphics.tsaplots](http://www.statsmodels.org/dev/graphics.html#module-statsmodels.graphics)
+* Decomposition: statsmodels.tsa.seasonal_decompose
+
+* Plots: [statsmodels.graphics.tsaplots](http://www.statsmodels.org/dev/graphics.html#module-statsmodels.graphics)
 
 --
 
