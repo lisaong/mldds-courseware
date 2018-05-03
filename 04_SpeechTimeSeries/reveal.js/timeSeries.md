@@ -1,3 +1,22 @@
+### Autoregressive (AR) model
+
+$AR(p): X\_t=c + \sum\_{i=1}^p \varphi\_i B^i X\_{t-i} + \varepsilon\_t$
+
+* X\_t = current value
+* X\_{t-i} = past values
+* p = order (number of past values)
+* c = constant
+* $\varepsilon\_t$ = noise
+* $\varphi\_1,...\varphi\_p$ = parameters
+
+--
+
+* $AR(0): X\_t=c + \varepsilon\_t$
+* $AR(1): X\_t=c + \varphi\_1 B^i X\_{t-1} + \varepsilon\_t$
+* ...
+
+---
+
 ### What's a time series
 
 A set of observations at regular time intervals
@@ -82,7 +101,8 @@ Non-linear (e.g. quadratic, exponential), changes in frequency and magnitude
 ### Forcasting models
 
 * Statistical
-  * AR, ARMA, ARIMA, VARS ...
+  * AR, MA, ARMA, ARIMA
+  * VARS
 * Deep Learning
   * Long Short Term Memory
 
@@ -92,10 +112,8 @@ Non-linear (e.g. quadratic, exponential), changes in frequency and magnitude
 
 Autoregressive (AR) model
 
-<p>
-When $\(a \ne 0\)$, there are two solutions to $\(ax^2 + bx + c = 0\)$ and they are
-$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
-</p>
+$$X\_t=c + \sum\_{i=1}^p \varphi\_i B^i X\_{t-1} + \varepsilon\_t$$
+
 ---
 
 ### VARs
