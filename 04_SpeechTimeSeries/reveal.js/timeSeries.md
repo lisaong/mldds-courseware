@@ -1,4 +1,4 @@
-## What is a time series
+#### What's a time series
 
 A set of observations at regular time intervals
 
@@ -6,36 +6,27 @@ A set of observations at regular time intervals
 
 ---
 
-## Types of time series
-
----
-
-## Univariate
+#### Univariate time series
 Forecast a single value
 
-Price of AAPL tomorrow?
+> What's the price of AAPL next Friday?
 
 ---
 
-## Multivariate
+#### Multivariate time series
 Model interactions between multiple variables
 
-What's the pollution level at 7am tomorrow ...
-
-based on 24 hour temperature, humidity, and UV index history?
-
----
-
-## Time series components
+> What's the pollution level tomorrow,
+> given today's temperature, humidity, and UV?
 
 ---
 
-## Components
+#### Components of a time series
 <table>
     <tbody>
         <tr>
             <td>Trend</td>
-            <td>long-term progression</td>
+            <td>the long-term progression</td>
         </tr>
         <tr>
             <td>Cyclical</td>
@@ -43,7 +34,7 @@ based on 24 hour temperature, humidity, and UV index history?
         </tr>
         <tr>
             <td>Seasonal</td>
-            <td>fixed and periodic fluctuations</td>
+            <td>fixed (short or long) term, periodic fluctuations</td>
         </tr>
         <tr>
             <td>Noise</td>
@@ -54,60 +45,64 @@ based on 24 hour temperature, humidity, and UV index history?
 
 ---
 
-## Decomposition
+#### Decomposition
 
-Factoring a time series into its components
-
-Two models: additive, multiplicative
+Factoring a time series into components
 
 <img src="assets/time-series/digitalOcean_decomposition.png" width="400"/>
 
 ---
 
-## Additive Model
+#### Additive model
+<pre><code class="nohighlight">y(t) = Trend + Cyclical + Seasonal + Noise</code></pre>
+
 Linear, consistent changes by the same amount
 
 ![additive](assets/time-series/minitab_time_series_plot_additive_data.png)
-<pre><code class="nohighlight">y(t) = Trend + Cyclical + Seasonal + Noise</code></pre>
 
 ---
 
-## Multiplicative Model
-Non-linear frequency and amplitude changes
-![multiplicative](assets/time-series/minitab_time_series_plot_multiplicative_data.png)
+#### Multiplicative model
 <pre><code class="nohighlight">y(t) = Trend * Cyclical * Seasonal * Noise</code></pre>
 
----
+Non-linear (e.g. quadratic, exponential), changes in frequency and magnitude
 
-## Forecasting
-
-* Statistical Analysis
-* LSTM
+![multiplicative](assets/time-series/minitab_time_series_plot_multiplicative_data.png)
 
 ---
 
-## ARIMA
+#### Forcasting models
+
+* Statistical
+  * ARIMA
+  * VARS
+* Deep Learning
+  * LSTM
 
 ---
 
-## VARs
+#### ARIMA
 
 ---
 
-## LSTM
+#### VARs
 
 ---
 
-## Comparison of approaches
+#### LSTM
 
 ---
 
-## Challenges of Time Series Forecasting
+#### Comparison
+
+---
+
+#### Challenges
 
 A paragraph with some text and a [link](http://hakim.se).
 
 ---
 
-## Workshop
+#### Workshop
 
 Some text here
