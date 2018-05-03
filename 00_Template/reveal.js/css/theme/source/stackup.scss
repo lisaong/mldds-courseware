@@ -57,6 +57,6 @@ section.has-dark-background {
 }
 
 body {
-    @include logo( '../../assets/Stackup_Logo_Small.png', 120px );
+    @include logo( '../../assets/Stackup_Logo_Small.png', 10% );
 }
 
