@@ -12,6 +12,9 @@ desktop.ini
 # Ignore the drop-in reveal.js, except for content we create
 */reveal.js/*
 !*/reveal.js/index.html*
+!*/reveal.js/*.md
+*/reveal.js/CONTRIBUTING.md
+*/reveal.js/README.md
 !*/reveal.js/assets/
 
 # Ignore the drop-in reveal.js css files, except for the ones we create

@@ -51,12 +51,12 @@ section.has-dark-background {
 // Generates the presentation background with a logo image
 @mixin logo( $imageUrl, $size ) {
     background-image: url($imageUrl);
-    background-size: $size;
+    background-size: $size;  
     background-position: top 1% left 1%;
     background-repeat: no-repeat;
 }
 
 body {
-    @include logo( '../../assets/Stackup_Logo_Small.png', 120px );
+    @include logo( '../../assets/Stackup_Logo_Small.png', 10% );
 }
 

@@ -24,14 +24,19 @@
     <body>
         <div class="reveal">
             <div class="slides">
-                <section> Slide 1 </section>
-                <section> Slide 2 </section>
                 <section data-markdown>
-                    <textarea data-template>
-                        ## Page title
-                
-                        A paragraph with some text and a [link](http://hakim.se).
-                    </textarea>
+                    MLDDS module 4
+
+                    ### Time Series Forecasting
+                </section>
+                <section data-markdown="timeSeries.md" data-separator-vertical="--">
+                </section>
+                <section data-markdown>
+                    MLDDS module 4
+
+                    ### Speech Recognition
+                </section>
+                <section data-markdown="speech.md" data-separator-vertical="--">
                 </section>
             </div>
         </div>
@@ -44,11 +49,16 @@
             // - https://github.com/hakimel/reveal.js#configuration
             // - https://github.com/hakimel/reveal.js#dependencies
             Reveal.initialize({
+                math: {
+                    mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js',
+                    config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+                },
                 dependencies: [
                     { src: 'plugin/markdown/marked.js' },
                     { src: 'plugin/markdown/markdown.js' },
                     { src: 'plugin/notes/notes.js', async: true },
-                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/math/math.js', async: true }
                 ]
             });
         </script>
