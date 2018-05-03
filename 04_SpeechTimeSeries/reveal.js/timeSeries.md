@@ -152,10 +152,11 @@ $\biggl(1-\sum\_{i=1}^p\varphi\_iB^i\biggr)(1 - B)^dX\_t = c + \biggl(1 + \sum\_
 * $q$ = order of $MA$ part
 * $B^i$ = lag operator (adds lag of $i$ to $X\_t$)
 * ... rest same as $MA$, $AR$
-
 --
 
-$$X'\_t = c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i X'\_{t-i} + \sum\_{i=1}^q\theta\_i\varepsilon\_{t-i}$$
+$ARIMA\(p, d, q\):$
+
+$X'\_t = c + \varepsilon\_t + \sum\_{i=1}^p \varphi\_i X'\_{t-i} + \sum\_{i=1}^q\theta\_i\varepsilon\_{t-i}$
 
 * $X'\_t$ = time series $X\_t$, differentiated $d$ times
 * Why differentiated?
