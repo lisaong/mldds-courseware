@@ -41,7 +41,7 @@ Decomposition: splits a time series into components
 
 ### Cyclical
 
-![cyclical](assets/time-series/slideplayer_slide_5.jpg)
+<img src="assets/time-series/slideplayer_cyclical_slide_5.jpg" height="400px"/>
 
 --
 
