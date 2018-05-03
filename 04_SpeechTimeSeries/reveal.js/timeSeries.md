@@ -1,4 +1,4 @@
-#### What's a time series
+### What's a time series
 
 A set of observations at regular time intervals
 
@@ -6,14 +6,14 @@ A set of observations at regular time intervals
 
 ---
 
-#### Univariate time series
+### Univariate time series
 Forecast a single value
 
 > What's the price of AAPL next Friday?
 
 ---
 
-#### Multivariate time series
+### Multivariate time series
 Model interactions between multiple variables
 
 > What's the pollution level tomorrow,
@@ -21,7 +21,15 @@ Model interactions between multiple variables
 
 ---
 
-#### Components of a time series
+### Decomposition
+
+Factoring a time series into components
+
+<img src="assets/time-series/digitalOcean_decomposition.png" width="400"/>
+
+---
+
+### Components
 <table>
     <tbody>
         <tr>
@@ -45,15 +53,15 @@ Model interactions between multiple variables
 
 ---
 
-#### Decomposition
+### Components
 
-Factoring a time series into components
-
-<img src="assets/time-series/digitalOcean_decomposition.png" width="400"/>
+* not all components are always present
+* a time series with only noise can't really be forecasted => just use average
+* long term usually > 1 year (but depends on the series)
 
 ---
 
-#### Additive model
+### Additive model
 <pre><code class="nohighlight">y(t) = Trend + Cyclical + Seasonal + Noise</code></pre>
 
 Linear, consistent changes by the same amount
@@ -62,7 +70,7 @@ Linear, consistent changes by the same amount
 
 ---
 
-#### Multiplicative model
+### Multiplicative model
 <pre><code class="nohighlight">y(t) = Trend * Cyclical * Seasonal * Noise</code></pre>
 
 Non-linear (e.g. quadratic, exponential), changes in frequency and magnitude
@@ -71,38 +79,43 @@ Non-linear (e.g. quadratic, exponential), changes in frequency and magnitude
 
 ---
 
-#### Forcasting models
+### Forcasting models
 
 * Statistical
-  * ARIMA
-  * VARS
+  * AR, ARMA, ARIMA, VARS ...
 * Deep Learning
-  * LSTM
+  * Long Short Term Memory
 
 ---
 
-#### ARIMA
+### ARIMA
+
+Autoregressive (AR) model
+
+<p>
+When $\(a \ne 0\)$, there are two solutions to $\(ax^2 + bx + c = 0\)$ and they are
+$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+</p>
+---
+
+### VARs
 
 ---
 
-#### VARs
+### LSTM
 
 ---
 
-#### LSTM
+### Comparison
 
 ---
 
-#### Comparison
-
----
-
-#### Challenges
+### Challenges
 
 A paragraph with some text and a [link](http://hakim.se).
 
 ---
 
-#### Workshop
+### Workshop
 
 Some text here
