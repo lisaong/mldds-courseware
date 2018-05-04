@@ -1,6 +1,6 @@
 ### What's a time series
 
-A set of observations at regular time intervals
+A set of observations at regular time steps
 
 ![time series](assets/time-series/imgur_1bpSS.png)
 
@@ -212,6 +212,41 @@ $VAR\(p\): Y\_t=c + \sum\_{i=1}^p \Pi\_iY\_{t-i} + \epsilon\_t$
 Basically $AR\(p\)$ for multivariate time series (vector $Y\_t$)
 
 --
+### Plots
+
+Exploration and diagnostics
+* Histogram
+* Autocorrelation
+* Partial Autocorrelation
+
+--
+
+### Histogram
+
+* Relative frequency distribution of $X$
+
+<img src="assets/time-series/machinelearningmastery_hist.png" width="400"/>
+
+
+### Autocorrelation
+
+* Pearson's correlation between $X\_t$ and $X\_{t-i}$ over time lag $i$
+  * -1: negative, 0: no correlation, 1: positive
+  * above confidence cone: good
+* For exploring whether correlation exists
+
+<img src="assets/time-series/machinelearningmastery_acf.png" width="400"/>
+
+--
+
+### Partial Autocorrelation
+
+* Autocorrelation, excluding the shorter lags
+* For selecting $p$ in $AR\(p\)$, $ARIMA\(p,d,q\)$
+
+<img src="assets/time-series/machinelearningmastery_pacf.png" width="400"/>
+
+--
 
 ### Python
 
@@ -221,20 +256,11 @@ Basically $AR\(p\)$ for multivariate time series (vector $Y\_t$)
 
 * Decomposition: statsmodels.tsa.seasonal_decompose
 
-* Plots: [statsmodels.graphics.tsaplots](http://www.statsmodels.org/dev/graphics.html#module-statsmodels.graphics)
-
---
-
-### Plots
-
-* Residual plot
-* Autocorrelation
-* Partial Autocorrelation
-
-https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-autocorrelation/
+* Plots:
+  * [statsmodels.graphics.tsaplots](http://www.statsmodels.org/dev/graphics.html#module-statsmodels.graphics)
+  * [matplotlib.pyplot](https://matplotlib.org/api/pyplot_api.html)
 
 ---
-
 ### LSTM
 
 ---
