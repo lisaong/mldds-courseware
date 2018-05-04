@@ -264,18 +264,32 @@ Relative frequency distribution of $X$
 
 ### LSTM
 
+* Memorizes long term dependencies
+* Single unit: LSTM -> Dense(1)
+* Deep (learn more complexity): stack LSTMs
+* Adam optimizer, mean absolute error
+
+--
+
+* get supervised dataset from series
+  * inputs(window size k): $X\_{t-1} .. X\_{t-k}$
+  * output: $X\_t$
+* normalize dataset (0-1)
+* train/test split
+  * don't randomize sequence!
+
 ---
 
-### Comparison
-
----
-
-### Challenges
-
-A paragraph with some text and a [link](http://hakim.se).
+| ARIMA etc | LSTM |
+|--|--|
+| time series only | general purpose |
+| tune p, d, q | tune depth, window size, hyperparameters |
+| transform for stationarity | transform for supervised learning |
+| easier to use, understand | opaque, slower to train |
+| statistical constaints | more accurate, with tuning |
 
 ---
 
 ### Workshop
 
-Some text here
+Time series using VAR and LSTM
