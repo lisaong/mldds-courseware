@@ -223,17 +223,17 @@ Exploration and diagnostics
 
 ### Histogram
 
-* Relative frequency distribution of $X$
+Relative frequency distribution of $X$
 
 <img src="assets/time-series/machinelearningmastery_hist.png" width="400"/>
 
+--
 
 ### Autocorrelation
 
 * Pearson's correlation between $X\_t$ and $X\_{t-i}$ over time lag $i$
   * -1: negative, 0: no correlation, 1: positive
-  * above confidence cone: good
-* For exploring whether correlation exists
+  * \> confidence cone: not statistical fluke
 
 <img src="assets/time-series/machinelearningmastery_acf.png" width="400"/>
 
@@ -261,6 +261,7 @@ Exploration and diagnostics
   * [matplotlib.pyplot](https://matplotlib.org/api/pyplot_api.html)
 
 ---
+
 ### LSTM
 
 ---
