@@ -47,7 +47,7 @@ Decomposition: splits a time series into components
 
 ### Components
 
-* Not every components is present
+* Not every component may be present
 * Time series with only noise: can't be forecasted => guess using average
   * White noise: zero mean, constant std deviation
 * Long term is typically > 1 year (depending ...)
