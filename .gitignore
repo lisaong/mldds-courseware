@@ -1,6 +1,5 @@
 desktop.ini
 .vscode
-.ipynb_checkpoints
 *.docx
 *.xlsx
 *.gsheet
@@ -32,3 +31,9 @@ desktop.ini
 */reveal.js/css/theme/*/*
 !*/reveal.js/css/theme/source/
 !*/reveal.js/css/theme/source/stackup.scss
+
+# Jupyter
+.ipynb_checkpoints
+
+# TensorBoard
+events.out*
