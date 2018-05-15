@@ -1,5 +1,6 @@
 node_modules/
 desktop.ini
+.vscode
 *.docx
 *.xlsx
 *.gsheet
@@ -8,6 +9,7 @@ desktop.ini
 *.log
 *.pdf
 *.tmp
+*.pyc
 ~*.*
 
 # Ignore the drop-in reveal.js, except for content we create
@@ -30,3 +32,9 @@ desktop.ini
 */reveal.js/css/theme/*/*
 !*/reveal.js/css/theme/source/
 !*/reveal.js/css/theme/source/stackup.scss
+
+# Jupyter
+.ipynb_checkpoints
+
+# TensorBoard
+events.out*
