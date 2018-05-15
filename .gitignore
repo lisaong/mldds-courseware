@@ -1,4 +1,5 @@
 desktop.ini
+.vscode
 .ipynb_checkpoints
 *.docx
 *.xlsx
@@ -8,6 +9,7 @@ desktop.ini
 *.log
 *.pdf
 *.tmp
+*.pyc
 ~*.*
 
 # Ignore the drop-in reveal.js, except for content we create
