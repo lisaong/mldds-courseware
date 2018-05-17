@@ -10,6 +10,7 @@ desktop.ini
 *.pdf
 *.tmp
 *.pyc
+*.zip
 ~*.*
 
 # Ignore the drop-in reveal.js, except for content we create
