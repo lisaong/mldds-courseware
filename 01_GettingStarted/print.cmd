@@ -1,0 +1,1 @@
+call jupyter nbconvert --to slides %1 --post serve
