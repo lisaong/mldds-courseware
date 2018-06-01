@@ -45,3 +45,5 @@ trie
 
 # TensorBoard
 events.out*
+
+old/
