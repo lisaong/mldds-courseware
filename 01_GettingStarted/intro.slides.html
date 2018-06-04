@@ -12155,6 +12155,59 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Data-Science-Processes-&amp;-Tools">Data Science Processes &amp; Tools<a class="anchor-link" href="#Data-Science-Processes-&amp;-Tools">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Data Collection: not covered because data-source dependent (HTML, XML, JSON, databases, images, audio, video, ...)</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Data Visualization: numpy, pandas, matplotlib</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Data Transforming: numpy, pandas</p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Model: scikit-learn, keras, etc</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Validation: scikit-learn, keras, etc</p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Workshop:-Setup-Environment">Workshop: Setup Environment<a class="anchor-link" href="#Workshop:-Setup-Environment">&#182;</a></h2><p><img src="assets/intro/tools.png" alt="tools"></p>
 
 </div>
@@ -12225,69 +12278,22 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Install-packages">Install packages<a class="anchor-link" href="#Install-packages">&#182;</a></h3><p>We'll be using <a href="https://jupyter.org/">Jupyter notebooks</a> as our IDE (interactive development environment) for machine learning experiments.</p>
+<p>In your brand new conda environment, install Jupyter:</p>
+
+<pre><code>conda install jupyter</code></pre>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Start-Jupyter">Start Jupyter<a class="anchor-link" href="#Start-Jupyter">&#182;</a></h3><p>Browse your command line to the location of this notebook (you can use <code>cd</code>)</p>
 
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Type <code>jupyter notebook</code></p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In the browser window, navigate to open this notebook (<code>intro.ipynb</code>)</p>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data-Science-Processes-&amp;-Tools">Data Science Processes &amp; Tools<a class="anchor-link" href="#Data-Science-Processes-&amp;-Tools">&#182;</a></h2>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Data Collection: not covered because data-source dependent (HTML, XML, JSON, databases, images, audio, video, ...)</p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Data Visualization: numpy, pandas, matplotlib</p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Data Transforming: numpy, pandas</p>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Model: scikit-learn, keras, etc</p>
+<pre><code>cd path/to/mldds-courseware
+jupyter notebook</code></pre>
 
 </div>
 </div>
@@ -12296,7 +12302,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Validation: scikit-learn, keras, etc</p>
+<p>In the browser window, navigate to <code>01_GettingStarted</code>, then the first workshop: <code>numpy.ipynb</code>.</p>
 
 </div>
 </div>
