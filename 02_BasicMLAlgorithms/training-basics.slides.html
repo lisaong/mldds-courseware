@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>pandas slides</title>
+<title>training-basics slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,7 +11905,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Pandas_logo.png" alt="pandas"></p>
+<p><img src="assets/training-basics/puppy-training.jpg" alt="training"></p>
+<p>(image: amazon)</p>
 
 </div>
 </div>
@@ -11914,8 +11915,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Workshop:-Pandas-and-Data-Manipulation">Workshop: Pandas and Data Manipulation<a class="anchor-link" href="#Workshop:-Pandas-and-Data-Manipulation">&#182;</a></h2><p>In this workshop, we will use pandas to load, describe, and query datasets.</p>
-
+<h1 id="Training-basics">Training basics<a class="anchor-link" href="#Training-basics">&#182;</a></h1>
 </div>
 </div>
 </div></section></section><section><section>
@@ -11923,45 +11923,14 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Cheatsheet">Cheatsheet<a class="anchor-link" href="#Cheatsheet">&#182;</a></h3><p><a href="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PandasPythonForDataScience.pdf">https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PandasPythonForDataScience.pdf</a></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="References">References<a class="anchor-link" href="#References">&#182;</a></h3><ol>
-<li><a href="https://pandas.pydata.org/pandas-docs/stable/">https://pandas.pydata.org/pandas-docs/stable/</a>  </li>
-<li>Python Data Science Handbook by Jake VanderPlas</li>
-<li>Python for Data Analysis: Data Wrangling with Pandas, NumPy, and IPython by Wes McKinney</li>
-<li><a href="https://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html">https://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html</a></li>
-</ol>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Installation">Installation<a class="anchor-link" href="#Installation">&#182;</a></h3><p>Windows: Start Button -&gt; "Anaconda Prompt"</p>
-<p>Ubuntu / MacOS: conda should be in your path</p>
-<p>Activate the environment</p>
-
-<pre><code>conda activate mldds01</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas should already be installed. If not, install it:</p>
-
-<pre><code>conda install pandas</code></pre>
+<p>Concepts in training models</p>
+<ul>
+<li>Loss functions</li>
+<li>Gradient descent</li>
+<li>Overfitting, underfitting, bias, variance</li>
+<li>Regularization</li>
+<li>Cross-validation</li>
+</ul>
 
 </div>
 </div>
@@ -11970,9 +11939,16 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Tip: You can check the versions installed by calling Python with a script:</p>
+<p>Objective: a model that trains fast and performs well</p>
 
-<pre><code>python -c "import pandas; print(pandas.__version__)"</code></pre>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Not an exhaustive list. We'll encounter more as we go over the different algorithms.</p>
 
 </div>
 </div>
@@ -11981,82 +11957,344 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="SGD-to-USD-Exchange-Rate-Data">SGD to USD Exchange Rate Data<a class="anchor-link" href="#SGD-to-USD-Exchange-Rate-Data">&#182;</a></h3><p>Similar to the NumPy workshop, we'll use the historical SGD to USD exchange rates from data.gov.sg to demonstrate some Pandas concepts.</p>
+<h2 id="1.-Loss-Functions">1. Loss Functions<a class="anchor-link" href="#1.-Loss-Functions">&#182;</a></h2><p>What they are: a metric of how far away the predictions are from the truth</p>
+<p>For example:</p>
+<p><img src="http://scikit-learn.org/stable/_images/math/44f36557fef9b30b077b21550490a1b9a0ade154.png" alt="MSE"></p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>a.k.a.:</p>
+<ul>
+<li>Objective function</li>
+<li>Cost function</li>
+<li>Error function</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Definitions">Definitions<a class="anchor-link" href="#Definitions">&#182;</a></h3><p>$$x^* = \arg \min L(x)$$</p>
+<p>where $x^*$ = value that minimizes the loss function $L(x)$</p>
+<p>The process of finding $x^*$ is called "Optimization". It usually involves running some type of Gradient Descent.</p>
 
 </div>
 </div>
 </div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Loss-Function-Examples">Loss Function Examples<a class="anchor-link" href="#Loss-Function-Examples">&#182;</a></h3><p>Scikit-learn:</p>
+<ul>
+<li><a href="http://scikit-learn.org/stable/modules/model_evaluation.html#mean-squared-error">Mean squared error</a>: <code>sklearn.metrics.mean_squared_error(y_true, y_pred)</code></li>
+<li><a href="http://scikit-learn.org/stable/modules/model_evaluation.html#log-loss">Log loss</a>: <code>sklearn.metrics.log_loss(y_true, y_pred)</code></li>
+<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.zero_one_loss.html#sklearn.metrics.zero_one_loss">Zero one loss</a>
+<code>sklearn.metrics.zero_one_loss(y_true, y_pred)</code></li>
+<li>etc</li>
+</ul>
+<p>Keras:</p>
+<ul>
+<li><a href="https://keras.io/losses/">https://keras.io/losses/</a></li>
+<li><code>keras.losses.mean_squared_error(y_true, y_pred)</code></li>
+<li><code>keras.losses.binary_crossentropy(y_true, y_pred)</code></li>
+<li>etc</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Gradient-Descent">2. Gradient Descent<a class="anchor-link" href="#2.-Gradient-Descent">&#182;</a></h2><p>What it is: technique for minimizing loss function for a given model</p>
+<p>Objective: find $w^*$ such that $$w^* = \underset{w}\arg \min{L\big(y_{true}, y_{pred}\big)}$$</p>
+<p>$$w^* = \underset{w}\arg \min{L\big(y_{true}, f(x, w)\big)}$$</p>
+<p>where</p>
+<ul>
+<li>$L(...)$ is the loss function</li>
+<li>$w$ are the weights</li>
+<li>$f(x, w)$ is the model that computes $y_{pred}$</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Gradient-descent-algorithm">Gradient descent algorithm<a class="anchor-link" href="#Gradient-descent-algorithm">&#182;</a></h3><ol>
+<li>Initialize $w$ to some value (e.g. random)</li>
+<li>Compute gradient of $L\big(y_{true}, f(x, w)\big)$</li>
+<li>Update $w$ by a "tiny factor" in the negative of the gradient</li>
+<li>Repeat 2-3 until we reach the "stopping criteria" (more on this later)</li>
+</ol>
+<p>The "tiny factor" is known as the "learning rate"</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Workshop:-Gradient-descent.-Animated">Workshop: Gradient descent. Animated<a class="anchor-link" href="#Workshop:-Gradient-descent.-Animated">&#182;</a></h3><p><img src="assets/training-basics/descend.jpg" alt="wake up"></p>
+<p>(training incantation)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Environment-Setup">Environment Setup<a class="anchor-link" href="#Environment-Setup">&#182;</a></h3><p>Create a new environment called <code>mldds02</code>. You may also reuse <code>mldds01</code>, but it's good to keep separate environments for different experiments.</p>
+
+<pre><code>conda create -n mldds02 python=3
+conda activate mldds02
+
+(mldds02) conda install jupyter numpy pandas matplotlib scikit-learn
+(mldds02) conda install -c conda-forge ffmpeg</code></pre>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">IFrame</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Credits: https://jed-ai.github.io/py1_gd_animation/</span>
 
-<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://data.gov.sg/dataset/exchange-rates-sgd-per-unit-of-usd-average-for-period-annual/resource/f927c39b-3b44-492e-8b54-174e775e0d98/view/43207b9f-1554-4afb-98fe-80dfdd6bb4f6&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="sd">&quot;&quot;&quot;Example gradient descent implementation&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">func_y</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A demonstrative loss function that happens to be convex (has global a minimum)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        x - the input (can be the weights of a machine learning algorithm)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The loss value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">gradient_func_y</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The gradient of func_y</span>
+<span class="sd">    Args:</span>
+<span class="sd">        x - the input</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The gradient value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">4</span> <span class="c1"># d(x^2 - 4x + 2)/dx = 2x - 4</span>
+
+<span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">previous_x</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An implementation of gradient descent</span>
+<span class="sd">    Args:</span>
+<span class="sd">        previous_x - the previous input value</span>
+<span class="sd">        learning_rate - how much to change x per iteration</span>
+<span class="sd">        epochs - number of steps to run gradient descent</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple: array of x values, array of loss values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_gd</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y_gd</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">x_gd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">previous_x</span><span class="p">)</span>
+    <span class="n">y_gd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func_y</span><span class="p">(</span><span class="n">previous_x</span><span class="p">))</span>
+    
+    <span class="c1"># loop to update x and y</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="c1"># x = lr * gradient(func(prev_x))</span>
+        <span class="n">update</span> <span class="o">=</span> <span class="n">learning_rate</span> <span class="o">*</span><span class="n">gradient_func_y</span><span class="p">(</span><span class="n">previous_x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">previous_x</span> <span class="o">-</span> <span class="n">update</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s1">&#39;previous x&#39;</span><span class="p">,</span> <span class="n">previous_x</span><span class="p">,</span>
+              <span class="s1">&#39;update:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">update</span><span class="p">,</span> <span class="s1">&#39;new x:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">x_gd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">y_gd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func_y</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        
+        <span class="c1"># update previous_x</span>
+        <span class="n">previous_x</span> <span class="o">=</span> <span class="n">x</span>
+    
+    <span class="k">return</span> <span class="n">x_gd</span><span class="p">,</span> <span class="n">y_gd</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With gradient descent implemented, we'll will now run it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">func_y</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x_gd</span><span class="p">,</span> <span class="n">y_gd</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">epochs</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Plot the animation.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">animation</span><span class="p">,</span> <span class="n">rc</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Gradient descent&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">point</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">animated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">value_display</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Initializes the animation&quot;&quot;&quot;</span>
+    <span class="n">line</span><span class="o">.</span><span class="n">set_data</span><span class="p">([],</span> <span class="p">[])</span>
+    <span class="n">point</span><span class="o">.</span><span class="n">set_data</span><span class="p">([],</span> <span class="p">[])</span>
+    <span class="n">value_display</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">line</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">value_display</span>
+
+<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Animates the plot at step i</span>
+<span class="sd">    Args:</span>
+<span class="sd">        i: the step to animate</span>
+<span class="sd">        return: a tuple of line, point, and value_display</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Animate line</span>
+    <span class="n">line</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x_gd</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">y_gd</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="c1"># Animate points</span>
+    <span class="n">point</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x_gd</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_gd</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># Animate value display</span>
+    <span class="n">value_display</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s1">&#39;Min = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y_gd</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">line</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">value_display</span>
+
+<span class="c1"># call the animator</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;animation&#39;</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="s1">&#39;html5&#39;</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">init_func</span><span class="o">=</span><span class="n">init</span><span class="p">,</span>
+                     <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x_gd</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span>
+                     <span class="n">repeat_delay</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># display the video</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h3><ol>
+<li>Try initializing x0 to something &gt; 2, what do you observe?</li>
+<li>Try increasing the learning_rate to something large like 10. Does the gradient still converge?</li>
+<li>Replace func_y and gradient_func_y above with a cubic function. What do you observe?
+<pre><code>y = x^3 - 5x^2 + x + 1
+gradient(y) = 3x^2 - 10x + 1</code></pre>
+</li>
+<li>Replace func_y and gradient_func_y with <code>cos(x)</code> and its derivative <code>-sin(x)</code>. What do you observe?  What needs to reach convergence?
+<pre><code>y = np.tan(x)
+gradient(y) = -np.sin(x)</code></pre>
+</li>
+</ol>
+<p>Derivative formulas: <a href="https://www.derivative-calculator.net/">https://www.derivative-calculator.net/</a></p>
+
+</div>
+</div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Download-Instructions">Download Instructions<a class="anchor-link" href="#Download-Instructions">&#182;</a></h3><p>You should already have this dataset from the NumPy workshop. If not, here are the instructions:</p>
+<h3 id="Gradient-Descent-Variants">Gradient Descent Variants<a class="anchor-link" href="#Gradient-Descent-Variants">&#182;</a></h3><ol>
+<li>Stochastic Gradient Descent (SGD)</li>
+<li>Minibatch SGD</li>
+<li>Minibatch SGD with Momentum</li>
+<li>Adaptive Learning Rates</li>
+</ol>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Stochastic-Gradient-Descent">Stochastic Gradient Descent<a class="anchor-link" href="#Stochastic-Gradient-Descent">&#182;</a></h3><p>"Regular" Gradient Descent is expensive because it processes all samples at once</p>
+<ul>
+<li>Imagine you have millions of training samples</li>
+</ul>
+<p>Stochastic Gradient Descent speeds this up by:</p>
+<ul>
+<li>Running gradient descent, one randomly selected training sample at a time</li>
+<li>Stochastic: random noise, because samples can vary a lot</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Notation">Notation<a class="anchor-link" href="#Notation">&#182;</a></h3><p>$\leftarrow$ = replace value
+Some texts use this symbol $:=$</p>
+<p>Examples</p>
+<ul>
+<li>$\theta \leftarrow \theta - \epsilon g$</li>
+<li>$\theta := \theta - \epsilon g$</li>
+</ul>
+<p>Means</p>
 <ol>
-<li>Go to <a href="https://data.gov.sg/dataset/exchange-rates-sgd-per-unit-of-usd-average-for-period-annual">https://data.gov.sg/dataset/exchange-rates-sgd-per-unit-of-usd-average-for-period-annual</a></li>
-<li>Click on the <code>Download</code> button</li>
-<li>Unzip and extract the <code>.csv</code> file. Note the path for use below.</li>
-</ol>
-<p>Note: on Windows, you may wish to rename the unzipped folder path to something shorter.</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Import-the-package">Import the package<a class="anchor-link" href="#Import-the-package">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>pd<span class="o">?</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Two-main-data-structures">Two main data structures<a class="anchor-link" href="#Two-main-data-structures">&#182;</a></h3><ol>
-<li>Series</li>
-<li>DataFrame</li>
+<li>Compute $\theta' = \theta - \epsilon g$</li>
+<li>Update $\theta = \theta'$</li>
 </ol>
 
 </div>
@@ -12066,13 +12304,35 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Series">Series<a class="anchor-link" href="#Series">&#182;</a></h3>
-<pre><code>pandas.Series(data=None, index=None, dtype=None, name=None, copy=False, fastpath=False)</code></pre>
+<p><img src="assets/training-basics/sgd.png" alt="sgd"></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Symbols:</p>
 <ul>
-<li>Similar to 1-d numpy array but with more flexible explicit indexing</li>
-<li>Has two components : index and value for each element</li>
-<li>A bit similar concept as dictionary</li>
-<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html&#39;">more here..</a></li>
+<li>The $\eta_t$ denotes the learning rate</li>
+<li>Note: $\Theta$ is denotes the weights matrix</li>
+</ul>
+<p>(image: Neural Networks in Natural Language Processing, Goldberg, 2017)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Minibatch-Stochastic-Gradient-Descent">Minibatch Stochastic Gradient Descent<a class="anchor-link" href="#Minibatch-Stochastic-Gradient-Descent">&#182;</a></h3><p>Instead of 1 random sample at a time:</p>
+<ul>
+<li>Sample a "minibatch" of m training samples</li>
+<li>Run gradient descent on that minibatch</li>
+<li>"Smooths" out the randomness by operating on a minibatch.</li>
+<li>The minibatch size can be tuned ("hyperparameter")</li>
 </ul>
 
 </div>
@@ -12082,16 +12342,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="DataFrame">DataFrame<a class="anchor-link" href="#DataFrame">&#182;</a></h3>
-<pre><code>pandas.DataFrame(data=None, index=None, columns=None, dtype=None, copy=False)</code></pre>
-<ul>
-<li>The primary pandas data structure</li>
-<li>Tabular format similar to excel</li>
-<li>Two-dimensional, potentially heterogeneous tabular data</li>
-<li>structure with labeled axes (rows and columns). Row and columns index</li>
-<li>Can be thought of as a dict-like container for Series objects. </li>
-<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">more here..</a></li>
-</ul>
+<p><img src="assets/training-basics/minibatch-sgd.png" alt="minibatch sgd"></p>
 
 </div>
 </div>
@@ -12100,1530 +12351,158 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Read-data-from-CSV-to-a-Series">Read data from CSV to a Series<a class="anchor-link" href="#Read-data-from-CSV-to-a-Series">&#182;</a></h3><p>You can use <code>pandas.read_csv</code> to read data into:</p>
+<p>Symbols:</p>
 <ul>
-<li>A Series, if the data contains only 1 column and you specify the <code>squeeze=True</code> option, or</li>
-<li>A DataFrame, for any number of columns. This is the default behavior because the DataFrame is the most flexible.</li>
+<li>$\epsilon_k$ denotes the learning rate</li>
+<li>$\theta$ denotes the weights matrix</li>
+<li>$\nabla_{\theta}$ means gradient w.r.t. $\theta$</li>
 </ul>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html">more here</a></p>
+<p>(image: Deep Learning, Goodfellow, 2016)</p>
 
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read data into a series</span>
-<span class="c1">#</span>
-<span class="c1"># parse_dates: which column(s) to parse dates</span>
-<span class="c1"># index_col: which zeroth indexed column to use the index</span>
-<span class="c1"># infer_datetime_format may speed up the date parsing</span>
-<span class="n">sgd_usd_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/exchange-rates/exchange-rates-sgd-per-unit-of-usd-daily.csv&#39;</span><span class="p">,</span>
-                             <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                             <span class="n">squeeze</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># inspect the first 10 values</span>
-<span class="n">sgd_usd_series</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_series</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read data into a data frame</span>
-<span class="n">sgd_usd_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/exchange-rates/exchange-rates-sgd-per-unit-of-usd-daily.csv&#39;</span><span class="p">,</span>
-                         <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># inspect the first 10 values</span>
-<span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read data without parsing dates</span>
-<span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/exchange-rates/exchange-rates-sgd-per-unit-of-usd-daily.csv&#39;</span><span class="p">,</span>
-                   <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># inspect the first 10 values</span>
-<span class="n">temp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dtype of index is a string</span>
-<span class="n">temp</span><span class="o">.</span><span class="n">index</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># with parse_dates = [&#39;date&#39;], dtype of index is a datetime64</span>
-<span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">index</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># read_csv has many other functions for reading in CSV data</span>
-<span class="c1"># such as custom parsing functions, or custom delimiters</span>
-pd.read_csv<span class="o">?</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Get-values-or-indices">Get values or indices<a class="anchor-link" href="#Get-values-or-indices">&#182;</a></h3><p>Series</p>
+<h3 id="Minibatch-SGD,-with-momentum">Minibatch SGD, with momentum<a class="anchor-link" href="#Minibatch-SGD,-with-momentum">&#182;</a></h3><p>Speeds up minibatch SGD by:</p>
 <ul>
-<li>use series.values</li>
-<li>use series.index</li>
+<li>Applying an exponentially decaying moving average of the previous gradients ($v$)<ul>
+<li>if gradients point the same way, will reach minimum faster</li>
 </ul>
-<p>DataFrame</p>
-<ul>
-<li>use df.values</li>
-<li>use df.index</li>
-</ul>
-<p>Note: these are properties, not function calls with ()</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For this dataset:</p>
-<ul>
-<li>Series.values is a 1 dimensional numpy.array</li>
-<li><p>DataFrame.values is not. It's actually 2 dimensional:</p>
-<p>number of samples (rows) x 1 (column)</p>
 </li>
+<li>Minibatch SGD: $\theta \leftarrow \theta - \epsilon g$</li>
+<li>Minibatch SGD + momentum: $\theta \leftarrow \theta - \epsilon g + \alpha v$, $v \leftarrow v - \epsilon g$</li>
 </ul>
-<p>This is because DataFrame is a more general data structure that can hold more columns.</p>
+<p>Variant: Nesterov's momentum</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_series</span><span class="o">.</span><span class="n">values</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">values</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_series</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_series</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ndim</span> <span class="c1"># rank = 1</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ndim</span> <span class="c1"># rank = 2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Tip: you can flatten the 3993 x 1 numpy array</span>
-<span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The .index is the same whether it is a Series or a DataFrame</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_series</span><span class="o">.</span><span class="n">index</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">index</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Get-the-summary">Get the summary<a class="anchor-link" href="#Get-the-summary">&#182;</a></h3><p>Try these on <code>sgd_usd_series</code> and <code>sgd_usd_df</code>.</p>
-<table>
-<thead><tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>df.columns</td>
-<td>Describe DataFrame columns</td>
-</tr>
-<tr>
-<td>df.info()</td>
-<td>Information on a DataFrame</td>
-</tr>
-<tr>
-<td>s.count(), df.count()</td>
-<td>Number of non-NA values</td>
-</tr>
-<tr>
-<td>s.count()</td>
-<td>Number of non-NA values</td>
-</tr>
-</tbody>
-</table>
-<p>Note: these are from the Cheatsheet. Series supports fewer methods.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Get-statistics">Get statistics<a class="anchor-link" href="#Get-statistics">&#182;</a></h3><p>Try these on <code>sgd_usd_series</code> and <code>sgd_usd_df</code>.</p>
-<table>
-<thead><tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s.sum(), df.sum()</td>
-<td>Sum of values</td>
-</tr>
-<tr>
-<td>s.cumsum(), df.cumsum()</td>
-<td>Cummulative sum of values</td>
-</tr>
-<tr>
-<td>s.min()/s.max(), df.min()/df.max()</td>
-<td>Minimum/maximum values</td>
-</tr>
-<tr>
-<td>s.idxmin()/series.idxmax(), df.idxmin()/df.idxmax()</td>
-<td>Minimum/Maximum index value</td>
-</tr>
-<tr>
-<td>s.describe(), df.describe()</td>
-<td>Summary statistics</td>
-</tr>
-<tr>
-<td>s.mean(), df.mean()</td>
-<td>Mean of values</td>
-</tr>
-<tr>
-<td>s.median(), df.median()</td>
-<td>Median of values</td>
-</tr>
-</tbody>
-</table>
-<p>Note: these are from the Cheatsheet</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Joins">Joins<a class="anchor-link" href="#Joins">&#182;</a></h3><p>Let's say we need to also show Singapore Dollar and Renminbi (CNY) exchange rates, but from a different data set.</p>
-<p>This dataset is already downloaded for you in the <code>data</code> folder.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># data source: https://www.exchangerates.org.uk</span>
-<span class="n">sgd_cny_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/sgd_cny_rates_daily.csv&#39;</span><span class="p">,</span>
-                          <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First 5 entries:&#39;</span><span class="p">)</span>
-<span class="n">sgd_cny_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_cny_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>sgd_cny_df</code>: DatetimeIndex: 3224 entries, 2018-05-27 to 2009-10-06</p>
-<p><code>sgd_usd_df</code>: DatetimeIndex: 3993 entries, 1988-01-08 to 2015-10-19</p>
-<ul>
-<li>have different date ranges</li>
-<li>one is in decreasing time order, the other is increasing time order </li>
-</ul>
-<p>Pandas DataFrames make it easy to join these datasets together based on index.</p>
-<p>You can do this without looping over the data, using <code>DataFrame.join()</code></p>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/merging.html#joining-on-index">more info..</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Default join is an `left` join, where the index of the left series (`sgd_usd_df`) is preserved.</span>
-
-<span class="n">sgd_usd_cny</span> <span class="o">=</span> <span class="n">sgd_usd_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sgd_cny_df</span><span class="p">)</span>
-<span class="n">sgd_usd_cny</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can remove the NaN entries using dropna()</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_cny</span> <span class="o">=</span> <span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-<span class="n">sgd_usd_cny</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The result is a DataFrame with entries where both exchange rates are present.</p>
-<p>Entries where either SGD-USD or SGD-CNY are missing are excluded.</p>
-<p>Note that even though the index for the series are in different order, join will still work because it matches the individual index values</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="When-in-doubt,-visualize">When in doubt, visualize<a class="anchor-link" href="#When-in-doubt,-visualize">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's visualize what we just did by plotting the dataframes.</p>
-<p>You should have already installed matplotlib. If not, do this:</p>
-
-<pre><code>conda install matplotlib</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Find the names of the columns</span>
-<span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span>
-                              <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># common x-axis for all subplots</span>
-
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original series&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sgd_usd_df</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SGD/USD&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sgd_cny_df</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SGD/CNY&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
-
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;After join() and dropna()&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sgd_usd_cny</span><span class="p">[</span><span class="s1">&#39;exchange_rate_usd&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SGD/USD&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sgd_usd_cny</span><span class="p">[</span><span class="s1">&#39;Singapore Dollar to Chinese Yuan&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SGD/CNY&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><ol>
-<li><p>Repeat the above using other types of join, such as <code>outer</code></p>
-</li>
-<li><p>What happens if you join the SGD/CNY DataFrame with the SGD/USD DataFrame?</p>
-</li>
-</ol>
-
-<pre><code>sgd_cny_usd = sgd_cny_df.join(sgd_usd_df)</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pandas,-like-SQL">Pandas, like SQL<a class="anchor-link" href="#Pandas,-like-SQL">&#182;</a></h3><p>If you have worked with SQL or databases before, the DataFrame.join() is conceptually the same as SQL.</p>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html">Here's</a> a guide that compares Pandas with SQL.</p>
-<p>We'll do an example with queries to demonstrate how you can think of Pandas as conceptually equivalent to SQL.</p>
+<p><img src="assets/training-basics/minibatch-sgd-momentum.png" alt="minibatch sgd with momentum"></p>
+<p>(image: Deep Learning, Goodfellow, 2016)</p>
 
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exercise:-Querying-a-DataFrame">Exercise: Querying a DataFrame<a class="anchor-link" href="#Exercise:-Querying-a-DataFrame">&#182;</a></h3><p>Let's say you want to query a DataFrame using something equivalent to this SQL syntax:</p>
-
-<pre><code>SELECT *
-FROM sgd_usd_cny
-WHERE date &gt;= '2012-01-01' AND date &lt; '2013-01-01';</code></pre>
-<p>What will you use in Pandas?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use pandas to find all exchange rates from 2012</span>
-<span class="c1">#</span>
-<span class="c1"># Refer to https://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html</span>
-<span class="c1">#</span>
-<span class="c1"># Hint 1: use pd.to_datetime</span>
-<span class="c1"># start = pd.to_datetime(&#39;2012-01-01&#39;)</span>
-<span class="c1"># end = pd.to_datetime(&#39;2013-01-01&#39;)</span>
-<span class="c1">#</span>
-<span class="c1"># Hint 2: use sgd_usd_cny.index</span>
-<span class="c1">#</span>
-<span class="c1"># Hint 3: add parenthesis for the boolean conditions</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Indexing-and-Slicing:-iloc,-loc">Indexing and Slicing: iloc, loc<a class="anchor-link" href="#Indexing-and-Slicing:-iloc,-loc">&#182;</a></h3><table>
-<thead><tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>iloc</td>
-<td>Select by position</td>
-</tr>
-<tr>
-<td>loc</td>
-<td>Select by label</td>
-</tr>
-<tr>
-<td>iat</td>
-<td>Get scalar value by position (fast iloc)</td>
-</tr>
-<tr>
-<td>at</td>
-<td>Get scalar value by label (fast loc)</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="assets/pandas/Pandas-selections-and-indexing.png" alt="loc iloc">
-(image: shanelynn.ie)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="loc,-at">loc, at<a class="anchor-link" href="#loc,-at">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="c1"># error (because index is time, not integer) </span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># use a DateTimeIndex for row selector</span>
-<span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2009-10-08&#39;</span><span class="p">),</span> <span class="p">:]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># use a column selector</span>
-<span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2009-10-08&#39;</span><span class="p">),</span> <span class="s1">&#39;exchange_rate_usd&#39;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># fast single-value access using .at</span>
-<span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2009-10-08&#39;</span><span class="p">),</span> <span class="s1">&#39;exchange_rate_usd&#39;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="iloc,-iat">iloc, iat<a class="anchor-link" href="#iloc,-iat">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># select by row position</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;exchange_rate_usd&#39;</span><span class="p">]</span> <span class="c1"># select by row position, column name</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># select by row position, column position</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">4</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># select by row slice</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Combining-with-boolean-conditions">Combining with boolean conditions<a class="anchor-link" href="#Combining-with-boolean-conditions">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># logical / boolean row index</span>
-<span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">exchange_rate_usd</span> <span class="o">&lt;</span> <span class="mf">1.21</span><span class="p">,</span> <span class="p">:]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># more selectors</span>
-<span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">exchange_rate_usd</span> <span class="o">&gt;</span> <span class="mf">1.425</span><span class="p">][</span><span class="s1">&#39;Singapore Dollar to Chinese Yuan&#39;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># iloc does not support boolean indexing, because it is NOT label-based</span>
-
-<span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">exchange_rate_usd</span> <span class="o">&lt;</span> <span class="mf">1.21</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># error</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Adding-and-removing-rows-/-columns">Adding and removing rows / columns<a class="anchor-link" href="#Adding-and-removing-rows-/-columns">&#182;</a></h3><table>
-<thead><tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s.drop(), df.drop()</td>
-<td>Drop row (axis=0)</td>
-</tr>
-<tr>
-<td>s.drop('col', axis=1), df.drop('col', axis=1)</td>
-<td>Drop column (axis=1)</td>
-</tr>
-<tr>
-<td>pd.concat([s1, s2], axis=0), pd.concat([df1, df2], axis=0)</td>
-<td>Concatenate rows (axis=0)</td>
-</tr>
-<tr>
-<td>pd.concat([s1, s2], axis=1), pd.concat([df1, df2], axis=1)</td>
-<td>Concatenate columns (axis=1)</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Append a few rows of empty data</span>
-<span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2015-10-20&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2015-10-22&#39;</span><span class="p">)</span>
-
-<span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
-                      <span class="n">columns</span><span class="o">=</span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">sgd_usd_cny</span><span class="p">,</span> <span class="n">new_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">result</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop the rows</span>
-<span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2015-10-20&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2015-10-22&#39;</span><span class="p">)</span>
-
-<span class="n">result</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">result</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Next, drop the rows by index</span>
-<span class="n">result</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">result</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exercises:-add-and-remove-columns">Exercises: add and remove columns<a class="anchor-link" href="#Exercises:-add-and-remove-columns">&#182;</a></h3><ol>
-<li>Add a new column called 'SGD to Euro' with empty values</li>
-<li>Drop the column you just added</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Add a new column called &#39;SGD to Euro&#39;, with empty values</span>
-<span class="c1">#</span>
-<span class="c1"># Hint: use index=sgd_usd_cny.index</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop the column you just added</span>
-<span class="c1"># </span>
-<span class="c1"># Hint: use inplace=True</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Missing-data">Missing data<a class="anchor-link" href="#Missing-data">&#182;</a></h3><p>We saw how to add columns and rows without any data.  Now we'll explore how to deal with the missing data.</p>
-<p>Here are some ways:</p>
-<table>
-<thead><tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dropna</td>
-<td>Drop missing values</td>
-</tr>
-<tr>
-<td>fillna(new_value)</td>
-<td>Fill missing values with new_value</td>
-</tr>
-<tr>
-<td>interpolate()</td>
-<td>Use linear interpolation</td>
-</tr>
-</tbody>
-</table>
-<p>We've already seen how dropna() works.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2015-10-20&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2015-10-22&#39;</span><span class="p">)</span>
-
-<span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
-                      <span class="n">columns</span><span class="o">=</span><span class="n">sgd_usd_cny</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">sgd_usd_cny</span><span class="p">,</span> <span class="n">new_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">result</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Dropping the NaN values</span>
-<span class="n">result</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Filling the NaN values with a meaningful value, such as the median</span>
-<span class="n">median</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
-<span class="n">result</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">median</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Using linear interpolation</span>
-<span class="n">result</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Categorical-Data">Categorical Data<a class="anchor-link" href="#Categorical-Data">&#182;</a></h3><p>The previous dataset shows how to use pandas for datasets with continous variables (the exchange rate).</p>
-<p>Let's see another dataset that demonstrates how to use pandas for categorical variables (such as classes of things).</p>
-<p>We'll use the <code>Annual Motor Vehicle Population by Vehicle Type</code> dataset from data.gov.sg.</p>
-<p>Reference: <a href="https://pandas.pydata.org/pandas-docs/stable/visualization.html">https://pandas.pydata.org/pandas-docs/stable/visualization.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Download-Instructions">Download Instructions<a class="anchor-link" href="#Download-Instructions">&#182;</a></h3><ol>
-<li>Go to <a href="https://data.gov.sg/dataset/annual-motor-vehicle-population-by-vehicle-type">https://data.gov.sg/dataset/annual-motor-vehicle-population-by-vehicle-type</a></li>
-<li>Click on the Download button</li>
-<li>Unzip and extract the .csv file. Note the path for use below.</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/motor-vehicles/annual-motor-vehicle-population-by-vehicle-type.csv&#39;</span><span class="p">,</span>
-                 <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Grouping-and-aggregating-categories">Grouping and aggregating categories<a class="anchor-link" href="#Grouping-and-aggregating-categories">&#182;</a></h3><p>Since this series has multiple entries for the same date, we can group rows together using <code>group_by</code>.</p>
-<p>For example, to find the total number of vehicles per year:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also plot the total number of vehicles per year:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Vehicle Population&#39;</span><span class="p">,</span>
-       <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span>
-       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Annual Vehicle Population&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Processing-per-category">Processing per category<a class="anchor-link" href="#Processing-per-category">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get the unique classes</span>
-<span class="n">df</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get just the dataFrame for a category</span>
-<span class="n">buses</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">category</span> <span class="o">==</span><span class="s1">&#39;Buses&#39;</span><span class="p">]</span>
-<span class="n">buses</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># count of each category</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">category</span> <span class="o">==</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># pick a year (2009) and plot the distributions across types</span>
-<span class="n">df_2009</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2009&#39;</span><span class="p">)]</span>
-<span class="n">df_2009</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create a series with the type as the index, and the numbers as values</span>
-<span class="n">s_2009_type</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">number</span>
-<span class="n">s_2009_type</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">type</span>
-<span class="n">s_2009_type</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># plot the bar chart</span>
-<span class="n">s_2009_type</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Let&#39;s ignore private cars because they outweigh everything else</span>
-<span class="n">s_2009_type</span><span class="p">[</span><span class="n">s_2009_type</span><span class="o">.</span><span class="n">index</span> <span class="o">!=</span> <span class="s2">&quot;Private cars&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pivot-Table">Pivot Table<a class="anchor-link" href="#Pivot-Table">&#182;</a></h3><p>Pandas supports creating a pivot table, similar to what is available from Excel.</p>
-<p>This is useful when we would like to group categories by year, and then display them in stacked bar plots, with year on the x-axis.</p>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.pivot_table.html">pandas.pivot_table()</a></p>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/visualization.html#bar-plots">bar plots</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Why-pivot-table?">Why pivot table?<a class="anchor-link" href="#Why-pivot-table?">&#182;</a></h3><p>The original dataset has each category as a separate entry in the <code>category</code> column.</p>
-<table>
-<thead><tr>
-<th>year</th>
-<th>category</th>
-<th>type</th>
-<th>number</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2005-01-01</td>
-<td>Cars &amp; Station-wagons</td>
-<td>Private cars</td>
-<td>401638</td>
-</tr>
-<tr>
-<td>2005-01-01</td>
-<td>Cars &amp; Station-wagons</td>
-<td>Company cars</td>
-<td>14926</td>
-</tr>
-</tbody>
-</table>
-<p>For the bar plot, we need each category as a separate column. The entry under each category will be the number of vehicles for that year.</p>
-<p>Something like:</p>
-<table>
-<thead><tr>
-<th>year</th>
-<th>Buses</th>
-<th>Cars &amp; Station-wagons</th>
-<th>Goods &amp; Other Vehicles</th>
-<th>...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2005-01-01</td>
-<td>2640</td>
-<td>438194</td>
-<td>128193</td>
-<td>...</td>
-</tr>
-<tr>
-<td>2006-01-01</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Original dataset, filtered by year 2005 as an illustration</span>
-<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2005&#39;</span><span class="p">)]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Create pivot table that is:</p>
-<ul>
-<li>indexed by year</li>
-<li>using category as the columns</li>
-<li>numbers as values</li>
+<h3 id="Adaptive-Learning-Rate-Strategies">Adaptive Learning Rate Strategies<a class="anchor-link" href="#Adaptive-Learning-Rate-Strategies">&#182;</a></h3><ul>
+<li>Learning rate will control the amount of gradient update<ul>
+<li>Large learning rate: risk overshoot and not converge</li>
+<li>Small learning rate: too slow</li>
+<li>Ideal: start large(r), then reduce as we get closer to minima</li>
 </ul>
-<p>Each category has multiple entries (one for each type), so we also need to specify this:</p>
-<ul>
-<li>aggregate function to sum up the numbers for that category</li>
+</li>
+<li>Strategies<ul>
+<li>Constant learning rate</li>
+<li>Time-based or step-based decay</li>
+<li>AdaGrad</li>
+<li>RMSProp</li>
+<li>Adam</li>
+</ul>
+</li>
+<li>What works best depends on your domain (true for <strong>any</strong> optimization)</li>
 </ul>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">pv_year_category</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span>
-                                  <span class="n">values</span><span class="o">=</span><span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
-
-<span class="n">pv_year_category</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Hmm, there are some NaN values.</p>
-<p>On closer examination, the culprit is 2017, where "and" replaced "&amp;" in the category name.</p>
-<p>We will need to fix those entries so that the name matches.</p>
-<h3 id="Question">Question<a class="anchor-link" href="#Question">&#182;</a></h3><p>Can you explain why can't we just use <code>dropna(axis=1)</code> to drop columns with NaN?</p>
+<p><img src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/Comparison-of-Adam-to-Other-Optimization-Algorithms-Training-a-Multilayer-Perceptron.png" alt="Comparison"></p>
+<p>(image: <a href="https://machinelearningmastery.com/adam-optimization-algorithm-for-deep-learning">machine learning mastery</a></p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Show the problematic dataframes (2017)</span>
-<span class="n">df_2017</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2017&#39;</span><span class="p">),</span> <span class="p">:]</span>
-<span class="n">df_2017</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>Fix the category names for year = 2017 by replacing "and" with "&amp;".</p>
-<p>Avoid looping on individual rows.</p>
-<p>For a given category, you can:</p>
-<ol>
-<li>Use <code>df.loc[row_indexer, col_indexer]</code> to get a view for each incorrect category</li>
-<li>Assign the correct category value to that view</li>
-</ol>
-<p>A view is just a subset of DataFrames matching the <code>[row_indexer, col_indexer]</code> criterion.</p>
-<p>Using <code>df.loc</code> with assignment will avoid this SettingWithCopyWarning, because loc returns a view, not a copy of the DataFrame:</p>
-
-<pre><code>Traceback (most recent call last)
-     ...
-SettingWithCopyWarning:
-     A value is trying to be set on a copy of a slice from a DataFrame.
-     Try using .loc[row_index,col_indexer] = value instead</code></pre>
+<p><img src="http://scikit-learn.org/stable/_images/sphx_glr_plot_mlp_training_curves_001.png" alt="Another comparison"></p>
+<p>(image: <a href="http://scikit-learn.org/stable/auto_examples/neural_networks/plot_mlp_training_curves.html">scikit-learn</a>)</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code needs to fix these categories:</span>
-<span class="c1">#</span>
-<span class="c1">#     Incorrect                   Correct</span>
-<span class="c1">#     ---------------------------------------------------</span>
-<span class="c1">#     Cars and Station-wagons     Cars &amp; Station-wagons</span>
-<span class="c1">#     Goods and Other Vehicles    Goods &amp; Other Vehicles</span>
-<span class="c1">#     Motorcycles &amp; Scooters      Motorcycles</span>
-<span class="c1">#     ----------------------------------------------------</span>
-<span class="c1">#</span>
-
-<span class="c1"># Your code here</span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="c1"># Let&#39;s generate the pivot_table again, the NaNs should now go away</span>
-<span class="n">pv_year_category</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span>
-                                  <span class="n">values</span><span class="o">=</span><span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
-
-<span class="n">pv_year_category</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's plot the bar chart.</p>
-<p>We are doing a bit more matplotlib stuff here to make the bar chart readable.</p>
+<h2 id="Overfitting-and-Underfitting">Overfitting and Underfitting<a class="anchor-link" href="#Overfitting-and-Underfitting">&#182;</a></h2><ul>
+<li>Overfitting: High variance</li>
+<li>Underfitting: High bias</li>
+</ul>
+<p><img src="http://blog.algotrading101.com/wp-content/uploads/2016/01/overfitting-comics.jpg" alt="creativity"></p>
+<p>(image: algotrading101)</p>
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-
-<span class="n">pv_year_category</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Annual Motor Vehicle Population by Category&#39;</span><span class="p">,</span>
-       <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Vehicle Population&#39;</span><span class="p">,</span>
-       <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
-
-<span class="c1"># Due to: https://github.com/pandas-dev/pandas/issues/1918</span>
-<span class="c1"># Can&#39;t just do: ax.xaxis.set_major_formatter(mdates.FormatStrFormatter(&#39;%Y&#39;))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FixedFormatter</span><span class="p">(</span><span class="n">pv_year_category</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y&quot;</span><span class="p">)))</span>
-
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://imgs.xkcd.com/comics/linear_regression.png" alt="comics"></p>
+<p>(image: xkcd)</p>
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Regularization">Regularization<a class="anchor-link" href="#Regularization">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Cross-Validation">Cross Validation<a class="anchor-link" href="#Cross-Validation">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reading-List">Reading List<a class="anchor-link" href="#Reading-List">&#182;</a></h3><table>
+<thead><tr>
+<th>Material</th>
+<th>Read it for</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chapter 8, Pages 290-296</td>
+<td>Stochastic Gradient Descent Theory</td>
+<td><a href="http://www.deeplearningbook.org/contents/optimization.html">http://www.deeplearningbook.org/contents/optimization.html</a></td>
+</tr>
+<tr>
+<td>Ordinary Least Squares Linear Regression</td>
+<td>Programming Example</td>
+<td><a href="http://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares">http://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares</a></td>
+</tr>
+</tbody>
+</table>
+<p>Note: in the reading list, SGD refers to "Minibatch SGD"</p>
 
+</div>
+</div>
 </div>
 </div>
 </div>
