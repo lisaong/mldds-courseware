@@ -12417,7 +12417,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Randomize">Randomize<a class="anchor-link" href="#Randomize">&#182;</a></h3><p>Before doing the train/test split, we'll also randomize the data so we can make the training and testing more "fair".</p>
+<h3 id="Shuffle-the-dataset">Shuffle the dataset<a class="anchor-link" href="#Shuffle-the-dataset">&#182;</a></h3><p>Before doing the train/test split, we'll also shuffle the data so we can make the training and testing more "fair" (or closer to real life usage of the model).</p>
 
 </div>
 </div>
@@ -12516,6 +12516,19 @@ a.anchor-link {
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
