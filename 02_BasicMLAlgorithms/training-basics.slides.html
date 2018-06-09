@@ -11927,7 +11927,7 @@ a.anchor-link {
 <ul>
 <li>Loss functions</li>
 <li>Gradient descent</li>
-<li>Overfitting, underfitting, bias, variance</li>
+<li>Overfitting, underfitting</li>
 <li>Regularization</li>
 <li>Cross-validation</li>
 </ul>
@@ -11957,7 +11957,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-Loss-Functions">1. Loss Functions<a class="anchor-link" href="#1.-Loss-Functions">&#182;</a></h2><p>What they are: a metric of how far away the predictions are from the truth</p>
+<h1 id="Loss-Functions">Loss Functions<a class="anchor-link" href="#Loss-Functions">&#182;</a></h1><p>What they are: a metric of how far away the predictions are from the truth</p>
 <p>For example:</p>
 <p><img src="http://scikit-learn.org/stable/_images/math/44f36557fef9b30b077b21550490a1b9a0ade154.png" alt="MSE"></p>
 
@@ -12016,7 +12016,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-Gradient-Descent">2. Gradient Descent<a class="anchor-link" href="#2.-Gradient-Descent">&#182;</a></h2><p>What it is: technique for minimizing loss function for a given model</p>
+<h1 id="Gradient-Descent">Gradient Descent<a class="anchor-link" href="#Gradient-Descent">&#182;</a></h1><p>What it is: technique for minimizing loss function for a given model</p>
 <p>Objective: find $w^*$ such that $$w^* = \underset{w}\arg \min{L\big(y_{true}, y_{pred}\big)}$$</p>
 <p>$$w^* = \underset{w}\arg \min{L\big(y_{true}, f(x, w)\big)}$$</p>
 <p>where</p>
@@ -12439,12 +12439,69 @@ Some texts use this symbol $:=$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Overfitting-and-Underfitting">Overfitting and Underfitting<a class="anchor-link" href="#Overfitting-and-Underfitting">&#182;</a></h2><ul>
-<li>Overfitting: High variance</li>
-<li>Underfitting: High bias</li>
+<h1 id="Underfiting,-Overfitting">Underfiting, Overfitting<a class="anchor-link" href="#Underfiting,-Overfitting">&#182;</a></h1>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Goals-of-training">Goals of training<a class="anchor-link" href="#Goals-of-training">&#182;</a></h2><ol>
+<li>Minimize training error</li>
+<li>Minimize gap between test error and training error. (the "generalization gap")</li>
+</ol>
+<p>(Reference: Deep Learning - Goodfellow, Bengio, Courville, MIT press, 2016)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Generalization">Generalization<a class="anchor-link" href="#Generalization">&#182;</a></h2><p>How well will the model handle data not found during training?</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Underfitting,-Overfitting">Underfitting, Overfitting<a class="anchor-link" href="#Underfitting,-Overfitting">&#182;</a></h2><ol>
+<li>A model is set to "underfit" if the training error is too large</li>
+<li>A model is set to "overfit" if the gap between test and training error is too large</li>
+</ol>
+<p>A good-fit model: neither underfit nor overfit (Goldilocks and the Three Bears)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Underfitting-/-High-Bias">Underfitting / High Bias<a class="anchor-link" href="#Underfitting-/-High-Bias">&#182;</a></h2><p>A model is set to "underfit" if the training error is too large</p>
+<ul>
+<li>Means model does not work</li>
+<li>It learnt nothing</li>
+<li>Mode has "high bias"</li>
 </ul>
-<p><img src="http://blog.algotrading101.com/wp-content/uploads/2016/01/overfitting-comics.jpg" alt="creativity"></p>
-<p>(image: algotrading101)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overfitting-/-High-Variance">Overfitting / High Variance<a class="anchor-link" href="#Overfitting-/-High-Variance">&#182;</a></h2><p>A model is set to "overfit" if the gap between test and training error is too large</p>
+<ul>
+<li>Means model does not generalize well</li>
+<li>It only learnt the training set (or learnt too much training set noise)</li>
+<li>Model has "high variance"</li>
+</ul>
 
 </div>
 </div>
@@ -12463,7 +12520,14 @@ Some texts use this symbol $:=$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Regularization">Regularization<a class="anchor-link" href="#Regularization">&#182;</a></h2>
+<h2 id="Fixing-Underfitting">Fixing Underfitting<a class="anchor-link" href="#Fixing-Underfitting">&#182;</a></h2><p>Symptom: poor model performance even on training data</p>
+<p>Potential cures:</p>
+<ul>
+<li>More data</li>
+<li>More features and/or different features</li>
+<li>Different algorithms</li>
+</ul>
+
 </div>
 </div>
 </div></section></section><section><section>
@@ -12471,7 +12535,32 @@ Some texts use this symbol $:=$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Cross-Validation">Cross Validation<a class="anchor-link" href="#Cross-Validation">&#182;</a></h2>
+<h2 id="Fixing-Overfitting">Fixing Overfitting<a class="anchor-link" href="#Fixing-Overfitting">&#182;</a></h2><p>Symptom: model has good performance in training data, but poor generalization on test data</p>
+<p>Potential cures:</p>
+<ul>
+<li>Early stoppping</li>
+<li>Fewer features</li>
+<li>Regularization</li>
+<li>Cross Validation</li>
+</ul>
+
+</div>
+</div>
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Workshop:-SGD,-Overfitting,-Underfitting">Workshop: SGD, Overfitting, Underfitting<a class="anchor-link" href="#Workshop:-SGD,-Overfitting,-Underfitting">&#182;</a></h2><p>In this workshop, we will try to fit a more complex linear regression model.</p>
+<p>We'll explore the following concepts:</p>
+<ul>
+<li>Loss functions</li>
+<li>Stochastic Gradient Descent</li>
+<li>Underfitting and Overfitting</li>
+</ul>
+<p>Inspiration:
+<a href="https://sdsawtelle.github.io/blog/output/week6-andrew-ng-machine-learning-with-python.html">https://sdsawtelle.github.io/blog/output/week6-andrew-ng-machine-learning-with-python.html</a></p>
+
 </div>
 </div>
 </div></section></section><section><section>
@@ -12479,7 +12568,1095 @@ Some texts use this symbol $:=$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-List">Reading List<a class="anchor-link" href="#Reading-List">&#182;</a></h3><table>
+<h3 id="Prediction-Tasks">Prediction Tasks<a class="anchor-link" href="#Prediction-Tasks">&#182;</a></h3><p>We'll try to fit a curve to predict, for recent Singapore University Graduates:</p>
+
+<pre><code>y: Gross Monthly Median Salary (S$)
+x: Overall Employment Rate (%)</code></pre>
+<p>To illustrate underfitting/overfitting, we'll explore:</p>
+<ul>
+<li>A first-order linear model: $y = w^Tx$</li>
+<li>A linear model with polynomial features
+$$y = w^TX$$
+where $X = [1, x, x^2, x^3, ...]$</li>
+</ul>
+<p>We'll also explore different loss functions and plotting of loss curves during training.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dataset(s)">Dataset(s)<a class="anchor-link" href="#Dataset(s)">&#182;</a></h3><ol>
+<li>Download this dataset: <a href="https://data.gov.sg/dataset/graduate-employment-survey-ntu-nus-sit-smu-sutd">https://data.gov.sg/dataset/graduate-employment-survey-ntu-nus-sit-smu-sutd</a></li>
+<li>Unzip it and note the path for use in <code>pandas.read_csv</code></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-Data-Transformation-and-Cleaning">1. Data Transformation and Cleaning<a class="anchor-link" href="#1.-Data-Transformation-and-Cleaning">&#182;</a></h3><p>The first step is to inspect the data to see what transformation/cleaning is needed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ISO-8859-1 encoding is needed</span>
+<span class="c1">#   UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0xe4 in position 20: invalid continuation byte</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/graduate-employment-survey-ntu-nus-sit-smu-sutd/graduate-employment-survey-ntu-nus-sit-smu-sutd.csv&#39;</span><span class="p">,</span>
+                 <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ISO-8859-1&#39;</span><span class="p">,</span>
+                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;university&#39;</span><span class="p">,</span> <span class="s1">&#39;employment_rate_overall&#39;</span><span class="p">,</span> <span class="s1">&#39;gross_monthly_median&#39;</span><span class="p">])</span>
+
+<span class="c1"># filter by NUS to keep things simple</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">university</span> <span class="o">==</span> <span class="s1">&#39;National University of Singapore&#39;</span><span class="p">]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The columns to inspect are:</p>
+<ul>
+<li>employment_rate_overall</li>
+<li>gross_monthly_median</li>
+</ul>
+<p>We are looking for:</p>
+<ul>
+<li>invalid values</li>
+<li>data types to transform to numeric</li>
+<li>feature ranges</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># the sample size is fairly small, we can inspect using .unique()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">employment_rate_overall</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>employment_rate_overall</code> column</p>
+<ul>
+<li>invalid values: yes, there is an 'na' value above</li>
+<li>data type is object (these are string values)<ul>
+<li>need to transform to numbers</li>
+<li>How: use <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_numeric.html">pandas.to_numeric</a> to convert to numbers</li>
+</ul>
+</li>
+<li>range: 0-100</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the dataset is large, it is hard to find the 'na' values.</p>
+<p>A quick test is to try converting the column first, to see if errors appear.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">employment_rate_overall</span><span class="p">)</span> <span class="c1"># see if we get parse errors</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will be using the <code>errors='coerce'</code> option in <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_numeric.html">pandas.to_numeric</a> when we do the actual conversion.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">employment_rate_overall</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span> <span class="c1"># &#39;na&#39; becomes NaN</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>gross_monthly_median</code> column is handled the same way.</p>
+<p>Let's now perform the data transformation and cleaning.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># transform string to numbers, forcing invalid values to float NaN</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;gross_monthly_median&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">gross_monthly_median</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;employment_rate_overall&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">employment_rate_overall</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># drop NaNs</span>
+<span class="n">df_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">df_dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Visualize-Dataset">Visualize Dataset<a class="anchor-link" href="#Visualize-Dataset">&#182;</a></h3><p>Let's plot the dataset to visualize our data.</p>
+<p>We'll use a scatter plot.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_dataset</span><span class="o">.</span><span class="n">employment_rate_overall</span><span class="p">,</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">gross_monthly_median</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Gross Monthly Median Income and Employment Rate for Recent NUS Graduates&#39;</span><span class="p">,</span>
+       <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Employment Rate (%)&#39;</span><span class="p">,</span>
+       <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Gross Monthly Median Income (S$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Inspecting the plot above, we can roughly make out a curve through it.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Feature-selection">2. Feature selection<a class="anchor-link" href="#2.-Feature-selection">&#182;</a></h3><h4 id="Inputs">Inputs<a class="anchor-link" href="#Inputs">&#182;</a></h4><table>
+<thead><tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Column name</th>
+<th>Transformation before model input?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$x_1$</td>
+<td>Overall Employment Rate (%)</td>
+<td>employment_rate_overall</td>
+<td>pd.to_numeric</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Outputs">Outputs<a class="anchor-link" href="#Outputs">&#182;</a></h4><table>
+<thead><tr>
+<th>Output</th>
+<th>Description</th>
+<th>Truth column</th>
+<th>Transformation from model output?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\hat{y}$</td>
+<td>Predicted Gross Monthly Medium Income S\$</td>
+<td>$y$ = gross_monthly_median</td>
+<td>None, output will stay numeric</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Prepare the numpy arrays for use with sklearn</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;employment_rate_overall&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;X.shape:&#39;</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;gross_monthly_median&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y.shape:&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Model-creation-and-training,-and-validation">3. Model creation and training, and validation<a class="anchor-link" href="#3.-Model-creation-and-training,-and-validation">&#182;</a></h3><p>In this section, we will</p>
+<ol>
+<li>Shuffle and then split dataset into train and test</li>
+<li>Perform feature scaling</li>
+<li>Train and validate our models</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dataset-shuffling-and-train-test-split">Dataset shuffling and train-test-split<a class="anchor-link" href="#Dataset-shuffling-and-train-test-split">&#182;</a></h3><p>In a previous workshop, we did the randomization and train-test split manually.</p>
+<p>Turns out, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">sklearn.model_selection.train_test_split</a> can do this for us.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># train-test split, witholding 15% for test data</span>
+<span class="c1"># shuffle=True is the default</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># view the shuffled dataset</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Feature-scaling">Feature scaling<a class="anchor-link" href="#Feature-scaling">&#182;</a></h3><p>Since we are using Stochastic Gradient Descent, we are recommended to scale the features between [0, 1] or [-1, 1].</p>
+<ul>
+<li><p>See <a href="http://scikit-learn.org/stable/modules/sgd.html#tips-on-practical-use">Tips on Practical Use for SGDRegressor</a>.</p>
+</li>
+<li><p>Scaling subtracts the mean and divides by the standard deviation</p>
+</li>
+<li>We will scale both the input and output values, using <a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler">sklearn.preprocessing.StandardScaler</a></li>
+<li>In both cases (input and output), the mean and standard deviation will be based on the training set only. This way we don't look at the test set. </li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># We train the scaler based on the training set, and use</span>
+<span class="c1"># it for both the training and test sets</span>
+<span class="c1">#</span>
+<span class="c1"># Reason: the test set shouldn&#39;t pollute the dataset</span>
+<span class="n">x_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">x_scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1"># must be 2D array</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">x_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">x_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">y_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">y_scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">y_train_scaled</span> <span class="o">=</span> <span class="n">y_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">y_test_scaled</span> <span class="o">=</span> <span class="n">y_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))[:,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># before scaling</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train_scaled</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># after scaling (showing first 5 values)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># before scaling</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_train_scaled</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># after scaling (showing first 5 values)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Underfit-Model:-First-Order-Linear-Regressor">Underfit Model: First Order Linear Regressor<a class="anchor-link" href="#Underfit-Model:-First-Order-Linear-Regressor">&#182;</a></h3><p>For the first order linear regressor, we'll use <code>sklearn.linear_model.SGDRegressor</code> with the dataset above.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">SGDRegressor</span>
+
+<span class="c1"># SGDRegressor?</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">linear_model</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                            <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">),</span>
+                            <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;squared_loss&#39;</span><span class="p">,</span> <span class="c1"># mean squared loss</span>
+                            <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="c1"># no regularization</span>
+                            <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                            <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="c1"># stopping condition</span>
+                            <span class="n">eta0</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="c1"># learning rate</span>
+                            <span class="n">learning_rate</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span> <span class="c1"># learning rate schedule</span>
+<span class="o">%</span><span class="k">time</span> linear_model.fit(X_train_scaled, y_train_scaled)
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficient&#39;</span><span class="p">,</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Model-Validation">Model Validation<a class="anchor-link" href="#Model-Validation">&#182;</a></h4><p>Let's validate our model's performance by computing metrics and plotting the linear model.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+
+<span class="n">pred_scaled</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Truth:&#39;</span><span class="p">,</span> <span class="n">y_test_scaled</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Predictions:&#39;</span><span class="p">,</span> <span class="n">pred_scaled</span><span class="p">)</span>
+
+<span class="c1"># Compute metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MSE:&#39;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test_scaled</span><span class="p">,</span> <span class="n">pred_scaled</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R2:&#39;</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_scaled</span><span class="p">,</span> <span class="n">pred_scaled</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Model-Visualization">Model Visualization<a class="anchor-link" href="#Model-Visualization">&#182;</a></h4><p>We'll visualize the entire dataset (train + test), by plotting the data as a sactter plot, and the linear function as a curve or line.</p>
+<p>The model needs to be called with pre- and post-processing stages:</p>
+<ol>
+<li>Scale the input</li>
+<li>Call <code>predict</code></li>
+<li>Unscale the output</li>
+</ol>
+<p>In both steps, we'll use the already-fitted scalers from previously. This ensures that the pre- and post-processing matches exactly with how the model was trained.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># First, call the model in 3 stages</span>
+<span class="c1"># 1. Pre-process the input</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">x_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># 2. Predict</span>
+<span class="n">y_pred_scaled</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+
+<span class="c1"># 3. Post-process the output</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred_scaled</span><span class="p">)</span>
+
+<span class="c1"># Finally, plot dataset and predictions</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;truth&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;predictions&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Gross Monthly Median Income and Employment Rate for Recent NUS Grads: First-Order Model&#39;</span><span class="p">,</span>
+       <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Employment Rate (%)&#39;</span><span class="p">,</span>
+       <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Gross Monthly Median Income (S$)&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Polynomial-Regression">Polynomial Regression<a class="anchor-link" href="#Polynomial-Regression">&#182;</a></h3><p>A linear model is obviously underfit, because it tries to draw a straight line. Let's try a curve instead (polynomial model).</p>
+<p>To generate polynomial features from x (Employment Rate), we use <a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">sklearn.preprocessing.PolynomialFeatures</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">PolynomialFeatures</span>
+
+<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">X_train_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">X_test_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Scale the features back to SGD happy ranges ([-1, 1])</span>
+<span class="n">x_scaler_poly</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">x_scaler_poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_poly</span><span class="p">)</span>
+<span class="n">X_train_poly_scaled</span> <span class="o">=</span> <span class="n">x_scaler_poly</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_poly</span><span class="p">)</span>
+<span class="n">X_test_poly_scaled</span> <span class="o">=</span> <span class="n">x_scaler_poly</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_poly</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">poly_model</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                          <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">),</span>
+                          <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;squared_loss&#39;</span><span class="p">,</span> <span class="c1"># mean squared loss</span>
+                          <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="c1"># no regularization</span>
+                          <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                          <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="c1"># stopping condition</span>
+                          <span class="n">eta0</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="c1"># learning rate</span>
+                          <span class="n">learning_rate</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span> <span class="c1"># learning rate schedule</span>
+<span class="o">%</span><span class="k">time</span> poly_model.fit(X_train_poly_scaled, y_train_scaled)
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients&#39;</span><span class="p">,</span> <span class="n">poly_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="n">poly_model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise:-Model-Validation-and-Visualization">Exercise: Model Validation and Visualization<a class="anchor-link" href="#Exercise:-Model-Validation-and-Visualization">&#182;</a></h3><p>Follow the pattern above to validate and visualize the new model.</p>
+<p>This means two tasks:</p>
+<ol>
+<li>Computing metrics</li>
+<li>Plotting the curve (hint: use a scatter plot for both)</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Compute metrics</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot curve</span>
+
+<span class="c1"># First, call the model in 3 stages</span>
+<span class="c1"># 1. Pre-process the input</span>
+<span class="c1"># Hint: you need to create the polynomial, then scale</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+
+
+
+
+
+
+
+<span class="c1"># 2. Predict</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+
+
+
+
+
+
+<span class="c1"># 3. Post-process the output by un-scaling y</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+
+
+
+
+
+
+<span class="c1"># Finally, plot dataset and predictions</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Learning-Curves-for-Underfit/Overfit-Detection">Learning Curves for Underfit/Overfit Detection<a class="anchor-link" href="#Learning-Curves-for-Underfit/Overfit-Detection">&#182;</a></h3><p>Even with the above polynomial curve, it's hard to tell if we are truly overfitting.</p>
+<p>The standard practice to determine model fit is to plot learning curves of the training scores and test scores during training iterations.</p>
+<p>Let's compare the learning curves for both the linear and polynomial case.</p>
+<p>Reference: <a href="http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html">http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">learning_curve</span>
+
+<span class="c1"># learning_curve?</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_learning_curve</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">tr_sizes</span><span class="p">,</span> <span class="n">tr_scores</span><span class="p">,</span> <span class="n">val_scores</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots the learning curve for a training session</span>
+<span class="sd">    Arg:</span>
+<span class="sd">        axis: axis to plot</span>
+<span class="sd">        title: plot title</span>
+<span class="sd">        tr_sizes: sizes of the training set</span>
+<span class="sd">        tr_scores: training scores</span>
+<span class="sd">        val_scores: validation scores</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tr_scores_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tr_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">tr_scores_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">tr_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">val_scores_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">val_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">val_scores_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">val_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">axis</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">tr_sizes</span><span class="p">,</span> <span class="n">tr_scores_mean</span> <span class="o">-</span> <span class="n">tr_scores_std</span><span class="p">,</span>
+                    <span class="n">tr_scores_mean</span> <span class="o">+</span> <span class="n">tr_scores_std</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">tr_sizes</span><span class="p">,</span> <span class="n">val_scores_mean</span> <span class="o">-</span> <span class="n">val_scores_std</span><span class="p">,</span>
+                    <span class="n">val_scores_mean</span> <span class="o">+</span> <span class="n">val_scores_std</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr_sizes</span><span class="p">,</span> <span class="n">tr_scores_mean</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training score&quot;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr_sizes</span><span class="p">,</span> <span class="n">val_scores_mean</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cross-validation score&quot;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+           <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Training examples&#39;</span><span class="p">,</span>
+           <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;R2 Scores&#39;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generate the learning curve for linear_model</span>
+<span class="c1"># By default this uses 3-fold Cross Validation (more on that later)</span>
+<span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
+    <span class="n">linear_model</span><span class="p">,</span> <span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train_scaled</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot the learning curve, along with the stats</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">plot_learning_curve</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;1st Order Model&#39;</span><span class="p">,</span>
+                    <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercise:-Plot-Learning-Curve">Exercise: Plot Learning Curve<a class="anchor-link" href="#Exercise:-Plot-Learning-Curve">&#182;</a></h2><p>Follow the example above and:</p>
+<ol>
+<li>Generate the learning curve for the polynomial model (<code>poly_model</code>)</li>
+<li>Plot the learning curve and the statistics</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1. Generate the learning curve for poly_model</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2. Plot the learning curve, along with the stats</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h2><p>The learning curves show:</p>
+<ul>
+<li>Both models are underfit: the training scores are very low. <ul>
+<li>Why? The data is quite dispersed, and linear regression is probably not a good way to model this </li>
+</ul>
+</li>
+<li>The polynomial model generalizes slightly better<ul>
+<li>It has a narrower gap between training scores and validation scores</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Robust-Linear-Regression-against-Outliers">Robust Linear Regression against Outliers<a class="anchor-link" href="#Robust-Linear-Regression-against-Outliers">&#182;</a></h2><p>The most obvious problem with the data is the presence of lots of outliers.</p>
+<p>There are some models that are a bit more robust against outliers. One of them is the RANdom SAmple Consensus model (RANSAC), which can be trained using a baseline estimator to split the data into two sets: inliers and outliers.</p>
+<p><a href="http://scikit-learn.org/stable/modules/linear_model.html#ransac-random-sample-consensus">http://scikit-learn.org/stable/modules/linear_model.html#ransac-random-sample-consensus</a></p>
+<p>Let's give it a try.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">RANSACRegressor</span>
+
+<span class="n">ransac</span> <span class="o">=</span> <span class="n">RANSACRegressor</span><span class="p">(</span><span class="n">poly_model</span><span class="p">,</span>
+                         <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+
+<span class="o">%</span><span class="k">time</span> ransac.fit(X_train_poly_scaled, y_train_scaled)
+
+<span class="n">pred_scaled</span> <span class="o">=</span> <span class="n">ransac</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_poly_scaled</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Truth:&#39;</span><span class="p">,</span> <span class="n">y_test_scaled</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Predictions:&#39;</span><span class="p">,</span> <span class="n">pred_scaled</span><span class="p">)</span>
+
+<span class="c1"># Compute metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MSE:&#39;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test_scaled</span><span class="p">,</span> <span class="n">pred_scaled</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R2:&#39;</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_scaled</span><span class="p">,</span> <span class="n">pred_scaled</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inlier_mask</span> <span class="o">=</span> <span class="n">ransac</span><span class="o">.</span><span class="n">inlier_mask_</span>
+<span class="n">outlier_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">inlier_mask</span><span class="p">)</span>
+
+<span class="n">X_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">X_poly_scaled</span> <span class="o">=</span> <span class="n">x_scaler_poly</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_poly</span><span class="p">)</span>
+<span class="n">y_pred_scaled</span> <span class="o">=</span> <span class="n">ransac</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_poly_scaled</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred_scaled</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">inlier_mask</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[</span><span class="n">inlier_mask</span><span class="p">],</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;inliers&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">outlier_mask</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[</span><span class="n">outlier_mask</span><span class="p">],</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;outliers&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;predictions&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Gross Monthly Median Income and Employment Rate: RANSAC with 12th Degree Baseline&#39;</span><span class="p">,</span>
+       <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Employment Rate (%)&#39;</span><span class="p">,</span>
+       <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Gross Monthly Median Income (S$)&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
+    <span class="n">ransac</span><span class="p">,</span> <span class="n">X_train_poly_scaled</span><span class="p">,</span> <span class="n">y_train_scaled</span><span class="p">,</span>
+    <span class="n">train_sizes</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plot_learning_curve</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;RANSAC Model&#39;</span><span class="p">,</span>
+                    <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Cross-Validation">Cross Validation<a class="anchor-link" href="#Cross-Validation">&#182;</a></h1><p>Cross validation was used when plotting the learning curves. Here's what K-fold Cross Validation does:</p>
+<ol>
+<li>Partition training samples into K equal-sized groups</li>
+<li>Pick a group for each training iteration:<ul>
+<li>train with the remaining K-1 groups</li>
+<li>validate with this group</li>
+</ul>
+</li>
+</ol>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg" alt="cv">
+(image: wikipedia)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Benefits:</p>
+<ul>
+<li>Better measure of generalization than sticking to the same training set</li>
+<li>Helps smaller datasets train better by varying training set</li>
+</ul>
+<p>More explanation: <a href="http://scikit-learn.org/stable/modules/cross_validation.html">http://scikit-learn.org/stable/modules/cross_validation.html</a></p>
+
+</div>
+</div>
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Regularization">Regularization<a class="anchor-link" href="#Regularization">&#182;</a></h1><p>Regularization is applied when there is overfitting.</p>
+<ul>
+<li>It's a heuristic.</li>
+<li>Adds a large constant value $\lambda$ * some aggregate of weights</li>
+<li>Penalizes the weights, so that they won't fit as well to training data as models get more complicated</li>
+</ul>
+<p>L1 regularization:</p>
+<p><img src="assets/training-basics/least_squares_l1.png" alt="l1"></p>
+<p>L2 regularization:</p>
+<p><img src="assets/training-basics/least_squares_l2.png" alt="l2"></p>
+<p>(images: chioka.in)</p>
+<p>To illustrate this, let's try adding regularization to the Polynomial Model.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Regularization parameter: 100&#39;</span><span class="p">)</span>
+
+<span class="n">poly_model</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span>
+                          <span class="n">alpha</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                          <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+                          <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                          <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+
+<span class="n">poly_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_poly_scaled</span><span class="p">,</span> <span class="n">y_train_scaled</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients&#39;</span><span class="p">,</span> <span class="n">poly_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="n">poly_model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+
+<span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
+    <span class="n">poly_model</span><span class="p">,</span> <span class="n">X_train_poly_scaled</span><span class="p">,</span> <span class="n">y_train_scaled</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+
+<span class="n">plot_learning_curve</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Regularization Type: L1 (alpha = 100)&#39;</span><span class="p">,</span>
+                    <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Regularization parameter: 0.05&#39;</span><span class="p">)</span>
+
+<span class="n">poly_model</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span>
+                          <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                          <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+                          <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                          <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+
+<span class="n">poly_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_poly_scaled</span><span class="p">,</span> <span class="n">y_train_scaled</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients&#39;</span><span class="p">,</span> <span class="n">poly_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="n">poly_model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+
+<span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
+    <span class="n">poly_model</span><span class="p">,</span> <span class="n">X_train_poly_scaled</span><span class="p">,</span> <span class="n">y_train_scaled</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+
+<span class="n">plot_learning_curve</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Regularization Type: L1 (alpha = 0.05)&#39;</span><span class="p">,</span>
+                    <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Reading-List">Reading List<a class="anchor-link" href="#Reading-List">&#182;</a></h1><table>
 <thead><tr>
 <th>Material</th>
 <th>Read it for</th>
@@ -12489,17 +13666,37 @@ Some texts use this symbol $:=$</p>
 <tbody>
 <tr>
 <td>Chapter 8, Pages 290-296</td>
-<td>Stochastic Gradient Descent Theory</td>
+<td>Stochastic Gradient Descent Theory (*)</td>
 <td><a href="http://www.deeplearningbook.org/contents/optimization.html">http://www.deeplearningbook.org/contents/optimization.html</a></td>
 </tr>
 <tr>
-<td>Ordinary Least Squares Linear Regression</td>
-<td>Programming Example</td>
-<td><a href="http://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares">http://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares</a></td>
+<td>Chapter 5, Pages 107-119</td>
+<td>Capacity, Overfitting and Underfitting</td>
+<td><a href="http://www.deeplearningbook.org/contents/ml.html">http://www.deeplearningbook.org/contents/ml.html</a></td>
+</tr>
+<tr>
+<td>Machine Learning Explained: Regularization</td>
+<td>Graphical comparison of different types of Regularization</td>
+<td><a href="http://enhancedatascience.com/2017/07/04/machine-learning-explained-regularization/">http://enhancedatascience.com/2017/07/04/machine-learning-explained-regularization/</a></td>
+</tr>
+<tr>
+<td>scikit-learn: Stochastic Gradient Descent</td>
+<td>How to use SGD</td>
+<td><a href="http://scikit-learn.org/stable/modules/sgd.html">http://scikit-learn.org/stable/modules/sgd.html</a></td>
+</tr>
+<tr>
+<td>scikit-learn: Learning Curves</td>
+<td>How to plot &amp; interpret learning curves</td>
+<td><a href="http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html">http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html</a></td>
+</tr>
+<tr>
+<td>scikit-learn: Cross Validation</td>
+<td>How to compute Cross Validation metrics</td>
+<td><a href="http://scikit-learn.org/stable/modules/cross_validation.html">http://scikit-learn.org/stable/modules/cross_validation.html</a></td>
 </tr>
 </tbody>
 </table>
-<p>Note: in the reading list, SGD refers to "Minibatch SGD"</p>
+<p>(*)Note: in the book, the section on SGD is actually talking about "Minibatch SGD"</p>
 
 </div>
 </div>
