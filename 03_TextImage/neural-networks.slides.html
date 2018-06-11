@@ -12090,25 +12090,12 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Setup---Graphviz">Setup - Graphviz<a class="anchor-link" href="#Setup---Graphviz">&#182;</a></h3><p>We'll be installing Graphviz for visualizing the architectures.</p>
-<ol>
-<li>Download and install graphviz binaries from: <a href="https://graphviz.gitlab.io/download/">https://graphviz.gitlab.io/download/</a></li>
-<li>Add the path to graphviz to your PATH environment variable, e.g. <code>C:/Program Files (x86)/Graphviz2.38/bin</code></li>
-</ol>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Setup---Conda-environment">Setup - Conda environment<a class="anchor-link" href="#Setup---Conda-environment">&#182;</a></h3><ol>
 <li>Create a new conda environment called <code>mldds03</code>
 a. Launch an <code>Anaconda Python</code> command window
 b. <code>conda create -n mldds03 python=3</code></li>
 <li>Activate the conda environment: <code>conda activate mldds03</code></li>
-<li>Install: <code>conda install jupyter numpy pandas matplotlib keras pydot</code></li>
+<li>Install: <code>conda install jupyter numpy pandas matplotlib keras pydot python-graphviz</code></li>
 <li>Navigate to the courseware folder: <code>cd mldds-courseware</code></li>
 <li>Launch Jupyter: <code>jupyter notebook</code> and open this notebook</li>
 </ol>
@@ -12374,6 +12361,20 @@ model_to_dot<span class="o">?</span>
 </div>
 </div>
 
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Troubleshooting:-Graphviz-Installation">Troubleshooting: Graphviz Installation<a class="anchor-link" href="#Troubleshooting:-Graphviz-Installation">&#182;</a></h3><p>If pydot is not able to find <code>graphviz</code>, you can try installing graphviz manually.</p>
+<ol>
+<li>Download and install graphviz binaries from: <a href="https://graphviz.gitlab.io/download/">https://graphviz.gitlab.io/download/</a></li>
+<li>Add the path to graphviz to your PATH environment variable, e.g. <code>C:/Program Files (x86)/Graphviz2.38/bin</code></li>
+<li>Launch a new <code>Anaconda Prompt</code> and re-run the Jupyter notebook.</li>
+</ol>
+
+</div>
+</div>
 </div><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
