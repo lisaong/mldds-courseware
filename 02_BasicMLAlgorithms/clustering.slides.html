@@ -11976,7 +11976,7 @@ a.anchor-link {
 <li>Expectation Maximization / Gaussian Mixture</li>
 <li>DBSCAN</li>
 </ul>
-<p>Comparison (worth checking out):
+<p>Comparison:
 <a href="http://scikit-learn.org/stable/modules/clustering.html#overview-of-clustering-methods">http://scikit-learn.org/stable/modules/clustering.html#overview-of-clustering-methods</a></p>
 
 </div>
@@ -11986,15 +11986,15 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="K-means">K-means<a class="anchor-link" href="#K-means">&#182;</a></h2>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Gaussian-Mixture">Gaussian Mixture<a class="anchor-link" href="#Gaussian-Mixture">&#182;</a></h2><p><a href="http://scikit-learn.org/stable/modules/mixture.html#gaussian-mixture">http://scikit-learn.org/stable/modules/mixture.html#gaussian-mixture</a></p>
+<h2 id="K-means">K-means<a class="anchor-link" href="#K-means">&#182;</a></h2><ul>
+<li>Divides $N$ samples into $K$ clusters $C$<ul>
+<li>Each cluster is centered on a mean $\mu_j$, known as a "centroid"</li>
+</ul>
+</li>
+<li>Objective is to minimize "inertia" (= within-cluster sum-of-squares)</li>
+</ul>
+<p>$$\sum_{i=0}^n \underset{\mu_j \in C} {\arg \min}{(\|x_i - \mu_j\|^2)}$$</p>
+<p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html</a></p>
 
 </div>
 </div>
@@ -12003,32 +12003,24 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="DBSCAN">DBSCAN<a class="anchor-link" href="#DBSCAN">&#182;</a></h2><p><a href="http://scikit-learn.org/stable/modules/clustering.html#dbscan">http://scikit-learn.org/stable/modules/clustering.html#dbscan</a></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Evaluation-Metrics">Evaluation Metrics<a class="anchor-link" href="#Evaluation-Metrics">&#182;</a></h2><p><a href="http://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation">http://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation</a></p>
+<h2 id="Workshop:-K-means-clustering">Workshop: K-means clustering<a class="anchor-link" href="#Workshop:-K-means-clustering">&#182;</a></h2><h3 id="Dataset:-COE-Bidding-Results">Dataset: COE Bidding Results<a class="anchor-link" href="#Dataset:-COE-Bidding-Results">&#182;</a></h3><p><a href="https://data.gov.sg/dataset/coe-bidding-results">https://data.gov.sg/dataset/coe-bidding-results</a></p>
+<ol>
+<li>Download the dataset on your machine</li>
+<li>Extract into a folder and note the path for use in <code>pd.read_csv</code></li>
+</ol>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[190]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="c1"># usecols=[&#39;year_release&#39;, &#39;romanised_title&#39;, &#39;publishers&#39;, &#39;region&#39;, &#39;platform&#39;, &#39;rating&#39;])</span>
-<span class="c1">#                usecols=[&#39;publishers&#39;, &#39;region&#39;, &#39;platform&#39;, &#39;rating&#39;])</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/video-games-classification-database/video-games-classification-database.csv&#39;</span><span class="p">,</span>
-                <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year_release&#39;</span><span class="p">,</span> <span class="s1">&#39;romanised_title&#39;</span><span class="p">,</span> <span class="s1">&#39;publishers&#39;</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;platform&#39;</span><span class="p">,</span> <span class="s1">&#39;rating&#39;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/coe-bidding-results/coe-results.csv&#39;</span><span class="p">,</span> <span class="c1"># fix to your path</span>
+                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vehicle_class&#39;</span><span class="p">,</span> <span class="s1">&#39;quota&#39;</span><span class="p">,</span> <span class="s1">&#39;premium&#39;</span><span class="p">])</span>
 
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -12037,560 +12029,794 @@ a.anchor-link {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[190]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>romanised_title</th>
-      <th>publishers</th>
-      <th>year_release</th>
-      <th>region</th>
-      <th>platform</th>
-      <th>rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>ATTOUTEKI YUUGI: MUGEN SOULS Z</td>
-      <td>IDEA FACTORY CO. LTD</td>
-      <td>2013</td>
-      <td>ASIA,EURO</td>
-      <td>Sony Playstation 3</td>
-      <td>Age Advisory</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>ARMA III</td>
-      <td>BOHEMIA INTERACTIVE</td>
-      <td>2013</td>
-      <td>ASIA</td>
-      <td>PC</td>
-      <td>Age Advisory</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>TOTAL WAR: SHOGUN 2 GOLD EDITION</td>
-      <td>SEGA EUROPE</td>
-      <td>2013</td>
-      <td>EURO</td>
-      <td>PC</td>
-      <td>General</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>COMPANY OF HEROES 2</td>
-      <td>SEGA EUROPE</td>
-      <td>2013</td>
-      <td>ASIA</td>
-      <td>PC</td>
-      <td>Age Advisory</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>COMPANY OF HEROES 2 RED STAR EDITION</td>
-      <td>SEGA EUROPE</td>
-      <td>2013</td>
-      <td>ASIA</td>
-      <td>PC</td>
-      <td>Age Advisory</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[191]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">LabelEncoder</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
 
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Task">Task<a class="anchor-link" href="#Task">&#182;</a></h3><ol>
+<li><p>Find clusters using the <code>quota</code>, and <code>premium</code> columns.</p>
+</li>
+<li><p>Compare the clusters found with the actual <code>vehicle_class</code> label</p>
+</li>
+</ol>
+<p><em>Note: in unsupervised learning, we DON'T provide the label for training the algorithm</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Data-Processing">Data Processing<a class="anchor-link" href="#Data-Processing">&#182;</a></h3><ol>
+<li>Take the last 300 samples for demo purposes</li>
+<li>Encode labels from ['Category A', ...] to [0, 1, 2, ...]</li>
+<li>Shuffle and split the data into train and test</li>
+<li>Scale the data</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># For demo purposes, use the first 300 samples</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">n_samples</span><span class="p">]</span>
+
+<span class="n">df_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;quota&#39;</span><span class="p">:</span><span class="s1">&#39;premium&#39;</span><span class="p">]</span>
+
+<span class="c1"># Encode labels</span>
 <span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
-<span class="n">encoded_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[:]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">)</span>
-<span class="n">encoded_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df_labels</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;vehicle_class&#39;</span><span class="p">])</span>
+
+<span class="c1"># Train, test split, and shuffle</span>
+<span class="n">df_data_train</span><span class="p">,</span> <span class="n">df_data_test</span><span class="p">,</span> <span class="n">df_labels_train</span><span class="p">,</span> <span class="n">df_labels_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">df_labels</span><span class="p">)</span>
+
+<span class="c1"># Scale the data to simplify processing</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_data_train</span><span class="p">)</span>
+<span class="n">df_data_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_data_train</span><span class="p">)</span>
+<span class="n">df_data_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_data_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Labels</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">df_labels_train</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">df_data_train_scaled</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[191]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>romanised_title</th>
-      <th>publishers</th>
-      <th>year_release</th>
-      <th>region</th>
-      <th>platform</th>
-      <th>rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>45</td>
-      <td>79</td>
-      <td>6</td>
-      <td>1</td>
-      <td>83</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>28</td>
-      <td>38</td>
-      <td>6</td>
-      <td>0</td>
-      <td>60</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>703</td>
-      <td>153</td>
-      <td>6</td>
-      <td>8</td>
-      <td>60</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>103</td>
-      <td>153</td>
-      <td>6</td>
-      <td>0</td>
-      <td>60</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>104</td>
-      <td>153</td>
-      <td>6</td>
-      <td>0</td>
-      <td>60</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Helper-functions">Helper functions<a class="anchor-link" href="#Helper-functions">&#182;</a></h3><p>Here's a helper function to visualize the k-means algorithm.</p>
+<p>It does this:</p>
+<ol>
+<li>For the min-max ranges of <code>quota</code> and <code>premium</code> (after scaling), run <code>Kmeans.predict</code> to get the label outputs [0, 1, 2, 3, 4] (for 5 categories)</li>
+<li>Plot a colour mesh, with colour assigned to each label</li>
+<li>Scatter plot the training data in black</li>
+<li>Scatter plot the centroids in red</li>
+</ol>
 
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[192]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">encoded_df</span><span class="o">.</span><span class="n">rating</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">plot_decision_boundaries</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">kmeans_model</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots the decision boundaries for a fitted k-means model</span>
+<span class="sd">    Args:</span>
+<span class="sd">        ax: subplot axis</span>
+<span class="sd">        title: subplot title</span>
+<span class="sd">        kmeans_model: a fitted sklearn.cluster.KMeans model</span>
+<span class="sd">        data: 2-dimensional input data to cluster and plot</span>
+<span class="sd"> </span>
+<span class="sd">    Based on: http://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Step size of the mesh. Decrease to increase the quality of the VQ.</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>     <span class="c1"># point in the mesh [x_min, x_max]x[y_min, y_max].</span>
+
+    <span class="c1"># Plot the decision boundary. For that, we will assign a color to each</span>
+    <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+
+    <span class="c1"># Obtain labels for each point in mesh using the trained model.</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">kmeans_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+
+    <span class="c1"># Put the result into a color plot</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
+              <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+              <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Pastel2</span><span class="p">,</span>
+              <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="c1"># Plot the centroids as a red X</span>
+    <span class="n">centroids</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+               <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">169</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;centroids&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+           <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">),</span>
+           <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[192]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([0, 1, 2], dtype=int64)</pre>
 </div>
-
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Train-and-plot-progress">Train and plot progress<a class="anchor-link" href="#Train-and-plot-progress">&#182;</a></h3><p>Now we'll run k-means with different iterations.</p>
+<p>Observe how the centroids move as the algorithm makes progress.</p>
 
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[233]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">scale</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">n_ratings</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">encoded_df</span><span class="o">.</span><span class="n">rating</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
-<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1"># get a subset of samples</span>
+<span class="c1"># Run k-means iteratively and plot to demonstrate the algorithm at work</span>
+<span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;vehicle_class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="n">n_iterations</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">encoded_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;romanised_title&#39;</span><span class="p">:</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="n">n_samples</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
 
-<span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;rating&#39;</span><span class="p">]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;romanised_title&#39;</span><span class="p">:</span><span class="s1">&#39;platform&#39;</span><span class="p">]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="n">reduced_data</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">n_ratings</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_data_train_scaled</span><span class="p">)</span>
+    <span class="n">plot_decision_boundaries</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;K-means, </span><span class="si">%d</span><span class="s1"> iteration(s)&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">,</span> <span class="n">kmeans</span><span class="p">,</span> <span class="n">df_data_train_scaled</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[233]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>KMeans(algorithm=&#39;auto&#39;, copy_x=True, init=&#39;k-means++&#39;, max_iter=300,
-    n_clusters=3, n_init=10, n_jobs=1, precompute_distances=&#39;auto&#39;,
-    random_state=None, tol=0.0001, verbose=0)</pre>
 </div>
-
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>Repeat the above, trying different options for k-means:</p>
+<ol>
+<li>Try a different initialization method: <code>k-means++</code></li>
+<li>Try averaging over different centroid seeds by setting <code>n_init</code> to a number greater than 1</li>
+<li>Try a different algorithm: <code>full</code>, <code>elkan</code></li>
+</ol>
+<p>You can run <code>KMeans?</code> to see its documentation.</p>
 
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[234]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[234]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[-0.75847317, -1.41802978, -0.93811359,  1.28157435,  0.4804135 ],
-       [-1.41665576, -1.65827202, -0.93811359,  0.72678026,  0.59645541],
-       [-0.48697285, -0.69730308, -2.02894335, -0.66020497, -0.44792176],
-       [-0.43760915,  0.18859015, -0.93811359, -0.66020497, -1.33757639],
-       [-0.19490432, -0.48709113,  0.15271617, -0.66020497,  0.40305223]])</pre>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[223]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reduced_data</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Evaluating-Clustering-Algorithms">Evaluating Clustering Algorithms<a class="anchor-link" href="#Evaluating-Clustering-Algorithms">&#182;</a></h2><p>When you have the ground truth labels:</p>
+<ul>
+<li>Homogeniety: each cluster contains only members of 1 class</li>
+<li>Completeness: all members of 1 class are assigned to the same cluster</li>
+<li>V-measure: harmonic mean of homogeniety and completeness
+$$v\_measure = \frac{2 * homogeniety * completeness}{homogeniety+completeness}$$</li>
+<li>Adjusted Rand index: similarity measure, ignoring ordering</li>
+</ul>
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[223]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[-1.34657673, -1.21635814],
-       [ 2.72135284, -0.53020643],
-       [-0.25237368, -0.14284584],
-       [ 0.60532584,  0.57480136],
-       [-1.67367971, -1.3402463 ]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[239]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labels</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Evaluating-Clustering-Algorithms">Evaluating Clustering Algorithms<a class="anchor-link" href="#Evaluating-Clustering-Algorithms">&#182;</a></h2><p>When you don't have the ground truth labels:</p>
+<ul>
+<li>Silhouette Coefficient</li>
+</ul>
+<p>$$S = \frac{b-a}{max(a, b)}$$</p>
+<p>Where:</p>
+<ul>
+<li>$a$: Mean distance between 1 sample and others in same class</li>
+<li>$b$: Mean distance between 1 sample and others in nearest clusters</li>
+</ul>
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[239]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([0, 0, 1, 1, 0], dtype=int64)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[236]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># http://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html</span>
-
-<span class="c1"># Step size of the mesh. Decrease to increase the quality of the VQ.</span>
-<span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>     <span class="c1"># point in the mesh [x_min, x_max]x[y_min, y_max].</span>
-
-<span class="c1"># Plot the decision boundary. For that, we will assign a color to each</span>
-<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">reduced_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">reduced_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">reduced_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">reduced_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
-
-<span class="c1"># Obtain labels for each point in mesh. Use last trained model.</span>
-<span class="n">Z</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
-
-<span class="c1"># Put the result into a color plot</span>
-<span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
-          <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
-          <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Pastel2</span><span class="p">,</span>
-          <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">reduced_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="c1"># Plot the centroids as a red X</span>
-<span class="n">centroids</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
-           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">169</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;centroids&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;K-means clustering on the video game dataset (PCA-reduced data)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-       <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">),</span>
-       <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span> <span class="o">=</span> <span class="p">())</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Evaluating-Clustering-Algorithms">Evaluating Clustering Algorithms<a class="anchor-link" href="#Evaluating-Clustering-Algorithms">&#182;</a></h2><p>Advantages and disadvantages of each metric:
+<a href="http://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation">http://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation</a></p>
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[236]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.legend.Legend at 0x1a3800a8860&gt;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[237]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Workshop:-Evaluating-K-means-on-the-COE-dataset">Workshop: Evaluating K-means on the COE dataset<a class="anchor-link" href="#Workshop:-Evaluating-K-means-on-the-COE-dataset">&#182;</a></h2><p>Since we have our labels, we can evaluate the performance of the clustering algorithm using all of the above.</p>
+<p>Higher numbers are better.</p>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[237]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([0, 0, 1, 1, 2, 2, 1, 2, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 0, 0, 2,
-       2, 0, 2, 2, 2, 1, 2, 0, 1, 2, 0, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 2, 0,
-       2, 0, 1, 2])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[240]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Homogeneity: </span><span class="si">%0.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">homogeneity_score</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completeness: </span><span class="si">%0.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">completeness_score</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;V-measure: </span><span class="si">%0.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">v_measure_score</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjusted Rand-Index: </span><span class="si">%.3f</span><span class="s2">&quot;</span>
-      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Silhouette Coefficient: </span><span class="si">%0.3f</span><span class="s2">&quot;</span>
-      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">))</span>
+<span class="c1"># Let&#39;s run to the maximum iterations</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_data_train_scaled</span><span class="p">)</span>
+
+<span class="c1"># Run prediction on the test data</span>
+<span class="n">test_labels_predict</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df_data_test_scaled</span><span class="p">)</span>
+<span class="n">test_labels_predict</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Homogeneity: </span><span class="si">%0.3f</span><span class="s2">&quot;</span>
+      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">homogeneity_score</span><span class="p">(</span><span class="n">df_labels_test</span><span class="p">,</span> <span class="n">test_labels_predict</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completeness: </span><span class="si">%0.3f</span><span class="s2">&quot;</span>
+      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">completeness_score</span><span class="p">(</span><span class="n">df_labels_test</span><span class="p">,</span> <span class="n">test_labels_predict</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;V-measure: </span><span class="si">%0.3f</span><span class="s2">&quot;</span>
+      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">v_measure_score</span><span class="p">(</span><span class="n">df_labels_test</span><span class="p">,</span> <span class="n">test_labels_predict</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjusted Rand-Index: </span><span class="si">%.3f</span><span class="s2">&quot;</span>
+      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">df_labels_test</span><span class="p">,</span> <span class="n">test_labels_predict</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Silhouette Coefficient: </span><span class="si">%0.3f</span><span class="s2">&quot;</span>
+      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">df_data_test_scaled</span><span class="p">,</span> <span class="n">test_labels_predict</span><span class="p">,</span>
+                                 <span class="n">sample_size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                                 <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">))</span>
+</pre></div>
 
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Homogeneity: 0.049
-Completeness: 0.048
-V-measure: 0.049
-Adjusted Rand-Index: -0.007
-Silhouette Coefficient: 0.221
-</pre>
 </div>
 </div>
-
-</div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>Compare the Evaluation Metrics for the different k-means settings you tried in the earlier exercise.</p>
+<ul>
+<li>A different initialization method: k-means++</li>
+<li>Averaging over different centroid seeds by setting n_init to a number greater than 1</li>
+<li>A different algorithm: full, elkan</li>
+</ul>
+<p>Use max_iter = 100 or a similar value.</p>
+<p>Which combination performs the best on this dataset?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Gaussian-Mixture-Models">Gaussian Mixture Models<a class="anchor-link" href="#Gaussian-Mixture-Models">&#182;</a></h2><p>Gaussian mixture models use the normal distribution</p>
+<ul>
+<li>Means are centered around clusters</li>
+<li>Assigns probabilities that a sample belongs to a cluster</li>
+</ul>
+<p><a href="http://scikit-learn.org/stable/modules/mixture.html#gaussian-mixture">http://scikit-learn.org/stable/modules/mixture.html#gaussian-mixture</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Covariance-Matrix-Types">Covariance Matrix Types<a class="anchor-link" href="#Covariance-Matrix-Types">&#182;</a></h2><p>The covariance matrix type controls how the gaussian models are "mixed" together.</p>
+<ul>
+<li>Spherical: all components have spherical covariance matrices</li>
+<li>Diagonal: each component has its own axis-aligned covariance matrix</li>
+<li>Tied: all components have the same covariance matrix</li>
+<li>Full: all components can have different covariance matrix</li>
+</ul>
+<p>Visualization:
+<a href="http://www.stats.ox.ac.uk/~sejdinov/teaching/dmml/Mixtures.html">http://www.stats.ox.ac.uk/~sejdinov/teaching/dmml/Mixtures.html</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Workshop:-Gaussian-Mixture-Model-on-the-COE-dataset">Workshop: Gaussian Mixture Model on the COE dataset<a class="anchor-link" href="#Workshop:-Gaussian-Mixture-Model-on-the-COE-dataset">&#182;</a></h2><p>In this workshop, we will apply GMMs to cluster the COE dataset.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Credits: https://github.com/scikit-learn/scikit-learn/blob/master/examples/mixture/plot_gmm_pdf.py</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="k">import</span> <span class="n">LogNorm</span>
+<span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="k">import</span> <span class="n">GaussianMixture</span>
+
+<span class="k">def</span> <span class="nf">plot_gmm</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">gmm</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots a Gaussian Mixture Model as a contour plot</span>
+<span class="sd">    Args:</span>
+<span class="sd">        ax: subplot axis</span>
+<span class="sd">        title: plot title</span>
+<span class="sd">        gmm: fitted Gaussian Mixture Model</span>
+<span class="sd">        data: data samples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span>
+                         <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+
+    <span class="c1"># negative log-likelihood scores for each point in the mesh</span>
+    <span class="c1"># using the trained model</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="o">-</span><span class="n">gmm</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span> 
+                     <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+       <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">),</span>
+       <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;vehicle_class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="n">covariance_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spherical&#39;</span><span class="p">,</span> <span class="s1">&#39;diag&#39;</span><span class="p">,</span> <span class="s1">&#39;tied&#39;</span><span class="p">,</span> <span class="s1">&#39;full&#39;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+                        <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">cov_type</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">covariance_types</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="n">gmm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="n">cov_type</span><span class="p">)</span>
+    <span class="n">gmm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_data_train_scaled</span><span class="p">)</span>
+    <span class="n">plot_gmm</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;Negative log-likelihood predicted by a GMM (covariance type = </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">cov_type</span><span class="p">,</span>
+             <span class="n">gmm</span><span class="p">,</span> <span class="n">df_data_train_scaled</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise:-Evaluation-metrics-and-Spherical-plots-for-GMM">Exercise: Evaluation metrics and Spherical plots for GMM<a class="anchor-link" href="#Exercise:-Evaluation-metrics-and-Spherical-plots-for-GMM">&#182;</a></h3><p>A contour plot is useful for visualizing the shape of a Gaussian Mixture Model, because it shows the probability distributions for each class.</p>
+<p>For clustering purposes, if we don't care so much about the probabilities, we can do spherical plots instead.</p>
+<ol>
+<li>Complete the <code>get_metrics</code> helper function to get the evaluation metrics for each GMM covariance type.</li>
+<li>Which model will you choose, based on the evaluation metrics?</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="k">import</span> <span class="n">Ellipse</span>
+
+<span class="k">def</span> <span class="nf">get_gmm_cov_matrix</span><span class="p">(</span><span class="n">gmm</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the covariance matrix</span>
+<span class="sd">    Args:</span>
+<span class="sd">        gmm: the Gaussian Mixture Model</span>
+<span class="sd">        label: the label index</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        the covariance matrix</span>
+
+<span class="sd">    Credits: http://www.stats.ox.ac.uk/~sejdinov/teaching/dmml/Mixtures.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">gmm</span><span class="o">.</span><span class="n">covariance_type</span> <span class="o">==</span> <span class="s1">&#39;full&#39;</span><span class="p">:</span>
+        <span class="c1"># one per label (of any type)</span>
+        <span class="n">cov</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">covariances_</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">gmm</span><span class="o">.</span><span class="n">covariance_type</span> <span class="o">==</span> <span class="s1">&#39;tied&#39;</span><span class="p">:</span>
+        <span class="c1"># all the same</span>
+        <span class="n">cov</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">covariances_</span>
+    <span class="k">elif</span> <span class="n">gmm</span><span class="o">.</span><span class="n">covariance_type</span> <span class="o">==</span> <span class="s1">&#39;diag&#39;</span><span class="p">:</span>
+        <span class="c1"># diagonal matrix per label</span>
+        <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">covariances_</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">gmm</span><span class="o">.</span><span class="n">covariance_type</span> <span class="o">==</span> <span class="s1">&#39;spherical&#39;</span><span class="p">:</span>
+        <span class="c1"># all spherical</span>
+        <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">gmm</span><span class="o">.</span><span class="n">covariances_</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">cov</span>
+    
+<span class="k">def</span> <span class="nf">plot_cov_ellipse</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots the covariance ellipse</span>
+<span class="sd">    Args:</span>
+<span class="sd">        cov: the covariance to plot</span>
+<span class="sd">        pos: the position</span>
+<span class="sd">        color: the ellipse color</span>
+<span class="sd">        ax: the subplot axis</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        the ellipse</span>
+
+<span class="sd">    Credits: http://www.stats.ox.ac.uk/~sejdinov/teaching/dmml/Mixtures.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">eigsorted</span><span class="p">(</span><span class="n">cov</span><span class="p">):</span>
+        <span class="n">vals</span><span class="p">,</span> <span class="n">vecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">vals</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">vals</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="n">vecs</span><span class="p">[:,</span><span class="n">order</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">vals</span><span class="p">,</span> <span class="n">vecs</span> <span class="o">=</span> <span class="n">eigsorted</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="o">*</span><span class="n">vecs</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">nstd</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># ???</span>
+
+    <span class="c1"># Width and height are &quot;full&quot; widths, not radius</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">nstd</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+    <span class="n">ellip</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">ellip</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ellip</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
+
+<span class="k">def</span> <span class="nf">get_metrics</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the cluster evaluation metrics</span>
+<span class="sd">    Args:</span>
+<span class="sd">        model - the model</span>
+<span class="sd">        test_data - the test dataset</span>
+<span class="sd">        test_labels - the test labels</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        a tuple of (homogeniety_score, completeness_score</span>
+<span class="sd">        v_measure_score, adjusted_rand_score, silhouette_score)    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Your code here</span>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+                        <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Spectral</span><span class="p">(</span><span class="n">each</span><span class="p">)</span>
+          <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)]</span>
+
+<span class="n">covariance_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spherical&#39;</span><span class="p">,</span> <span class="s1">&#39;diag&#39;</span><span class="p">,</span> <span class="s1">&#39;tied&#39;</span><span class="p">,</span> <span class="s1">&#39;full&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">cov_type</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">covariance_types</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="n">gmm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="n">cov_type</span><span class="p">)</span>
+    <span class="n">gmm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_data_train_scaled</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_data_train_scaled</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">df_data_train_scaled</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+    <span class="n">homogeneity</span><span class="p">,</span> <span class="n">completeness</span><span class="p">,</span> <span class="n">vmeasure</span><span class="p">,</span> <span class="n">adjusted_rand</span><span class="p">,</span> <span class="n">silhouette</span> <span class="o">=</span> \
+        <span class="n">get_metrics</span><span class="p">(</span><span class="n">gmm</span><span class="p">,</span> <span class="n">df_data_test_scaled</span><span class="p">,</span> <span class="n">df_labels_test</span><span class="p">)</span>    
+
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">colors</span><span class="p">):</span>
+        <span class="n">cov</span> <span class="o">=</span> <span class="n">get_gmm_cov_matrix</span><span class="p">(</span><span class="n">gmm</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>                
+        <span class="n">position</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">means_</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+        <span class="n">plot_cov_ellipse</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;GMM with </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> covariance</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;homogeneity </span><span class="si">%.2f</span><span class="s1">, completeness </span><span class="si">%.2f</span><span class="s1">, v-measure </span><span class="si">%.2f</span><span class="se">\n</span><span class="s1">&#39;</span>
+           <span class="s1">&#39;adjusted rand score </span><span class="si">%.2f</span><span class="s1">, silhouette coefficient </span><span class="si">%.2f</span><span class="s1">&#39;</span>
+           <span class="o">%</span> <span class="p">(</span><span class="n">cov_type</span><span class="p">,</span> <span class="n">homogeneity</span><span class="p">,</span> <span class="n">completeness</span><span class="p">,</span> <span class="n">vmeasure</span><span class="p">,</span> <span class="n">adjusted_rand</span><span class="p">,</span>
+              <span class="n">silhouette</span><span class="p">),</span>
+       <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="DBSCAN">DBSCAN<a class="anchor-link" href="#DBSCAN">&#182;</a></h2><p>The final clustering algorithm we'll look at is DBSCAN.</p>
+<p>The key feature of DBSCAN is that it can find clusters of any shape (not just spherical or convex).</p>
+<p>Instead of telling it how many clusters to find, DBSCAN can estimate the clusters from the data.</p>
+<p><a href="http://scikit-learn.org/stable/modules/clustering.html#dbscan">http://scikit-learn.org/stable/modules/clustering.html#dbscan</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Walkthrough---DBSCAN-on-the-COE-dataset">Walkthrough - DBSCAN on the COE dataset<a class="anchor-link" href="#Walkthrough---DBSCAN-on-the-COE-dataset">&#182;</a></h2><p>Credits: <a href="http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html">http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Data-preparation">Data preparation<a class="anchor-link" href="#Data-preparation">&#182;</a></h3><p>DBSCAN does not have the concept of 'predict'.</p>
+<p>We'll use the "full" dataset (first 300 values), without splitting train and test.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler_all</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">df_data_scaled</span> <span class="o">=</span> <span class="n">scaler_all</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_data</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Fit the model to get:</p>
+<ul>
+<li>The core samples that DBSCAN considers as part of a cluster</li>
+<li>The cluster labels that DBSCAN found</li>
+</ul>
+<p>The <code>eps</code> and <code>min_samples</code> settings are tunable to the dataset, depending on how many clusters you would like DBSCAN to find.</p>
+<p>More details: <code>DBSCAN?</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">DBSCAN</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># these can be tuned</span>
+                                     <span class="c1"># based on how many clusters</span>
+                                     <span class="c1"># you want DBSCAN to find</span>
+<span class="n">db</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_data_scaled</span><span class="p">)</span>
+
+<span class="n">core_samples_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">core_samples_mask</span><span class="p">[</span><span class="n">db</span><span class="o">.</span><span class="n">core_sample_indices_</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">db</span><span class="o">.</span><span class="n">labels_</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Number of clusters in labels, ignoring noise if present.</span>
+<span class="n">labels_predict</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">labels_</span>
+<span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels_predict</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">labels_predict</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Estimated number of clusters: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">n_clusters</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute the Evaluation Metrics:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labels_true</span> <span class="o">=</span> <span class="n">df_labels</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Homogeneity: </span><span class="si">%0.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">homogeneity_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_predict</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completeness: </span><span class="si">%0.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">completeness_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_predict</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;V-measure: </span><span class="si">%0.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">v_measure_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_predict</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjusted Rand Index: </span><span class="si">%0.3f</span><span class="s2">&quot;</span>
+      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_predict</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Silhouette Coefficient: </span><span class="si">%0.3f</span><span class="s2">&quot;</span>
+      <span class="o">%</span> <span class="n">metrics</span><span class="o">.</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">df_data_scaled</span><span class="p">,</span> <span class="n">labels_predict</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Plot the clusters found by DBSCAN:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">plot_dbscan</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+
+    <span class="c1"># Black removed and is used for noise instead.</span>
+    <span class="n">unique_labels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Spectral</span><span class="p">(</span><span class="n">each</span><span class="p">)</span>
+              <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_labels</span><span class="p">))]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique_labels</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Black used for noise.</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">class_member_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span>
+
+        <span class="n">xy</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">class_member_mask</span> <span class="o">&amp;</span> <span class="n">core_samples_mask</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xy</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">col</span><span class="p">),</span>
+                 <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+        <span class="n">xy</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">class_member_mask</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">core_samples_mask</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xy</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">col</span><span class="p">),</span>
+                 <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">())</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_dbscan</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;COE Quotas vs Premiums, Estimated number of clusters: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">n_clusters</span><span class="p">,</span>
+            <span class="n">df_data_scaled</span><span class="p">,</span> <span class="n">labels_predict</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section>
 </div>
 </div>
 
