@@ -3,6 +3,7 @@ desktop.ini
 .vscode
 *.binary
 *.docx
+*.dot
 *.gdoc
 *.gform
 *.gsheet
