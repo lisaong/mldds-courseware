@@ -1,6 +1,9 @@
 ## Machine Learning-driven Data Science
 
-Slides and Workshop material (under development)
+Slides and Workshop material (under development) for the Machine Learning classes from NUS ISS Stackup.
+
+- [Setup](#setting-up-your-machine)
+- [Module Index](#module-index)
 
 ### Setting up your machine
 
@@ -23,7 +26,7 @@ To run the workshop exercises, you need the original Jupyter notebooks. Go to th
   - [1.2 NumPy](01_GettingStarted/numpy.slides.html)
   - [1.3 Pandas](01_GettingStarted/pandas.slides.html)
   - [1.4 Matplotlib](01_GettingStarted/matplotlib.slides.html)
-  - [1.5 My first model](01_GettingStarted/my-first-model.slides.html)
+  - [1.5 My First Model](01_GettingStarted/my-first-model.slides.html)
 
 - 2 Basic Machine Learning Algorithms
   - [2.1 Training Basics](02_BasicMLAlgorithms/training-basics.slides.html)
@@ -35,7 +38,7 @@ To run the workshop exercises, you need the original Jupyter notebooks. Go to th
 
 - 3 Image Recognition and Text Processing
   - [3.1 Neural Networks](03_TextImage/neural-networks.slides.html)
-  - 3.2 Image Recognition
+  - [3.2 Image Recognition](03_TextImage/image.slides.html)
   - 3.3 Transfer Learning
   - 3.4 Adversarial Learning
   - 3.5 Text Processing and Word Embeddings
