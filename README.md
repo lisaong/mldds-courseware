@@ -34,7 +34,7 @@ To run the workshop exercises, you need the original Jupyter notebooks. Go to th
   - [2.5 Dimensionality Reduction](02_BasicMLAlgorithms/dimensionality.slides.html)
 
 - 3 Image Recognition and Text Processing
-  - [3.1 Neural Networks](03_TextImage/neural-networks.html)
+  - [3.1 Neural Networks](03_TextImage/neural-networks.slides.html)
   - 3.2 Image Recognition
   - 3.3 Transfer Learning
   - 3.4 Adversarial Learning
