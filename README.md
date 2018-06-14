@@ -39,7 +39,7 @@ To run the workshop exercises, you need the original Jupyter notebooks. Go to th
 - 3 Image Recognition and Text Processing
   - [3.1 Neural Networks](03_TextImage/neural-networks.slides.html)
   - [3.2 Image Recognition](03_TextImage/image.slides.html)
-  - 3.3 Transfer Learning
+  - [3.3 Transfer Learning](03_TextImage/transfer-learning.slides.html)
   - 3.4 Adversarial Learning
   - 3.5 Text Processing and Word Embeddings
   - 3.6 Document Summarization
