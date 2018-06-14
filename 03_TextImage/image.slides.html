@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>neural-networks slides</title>
+<title>image slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,7 +11905,10 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Neural-Networks">Neural Networks<a class="anchor-link" href="#Neural-Networks">&#182;</a></h1>
+<h1 id="Image-Recognition">Image Recognition<a class="anchor-link" href="#Image-Recognition">&#182;</a></h1><p>(live long, prosper, and watch out for cats)</p>
+<p><img src="assets/image/meme.jpg" alt="cat detectors rule"></p>
+<p>(image: <a href="https://towardsdatascience.com/the-whos-who-of-machine-learning-and-why-you-should-know-them-9cefbbc84f07">https://towardsdatascience.com/the-whos-who-of-machine-learning-and-why-you-should-know-them-9cefbbc84f07</a>)</p>
+
 </div>
 </div>
 </div></section></section><section><section>
@@ -11913,29 +11916,17 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h2><p>Neural Networks: General-purpose learning algorithm for modeling non-linearity</p>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>... if you train it with "enough" data</p>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Non-linear-inputs">Non-linear inputs<a class="anchor-link" href="#Non-linear-inputs">&#182;</a></h2><ul>
-<li>Images</li>
-<li>Text</li>
-<li>Speech</li>
-<li>XOR</li>
+<h1 id="Topics">Topics<a class="anchor-link" href="#Topics">&#182;</a></h1><ul>
+<li>Input Representation</li>
+<li>Convolutional Neural Networks<ul>
+<li>Convolution, Activation, Pooling</li>
+</ul>
+</li>
+<li>Architectures<ul>
+<li>Image Classification</li>
+<li>Object Detection</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -11945,9 +11936,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Limitations-of-linear-models">Limitations of linear models<a class="anchor-link" href="#Limitations-of-linear-models">&#182;</a></h2><p>Not "linearly separable"</p>
-<p><img src="assets/neural/xor.png" alt="xor"></p>
-<p>Can't draw boundary to separate x's and o's</p>
+<h1 id="Image-Recognition-Tasks">Image Recognition Tasks<a class="anchor-link" href="#Image-Recognition-Tasks">&#182;</a></h1><p><img src="assets/image/cat_detectors.png" alt="cat detectors"></p>
+<p>(image: analyticsindiamag.com)</p>
 
 </div>
 </div>
@@ -11956,123 +11946,25 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Modeling-non-linearity">Modeling non-linearity<a class="anchor-link" href="#Modeling-non-linearity">&#182;</a></h2><p>Transform $x$ into $\phi(x)$ to become linearly separable</p>
-<p><img src="assets/neural/xor_phi.png" alt="xor"></p>
-<p>$\phi(x)$ is the basis for a "neuron"</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Neuron">Neuron<a class="anchor-link" href="#Neuron">&#182;</a></h2><p>$$y = W\phi(x) + b$$</p>
-<p>$$\phi(x) = g(W'x + b')$$</p>
-<p>Trainable: $W', b', W, b$</p>
-<p>$g(x)$ is a non-linear function, e.g. Sigmoid</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Neuron-(Perceptron)">Neuron (Perceptron)<a class="anchor-link" href="#Neuron-(Perceptron)">&#182;</a></h2><p><img src="assets/neural/neuron.png" alt="neuron"></p>
-<p>(image: Neural Network Methods in Natural Language Processing, Goldberg, 2017)</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Neural-Network">Neural Network<a class="anchor-link" href="#Neural-Network">&#182;</a></h2><p>Multiple neurons in 1 layer make up an "Artificial Neural Network"</p>
-<p><img src="assets/neural/300px-Colored_neural_network.svg.png" alt="neural network"></p>
-<p>(image: <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">Wikipedia</a>)</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Neural-Network-(Deep)">Neural Network (Deep)<a class="anchor-link" href="#Neural-Network-(Deep)">&#182;</a></h2><p>Multiple "hidden" layers of neurons make up a "Deep Neural Network"</p>
-<p><img src="assets/neural/deep_nn.png" alt="multi-layer perceptron"></p>
-<p>(image: Goldberg, 2017)</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Properties-of-a-Neural-Network">Properties of a Neural Network<a class="anchor-link" href="#Properties-of-a-Neural-Network">&#182;</a></h2><table>
-<thead><tr>
-<th>Term</th>
-<th>Description</th>
-<th>Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Input dimension</td>
-<td>How many inputs</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Output dimension</td>
-<td>How many outputs</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Number of hidden layers</td>
-<td>Number of layers, excluding input and output</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Activation type</td>
-<td>Type of non-linear function</td>
-<td>sigmoid, ReLU, tanh</td>
-</tr>
-<tr>
-<td>Hidden layer type</td>
-<td>How the neurons are connected together</td>
-<td>Fully-connected, Convolutional</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Activation-types">Activation types<a class="anchor-link" href="#Activation-types">&#182;</a></h2><p>What non-linearity is applied</p>
-<p><img src="assets/neural/activations.png" alt="dnn"></p>
-<p>(image: Goldberg, 2017)</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Layer-types">Layer types<a class="anchor-link" href="#Layer-types">&#182;</a></h2><p>How the neurons are connected together, and what operations are performed with x, W, and b:</p>
+<h2 id="Image-Representation:-Tensor">Image Representation: Tensor<a class="anchor-link" href="#Image-Representation:-Tensor">&#182;</a></h2><ul>
+<li>3 channels: 'rgb'</li>
+<li>rows: image height</li>
+<li>columns: image width</li>
+</ul>
+<p>Ordering:</p>
 <ul>
-<li>Dense</li>
-<li>Convolutional</li>
-<li>Recurrent</li>
-<li>Residual</li>
+<li>Channels-first: channel, rows, columns</li>
+<li>Channels-last: rows, columns, channels</li>
 </ul>
-<p>More detail to come...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Walkthrough---Image-Tensors">Walkthrough - Image Tensors<a class="anchor-link" href="#Walkthrough---Image-Tensors">&#182;</a></h2><p>In this walkthrough, we will read an image from file and examine the data.</p>
 
 </div>
 </div>
@@ -12081,7 +11973,163 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Walkthrough:-Neural-Network-Architectures-in-keras">Walkthrough: Neural Network Architectures in keras<a class="anchor-link" href="#Walkthrough:-Neural-Network-Architectures-in-keras">&#182;</a></h2><p>In this walkthrough, we will use Keras to examine the architecture of some well-known neural networks.</p>
+<h3 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h3><p>Install the Python image library:</p>
+
+<pre><code>conda install pillow</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="c1"># read an image file</span>
+<span class="n">demo</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;assets/image/cat.jpg&#39;</span><span class="p">)</span> <span class="c1"># source: pxhere.com/en/photo/1337399</span>
+
+<span class="c1"># check whether this is RGB or BGR</span>
+<span class="c1"># so that we can input the images correctly to our neural network</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;channel ordering:&#39;</span><span class="p">,</span> <span class="n">demo</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="c1"># display the image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">demo</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;moar food&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># examine the numpy array</span>
+<span class="n">demo_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">demo</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape:&#39;</span><span class="p">,</span> <span class="n">demo_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;data type:&#39;</span><span class="p">,</span> <span class="n">demo_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rank:&#39;</span><span class="p">,</span> <span class="n">demo_arr</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># since the sides of the picture are the same boring color</span>
+<span class="c1"># inspect the (roughly) middle 5 rows and columns</span>
+<span class="n">midpoint_row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">demo_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">midpoint_col</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">demo_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">demo_arr</span><span class="p">[</span><span class="n">midpoint_row</span><span class="p">:</span><span class="n">midpoint_row</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">midpoint_col</span><span class="p">:</span><span class="n">midpoint_col</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># resize the image to 224 by 224</span>
+<span class="n">demo</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">),</span> <span class="n">resample</span><span class="o">=</span><span class="n">Image</span><span class="o">.</span><span class="n">BICUBIC</span><span class="p">)</span>
+
+<span class="c1"># display the image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;moar food (224x224)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># examine the numpy array again</span>
+<span class="n">demo_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">demo</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">demo_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demo_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c1"># notice the difference in values from previously</span>
+<span class="n">midpoint_row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">demo_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">midpoint_col</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">demo_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">demo_arr</span><span class="p">[</span><span class="n">midpoint_row</span><span class="p">:</span><span class="n">midpoint_row</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">midpoint_col</span><span class="p">:</span><span class="n">midpoint_col</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A histogram is sometimes helpful to visualize the colour distribution of a given channel</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># order: RGB</span>
+<span class="n">red_channel</span> <span class="o">=</span> <span class="n">demo_arr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">green_channel</span> <span class="o">=</span> <span class="n">demo_arr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">blue_channel</span> <span class="o">=</span> <span class="n">demo_arr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># flatten the [row_size, col_size] matrix into a vector of [row_size * col_size]</span>
+<span class="c1"># we just need to count the raw pixel values for the histogram,</span>
+<span class="c1"># so it doesn&#39;t matter where they are located.</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">red_channel</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="mi">256</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">green_channel</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="mi">256</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">blue_channel</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="mi">256</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Histogram of input image&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Output">Output<a class="anchor-link" href="#Output">&#182;</a></h2><ul>
+<li>Image Classification: labels</li>
+<li>Object Detection: labels + bounding boxes</li>
+<li>Instance Segmentation: labels + boundaries</li>
+</ul>
 
 </div>
 </div>
@@ -12090,303 +12138,206 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Setup---Conda-environment">Setup - Conda environment<a class="anchor-link" href="#Setup---Conda-environment">&#182;</a></h3><ol>
-<li>Create a new conda environment called <code>mldds03</code>
-a. Launch an <code>Anaconda Python</code> command window
-b. <code>conda create -n mldds03 python=3</code></li>
-<li>Activate the conda environment: <code>conda activate mldds03</code></li>
-<li>Install: <code>conda install jupyter numpy pandas matplotlib keras pydot python-graphviz</code></li>
-<li>Navigate to the courseware folder: <code>cd mldds-courseware</code></li>
-<li>Launch Jupyter: <code>jupyter notebook</code> and open this notebook</li>
+<h2 id="Problem:-many-input-features-$\rightarrow$-many-parameters">Problem: many input features $\rightarrow$ many parameters<a class="anchor-link" href="#Problem:-many-input-features-$\rightarrow$-many-parameters">&#182;</a></h2><p>224 x 224 pixel colour image: 224 x 224 x 3 = 150528 features</p>
+<p>Dimensionality reduction may help, but there's a better way....</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Convolution">Convolution<a class="anchor-link" href="#Convolution">&#182;</a></h2><ul>
+<li>Reduces parameter space</li>
+<li>Looks at localized, spatial information</li>
+</ul>
+<p><img src="assets/image/cnn.png" alt="cnn"></p>
+<p>(image: <a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/convolutional_neural_networks.html">leonardoaraujosantos.gitbooks.io</a>)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Convolution---Hyperparmeters">Convolution - Hyperparmeters<a class="anchor-link" href="#Convolution---Hyperparmeters">&#182;</a></h2><ul>
+<li>Kernel size: size of the window (pixels)</li>
+<li>Stride: how many pixels to slide the window</li>
+<li>Depth: how many filters to use</li>
+<li>Padding: whether to keep the output size the same as input size</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Kernel-size-=-(2,-2),-Stride-=-1">Kernel size = (2, 2), Stride = 1<a class="anchor-link" href="#Kernel-size-=-(2,-2),-Stride-=-1">&#182;</a></h2><p><img src="assets/image/2d_convolution.png" alt="convolution"></p>
+<p>(image: <a href="http://www.deeplearningbook.org/contents/convnets.html">http://www.deeplearningbook.org/contents/convnets.html</a>)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Depth-=-number-of-filters">Depth = number of filters<a class="anchor-link" href="#Depth-=-number-of-filters">&#182;</a></h2><p><img src="assets/image/depthcol.jpg" alt="depth col"></p>
+<p>(image: <a href="https://cs231n.github.io/convolutional-networks">https://cs231n.github.io/convolutional-networks</a>)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Padding-=-same">Padding = same<a class="anchor-link" href="#Padding-=-same">&#182;</a></h2><p><img src="assets/image/same_padding_no_strides.gif" alt="same_padding_no_strides"></p>
+<p>(image: <a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/convolutional_neural_networks.html">leonardoaraujosantos.gitbooks.io</a>)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Padding-=-valid-(none)">Padding = valid (none)<a class="anchor-link" href="#Padding-=-valid-(none)">&#182;</a></h2><p><img src="assets/image/no_padding_no_strides.gif" alt="no_padding_no_strides"></p>
+<p>(image: <a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/convolutional_neural_networks.html">leonardoaraujosantos.gitbooks.io</a>)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Activity---Convolution-Hyperparameters">Activity - Convolution Hyperparameters<a class="anchor-link" href="#Activity---Convolution-Hyperparameters">&#182;</a></h2><ol>
+<li><p>Run and watch the example in the next cell.</p>
+</li>
+<li><p>Fill in the corresponding hyperparameters</p>
+<ul>
+<li>Kernel Size = </li>
+<li>Stride = </li>
+<li>Depth = </li>
+<li>Padding =</li>
+</ul>
+</li>
 </ol>
 
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pre-trained-Neural-Networks-in-Keras">Pre-trained Neural Networks in Keras<a class="anchor-link" href="#Pre-trained-Neural-Networks-in-Keras">&#182;</a></h3><p>"Pre-trained" neural networks are available under <code>keras.applications</code></p>
-<p><a href="https://keras.io/applications/">https://keras.io/applications/</a></p>
-<p>These are trained on the ImageNet dataset (<a href="http://www.image-net.org/">http://www.image-net.org/</a>), which contains millions of images.</p>
-<p>The neural network architectures from keras are previous years submissions to the ImageNet annual challenge.</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">keras</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="MobileNet">MobileNet<a class="anchor-link" href="#MobileNet">&#182;</a></h3><p>MobileNet is a pre-trained ImageNet DNN optimized to run on smaller devices.</p>
-<p>Documentation: <a href="https://keras.io/applications/#mobilenet">https://keras.io/applications/#mobilenet</a></p>
-<p>Implementation: <a href="https://github.com/keras-team/keras-applications/blob/master/keras_applications/mobilenet.py">https://github.com/keras-team/keras-applications/blob/master/keras_applications/mobilenet.py</a></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications</span> <span class="k">import</span> <span class="n">mobilenet</span>
-
-<span class="n">mobilenet_model</span> <span class="o">=</span> <span class="n">mobilenet</span><span class="o">.</span><span class="n">MobileNet</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">)</span>
-<span class="n">mobilenet_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="ResNet50">ResNet50<a class="anchor-link" href="#ResNet50">&#182;</a></h3><p>ResNet50 is another pre-trained ImageNet DNN. This is a larger network than MobileNet (almost 26 million parameters). It improves accuracy by introducing residual connections, which are connections that skip layers.</p>
-<p>Documentation: <a href="https://keras.io/applications/#resnet50">https://keras.io/applications/#resnet50</a></p>
-<p>Implementation: <a href="https://github.com/keras-team/keras-applications/blob/master/keras_applications/resnet50.py">https://github.com/keras-team/keras-applications/blob/master/keras_applications/resnet50.py</a></p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications</span> <span class="k">import</span> <span class="n">resnet50</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Source: https://cs231n.github.io/convolutional-networks</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
 
-<span class="n">resnet_model</span> <span class="o">=</span> <span class="n">resnet50</span><span class="o">.</span><span class="n">ResNet50</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">)</span>
-<span class="n">resnet_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe src=conv-demo.html width=800 height=700&gt;&lt;/iframe&gt;&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Creating-Neural-Networks-using-Keras">Creating Neural Networks using Keras<a class="anchor-link" href="#Creating-Neural-Networks-using-Keras">&#182;</a></h3><p>Finally, let's try something simpler.</p>
-<p>Let's create a 1-layer network that can do linear regression.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Reference: https://gist.github.com/fchollet/b7507f373a3446097f26840330c1c378</span>
-<span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Sequential</span>
-<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dense</span>
-
-<span class="n">simple_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-<span class="n">simple_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">))</span> <span class="c1"># 4 inputs, 1 output</span>
-<span class="n">simple_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
-
-<span class="n">simple_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>keras.models.Sequential<span class="o">?</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>keras.layers.Dense<span class="o">?</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>keras.Model.compile<span class="o">?</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>How about a 2-layer network to make it a deep neural network?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Activation</span>
-
-<span class="n">deeper_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-
-<span class="c1"># imagine we tuned hyperparamters and derived this magic architecture to solve all our problems</span>
-<span class="n">deeper_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span> <span class="c1"># 42 inputs, 12 outputs</span>
-<span class="n">deeper_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span> <span class="c1"># 12 inputs, 4 outputs</span>
-<span class="n">deeper_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
-<span class="n">deeper_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">)</span>
-
-<span class="n">deeper_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Visualizing-Neural-Net-Architectures-in-Keras">Visualizing Neural Net Architectures in Keras<a class="anchor-link" href="#Visualizing-Neural-Net-Architectures-in-Keras">&#182;</a></h3><p><a href="https://keras.io/visualization/">https://keras.io/visualization/</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">SVG</span>
-<span class="kn">from</span> <span class="nn">keras.utils.vis_utils</span> <span class="k">import</span> <span class="n">model_to_dot</span>
-
-model_to_dot<span class="o">?</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">simple_model</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">deeper_model</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">mobilenet_model</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">resnet_model</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Troubleshooting:-Graphviz-Installation">Troubleshooting: Graphviz Installation<a class="anchor-link" href="#Troubleshooting:-Graphviz-Installation">&#182;</a></h3><p>If pydot is not able to find <code>graphviz</code>, you can try installing graphviz manually.</p>
-<ol>
-<li>Download and install graphviz binaries from: <a href="https://graphviz.gitlab.io/download/">https://graphviz.gitlab.io/download/</a></li>
-<li>Add the path to graphviz to your PATH environment variable, e.g. <code>C:/Program Files (x86)/Graphviz2.38/bin</code></li>
-<li>Launch a new <code>Anaconda Prompt</code> and re-run the Jupyter notebook.</li>
-</ol>
-
-</div>
-</div>
 </div><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Training-a-neural-network">Training a neural network<a class="anchor-link" href="#Training-a-neural-network">&#182;</a></h2><p>A neural network is trained using Stochastic Gradient Descent</p>
+<h2 id="Walkthrough---2D-Convolution">Walkthrough - 2D Convolution<a class="anchor-link" href="#Walkthrough---2D-Convolution">&#182;</a></h2><p>In this walkthrough, we will convolve our demo image with a kernel that performs edge detection.</p>
+<p>Credits: <a href="http://machinelearninguru.com/computer_vision/basics/convolution/image_convolution_1.html">http://machinelearninguru.com/computer_vision/basics/convolution/image_convolution_1.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># convert our input image to greyscale (1 channel)</span>
+<span class="n">demo_grey</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">demo_grey</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;moar grey&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.convolve2d.html</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="k">import</span> <span class="n">convolve2d</span>
+
+<span class="c1"># edge-detection kernel</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># we use &#39;valid&#39; which means we do not add zero padding to our image</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">convolve2d</span><span class="p">(</span><span class="n">demo_grey</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;moar edges&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Convolutional-Block">Convolutional Block<a class="anchor-link" href="#Convolutional-Block">&#182;</a></h2><p>Generally, 3 stages:</p>
+<ol>
+<li>Convolutional Layer</li>
+<li>Activation Layer</li>
+<li>Pooling Layer</li>
+</ol>
+<p>Sometimes 1 &amp; 2 will repeat a few times before 3.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="assets/image/convnet.jpg" alt="conv block"></p>
+<p>(image: <a href="https://cs231n.github.io/convolutional-networks">https://cs231n.github.io/convolutional-networks</a>)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Activation-Layer">Activation Layer<a class="anchor-link" href="#Activation-Layer">&#182;</a></h2><p>The output of convolution is typically passed through an "activation" function, so that it can model non-linearity:</p>
+<p>Examples:</p>
 <ul>
-<li>Forward Propagation to compute the output at each layer</li>
-<li>Back Propagation to compute gradients</li>
-<li>Update weights and biases using gradients</li>
+<li>linear (= no activation)</li>
+<li>sigmoid</li>
+<li>tanh</li>
+<li>Rectified Linear Units, leaky ReLU, Parametric ReLU, Exponential Linear Units</li>
 </ul>
+<p><a href="https://keras.io/activations/">https://keras.io/activations/</a></p>
 
 </div>
 </div>
@@ -12395,62 +12346,159 @@ model_to_dot<span class="o">?</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Forward-Propagation">Forward Propagation<a class="anchor-link" href="#Forward-Propagation">&#182;</a></h3><p>For 1 neuron:</p>
-<p>$$y = W'g(Wx + b) + b'$$</p>
+<h2 id="Walkthrough----Activation-Functions">Walkthrough -  Activation Functions<a class="anchor-link" href="#Walkthrough----Activation-Functions">&#182;</a></h2><p>Let's see what happens when we pass our convolved edge detected image through various activation functions.</p>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">input_arr</span> <span class="o">=</span> <span class="n">edges</span>
+<span class="n">input_arr</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Forward-Propagation">Forward Propagation<a class="anchor-link" href="#Forward-Propagation">&#182;</a></h3><p>2 layers of neurons:</p>
-<p>$$x_1 = W_1'g(W_1x + b_1) + b_1'$$</p>
-<p>$$y = x_2 = W_2'g(W_2x_1 + b_2) + b_2'$$</p>
+<p>Sigmoid</p>
+<p>$f(x) = \frac{1}{1 + e^{-x}}$</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + sigmoid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">input_arr</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + tanh&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Forward-Propagation">Forward Propagation<a class="anchor-link" href="#Forward-Propagation">&#182;</a></h3><p>For layer $l$, single layer operation:</p>
-<p>$$x_l = \sigma_l(W_lx_{l-1} + b_1)$$</p>
-<p>where $\sigma_l(z) = W_l'g(z) + b_l'$</p>
+<p>ReLU</p>
+<p>$f(x) = max(0, x)$</p>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">relu</span><span class="p">(</span><span class="n">input_arr</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + ReLU&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Feedforward-through-Layers">Feedforward through Layers<a class="anchor-link" href="#Feedforward-through-Layers">&#182;</a></h3><p>for $l = 1$ to $\,L$:</p>
-<p>$\,\,\,\,x_l = \sigma_l(W_lx_{l-1} + b_l)$</p>
-<p>Where:</p>
-<ul>
-<li>Number of layers: $L$</li>
-<li>Input: $x_0$, Output: $x_L$</li>
-<li>Note: $x_l$ are tensors with the input &amp; output dimensions of that layer</li>
-</ul>
+<p>Leaky ReLU</p>
+<p>$f(x) = \begin{cases}
+x &amp; if\,x &gt; 0 \\
+0.01x &amp; otherwise
+\end{cases}$</p>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">leaky_relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">leaky_relu</span><span class="p">(</span><span class="n">input_arr</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + Leaky ReLU&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Backward-Propagation">Backward Propagation<a class="anchor-link" href="#Backward-Propagation">&#182;</a></h3><p>Objective</p>
-<ul>
-<li>Compute the gradients of the cost function $J$ w.r.t. to $W^j_l$ and $b^j_l$ (layer $l$, neuron $j$)<ul>
-<li>Partial derivatives $\frac{\partial J}{\partial W^j_l}$, $\frac{\partial J}{\partial b^j_l}$ </li>
+<h2 id="Pooling-Layer">Pooling Layer<a class="anchor-link" href="#Pooling-Layer">&#182;</a></h2><ul>
+<li>Summarizes the activations<ul>
+<li>Take the maximum of a window size: Max pooling</li>
+<li>Take the average of a window size: Average pooling</li>
 </ul>
 </li>
-<li>E.g. quadratic cost function, $n$ training samples, output $x_L$:
-$$J({W_l},{b_l}) = \frac{1}{2n}\sum_{i=1}^n {\|y^i - x_{L}^i\|}^2$$</li>
+</ul>
+<p><a href="https://keras.io/layers/pooling/">https://keras.io/layers/pooling/</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Pooling-Layer">Pooling Layer<a class="anchor-link" href="#Pooling-Layer">&#182;</a></h2><ul>
+<li>Translation invariances:<ul>
+<li>Robust to shifts in locations of pixels within that window</li>
+</ul>
+</li>
+<li>Downsampling:<ul>
+<li>Compressing and summarizing inputs into next layers</li>
+<li>Pass the highest activation, or the average activations to the next layer</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -12460,143 +12508,278 @@ $$J({W_l},{b_l}) = \frac{1}{2n}\sum_{i=1}^n {\|y^i - x_{L}^i\|}^2$$</li>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Backward-Propagation">Backward Propagation<a class="anchor-link" href="#Backward-Propagation">&#182;</a></h3><ol>
-<li>Feedforward from layer 1 to L</li>
-<li>Compute the output error vector at layer L ($\delta_L$)</li>
-<li>Backward propagate the error (backwards from layer L-1, .. 1) to compute per-layer error vectors ($\delta_l$)</li>
-<li>Compute gradient of cost function for layer $l$, neuron $j$:
-$$\frac{\partial J}{\partial W_l^j} = x_{l-1}^j\delta_l^j$$
-$$\frac{\partial J}{\partial b_l^j} = \delta_l^j$$</li>
+<h2 id="Walkthrough---Pooling">Walkthrough - Pooling<a class="anchor-link" href="#Walkthrough---Pooling">&#182;</a></h2><p>Let's see what happens when we pass our convolved + activated image through various pooling functions.</p>
+<h3 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h3><p>Install the skimage library:</p>
+
+<pre><code>conda install scikit-image</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://stackoverflow.com/questions/42463172/how-to-perform-max-mean-pooling-on-a-2d-array-using-numpy</span>
+<span class="kn">from</span> <span class="nn">skimage.measure</span> <span class="k">import</span> <span class="n">block_reduce</span>
+
+<span class="k">def</span> <span class="nf">max_pool</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">block_reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pool_size</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">average_pool</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">block_reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pool_size</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">max_pool</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + sigmoid + max pool&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original shape:&#39;</span><span class="p">,</span> <span class="n">edges</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After activation:&#39;</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># (2, 2) will halve the size of the output</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After pooling (2, 2):&#39;</span><span class="p">,</span> <span class="n">max_pool</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">average_pool</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + sigmoid + average pool&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">max_pool</span><span class="p">(</span><span class="n">relu</span><span class="p">(</span><span class="n">edges</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + relu + max pool&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">average_pool</span><span class="p">(</span><span class="n">relu</span><span class="p">(</span><span class="n">edges</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + relu + average pool&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Regularization-Layers">Regularization Layers<a class="anchor-link" href="#Regularization-Layers">&#182;</a></h2><p>These layers are common in Deep Convolutional Neural Networks:</p>
+<ul>
+<li>Dropout</li>
+<li>Batch Normalization</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Dropout">Dropout<a class="anchor-link" href="#Dropout">&#182;</a></h2><ul>
+<li>Randomly setting some layer inputs to 0 during training to reduce overfitting.</li>
+<li>No-op during prediction</li>
+</ul>
+<p><a href="https://keras.io/layers/core/#dropout">https://keras.io/layers/core/#dropout</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Dropout">Dropout<a class="anchor-link" href="#Dropout">&#182;</a></h2><p><img src="assets/image/dropout.png" alt="dropout"></p>
+<p>(image: <a href="http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf">http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf</a>)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Batch-Normalization">Batch Normalization<a class="anchor-link" href="#Batch-Normalization">&#182;</a></h2><ul>
+<li>Avoid saturating non-linearities by normalizing the input to the next layer</li>
+<li>Normalizing is done per minibatch</li>
+<li>Speeds up training</li>
+</ul>
+<p><a href="https://keras.io/layers/normalization/#batchnormalization">https://keras.io/layers/normalization/#batchnormalization</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Batch-Normalization---Training">Batch Normalization - Training<a class="anchor-link" href="#Batch-Normalization---Training">&#182;</a></h2><p><img src="assets/image/batchnorm.png" alt="batch norm"></p>
+<p>(image: <a href="https://arxiv.org/abs/1502.03167">Batch Normalization Paper</a>)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Batch-Normalization---Prediction">Batch Normalization - Prediction<a class="anchor-link" href="#Batch-Normalization---Prediction">&#182;</a></h2><ul>
+<li>Minibatch mean and variance don't apply at prediction time</li>
+<li>Instead, "population" mean and variance is computed and stored from training</li>
+<li>Batch Norm layer will use the population mean and variance for prediction</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Architectures">Architectures<a class="anchor-link" href="#Architectures">&#182;</a></h2><ul>
+<li>Image Classification</li>
+<li>Object Detection</li>
+<li>Instance Segmentation</li>
+</ul>
+<p><a href="https://github.com/keras-team/keras-applications">https://github.com/keras-team/keras-applications</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="ImageNet-Large-Scale-Visual-Recognition-Challenge-(ILSVRC)">ImageNet Large Scale Visual Recognition Challenge (ILSVRC)<a class="anchor-link" href="#ImageNet-Large-Scale-Visual-Recognition-Challenge-(ILSVRC)">&#182;</a></h2><ul>
+<li><a href="http://image-net.org/index">http://image-net.org/index</a></li>
+<li>14 million crowdsourced, hand-annotated images<ul>
+<li><a href="http://image-net.org/explore">http://image-net.org/explore</a></li>
+<li><a href="http://image-net.org/download-bboxes">http://image-net.org/download-bboxes</a></li>
+</ul>
+</li>
+<li>Annual challenge, since 2010<ul>
+<li>Classifiy images into 1000 classes (including 90 dog breeds)</li>
+<li>CNN breakthrough in 2012</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="ImageNet-Progress">ImageNet Progress<a class="anchor-link" href="#ImageNet-Progress">&#182;</a></h2><p><img src="assets/image/pyconza17-deep-learning-for-computer-vision-60-638.jpg" alt="over the years"></p>
+<p>(image: <a href="https://www.slideshare.net/AlexConway2/pyconza17-deep-learning-for-computer-vision">Alex Conway</a>)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Workshop:-Image-Classification-CNNs">Workshop: Image Classification CNNs<a class="anchor-link" href="#Workshop:-Image-Classification-CNNs">&#182;</a></h2><p>In this workshop, we'll explore a couple of Convolutional Neural Networks (CNNs) that are trained for ImageNet to perform accurate image classification.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll classify an image with the VGG16 model.</p>
+<ul>
+<li><p>Documentation: <a href="https://keras.io/applications/#vgg16">https://keras.io/applications/#vgg16</a></p>
+</li>
+<li><p>Implementation: <a href="https://github.com/keras-team/keras-applications/blob/master/keras_applications/vgg16.py">https://github.com/keras-team/keras-applications/blob/master/keras_applications/vgg16.py</a></p>
+</li>
+</ul>
+<p>Note that the weights are stored separately from the implementation.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications</span> <span class="k">import</span> <span class="n">VGG16</span>
+
+<span class="n">vgg16</span> <span class="o">=</span> <span class="n">VGG16</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vgg16</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Download-Image">Download Image<a class="anchor-link" href="#Download-Image">&#182;</a></h3><ol>
+<li>Download an image from the web. It can be any well-known image format such as PNG or JPEG.</li>
+<li>Update the <code>path</code> variable to point to your image</li>
 </ol>
 
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Gradient-Descent-Update-Rule">Gradient Descent Update Rule<a class="anchor-link" href="#Gradient-Descent-Update-Rule">&#182;</a></h3><p>$$W_l^j := W_l^j + \epsilon \frac{\partial J}{W_l^j}$$</p>
-<p>$$b_l^j := b_l^j + \epsilon \frac{\partial J}{b_l^j}$$</p>
-<p>$\epsilon$ = learning rate</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Workshop:-Neural-Network-for-Logistic-Regression">Workshop: Neural Network for Logistic Regression<a class="anchor-link" href="#Workshop:-Neural-Network-for-Logistic-Regression">&#182;</a></h2><p>In this workshop, you'll train a neural network to perform logistic regression on the MNIST dataset.</p>
-<p>Credits: <a href="https://medium.com/@the1ju/simple-logistic-regression-using-keras-249e0cc9a970">https://medium.com/@the1ju/simple-logistic-regression-using-keras-249e0cc9a970</a></p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">keras</span>
-<span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="k">import</span> <span class="n">mnist</span>
-<span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Sequential</span>
-<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span>
-<span class="kn">from</span> <span class="nn">keras</span> <span class="k">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Training settings</span>
-<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">NUM_CLASSES</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">30</span>
-
-<span class="c1"># Input size settings</span>
-<span class="n">IMG_ROWS</span> <span class="o">=</span> <span class="mi">28</span> <span class="c1"># 28 pixels wide</span>
-<span class="n">IMG_COLS</span> <span class="o">=</span> <span class="mi">28</span> <span class="c1"># 28 pixels high</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import the dataset, split between train and test sets</span>
-<span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Input processing</span>
-<span class="n">input_dim</span> <span class="o">=</span> <span class="n">IMG_ROWS</span> <span class="o">*</span> <span class="n">IMG_COLS</span>
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">)</span> 
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">)</span> 
-
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-<span class="n">X_train</span> <span class="o">/=</span> <span class="mi">255</span>
-<span class="n">X_test</span> <span class="o">/=</span> <span class="mi">255</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;X_train shape:&#39;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;train samples&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;test samples&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We are doing multi-class classification</span>
-<span class="c1"># Convert class vectors to binary class matrices</span>
-<span class="n">y_train_cat</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">NUM_CLASSES</span><span class="p">)</span>
-<span class="n">y_test_cat</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">NUM_CLASSES</span><span class="p">)</span>
-
-<span class="c1"># Show how the classes look like</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_train shape:&#39;</span><span class="p">,</span> <span class="n">y_train_cat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First y_train sample:&#39;</span><span class="p">,</span> <span class="n">y_train_cat</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create the model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span> 
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">NUM_CLASSES</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># update this path to your own image</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;D:/tmp/mldds-courseware/03_TextImage/assets/image/cat.jpg&#39;</span>
 </pre></div>
 
 </div>
@@ -12608,27 +12791,390 @@ $$\frac{\partial J}{\partial b_l^j} = \delta_l^j$$</li>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exercise:-Training-the-Neural-Network">Exercise: Training the Neural Network<a class="anchor-link" href="#Exercise:-Training-the-Neural-Network">&#182;</a></h3><ol>
-<li>Compile the model</li>
-<li>Train the model using <code>sgd</code>, minibatch size 128 <ul>
-<li>Training set: <code>X_train</code>, <code>y_train_cat</code></li>
-<li>Test set: <code>X_test</code>, <code>y_test_cat</code></li>
+<h3 id="Pre-process-image">Pre-process image<a class="anchor-link" href="#Pre-process-image">&#182;</a></h3><ol>
+<li>Resize the crop the image into height: 224, width: 224<ul>
+<li>These dimensions are specified by the neural network as the default input size</li>
 </ul>
 </li>
-<li>Plot the learning curve, using the accuracy metrics</li>
-<li>Analyze the learning curve to determine if overfitting or underfitting occurred. <ul>
-<li>If overfitting occurred, which epoch can training stop</li>
-<li>If underfitting occurred, train more epochs to determine what the optimum number of epochs should be</li>
+<li>Pre-process the image using <code>VGG16.preprocess_input</code></li>
+<li>Prepend an extra axis to match the input shape that the model expects</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">resize_and_crop_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Resizes and crops an image to the desired size</span>
+<span class="sd">    Args:</span>
+<span class="sd">        image_path: path to the image</span>
+<span class="sd">        width: image width</span>
+<span class="sd">        height: image height</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        the resulting image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageOps</span>
+    
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Preprocess image input</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.image</span> <span class="k">import</span> <span class="n">img_to_array</span>
+<span class="kn">from</span> <span class="nn">keras.applications.vgg16</span> <span class="k">import</span> <span class="n">preprocess_input</span><span class="p">,</span> <span class="n">decode_predictions</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">resize_and_crop_image</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">preprocess_input</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original image shape:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># The model expect images in a batch, because it&#39;s trained that way</span>
+<span class="c1"># Add an extra first axis</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Expected input shape&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Predict-and-decode-predictions">Predict and decode predictions<a class="anchor-link" href="#Predict-and-decode-predictions">&#182;</a></h3><ol>
+<li>Run the <code>VGG16.predict</code> method on the pre-processed image.</li>
+<li>Use the <code>VGG16.decode_predictions</code> method to translate the raw predicted values into class labels. </li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">vgg16</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># display the image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Test image&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># display the predictions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Raw predictions:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Decoded predictions:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">decode_predictions</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercise:-Choose-your-own-Image-Classification-CNN">Exercise: Choose your own Image Classification CNN<a class="anchor-link" href="#Exercise:-Choose-your-own-Image-Classification-CNN">&#182;</a></h2><ol>
+<li>Pick another CNN from this list: <a href="https://keras.io/applications/#available-models">https://keras.io/applications/#available-models</a><ul>
+<li>Note: we are using models from <code>keras.applications</code>. The next workshop will cover using a keras model from a third-party source.</li>
+</ul>
+</li>
+<li>Repeat the steps above to:<ul>
+<li>Examine the model by getting its summary</li>
+<li>Resize, crop, and preprocess the image using that model's <code>preprocess_input</code> method.</li>
+<li>For best results, stick to the input size that is documented for the model</li>
+<li>Get raw predictions</li>
+<li>Decode the predictions using that model's <code>decode_predictions</code> method.</li>
 </ul>
 </li>
 </ol>
-<p>How to get the accuracy metrics:</p>
+<p>Can you find a model that performs better than <code>VGG16</code>?</p>
 
-<pre><code>history = model.fit(..., metrics=['accuracy'])
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Workshop:-Object-Detection-CNN">Workshop: Object Detection CNN<a class="anchor-link" href="#Workshop:-Object-Detection-CNN">&#182;</a></h2><p>In this workshop, we'll explore an Object Detection CNN.</p>
+<p>Object detection CNNs are not part of <code>keras.applications</code>, so we need to download the models separately, and then load it into keras.</p>
+<p>We'll try this model: <a href="https://github.com/qqwweee/keras-yolo3">https://github.com/qqwweee/keras-yolo3</a>.</p>
+<p>This is a keras wrapper for the YOLO (you only look once) v3 model: <a href="https://pjreddie.com/darknet/yolo/">https://pjreddie.com/darknet/yolo/</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Clone-the-keras-yolo3-repository">Clone the keras-yolo3 repository<a class="anchor-link" href="#Clone-the-keras-yolo3-repository">&#182;</a></h3><p>From a command window:</p>
+
+<pre><code>git clone https://github.com/qqwweee/keras-yolo3.git</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Download-pre-trained-YOLO-v3-weights">Download pre-trained YOLO v3 weights<a class="anchor-link" href="#Download-pre-trained-YOLO-v3-weights">&#182;</a></h3><p>Download <a href="https://pjreddie.com/media/files/yolov3.weights">https://pjreddie.com/media/files/yolov3.weights</a> into your <code>keras-yolo3</code> folder.</p>
+<p>Note: This file is 237MB, and may take a few minutes to download. While we are waiting, you can run the next cell (Examine YOLO v3 architecture).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Examine-YOLO-v3-architecture">Examine YOLO v3 architecture<a class="anchor-link" href="#Examine-YOLO-v3-architecture">&#182;</a></h3><p>(This step can be done in parallel with the download.)</p>
+<p>Open yolov3.cfg in the <code>keras-yolo3</code> folder in a text editor.</p>
+<p>Scroll through the file, and you should recognize a few keywords. This config file defines the YOLO v3 architecture.</p>
+<p>Here's how the hyperparameters are set for one of the many convolutional blocks:</p>
+
+<pre><code>[convolutional]
+batch_normalize=1
+filters=64
+size=3
+stride=2
+pad=1
+activation=leaky</code></pre>
+<p>The above describes a convolutional block with:</p>
+<ul>
+<li>depth 64</li>
+<li>kernel size 3</li>
+<li>stride 2</li>
+<li>padding "same"</li>
+<li>batch normalization</li>
+<li>leaky ReLU activation</li>
+<li>no pooling layer</li>
+</ul>
+<p>These design choices are specific to this architecture.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Convert-into-Keras-model">Convert into Keras model<a class="anchor-link" href="#Convert-into-Keras-model">&#182;</a></h3><h4 id="Windows:">Windows:<a class="anchor-link" href="#Windows:">&#182;</a></h4><p>Launch an Anaconda Prompt:</p>
+
+<pre><code>activate mldds03
+cd keras-yolo3
+python convert.py yolov3.cfg yolov3.weights model_data\yolo.h5</code></pre>
+<h4 id="MacOS-/-Ubuntu:">MacOS / Ubuntu:<a class="anchor-link" href="#MacOS-/-Ubuntu:">&#182;</a></h4><p>From a terminal window:</p>
+
+<pre><code>source activate mldds03
+cd keras-yolo3
+python convert.py yolov3.cfg yolov3.weights model_data/yolo.h5</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If successful, you should see this:</p>
+
+<pre><code>Parsing section yolo_2
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_1 (InputLayer)            (None, None, None, 3 0
+__________________________________________________________________________________________________
+conv2d_1 (Conv2D)               (None, None, None, 3 864         input_1[0][0]
+__________________________________________________________________________________________________
+batch_normalization_1 (BatchNor (None, None, None, 3 128         conv2d_1[0][0]
+__________________________________________________________________________________________________
+leaky_re_lu_1 (LeakyReLU)       (None, None, None, 3 0           batch_normalization_1[0][0]
+
 ...
-loss = history.history['loss']
-val_loss = history.history['val_loss']</code></pre>
-<p>You may reference this example for steps 1 and 2: <a href="https://medium.com/@the1ju/simple-logistic-regression-using-keras-249e0cc9a970">https://medium.com/@the1ju/simple-logistic-regression-using-keras-249e0cc9a970</a></p>
+
+__________________________________________________________________________________________________
+batch_normalization_72 (BatchNo (None, None, None, 2 1024        conv2d_74[0][0]
+__________________________________________________________________________________________________
+leaky_re_lu_58 (LeakyReLU)      (None, None, None, 1 0           batch_normalization_58[0][0]
+__________________________________________________________________________________________________
+leaky_re_lu_65 (LeakyReLU)      (None, None, None, 5 0           batch_normalization_65[0][0]
+__________________________________________________________________________________________________
+leaky_re_lu_72 (LeakyReLU)      (None, None, None, 2 0           batch_normalization_72[0][0]
+__________________________________________________________________________________________________
+conv2d_59 (Conv2D)              (None, None, None, 2 261375      leaky_re_lu_58[0][0]
+__________________________________________________________________________________________________
+conv2d_67 (Conv2D)              (None, None, None, 2 130815      leaky_re_lu_65[0][0]
+__________________________________________________________________________________________________
+conv2d_75 (Conv2D)              (None, None, None, 2 65535       leaky_re_lu_72[0][0]
+==================================================================================================
+Total params: 62,001,757
+Trainable params: 61,949,149
+Non-trainable params: 52,608
+__________________________________________________________________________________________________
+None
+Saved Keras model to model_data\yolo.h5
+Read 62001757 of 62001757.0 from Darknet weights.</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-few-interesting-things:">A few interesting things:<a class="anchor-link" href="#A-few-interesting-things:">&#182;</a></h3><ul>
+<li>This is a big model (62 million parameters)</li>
+<li>The architect of this network decided to insert batch normalization <strong>between</strong> the convolutional layer and its activation</li>
+<li>Pooling is not in use at all</li>
+</ul>
+<p>Next, let's use the model to perform object detection on images and videos.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Image-detection">Image detection<a class="anchor-link" href="#Image-detection">&#182;</a></h3>
+<pre><code>python yolo.py</code></pre>
+<p>Enter an input image filename, and you should get something like this:</p>
+<p><img src="assets/image/yolo_v3_demo.png" alt="memed"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Video-detection">Video detection<a class="anchor-link" href="#Video-detection">&#182;</a></h3><p>Video detection works by processing the image, one frame at a time.</p>
+<h4 id="Setup---OpenCV">Setup - OpenCV<a class="anchor-link" href="#Setup---OpenCV">&#182;</a></h4><p>To run video detection, you need to install OpenCV</p>
+
+<pre><code>conda install opencv</code></pre>
+<p>or</p>
+
+<pre><code>conda install -c conda-forge opencv</code></pre>
+<h4 id="[Optional]-Setup---openh264">[Optional] Setup - openh264<a class="anchor-link" href="#[Optional]-Setup---openh264">&#182;</a></h4><p>To display detection boxes embedded in the video, download the libopenh264 codec:</p>
+<ol>
+<li>Download <a href="https://github.com/cisco/openh264/releases">https://github.com/cisco/openh264/releases</a></li>
+<li>Extract the .bz2 (on Windows, use Winzip or WinRAR)</li>
+<li>Copy openh264-1.6.0-win64msvc.dll to the <code>keras-yolo3</code> folder</li>
+</ol>
+<p>This is just for display purposes. The model will still detect objects without this.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><p>Download a video (in the smallest resolution you can find), for example:
+<a href="https://pixabay.com/en/videos/street-it-s-raining-11067/">https://pixabay.com/en/videos/street-it-s-raining-11067/</a></p>
+</li>
+<li><p>Run the video detector</p>
+</li>
+</ol>
+
+<pre><code>python yolo_video.py video.mp4 output.mp4</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here's an example output for an example video:</p>
+<p><img src="assets/image/yolo_v3_video.png" alt="video"></p>
+
+<pre><code>Found 7 boxes for img
+truck 0.50 (19, 282) (250, 538)
+car 0.46 (320, 374) (393, 435)
+car 0.57 (221, 355) (343, 435)
+car 0.65 (386, 381) (488, 442)
+car 0.74 (19, 282) (250, 538)
+car 0.92 (554, 354) (833, 526)
+person 0.72 (498, 354) (566, 464)
+3.7216578782751952
+(416, 416, 3)
+Found 6 boxes for img
+car 0.51 (322, 374) (391, 434)
+car 0.69 (386, 382) (485, 442)
+car 0.77 (219, 354) (340, 435)
+car 0.90 (16, 282) (260, 538)
+car 0.92 (553, 353) (835, 526)
+person 0.75 (499, 353) (566, 465)
+3.7170675099385093
+(416, 416, 3)
+Found 6 boxes for img
+car 0.70 (322, 375) (393, 434)
+car 0.78 (390, 382) (483, 443)
+car 0.86 (14, 285) (265, 539)
+car 0.91 (220, 354) (338, 440)
+car 0.92 (553, 353) (834, 527)
+person 0.91 (495, 349) (565, 466)
+3.7226787045414973
+(416, 416, 3)
+Found 7 boxes for img
+truck 0.58 (9, 290) (268, 536)
+car 0.68 (18, 304) (286, 524)
+car 0.71 (323, 375) (395, 434)
+car 0.86 (390, 382) (483, 444)
+car 0.90 (219, 355) (340, 440)
+car 0.92 (554, 354) (834, 527)
+person 0.87 (495, 349) (565, 464)
+3.609754515084603
+(416, 416, 3)</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Object-Detection-using-YOLO">Object Detection using YOLO<a class="anchor-link" href="#Object-Detection-using-YOLO">&#182;</a></h2><p><img src="assets/image/yolo-detection.png" alt="yolo detection"></p>
+<p>(image: <a href="https://pjreddie.com/media/files/papers/yolo.pdf">https://pjreddie.com/media/files/papers/yolo.pdf</a>)</p>
 
 </div>
 </div>
@@ -12638,8 +13184,42 @@ val_loss = history.history['val_loss']</code></pre>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Compile and train model</span>
-<span class="c1"># Your code here</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">keras_yolo3_path</span> <span class="o">=</span> <span class="s1">&#39;D:/tmp/keras-yolo3/model_data&#39;</span> <span class="c1"># update to your path</span>
+
+<span class="c1"># trained weights</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keras_yolo3_path</span><span class="p">,</span> <span class="s1">&#39;yolo.h5&#39;</span><span class="p">)</span>
+
+<span class="c1"># anchors</span>
+<span class="n">anchors_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keras_yolo3_path</span><span class="p">,</span> <span class="s1">&#39;yolo_anchors.txt&#39;</span><span class="p">)</span>
+
+<span class="c1"># classes</span>
+<span class="n">classes_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keras_yolo3_path</span><span class="p">,</span> <span class="s1">&#39;coco_classes.txt&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These are the pre-defined anchors, chosen to be representative of the ground truth detection boxes.</p>
+<p>These are found using K-means clustering.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">anchors_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -12647,13 +13227,48 @@ val_loss = history.history['val_loss']</code></pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These are the classes of objects that the detector will recognize.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot learning curve</span>
-<span class="c1"># Your code here</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">classes_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, this is the model architecture, as seen by keras.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">load_model</span>
+
+<span class="c1"># This file is really huge, so may take some time to load</span>
+<span class="n">yolo_model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="nb">compile</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">yolo_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12674,24 +13289,19 @@ val_loss = history.history['val_loss']</code></pre>
 </thead>
 <tbody>
 <tr>
-<td>Lecture 1: Deep Learning Challenge. Is There Theory?</td>
-<td>Intro to Deep Learning</td>
-<td><a href="https://stats385.github.io/lecture_slides">https://stats385.github.io/lecture_slides</a> (lecture 1)</td>
+<td>Deep Learning - Chapter 9.2: Motivation (p 329-335)</td>
+<td>3 motivations for convolution</td>
+<td><a href="http://www.deeplearningbook.org/contents/convnets.html">http://www.deeplearningbook.org/contents/convnets.html</a></td>
 </tr>
 <tr>
-<td>Lecture 2: Overview of Deep Learning from a Practical Point of View</td>
-<td>More background on Neural Nets</td>
-<td><a href="https://stats385.github.io/lecture_slides">https://stats385.github.io/lecture_slides</a> (lecture 2)</td>
+<td>Deep Learning - Chapter 9.3: Motivation (p 335-339)</td>
+<td>The idea behind pooling</td>
+<td><a href="http://www.deeplearningbook.org/contents/convnets.html">http://www.deeplearningbook.org/contents/convnets.html</a></td>
 </tr>
 <tr>
-<td>Neural Networks and Deep Learning, Chapter 2</td>
-<td>Understanding Back Propagation</td>
-<td><a href="http://neuralnetworksanddeeplearning.com/chap2.html">http://neuralnetworksanddeeplearning.com/chap2.html</a></td>
-</tr>
-<tr>
-<td>Guide to the Sequential Model</td>
-<td>Basic usage of Keras for neural net training</td>
-<td><a href="https://keras.io/getting-started/sequential-model-guide/">https://keras.io/getting-started/sequential-model-guide/</a></td>
+<td>Bounding box object detectors: understanding YOLO, You Look Only Once</td>
+<td>An overview of YOLO</td>
+<td><a href="https://christopher5106.github.io/object/detectors/2017/08/10/bounding-box-object-detectors-understanding-yolo.html">https://christopher5106.github.io/object/detectors/2017/08/10/bounding-box-object-detectors-understanding-yolo.html</a></td>
 </tr>
 </tbody>
 </table>
