@@ -7,8 +7,10 @@ desktop.ini
 *.gdoc
 *.gform
 *.gsheet
+*.h5
 *.lnk
 *.log
+*.npy
 *.pb
 *.pdf
 *.pyc

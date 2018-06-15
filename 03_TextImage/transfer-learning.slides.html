@@ -11905,7 +11905,9 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Transfer-Learning">Transfer Learning<a class="anchor-link" href="#Transfer-Learning">&#182;</a></h1>
+<h1 id="Transfer-Learning">Transfer Learning<a class="anchor-link" href="#Transfer-Learning">&#182;</a></h1><p><img src="assets/transfer/transfer_inner_chi.jpg" alt="tranfer_inner_chi"></p>
+<p>(image: kuailexiaorongrong.blog.163.com, via <a href="https://sg.news.yahoo.com/6-kungfu-moves-movies-wished-194241611.html">https://sg.news.yahoo.com/6-kungfu-moves-movies-wished-194241611.html</a>)</p>
+
 </div>
 </div>
 </div></section></section><section><section>
@@ -11914,9 +11916,9 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Topics">Topics<a class="anchor-link" href="#Topics">&#182;</a></h1><ul>
-<li>Motivation</li>
+<li>Introduction &amp; motivation</li>
+<li>Adapting Neural Networks</li>
 <li>Process</li>
-<li>Workshop</li>
 </ul>
 
 </div>
@@ -11926,11 +11928,23 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h1><ul>
-<li><p>Lots of data, time, resources needed to train and tune a neural network from scratch</p>
+<h1 id="Transfer-Learning">Transfer Learning<a class="anchor-link" href="#Transfer-Learning">&#182;</a></h1><p>Transfering the knowledge of one model to perform a new task.</p>
+<p>"Domain Adaptation"</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h2><ul>
+<li>Lots of data, time, resources needed to train and tune a neural network from scratch<ul>
+<li>An ImageNet deep neural net can take weeks to train and fine-tune from scratch.</li>
+<li>Unless you have 256 GPUs, possible to achieve in <a href="https://research.fb.com/publications/accurate-large-minibatch-sgd-training-imagenet-in-1-hour/">1 hour</a></li>
+</ul>
 </li>
-<li><p>Cheaper, faster way of adapting a neural network by exploiting their generalization properties</p>
-</li>
+<li>Cheaper, faster way of adapting a neural network by exploiting their generalization properties</li>
 </ul>
 
 </div>
@@ -11940,13 +11954,79 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Examples">Examples<a class="anchor-link" href="#Examples">&#182;</a></h2><p>Transfer learning is often featured in the "train your own AI model" services:</p>
+<h2 id="Traditional-vs.-Transfer-Learning">Traditional vs. Transfer Learning<a class="anchor-link" href="#Traditional-vs.-Transfer-Learning">&#182;</a></h2><p><img src="assets/transfer/traditional_v_transfer.png" alt="tradition_v_transfer"></p>
+<p>(image: <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.147.9185&amp;rep=rep1&amp;type=pdf">Survey on Transfer Learning</a>)</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Transfer-Learning-Types">Transfer Learning Types<a class="anchor-link" href="#Transfer-Learning-Types">&#182;</a></h2><table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inductive</td>
+<td>Adapt existing <strong>supervised</strong> training model on new <strong>labeled</strong> dataset</td>
+<td>Classification, Regression</td>
+</tr>
+<tr>
+<td>Transductive</td>
+<td>Adapt existing <strong>supervised</strong> training model on new <strong>unlabeled</strong> dataset</td>
+<td>Classification, Regression</td>
+</tr>
+<tr>
+<td>Unsupervised</td>
+<td>Adapt existing <strong>unsupervised</strong> training model on new <strong>unlabeled</strong> dataset</td>
+<td>Clustering, Dimensionality Reduction</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Transfer-Learning-Applications">Transfer Learning Applications<a class="anchor-link" href="#Transfer-Learning-Applications">&#182;</a></h2><ul>
+<li>Image classification (most common): learn new image classes</li>
+<li>Text sentiment classification</li>
+<li>Text translation to new languages</li>
+<li>Speaker adaptation in speech recognition</li>
+<li>Question answering</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Transfer-Learning-Services">Transfer Learning Services<a class="anchor-link" href="#Transfer-Learning-Services">&#182;</a></h2><p>Transfer learning is used in many "train your own AI model" services:</p>
 <ul>
-<li><a href="https://cloud.google.com/blog/big-data/2018/03/automl-vision-in-action-from-ramen-to-branded-goods">https://cloud.google.com/blog/big-data/2018/03/automl-vision-in-action-from-ramen-to-branded-goods</a></li>
-<li><a href="https://azure.microsoft.com/en-us/services/cognitive-services/custom-vision-service/">https://azure.microsoft.com/en-us/services/cognitive-services/custom-vision-service/</a></li>
-<li><a href="https://github.com/awslabs/amazon-sagemaker-examples/tree/master/introduction_to_amazon_algorithms/imageclassification_caltech">https://github.com/awslabs/amazon-sagemaker-examples/tree/master/introduction_to_amazon_algorithms/imageclassification_caltech</a></li>
+<li>just upload 5-10 images to train a new model! in minutes!</li>
 </ul>
+<p><img src="assets/transfer/custom-vision.png" alt="custom vision"></p>
+<p>(image: <a href="https://azure.microsoft.com/en-us/services/cognitive-services/custom-vision-service/">https://azure.microsoft.com/en-us/services/cognitive-services/custom-vision-service/</a>)</p>
 
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Transfer-Learning-in-Neural-Networks">Transfer Learning in Neural Networks<a class="anchor-link" href="#Transfer-Learning-in-Neural-Networks">&#182;</a></h1>
 </div>
 </div>
 </div></section></section><section><section>
@@ -12065,7 +12145,7 @@ Q: How do we apply transfer learning to dataset B to create model B?</p>
 <tr>
 <td>Large</td>
 <td>Very different</td>
-<td>Train model B  from scratch, initialize weights from model A</td>
+<td>Train model B from scratch, initialize weights from model A</td>
 </tr>
 <tr>
 <td>Large</td>
@@ -12093,10 +12173,13 @@ Q: How do we apply transfer learning to dataset B to create model B?</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Learning-Rate">Learning Rate<a class="anchor-link" href="#Learning-Rate">&#182;</a></h2><ul>
+<h2 id="Learning-Rates">Learning Rates<a class="anchor-link" href="#Learning-Rates">&#182;</a></h2><ul>
 <li><p>Training linear classifier: typical learning rate</p>
 </li>
-<li><p>Fine-tuning: use smaller learning rate to avoid distorting the (already decent) weights</p>
+<li><p>Fine-tuning: use smaller learning rate to avoid distorting the existing weights</p>
+<ul>
+<li>Assumes weights are close to "good"</li>
+</ul>
 </li>
 </ul>
 
@@ -12107,7 +12190,1093 @@ Q: How do we apply transfer learning to dataset B to create model B?</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Workshop:-Transfer-Learning">Workshop: Transfer Learning<a class="anchor-link" href="#Workshop:-Transfer-Learning">&#182;</a></h1>
+<h1 id="Workshop:-Learning-New-Image-Classes">Workshop: Learning New Image Classes<a class="anchor-link" href="#Workshop:-Learning-New-Image-Classes">&#182;</a></h1><p>In this workshop, we will:</p>
+<ul>
+<li>Create a dataset of new classes not found in ImageNet</li>
+<li>Perform inductive transfer learning on a pre-trained ImageNet neural network</li>
+<li>Evaluate the results</li>
+</ul>
+<p>Credits: <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Choose-your-own-dataset">Choose your own dataset<a class="anchor-link" href="#Choose-your-own-dataset">&#182;</a></h2><p>We will create a new dataset to perform a new multi-class classification task.</p>
+<ol>
+<li><p>Pick a category that is NOT found in ImageNet</p>
+<ul>
+<li>For reference, the 1000 imagenet classes are here: <a href="http://image-net.org/challenges/LSVRC/2014/browse-synsets">http://image-net.org/challenges/LSVRC/2014/browse-synsets</a></li>
+</ul>
+</li>
+<li><p>Download your images from the web. Organize them in a directory structure like this:</p>
+
+<pre><code>data/
+ train/
+     chapati/
+         chapati001.jpg
+         chapati002.jpg
+         ...
+     fishball_noodle/
+         fishball_noodle001.jpg
+         fishball_noodle002.jpg
+         ...
+     satay/
+         satay001.jpg
+         satay002.jpg
+         ...
+ validation/
+     chapati/
+         chapati001.jpg
+         chapati002.jpg
+         ...
+     fishball_noodle/
+         fishball_noodle001.jpg
+         fishball_noodle002.jpg
+         ...
+     satay/
+         satay001.jpg
+         satay002.jpg
+         ...</code></pre>
+</li>
+</ol>
+<h3 id="Guidelines">Guidelines<a class="anchor-link" href="#Guidelines">&#182;</a></h3><ul>
+<li>Pick classes that have distinctive image characteristics<ul>
+<li>For example, circles, lines, patterns.</li>
+</ul>
+</li>
+<li>Provide at least 20 training images per class. The more the better, to avoid overfitting.</li>
+<li>Use different images for the training and validation sets.</li>
+<li>Use any standard image format, such as jpg and png </li>
+<li>A sample dataset is available in the data folder. Warning: it may make you hungry.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Set-dataset-path-and-labels">Set dataset path and labels<a class="anchor-link" href="#Set-dataset-path-and-labels">&#182;</a></h3><p>Update <code>dataset_path</code> with the path to your dataset</p>
+<ul>
+<li>You can use an absolute path (e.g. 'D:/tmp/data') or a relative path</li>
+</ul>
+<p>Update <code>labels</code> with the labels for your dataset</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Update to set the path of your dataset</span>
+<span class="c1"># You can use an absolute path (e.g. &#39;D:/tmp/data&#39;) or a relative path</span>
+<span class="n">dataset_path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span>
+
+<span class="c1"># Update to set the labels for your dataset</span>
+<span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;chapati&#39;</span><span class="p">,</span> <span class="s1">&#39;fishball_noodle&#39;</span><span class="p">,</span> <span class="s1">&#39;satay&#39;</span><span class="p">]</span>
+
+<span class="n">n_classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Num classes:&#39;</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">count_image_files</span><span class="p">(</span><span class="n">folder_name</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;jpg&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Counts 1-level nested image files in a folder</span>
+<span class="sd">    Arg:</span>
+<span class="sd">        folder_name: name of folder to search</span>
+<span class="sd">        extensions: array of image file extensions</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        number of image files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">reduce</span>
+    <span class="kn">import</span> <span class="nn">glob</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">((</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">),</span>
+        <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/**/*.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">folder_name</span><span class="p">,</span> <span class="n">ext</span><span class="p">),</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">extensions</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">train_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">,</span> <span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">n_train_set</span> <span class="o">=</span> <span class="n">count_image_files</span><span class="p">(</span><span class="n">train_folder</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training set size:&#39;</span><span class="p">,</span> <span class="n">n_train_set</span><span class="p">)</span>
+
+<span class="n">val_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">)</span>
+<span class="n">n_val_set</span> <span class="o">=</span> <span class="n">count_image_files</span><span class="p">(</span><span class="n">val_folder</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Validation set size:&#39;</span><span class="p">,</span> <span class="n">n_val_set</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Perform-Data-Augmentation">Perform Data Augmentation<a class="anchor-link" href="#Perform-Data-Augmentation">&#182;</a></h3><ul>
+<li><p>Data Augmentation is a technique to improve the performance of classification models</p>
+<ul>
+<li>This is especially helpful for small training datasets</li>
+<li><a href="http://cs231n.stanford.edu/reports/2017/pdfs/300.pdf">http://cs231n.stanford.edu/reports/2017/pdfs/300.pdf</a></li>
+</ul>
+</li>
+<li><p>We will use <code>keras.preprocessing.image.ImageDataGenerator</code> to randomly rotate and horizontal flip our training data.</p>
+<ul>
+<li>This is documented in <a href="https://keras.io/preprocessing/image/">https://keras.io/preprocessing/image/</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://keras.io/preprocessing/image/#imagedatagenerator-class</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.image</span> <span class="k">import</span> <span class="n">ImageDataGenerator</span>
+
+<span class="c1"># 160x160 matches one of the sizes supported by MobileNet</span>
+<span class="c1"># (the neural network we&#39;ll transfer learn from)</span>
+<span class="n">img_height</span> <span class="o">=</span> <span class="n">img_width</span> <span class="o">=</span> <span class="mi">160</span>
+<span class="n">channels</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">datagen</span> <span class="o">=</span> <span class="n">ImageDataGenerator</span><span class="p">(</span><span class="n">rescale</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span>
+                            <span class="n">rotation_range</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                            <span class="n">zoom_range</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span>
+                            <span class="n">horizontal_flip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># generate image data from the training set</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="n">datagen</span><span class="o">.</span><span class="n">flow_from_directory</span><span class="p">(</span><span class="n">train_folder</span><span class="p">,</span>
+                                        <span class="n">color_mode</span><span class="o">=</span><span class="s1">&#39;rgb&#39;</span><span class="p">,</span>
+                                        <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">),</span>
+                                        <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                        <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">,</span>
+                                        <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># display some images</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Baseline-Model---4-layer-CNN-from-scratch">Baseline Model - 4-layer CNN from scratch<a class="anchor-link" href="#Baseline-Model---4-layer-CNN-from-scratch">&#182;</a></h2><p>As a baseline, let's train a simple Convolutional Neural Network to do multi-class classification.</p>
+<p>This will be trained from scratch and compared against the transfer learning model(s).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPool2D</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span>\
+    <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dense</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="c1"># Convolutional Block 1</span>
+<span class="c1"># depth 8, kernel 3, stride 1, with padding</span>
+<span class="c1"># input shape: 160, 160, 3 </span>
+<span class="c1"># output shape (of the block): 53, 53, 8</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span>
+                 <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span>
+                 <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">img_width</span><span class="p">,</span> <span class="n">img_height</span><span class="p">,</span> <span class="n">channels</span><span class="p">)))</span>
+<span class="c1"># Note: input_shape is inferred for subsequent layers</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+
+<span class="c1"># Convolutional Block 2</span>
+<span class="c1"># depth 16, kernel 3, stride 1, with padding</span>
+<span class="c1"># input shape: 53, 53, 8 </span>
+<span class="c1"># output shape (of the block): 26, 26, 16</span>
+<span class="c1"># Note: Batch norm is inserted before activation for 2nd conv block onwards</span>
+<span class="c1">#       Batch Norm removes noise in the covariates (means, variances)</span>
+<span class="c1">#       when we stack convolutional blocks</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+
+<span class="c1"># Convolutional Block 3</span>
+<span class="c1"># depth 32, kernel 3, stride 1, with padding</span>
+<span class="c1"># input shape: 26, 26, 16</span>
+<span class="c1"># output shape (of the block): 13, 13, 32</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+
+<span class="c1"># Convolutional Block 4</span>
+<span class="c1"># depth 32, kernel 3, stride 1, with padding</span>
+<span class="c1"># input shape: 13, 13, 32</span>
+<span class="c1"># output shape (of the block): 6, 6, 32</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+
+<span class="c1"># Classifier</span>
+<span class="c1"># input shape: 6, 6, 32</span>
+<span class="c1"># output shape: 3</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="TensorBoard---Monitoring-Training-Progress">TensorBoard - Monitoring Training Progress<a class="anchor-link" href="#TensorBoard---Monitoring-Training-Progress">&#182;</a></h3><p>This is the first time we're training neural networks in keras.</p>
+<ul>
+<li>We'll be using the default backend of keras, which is Tensorflow.</li>
+<li>Therefore, we can use <a href="https://www.tensorflow.org/programmers_guide/summaries_and_tensorboard">Tensorboard</a> to view training progress and metrics.</li>
+</ul>
+<p>TensorBoard is already included in Tensorflow, so there is no separate installation required.</p>
+<h3 id="Launching-TensorBoard">Launching TensorBoard<a class="anchor-link" href="#Launching-TensorBoard">&#182;</a></h3><h4 id="Windows">Windows<a class="anchor-link" href="#Windows">&#182;</a></h4><p>Launch a new Anaconda prompt:</p>
+
+<pre><code>activate mldds03
+cd \path\to\mldds-courseware\03_TextImage
+mkdir logs
+tensorboard --logdir=./logs --host=0.0.0.0 --port=8008</code></pre>
+<h4 id="MacOS-/-Ubuntu">MacOS / Ubuntu<a class="anchor-link" href="#MacOS-/-Ubuntu">&#182;</a></h4><p>Launch a new terminal:</p>
+
+<pre><code>source activate mldds03
+cd /path/to/mldds-courseware/03_TextImage
+mkdir logs
+tensorboard --logdir=./logs --host=0.0.0.0 --port=8008</code></pre>
+<h3 id="Viewing-TensorBoard">Viewing TensorBoard<a class="anchor-link" href="#Viewing-TensorBoard">&#182;</a></h3><p>Once you see TensorBoard launched, you can navigate to <a href="http://localhost:8008">http://localhost:8008</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">TensorBoard</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># feel free to increase this if you have more images</span>
+
+<span class="n">train_generator</span> <span class="o">=</span> <span class="n">datagen</span><span class="o">.</span><span class="n">flow_from_directory</span><span class="p">(</span><span class="n">train_folder</span><span class="p">,</span>
+                                              <span class="n">color_mode</span><span class="o">=</span><span class="s1">&#39;rgb&#39;</span><span class="p">,</span>
+                                              <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">),</span>
+                                              <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                                              <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">,</span>
+                                              <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># TensorBoard</span>
+<span class="c1"># make a unique log index so that it&#39;s easier to filter</span>
+<span class="c1"># by training sessions</span>
+<span class="n">log_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+
+<span class="c1"># we set histogram_freq=0 because we are using a generator</span>
+<span class="n">tensorboard</span> <span class="o">=</span> <span class="n">TensorBoard</span><span class="p">(</span><span class="n">log_dir</span><span class="o">=</span><span class="s1">&#39;./logs/baseline_cnn/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">log_index</span><span class="p">,</span>
+                          <span class="n">histogram_freq</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                          <span class="n">write_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">write_images</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Avoid overfitting by setting up early stopping</span>
+<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                               <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adadelta&#39;</span><span class="p">,</span>
+              <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span>
+                    <span class="n">n_train_set</span><span class="o">//</span><span class="n">batch_size</span><span class="p">,</span>
+                    <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">tensorboard</span><span class="p">,</span> <span class="n">early_stopping</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can view training progress from Tensorboard by going to <a href="http://localhost:8008">http://localhost:8008</a></p>
+<p><img src="assets/transfer/tensorboard-demo.png" alt="tensorboard"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercise---Classification-Model-Validation">Exercise - Classification Model Validation<a class="anchor-link" href="#Exercise---Classification-Model-Validation">&#182;</a></h2><ol>
+<li>Create a test_generator using datagen.flow_from_directory, but point it to the validation folder and set batch_size to all available test samples</li>
+</ol>
+
+<pre><code># no data augmentation for the test set
+test_datagen = ImageDataGenerator(rescale=1. / 255)
+
+test_generator = test_datagen.flow_from_directory(val_folder,
+                                                  color_mode='rgb',
+                                                  target_size=(img_height, img_width),
+                                                  batch_size=n_val_set,
+                                                  class_mode='categorical',
+                                                  shuffle=False)
+test_x, test_y = next(test_generator)</code></pre>
+<ol>
+<li><p>Run predictions using the CNN we just trained</p>
+
+<pre><code>pred_y = model.predict(test_x)</code></pre>
+</li>
+<li><p>The predictions from the CNN are continuous values, so we need to convert them to categorical.</p>
+</li>
+</ol>
+
+<pre><code># convert numbers into one-hot rows
+bins = np.array([0.5]) # x &lt;= 0.5 becomes 0, else 1
+pred_y_onehot = np.digitize(pred_y, bins)
+
+# convert one-hot rows to label index
+pred_y_labels = pred_y_onehot.argmax(axis=1)</code></pre>
+<ol>
+<li>Use sklearn.metrics to evaluate the classification model (using confusion_matrix, classification_report). Note that confusion_matrix takes in label indices, not one-hot arrays.</li>
+</ol>
+<h3 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h3><p>You may need to install sklearn into your conda environment.</p>
+
+<pre><code>conda install scikit-learn</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you used the sample dataset, you should get classification metrics similar to this:</p>
+
+<pre><code>Found 15 images belonging to 3 classes.
+             precision    recall  f1-score   support
+
+          0       0.38      0.60      0.46         5
+          1       1.00      0.20      0.33         5
+          2       0.50      0.60      0.55         5
+
+avg / total       0.62      0.47      0.45        15
+
+[[3 0 2]
+ [3 1 1]
+ [2 0 3]]</code></pre>
+<p>This baseline model doesn't perform too well.  Let's see what we get with Transfer Learning.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Transfer-Learning-with-ImageNet-MobileNet">Transfer Learning with ImageNet MobileNet<a class="anchor-link" href="#Transfer-Learning-with-ImageNet-MobileNet">&#182;</a></h2><p>Now that we have our baseline CNN, let's try transfer learning.</p>
+<p>2 Steps:</p>
+<ol>
+<li>Freeze and retrain a classifier on top of MobileNet</li>
+<li>Un-freeze and fine-tune the model we got from step 2</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Load-the-featurizer-portion-of-MobileNet">Load the featurizer portion of MobileNet<a class="anchor-link" href="#Load-the-featurizer-portion-of-MobileNet">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.applications</span> <span class="k">import</span> <span class="n">MobileNet</span>
+
+<span class="c1"># Exclude the Dense layer from the network by setting include_top=False</span>
+<span class="c1"># We are going to re-train a classifier with the remaining layers</span>
+<span class="n">featurizer</span> <span class="o">=</span> <span class="n">MobileNet</span><span class="p">(</span><span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span>
+                       <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">img_width</span><span class="p">,</span> <span class="n">img_height</span><span class="p">,</span> <span class="n">channels</span><span class="p">))</span>
+<span class="n">featurizer</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Freeze-the-featurizer-weights">Freeze the featurizer weights<a class="anchor-link" href="#Freeze-the-featurizer-weights">&#182;</a></h3><p>If the weights and labels were not previously saved:</p>
+<ol>
+<li>Run the training set through the MobileNet featurizer</li>
+<li>Save the output of the featurizer and corresponding training set labels</li>
+</ol>
+<p>Else load the weights and labels from files.</p>
+<p>Since this is supervised learning, we need both the weights and labels to train the classifier.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># For large neural networks such as VGG, it is a good idea to save the</span>
+<span class="c1"># weights to a file that we load during transfer learning training.</span>
+
+<span class="c1"># https://wiki.python.org/moin/UsingPickle</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="n">weights_file</span> <span class="o">=</span> <span class="s1">&#39;mobilenet_features_train.npy&#39;</span>
+<span class="n">labels_file</span> <span class="o">=</span> <span class="s1">&#39;mobilenet_labels_train.npy&#39;</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># feel free to increase this if you have more images</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">weights_file</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">labels_file</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loading weights from </span><span class="si">%s</span><span class="s1">:&#39;</span> <span class="o">%</span> <span class="n">weights_file</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">weights_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">features_train</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loading labels from </span><span class="si">%s</span><span class="s1">:&#39;</span> <span class="o">%</span> <span class="n">labels_file</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">labels_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">labels_train</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saving weights to </span><span class="si">%s</span><span class="s1">:&#39;</span> <span class="o">%</span> <span class="n">weights_file</span><span class="p">)</span>
+    <span class="n">train_generator</span> <span class="o">=</span> <span class="n">datagen</span><span class="o">.</span><span class="n">flow_from_directory</span><span class="p">(</span><span class="n">train_folder</span><span class="p">,</span>
+                                                  <span class="n">color_mode</span><span class="o">=</span><span class="s1">&#39;rgb&#39;</span><span class="p">,</span>
+                                                  <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">),</span>
+                                                  <span class="n">batch_size</span><span class="o">=</span><span class="n">n_train_set</span><span class="p">,</span>
+                                                  <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saving labels to </span><span class="si">%s</span><span class="s1">:&#39;</span> <span class="o">%</span> <span class="n">labels_file</span><span class="p">)</span>
+    
+    <span class="c1"># capture the featurizer weights and labels</span>
+    <span class="n">train_x</span><span class="p">,</span> <span class="n">labels_train</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">train_generator</span><span class="p">)</span>
+
+    <span class="n">features_train</span> <span class="o">=</span> <span class="n">featurizer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">train_x</span><span class="p">)</span>    
+
+    <span class="c1"># save to file</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">weights_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">labels_train</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">labels_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;features_train.shape:&#39;</span><span class="p">,</span> <span class="n">features_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;labels_train:&#39;</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Train-a-new-classifier-with-the-frozen-weights">Train a new classifier with the frozen weights<a class="anchor-link" href="#Train-a-new-classifier-with-the-frozen-weights">&#182;</a></h3><p>Now that we have the featurizer weights, we can:</p>
+<ol>
+<li>Create a general classifier.</li>
+<li>Train the classifier with the weights (X) and labels (y).</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Create-a-general-classifier">Create a general classifier<a class="anchor-link" href="#Create-a-general-classifier">&#182;</a></h4><p>Note that this classifier does not have to be related to the architecture of the original network.</p>
+<p>It simply treats the inputs as opaque features.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span>
+
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="n">features_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span> <span class="c1"># flatten (5, 5, 1024) to vector</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+
+<span class="n">classifier</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercise:-Train-the-classifier">Exercise: Train the classifier<a class="anchor-link" href="#Exercise:-Train-the-classifier">&#182;</a></h2><ol>
+<li>Setup a tensorboard callback</li>
+</ol>
+
+<pre><code>tensorboard = TensorBoard(log_dir='./logs/mobilenet_trf/%s' % log_index,
+                             histogram_freq=0, write_graph=True, write_images=False)</code></pre>
+<ol>
+<li>Setup an EarlyStopping callback to monitor the validation loss. <ul>
+<li>To understand what it does, try experimenting with these parameters or removing this callback to see what happens.</li>
+<li>To disable this callback, you need to update the list of callbacks passed to <code>fit</code></li>
+<li>You should see overfitting if you disable the callback AND increase <code>epochs</code> for <code>fit</code>.</li>
+</ul>
+</li>
+</ol>
+
+<pre><code>early_stopping = EarlyStopping(monitor='val_loss', patience=4, verbose=0, mode='auto')</code></pre>
+<ol>
+<li>Compile the model, then fit with the features and labels</li>
+</ol>
+
+<pre><code>classifier.compile(optimizer='rmsprop',
+                   loss='categorical_crossentropy', metrics=['accuracy'])
+
+classifier.fit(x=features_train,
+               y=labels_train,
+               validation_split=0.2,
+               batch_size=batch_size,
+               epochs=10,
+               callbacks=[tensorboard, early_stopping])</code></pre>
+<p>If you run <code>fit</code> multiple times, you may notice that the model continues training from the previous call to <code>fit</code>.</p>
+<ul>
+<li>To reset the model state, you may find it useful to just re-declare the model before calling <code>fit</code>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Evaluate-the-model">Evaluate the model<a class="anchor-link" href="#Evaluate-the-model">&#182;</a></h3><p>Evaluating the transfer learnt model is not as straightforward as giving it the test inputs.</p>
+<p>We'll need to:</p>
+<ol>
+<li>Get the validation set features (and labels) from the MobileNet featurizer</li>
+<li>Pass the features into the classifier to get the predictions.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_generator</span> <span class="o">=</span> <span class="n">test_datagen</span><span class="o">.</span><span class="n">flow_from_directory</span><span class="p">(</span><span class="n">val_folder</span><span class="p">,</span>
+                                                  <span class="n">color_mode</span><span class="o">=</span><span class="s1">&#39;rgb&#39;</span><span class="p">,</span>
+                                                  <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">),</span>
+                                                  <span class="n">batch_size</span><span class="o">=</span><span class="n">n_val_set</span><span class="p">,</span>
+                                                  <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">,</span>
+                                                  <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Get the validation set features (and labels) from the MobileNet featurizer</span>
+<span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">test_generator</span><span class="p">)</span>
+<span class="n">test_features</span> <span class="o">=</span> <span class="n">featurizer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+
+<span class="c1"># Pass the features into the classifier to get the predictions.</span>
+<span class="n">pred_y</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_features</span><span class="p">)</span>
+
+<span class="c1"># convert numbers into one-hot rows</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span> <span class="c1"># x &lt;= 0.5 becomes 0, else 1</span>
+<span class="n">pred_y_onehot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">pred_y</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+
+<span class="c1"># convert one-hot rows to label index</span>
+<span class="n">pred_y_labels</span> <span class="o">=</span> <span class="n">pred_y_onehot</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Evaluate metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y_onehot</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_y</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">pred_y_labels</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you are using the sample dataset, you should get classification metrics similar to this:</p>
+
+<pre><code>Found 15 images belonging to 3 classes.
+             precision    recall  f1-score   support
+
+          0       0.71      1.00      0.83         5
+          1       1.00      1.00      1.00         5
+          2       1.00      0.60      0.75         5
+
+avg / total       0.90      0.87      0.86        15
+
+[[5 0 0]
+ [0 5 0]
+ [2 0 3]]</code></pre>
+<p>A much better improvement from the baseline model.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fine-tuning-the-Featurizer">Fine-tuning the Featurizer<a class="anchor-link" href="#Fine-tuning-the-Featurizer">&#182;</a></h2><p>To further improve the result, we can try to "fine-tune" the last few layers of the featurizer.</p>
+<p>Let's examine the architecture:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">SVG</span>
+<span class="kn">from</span> <span class="nn">keras.utils.vis_utils</span> <span class="k">import</span> <span class="n">model_to_dot</span>
+
+<span class="c1"># We can plot the featurizer architecture</span>
+<span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">featurizer</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We can also plot the classifier architecture </span>
+<span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="MobileNet-Convolutional-Block">MobileNet Convolutional Block<a class="anchor-link" href="#MobileNet-Convolutional-Block">&#182;</a></h3><p>MobileNet is unique in that it's convolutional block is actually a Depthwise-separable block.</p>
+<ul>
+<li>This speeds up the network and reduces the number of parameters it needs to store</li>
+<li>This means that we should fine-tune the last <code>Depthwise Conv2D</code> and <code>Conv2D</code> blocks <strong>as a unit</strong>, because together they perform the standard convolution operation.</li>
+</ul>
+<p><img src="assets/transfer/depthwise_conv_block.png" alt="Depthwise Separable Conv Block"></p>
+<p>(image: <a href="https://arxiv.org/abs/1704.04861">https://arxiv.org/abs/1704.04861</a>)</p>
+<p>If you are interested, slides and demos on a talk on optimzed neural nets for mobile devices: <a href="https://github.com/lisaong/stackup-workshops/blob/master/ai-edge">https://github.com/lisaong/stackup-workshops/blob/master/ai-edge</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This picture shows the candidate layers to be fine-tuned (in yellow).</p>
+<p><img src="assets/transfer/mobilenet-finetune.png" alt="fine tune candidates"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Construct-Model-for-Fine-tuning">Construct Model for Fine-tuning<a class="anchor-link" href="#Construct-Model-for-Fine-tuning">&#182;</a></h3><p>Now that we've identified the candidate layers, the next steps are to:</p>
+<ol>
+<li>Create a new MobileNet featurizer with the ImageNet weights</li>
+<li>Append the classifier we trained earlier to the featurizer</li>
+<li>Freeze the featurizer layers that we don't want to fine-tune</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Model</span>
+
+<span class="c1"># 1. Create a new MobileNet featurizer with the ImageNet weights</span>
+<span class="n">mobilenet</span> <span class="o">=</span> <span class="n">MobileNet</span><span class="p">(</span><span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                      <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span>
+                      <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">img_width</span><span class="p">,</span> <span class="n">img_height</span><span class="p">,</span> <span class="n">channels</span><span class="p">))</span>
+
+<span class="c1"># 2. Append the classifier we trained earlier to the featurizer</span>
+<span class="n">combined_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">mobilenet</span><span class="o">.</span><span class="n">input</span><span class="p">,</span>
+                       <span class="n">outputs</span><span class="o">=</span><span class="n">classifier</span><span class="p">(</span><span class="n">mobilenet</span><span class="o">.</span><span class="n">output</span><span class="p">))</span>
+
+<span class="c1"># 3. Freeze the featurizer layers that we don&#39;t want to fine-tune</span>
+
+<span class="c1"># first, we confirm these are the layers we want to keep unfrozen</span>
+<span class="n">combined_model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To freeze the other layers, we set <code>layer[index].trainable = False</code></p>
+<p>Once this is set, the model summary should show significantly fewer trainable parameters.</p>
+<p>Weights (if any) for these last 7 layers will be trainable:</p>
+
+<pre><code>conv_dw_13 (DepthwiseConv2D) (None, 5, 5, 1024)        9216      
+_________________________________________________________________
+conv_dw_13_bn (BatchNormaliz (None, 5, 5, 1024)        4096      
+_________________________________________________________________
+conv_dw_13_relu (Activation) (None, 5, 5, 1024)        0         
+_________________________________________________________________
+conv_pw_13 (Conv2D)          (None, 5, 5, 1024)        1048576   
+_________________________________________________________________
+conv_pw_13_bn (BatchNormaliz (None, 5, 5, 1024)        4096      
+_________________________________________________________________
+conv_pw_13_relu (Activation) (None, 5, 5, 1024)        0         
+_________________________________________________________________
+sequential_10 (Sequential)   (None, 3)                 1638659   
+=================================================================
+Total params: 4,867,523
+Trainable params: 2,700,547
+Non-trainable params: 2,166,976
+_________________________________________________________________</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Freeze the other layers</span>
+<span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">combined_model</span><span class="o">.</span><span class="n">layers</span><span class="p">[:</span><span class="o">-</span><span class="mi">7</span><span class="p">]:</span>
+    <span class="n">layer</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
+    
+<span class="n">combined_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Setup-Optimizer-and-Learning-Rate-for-Fine-Tuning">Setup Optimizer and Learning Rate for Fine-Tuning<a class="anchor-link" href="#Setup-Optimizer-and-Learning-Rate-for-Fine-Tuning">&#182;</a></h3><p>For fine-tuning, we want to keep the learning rate slow, and avoid aggressive optimizers:</p>
+<ul>
+<li>Try RMSProp or SGD: <a href="https://keras.io/optimizers/">https://keras.io/optimizers/</a></li>
+<li>Slow learning rate that decays exponentially</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercise:-Train-the-combined-model">Exercise: Train the combined model<a class="anchor-link" href="#Exercise:-Train-the-combined-model">&#182;</a></h2><p>Using the hints below, write the code to train the combined model.</p>
+<ol>
+<li>Setup data augmentation for the training set. The code should be similar to what was done for saving the featurizer weights. </li>
+</ol>
+
+<pre><code># setup data augmentation in the same way as before
+train_datagen = ImageDataGenerator(...)
+
+# batch_size should be n_train_set
+# the other setting should be similar to before
+train_generator = train_datagen.flow_from_directory(...)
+
+# get the training set
+train_x, labels_train = next(train_generator)</code></pre>
+<ol>
+<li>Train the featurizer using SGD, with an exponentially decaying learning rate. Make sure that early stopping is more strict, because we don't want to overfit.</li>
+</ol>
+
+<pre><code># compile the model
+from keras.optimizers import SGD
+
+combined_model.compile(loss='categorical_crossentropy',
+                       optimizer=SGD(lr=1e-4, decay=0.9),
+                       metrics=['accuracy'])
+
+# setup tensorboard to track our logs in a separate folder for easy filtering
+# the other settings should be similar to fitting the classifier
+tensorboard = TensorBoard(log_dir='./logs/mobilenet_finetune/%s' % log_index, ...)
+
+# let's be even more strict with early stopping
+early_stopping = EarlyStopping(monitor='val_loss', patience=0,
+                               verbose=0, mode='auto')
+
+# finally, fine-tune the model.
+# the other settings should be similar to fitting the classifier
+# Note: since the learning rate is slow, we will need to increase the number of epochs
+combined_model.fit(x=train_x,
+                   y=labels_train,
+                   epochs=30.
+                   ...)</code></pre>
+<p>Note: you do not need to call <code>next(test_generator)</code> or <code>next(train_generator)</code> when using <code>fit_generator</code> for training.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Evaluate-the-Combined-Model">Evaluate the Combined Model<a class="anchor-link" href="#Evaluate-the-Combined-Model">&#182;</a></h3><p>Last, but not the least, evalute the classification metrics for the combined model.</p>
+<ul>
+<li>Unlike the first Transfer Learning case, we do not need to pre-process the test samples through the featurizer and then the classifier.</li>
+<li>We can pass the test samples directly into the combined model.</li>
+</ul>
+<p>If you were using the sample data, you should see a remarkable improvement in the F1 score:</p>
+
+<pre><code>Found 15 images belonging to 3 classes.
+             precision    recall  f1-score   support
+
+          0       1.00      1.00      1.00         5
+          1       0.83      1.00      0.91         5
+          2       1.00      0.80      0.89         5
+
+avg / total       0.94      0.93      0.93        15
+
+[[5 0 0]
+ [0 5 0]
+ [0 1 4]]</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_generator</span> <span class="o">=</span> <span class="n">test_datagen</span><span class="o">.</span><span class="n">flow_from_directory</span><span class="p">(</span><span class="n">val_folder</span><span class="p">,</span>
+                                                  <span class="n">color_mode</span><span class="o">=</span><span class="s1">&#39;rgb&#39;</span><span class="p">,</span>
+                                                  <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">),</span>
+                                                  <span class="n">batch_size</span><span class="o">=</span><span class="n">n_val_set</span><span class="p">,</span>
+                                                  <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">,</span>
+                                                  <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Get the validation set features (and labels) from the MobileNet featurizer</span>
+<span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">test_generator</span><span class="p">)</span>
+
+<span class="c1"># Pass the features into the combined model to get the predictions.</span>
+<span class="n">pred_y</span> <span class="o">=</span> <span class="n">combined_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+
+<span class="c1"># convert numbers into one-hot rows</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span> <span class="c1"># x &lt;= 0.5 becomes 0, else 1</span>
+<span class="n">pred_y_onehot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">pred_y</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+
+<span class="c1"># convert one-hot rows to label index</span>
+<span class="n">pred_y_labels</span> <span class="o">=</span> <span class="n">pred_y_onehot</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Evaluate metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y_onehot</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_y</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">pred_y_labels</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h1><p>This has been another looong workshop. It's easy to get lost in what we're trying to do.</p>
+<h4 id="Start">Start<a class="anchor-link" href="#Start">&#182;</a></h4><p>We started with a pre-trained MobileNet neural net.</p>
+<h4 id="Objective">Objective<a class="anchor-link" href="#Objective">&#182;</a></h4><p>Adapt it to a new dataset and a new task (new classes).</p>
+<h4 id="Process">Process<a class="anchor-link" href="#Process">&#182;</a></h4><ol>
+<li><p>Train a baseline classifier using a 4-layer Convolutional Neural Network</p>
+</li>
+<li><p>Transfer learning stage 1</p>
+<ul>
+<li>Partition the MobileNet CNN into featurizer and classifier.</li>
+<li>Freeze the featurizer weights.</li>
+<li>Train a new classifier (transfer-learning classifier) using the featurizer weights as inputs.</li>
+</ul>
+</li>
+<li><p>Transfer learning stage 2: fine-tuning</p>
+<ul>
+<li>Unfreeze the last convolutional block of the featurizer</li>
+<li>Add the transfer-learning classifier to the featurizer to make a combined model</li>
+<li>Re-train the combined model with a very slow learning rate.</li>
+</ul>
+</li>
+</ol>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Reading-List">Reading List<a class="anchor-link" href="#Reading-List">&#182;</a></h1><table>
+<thead><tr>
+<th>Material</th>
+<th>Read it for</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A Survey on Transfer Learning (IEEE)</td>
+<td>Overview of transfer learning</td>
+<td><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.147.9185&amp;rep=rep1&amp;type=pdf">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.147.9185&amp;rep=rep1&amp;type=pdf</a></td>
+</tr>
+<tr>
+<td>Transductive Learning: Motivation, Model, Algorithms</td>
+<td>Explanation of Induction vs. Transduction Transfer Learning</td>
+<td><a href="http://www.kyb.mpg.de/fileadmin/user_upload/files/publications/pdfs/pdf2527.pdf">http://www.kyb.mpg.de/fileadmin/user_upload/files/publications/pdfs/pdf2527.pdf</a></td>
+</tr>
+<tr>
+<td>Supervised and Unsupervised Transfer Learning for Question Answering (Paper)</td>
+<td>More unique application of transfer learning</td>
+<td><a href="https://arxiv.org/abs/1711.05345">https://arxiv.org/abs/1711.05345</a></td>
+</tr>
+<tr>
+<td>Building powerful image classification models using very little data</td>
+<td>More walkthroughs and explanations of this workshop (we used this as the reference tutorial)</td>
+<td><a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html</a></td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </div>
