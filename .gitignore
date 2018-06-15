@@ -9,6 +9,7 @@ desktop.ini
 *.gsheet
 *.lnk
 *.log
+*.npy
 *.pb
 *.pdf
 *.pyc
