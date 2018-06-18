@@ -56,5 +56,17 @@ To run the workshop exercises, you can clone this [repository](https://github.co
   - 5.3 Feature Engineering
   - 5.4 Debugging
 
+### Viewing Slides
+The non-coding portions of the Jupyter notebooks can be presented as a slide show. To view as a slide show:
+```
+conda install -c damianavila82 rise
+```
+
+Then from the Jupyter notebook:
+- Alt-r, "Enter/Exit Live Reveal Slideshow
+- Shift-i, Toggle slide
+- Shift-u, Toggle subslide
+- Shift-f, Toggle fragment
+
 ##### StackUp | Institute of Systems Science | National University of Singapore
 
