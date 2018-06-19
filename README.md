@@ -24,7 +24,7 @@ To run the workshop exercises, you can clone this [repository](https://github.co
 - 1 Getting Started
   - 1.1 Introduction [[html](https://lisaong.github.io/mldds-courseware/01_GettingStarted/intro.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/01_GettingStarted/intro.ipynb)]
   - 1.2 NumPy [[html](https://lisaong.github.io/mldds-courseware/01_GettingStarted/numpy.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/01_GettingStarted/numpy.ipynb)]
-  - 1.2.1 NumPy Tensor Slicing [[ipynb](https://github.com/lisaong/mldds-courseware/blob/master/01_GettingStarted/numpy-tensor-slicing.ipynb)]
+  - 1.2.1 NumPy Tensor Slicing [[html](https://lisaong.github.io/mldds-courseware/01_GettingStarted/numpy-tensor-slicing.slides.html)[ipynb](https://github.com/lisaong/mldds-courseware/blob/master/01_GettingStarted/numpy-tensor-slicing.ipynb)]
   - 1.3 Pandas [[html](https://lisaong.github.io/mldds-courseware/01_GettingStarted/pandas.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/01_GettingStarted/pandas.ipynb)]
   - 1.4 Matplotlib [[html](https://lisaong.github.io/mldds-courseware/01_GettingStarted/matplotlib.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/01_GettingStarted/matplotlib.ipynb)]
   - 1.5 My First Model [[html](https://lisaong.github.io/mldds-courseware/01_GettingStarted/my-first-model.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/01_GettingStarted/my-first-model.ipynb)]
