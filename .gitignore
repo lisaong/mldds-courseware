@@ -17,6 +17,7 @@ desktop.ini
 *.tar.gz
 *.tmp
 *.txt
+*.w2v
 *.wav
 *.xlsx
 *.zip
