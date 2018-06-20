@@ -24,27 +24,6 @@ desktop.ini
 ~*.*
 trie
 
-# Ignore the drop-in reveal.js, except for content we create
-*/reveal.js/*
-!*/reveal.js/index.html*
-!*/reveal.js/*.md
-*/reveal.js/CONTRIBUTING.md
-*/reveal.js/README.md
-!*/reveal.js/assets/
-
-# Ignore the drop-in reveal.js css files, except for the ones we create
-# wow, how convoluted can we make this
-!*/reveal.js/css/
-*/reveal.js/css/*.*
-*/reveal.js/css/print
-
-*/reveal.js/css/theme/*
-!*/reveal.js/css/theme/stackup.css
-
-*/reveal.js/css/theme/*/*
-!*/reveal.js/css/theme/source/
-!*/reveal.js/css/theme/source/stackup.scss
-
 # Jupyter
 .ipynb_checkpoints
 
