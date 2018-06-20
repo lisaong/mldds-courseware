@@ -42,7 +42,7 @@ To run the workshop exercises, you can clone this [repository](https://github.co
   - 3.2 Image Recognition [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/image.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/image.ipynb)]
   - 3.3 Transfer Learning [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/transfer-learning.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/transfer-learning.ipynb)]
   - 3.4 Adversarial Learning [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/adversarial.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/adversarial.ipynb)]
-  - 3.5 Text Processing and Word Embeddings
+  - 3.5 Text Processing and Word Embeddings [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/text.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/text.ipynb)]
   - 3.6 Document Summarization
   - 3.7 Recurrent Neural Networks
   - 3.8 Text Sentiment
