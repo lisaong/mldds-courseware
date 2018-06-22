@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>text slides</title>
+<title>word-vectors slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,7 +11905,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Text-Processing">Text Processing<a class="anchor-link" href="#Text-Processing">&#182;</a></h1>
+<h1 id="Word-Vectors">Word Vectors<a class="anchor-link" href="#Word-Vectors">&#182;</a></h1>
 </div>
 </div>
 </div></section></section><section><section>
@@ -11914,12 +11914,8 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Topics">Topics<a class="anchor-link" href="#Topics">&#182;</a></h1><ul>
-<li>Overview</li>
-<li>Parsing, Stemming, Lemmatization</li>
-<li>Named Entity Recognition</li>
-<li>Stop Words</li>
-<li>Frequency Analysis</li>
-<li>Workshop: Document Summarization</li>
+<li>Why Word Vectors</li>
+<li>Workshop: Training Word2Vec</li>
 </ul>
 
 </div>
@@ -11930,7 +11926,7 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="References">References<a class="anchor-link" href="#References">&#182;</a></h1><p>NLTK book: <a href="http://www.nltk.org/book/">http://www.nltk.org/book/</a></p>
-<p>spaCy 101: <a href="https://spacy.io/usage/spacy-101">https://spacy.io/usage/spacy-101</a></p>
+<p>CS224d 2015 Lecture 2: Word Vectors:<a href="https://www.youtube.com/watch?v=T8tQZChniMk&amp;index=28&amp;list=PLppspYHk_mI3RzQd16if8skxZgK1woubt&amp;t=0s">https://www.youtube.com/watch?v=T8tQZChniMk&amp;index=28&amp;list=PLppspYHk_mI3RzQd16if8skxZgK1woubt&amp;t=0s</a></p>
 
 </div>
 </div>
@@ -11941,63 +11937,10 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h1><p>Run this command from an Anaconda prompt (within the mldds03 environment):</p>
 
-<pre><code>(mldds03) conda install nltk spacy scikit-learn pandas</code></pre>
-<h3 id="NLTK:-NLP-toolkit">NLTK: NLP toolkit<a class="anchor-link" href="#NLTK:-NLP-toolkit">&#182;</a></h3><p><a href="https://www.nltk.org/install.html">https://www.nltk.org/install.html</a></p>
-<h3 id="spaCy:-another-NLP-toolkit">spaCy: another NLP toolkit<a class="anchor-link" href="#spaCy:-another-NLP-toolkit">&#182;</a></h3><p>Simpler to use than NLTK (but usually fewer knobs)</p>
-<p><a href="https://spacy.io/api/">https://spacy.io/api/</a></p>
-<p><a href="https://spacy.io/usage/spacy-101">https://spacy.io/usage/spacy-101</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="What-is-Text-Processing?">What is Text Processing?<a class="anchor-link" href="#What-is-Text-Processing?">&#182;</a></h1><ul>
-<li>A sub-field of Natural Language Processing (NLP)</li>
-<li>Natural Language Processing is ...<ul>
-<li>Teaching machines to understand and produce language (text, speech)</li>
-<li>A combination of computer science and computational linguistics</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Text-Processing-Tasks">Text Processing Tasks<a class="anchor-link" href="#Text-Processing-Tasks">&#182;</a></h1><ul>
-<li>Word categorization and tagging: part of speech, type of entity</li>
-<li>Semantic Analysis: finding meanings of documents</li>
-<li>Topic Modeling: finding topics from documents</li>
-<li>Document similarity: comparing if two documents are semantically similar</li>
-<li>etc.</li>
-</ul>
-<p>Note: Speech is text processing + acoustic model</p>
-
-</div>
-</div>
-</div><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Parsing,-Stemming-&amp;-Lemmatization">Parsing, Stemming &amp; Lemmatization<a class="anchor-link" href="#Parsing,-Stemming-&amp;-Lemmatization">&#182;</a></h1><ul>
-<li>Tokenization: splitting text into words</li>
-<li>Sentence boundary detection: splitting text into sentences</li>
-<li>Stemming: finding word stems<ul>
-<li>stating =&gt; state, reference =&gt; refer</li>
-</ul>
-</li>
-<li>Lemmatization: finding the base form of words<ul>
-<li>was =&gt; be</li>
-</ul>
-</li>
-</ul>
+<pre><code>(mldds03) conda install gensim cython nltk</code></pre>
+<h3 id="gensim:-for-training-word2vec">gensim: for training word2vec<a class="anchor-link" href="#gensim:-for-training-word2vec">&#182;</a></h3><p><a href="https://radimrehurek.com/gensim/">https://radimrehurek.com/gensim/</a></p>
+<h3 id="Cython:-to-speed-up-training-word2vec">Cython: to speed up training word2vec<a class="anchor-link" href="#Cython:-to-speed-up-training-word2vec">&#182;</a></h3><p><a href="http://docs.cython.org/en/latest/src/quickstart/install.html">http://docs.cython.org/en/latest/src/quickstart/install.html</a></p>
+<h3 id="NLTK:-NLP-toolkit">NLTK: NLP toolkit<a class="anchor-link" href="#NLTK:-NLP-toolkit">&#182;</a></h3><p>Installation: <a href="https://www.nltk.org/install.html">https://www.nltk.org/install.html</a></p>
 
 </div>
 </div>
@@ -12006,139 +11949,95 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Tokenization">Tokenization<a class="anchor-link" href="#Tokenization">&#182;</a></h2><ul>
-<li>Segmenting text into words, punctuation, etc.</li>
-<li>Rule-based</li>
-</ul>
+<h1 id="Word-Vectors">Word Vectors<a class="anchor-link" href="#Word-Vectors">&#182;</a></h1><p><a href="https://spacy.io/usage/vectors-similarity">https://spacy.io/usage/vectors-similarity</a></p>
+<p><a href="https://github.com/charlieg/A-Smattering-of-NLP-in-Python">https://github.com/charlieg/A-Smattering-of-NLP-in-Python</a></p>
+<p>Video: <a href="https://youtu.be/T8tQZChniMk">https://youtu.be/T8tQZChniMk</a></p>
+<p><a href="http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html">http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html</a></p>
 
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Tokenization-with-spaCy">Tokenization with spaCy<a class="anchor-link" href="#Tokenization-with-spaCy">&#182;</a></h3><p><img src="assets/text/tokenization.svg" alt="tokenization in spaCy"></p>
-<p>(image: <a href="https://spacy.io/usage/spacy-101#annotations-token">https://spacy.io/usage/spacy-101#annotations-token</a>)</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Download the English model</span>
-<span class="c1"># You can find other models here: https://spacy.io/models/en</span>
-<span class="o">!</span>python -m spacy download en_core_web_sm
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;This is a test. A quick brown fox jumps over the lazy dog.&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
-
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="c1"># sentence tokenizer</span>
-<span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># word tokenizer</span>
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s1">&#39;DET&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://spacy.io/api/token">https://spacy.io/api/token</a></p>
-<p><a href="https://spacy.io/api/token#attributes">https://spacy.io/api/token#attributes</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spacy</span> <span class="k">import</span> <span class="n">displacy</span>
-
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;distance&#39;</span><span class="p">:</span> <span class="mi">140</span><span class="p">})</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Tokenization-with-NLTK">Tokenization with NLTK<a class="anchor-link" href="#Tokenization-with-NLTK">&#182;</a></h3><p><a href="http://www.nltk.org/api/nltk.tokenize.html">http://www.nltk.org/api/nltk.tokenize.html</a></p>
-<p>nltk.tokenize</p>
+<h1 id="Workshop:-Creating-Word2Vec-Models">Workshop: Creating Word2Vec Models<a class="anchor-link" href="#Workshop:-Creating-Word2Vec-Models">&#182;</a></h1><p>Credits:</p>
 <ul>
-<li>sent_tokenize</li>
-<li>word_tokenize</li>
-<li>wordpunc_tokenize</li>
+<li><a href="https://codesachin.wordpress.com/2015/10/09/generating-a-word2vec-model-from-a-block-of-text-using-gensim-python/">https://codesachin.wordpress.com/2015/10/09/generating-a-word2vec-model-from-a-block-of-text-using-gensim-python/</a></li>
+<li><a href="https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors">https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors</a></li>
+</ul>
+<p>Word2Vec</p>
+<ul>
+<li>Semantic learning of text representations</li>
+<li>Neural network </li>
+<li>Cosine similarity</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Download-text">Download text<a class="anchor-link" href="#Download-text">&#182;</a></h2><p>For demonstration purposes, we'll start with Wikipedia articles.</p>
+<p>We'll use a python library that wraps the Wikipedia APIs.</p>
+<p><a href="https://pypi.org/project/wikipedia/">https://pypi.org/project/wikipedia/</a></p>
+<p>Run this from an Anaconda prompt (within the mldds03 environment):</p>
+
+<pre><code>(mldds03) pip install wikipedia</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">wikipedia</span>
+<span class="kn">from</span> <span class="nn">wikipedia</span> <span class="k">import</span> <span class="n">search</span><span class="p">,</span> <span class="n">page</span>
+
+<span class="c1"># Get our documents: wikipedia articles</span>
+<span class="n">topic</span> <span class="o">=</span> <span class="s1">&#39;singapore&#39;</span>
+
+<span class="n">titles</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+<span class="n">titles</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># retrieve all pages</span>
+<span class="n">wikipages</span> <span class="o">=</span> <span class="p">[</span><span class="n">page</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">]</span>
+
+<span class="c1"># inspect the first page</span>
+<span class="n">wikipages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">summary</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Process-text">Process text<a class="anchor-link" href="#Process-text">&#182;</a></h2><ul>
+<li>Split into sentences</li>
+<li>Remove special characters</li>
+<li>Convert to lowercase</li>
+<li>Tokenize the text into words</li>
+<li>Optionally remove stop words such as 'a', 'the'</li>
+<li>Stem each word</li>
 </ul>
 
 </div>
@@ -12149,530 +12048,64 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Download the Punkt sentence tokenizer</span>
-<span class="c1"># https://www.nltk.org/_modules/nltk/tokenize/punkt.html</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span> <span class="c1"># python regular expressions library</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="k">import</span> <span class="n">PorterStemmer</span>
 
+<span class="c1"># Download NLTK corpora</span>
 <span class="c1"># List of available corpora: http://www.nltk.org/book/ch02.html#tab-corpora</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
+
+<span class="c1"># 1. Download the Punkt sentence tokenizer</span>
+<span class="c1"># https://www.nltk.org/_modules/nltk/tokenize/punkt.html</span>
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
-</pre></div>
 
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">sent_tokenize</span>
-
-<span class="c1"># list of sentences</span>
-<span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">word_tokenize</span>
-
-<span class="c1"># flat list of words and punctuations</span>
-<span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
-
-<span class="n">sentences</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="c1"># list of lists</span>
-<span class="p">[</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">wordpunct_tokenize</span>
-
-<span class="n">text2</span> <span class="o">=</span> <span class="s2">&quot;&#39;The time is now 5.30am,&#39; he said.&quot;</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text2</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">wordpunct_tokenize</span><span class="p">(</span><span class="n">text2</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Part of speech tagging</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
-
-<span class="n">sentences</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
-
-<span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">pos_tag</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s1">&#39;JJ&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Twitter-aware-tokenizer">Twitter-aware tokenizer<a class="anchor-link" href="#Twitter-aware-tokenizer">&#182;</a></h4><p><code>nltk.tokenize.TweetTokenizer</code></p>
-<p><a href="http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.casual">http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.casual</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">TweetTokenizer</span>
-
-<span class="n">tknzr</span> <span class="o">=</span> <span class="n">TweetTokenizer</span><span class="p">()</span>
-<span class="n">tweet</span> <span class="o">=</span> <span class="s2">&quot;This is a cooool #dummysmiley: :-) :-P &lt;3 and some arrows &lt; &gt; -&gt; &lt;--&quot;</span>
-
-<span class="n">tknzr</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tknzr</span> <span class="o">=</span> <span class="n">TweetTokenizer</span><span class="p">(</span><span class="n">strip_handles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reduce_len</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">tweet</span> <span class="o">=</span> <span class="s1">&#39;@remy: This is waaaaayyyy too much for you!!!!!!&#39;</span>
-
-<span class="n">tknzr</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Stemming-vs.-Lemmatization">Stemming vs. Lemmatization<a class="anchor-link" href="#Stemming-vs.-Lemmatization">&#182;</a></h2><ul>
-<li>Stemming uses rule-based heuristics<ul>
-<li>ponies =&gt; poni</li>
-<li>Quicker, but less precision</li>
-</ul>
-</li>
-<li>Lemmatization uses vocabulary and morphological analysis<ul>
-<li>ponies =&gt; pony</li>
-<li>For English, not much improvement over stemming because context of word use is more important</li>
-</ul>
-</li>
-</ul>
-<p><a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html">https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html</a></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Porter-Stemmer">Porter Stemmer<a class="anchor-link" href="#Porter-Stemmer">&#182;</a></h2><ul>
-<li>5 sequential phases of word reductions</li>
-<li>Applies rules such as "sses -&gt; ss", "ies =&gt; i"</li>
-</ul>
-<p><img src="assets/text/stemmers.png" alt="stemmers"></p>
-<p>(image: <a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html">https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html</a>)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Stemming-&amp;-Lemmatization-with-spaCy">Stemming &amp; Lemmatization with spaCy<a class="anchor-link" href="#Stemming-&amp;-Lemmatization-with-spaCy">&#182;</a></h3><p><code>spacy.lemmatizer.Lemmatizer</code></p>
-<p><a href="https://spacy.io/api/lemmatizer">https://spacy.io/api/lemmatizer</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spacy.lemmatizer</span> <span class="k">import</span> <span class="n">Lemmatizer</span>
-<span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="k">import</span> <span class="n">LEMMA_INDEX</span><span class="p">,</span> <span class="n">LEMMA_EXC</span><span class="p">,</span> <span class="n">LEMMA_RULES</span>
-
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
-<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">Lemmatizer</span><span class="p">(</span><span class="n">LEMMA_INDEX</span><span class="p">,</span> <span class="n">LEMMA_EXC</span><span class="p">,</span> <span class="n">LEMMA_RULES</span><span class="p">)</span>
-
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">lemmatizer</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Stemming-&amp;-Lemmatization-with-NLTK">Stemming &amp; Lemmatization with NLTK<a class="anchor-link" href="#Stemming-&amp;-Lemmatization-with-NLTK">&#182;</a></h3><p><code>nltk.stem</code></p>
-<ul>
-<li><code>PorterStemmer</code></li>
-<li><code>WordNetLemmatizer</code></li>
-</ul>
-<p><a href="http://www.nltk.org/api/nltk.stem.html">http://www.nltk.org/api/nltk.stem.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="k">import</span> <span class="n">PorterStemmer</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">word_tokenize</span>
-
-<span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
-
-<span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="k">import</span> <span class="n">WordNetLemmatizer</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">word_tokenize</span>
-
-<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
-
-<span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Named-Entity-Recognition">Named Entity Recognition<a class="anchor-link" href="#Named-Entity-Recognition">&#182;</a></h2><ul>
-<li><p>Find and classify entities within text</p>
-<ul>
-<li>Persons</li>
-<li>Organizations</li>
-<li>Locations</li>
-<li>Time expressions</li>
-<li>Quantities</li>
-<li>Phone numbers</li>
-<li>etc</li>
-</ul>
-</li>
-<li><p>Grammar-based models, trained classifiers</p>
-</li>
-<li><p>Can be corpus-dependent, see <a href="https://spacy.io/api/annotation#named-entities">https://spacy.io/api/annotation#named-entities</a></p>
-</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Named-Entity-Recognition-with-spaCy">Named Entity Recognition with spaCy<a class="anchor-link" href="#Named-Entity-Recognition-with-spaCy">&#182;</a></h3><p><a href="https://spacy.io/api/annotation#named-entities">https://spacy.io/api/annotation#named-entities</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
-
-<span class="n">text3</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Flight 224 is scheduled to arrive in Frankfurt at 4pm July 5th, 2018.&quot;</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text3</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">label_</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">start_char</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">end_char</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s1">&#39;NORP&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spacy</span> <span class="k">import</span> <span class="n">displacy</span>
-
-<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Named-Entity-Recognition-with-NLTK">Named Entity Recognition with NLTK<a class="anchor-link" href="#Named-Entity-Recognition-with-NLTK">&#182;</a></h3>
-<pre><code>nltk.ne_chunk()</code></pre>
-<p><a href="https://www.nltk.org/book/ch07.html">https://www.nltk.org/book/ch07.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;maxent_ne_chunker&#39;</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
-
-<span class="n">sentences</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text3</span><span class="p">)</span>
-<span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
-
-<span class="c1"># Input to ne_chunk needs to be a part-of-speech tagged word</span>
-<span class="n">sentences_pos_tagged</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">pos_tag</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
-
-<span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">ne_chunk</span><span class="p">(</span><span class="n">word_pos</span><span class="p">)</span> <span class="k">for</span> <span class="n">word_pos</span> <span class="ow">in</span> <span class="n">sentences_pos_tagged</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Stop-words">Stop words<a class="anchor-link" href="#Stop-words">&#182;</a></h2><p>Stop words are high-frequency words that don't contribute much lexical content:</p>
-<ul>
-<li>the</li>
-<li>a</li>
-<li>to</li>
-</ul>
-<p>NLP libraries usually include a corpus of stop words.</p>
-<p>Stop word lists:</p>
-<ul>
-<li><a href="http://www.nltk.org/book/ch02.html#stopwords_index_term">http://www.nltk.org/book/ch02.html#stopwords_index_term</a></li>
-<li><a href="https://www.semantikoz.com/blog/free-stop-word-lists-in-23-languages/">https://www.semantikoz.com/blog/free-stop-word-lists-in-23-languages/</a></li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Stop-words-with-spaCy">Stop words with spaCy<a class="anchor-link" href="#Stop-words-with-spaCy">&#182;</a></h3><p><code>spacy.lang.en.stop_words</code></p>
-<p><code>token.is_stop</code></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">spacy.lang.en.stop_words</span> <span class="k">import</span> <span class="n">STOP_WORDS</span>
-
-<span class="n">STOP_WORDS</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Deutsch</span>
-<span class="kn">from</span> <span class="nn">spacy.lang.de.stop_words</span> <span class="k">import</span> <span class="n">STOP_WORDS</span>
-
-<span class="n">STOP_WORDS</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text3</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">is_stop</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Adding stop words</span>
-<span class="kn">from</span> <span class="nn">spacy.lang.en.stop_words</span> <span class="k">import</span> <span class="n">STOP_WORDS</span>
-
-<span class="n">STOP_WORDS</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;MLDDS&#39;</span><span class="p">)</span>
-
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Sorry I&#39;m not free tonite, I have MLDDS (lowercase: mldds).&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">is_stop</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Stop-words-with-NLTK">Stop words with NLTK<a class="anchor-link" href="#Stop-words-with-NLTK">&#182;</a></h3>
-<pre><code>nltk.corpus.stopwords</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Download corpus</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="c1"># 2. Download the Stop Words corpus</span>
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span>
+<span class="c1"># 3. Helper function to convert text</span>
+<span class="k">def</span> <span class="nf">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cleans and converts text to a list of lists of tokens</span>
+<span class="sd">    Args:</span>
+<span class="sd">        text: input text</span>
+<span class="sd">        remove_stopwords: whether to remove stopwords</span>
+<span class="sd">    Returns: a tuple</span>
+<span class="sd">        A list of lists of tokens that looks like:</span>
+<span class="sd">           [[&quot;cat&quot;, &quot;say&quot;, &quot;meow&quot;], [&quot;dog&quot;, &quot;say&quot;, &quot;woof&quot;]]</span>
+<span class="sd">        Total of words</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Split into sentences</span>
+    <span class="c1"># Reference: http://www.nltk.org/api/nltk.tokenize.html</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-<span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+    <span class="c1"># set of stopwords</span>
+    <span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+
+    <span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+    
+    <span class="n">wordcount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="c1"># Remove non-letters and numbers</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^a-zA-Z0-9]&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+        <span class="c1"># Convert to lowercase</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        
+        <span class="c1"># Tokenize the sentence into words</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    
+        <span class="k">if</span> <span class="n">remove_stopwords</span><span class="p">:</span>
+            <span class="c1"># Remove stop words</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">]</span>
+    
+        <span class="c1"># Stem the words</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+        
+        <span class="n">result</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tokens</span><span class="p">]</span>
+        <span class="n">wordcount</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">wordcount</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12685,7 +12118,43 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;german&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test our helper function to see what it does</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">wikipages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;===== Original text for first article =====&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">wordlist</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">text</span><span class="p">,</span>
+                                             <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">===== Stem words [</span><span class="si">%d</span><span class="s1"> words] =====&#39;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wordlist</span><span class="p">)</span>
+
+<span class="n">wordlist</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">===== Stem words - stopwords [</span><span class="si">%d</span><span class="s1"> words] =====&#39;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wordlist</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Convert-all-articles-to-sentence-word-lists">Convert all articles to sentence word lists<a class="anchor-link" href="#Convert-all-articles-to-sentence-word-lists">&#182;</a></h3><p>Let's now convert all articles on our topic to sentence word lists.</p>
+<p>We were examining the summary for each article, let's see how we can get to the content.</p>
+<p>Looking at the wikipedia library's documentation, we can use <code>WikipediaPage.content</code> to get to the plain text content for each page: <a href="https://wikipedia.readthedocs.io/en/latest/code.html">https://wikipedia.readthedocs.io/en/latest/code.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wikipages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
 </pre></div>
 
 </div>
@@ -12698,137 +12167,19 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text3</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Converting </span><span class="si">%d</span><span class="s1"> articles to training set...&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">))</span>
 
-<span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+<span class="n">training_set</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">training_set_size</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">)</span>
-</pre></div>
+<span class="k">for</span> <span class="n">wikipage</span> <span class="ow">in</span> <span class="n">wikipages</span><span class="p">:</span>
+    <span class="n">wordlist</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">wikipage</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Adding stop words</span>
-<span class="n">stops</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
-<span class="n">stops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;MLDDS&quot;</span><span class="p">)</span>
-<span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stops</span><span class="p">)</span>
-
-<span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Sorry I&#39;m not free tonite, I have MLDDS (lowercase: mldds).&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Frequency-Analysis">Frequency Analysis<a class="anchor-link" href="#Frequency-Analysis">&#182;</a></h1><p>Answers two questions:</p>
-<ol>
-<li><p>How often does a word appear in a document?</p>
-</li>
-<li><p>How important is a word in a document?</p>
-</li>
-</ol>
-<p>Measure: Term Frequency - Inverse Document Frequency (TF-IDF)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Term-Frequency">Term Frequency<a class="anchor-link" href="#Term-Frequency">&#182;</a></h2><p>Most common formula:</p>
-<p>$$\frac{f_{t, d}}{\sum_{t' \in d} \, f_{t',d}}$$</p>
-<p>$f_{t, d}$: count of term $t$ in document $d$</p>
-<p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">https://en.wikipedia.org/wiki/Tf%E2%80%93idf</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Inverse-Document-Frequency">Inverse Document Frequency<a class="anchor-link" href="#Inverse-Document-Frequency">&#182;</a></h2><p>Most common formula:</p>
-<p>$$log\frac{N}{\mid\{d \in D : t \in d \}\mid}$$</p>
-<p>$N$: number of documents</p>
-<p>$\mid\{d \in D : t \in d \}\mid$: number of documents containing term $t$</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="TD-IDF">TD-IDF<a class="anchor-link" href="#TD-IDF">&#182;</a></h2><p>$$tfidf(t, d, D) = tf(t, d) * idf(t, D)$$</p>
-<table>
-<thead><tr>
-<th>term</th>
-<th>tf</th>
-<th>idf</th>
-<th>tf-idf</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>to</td>
-<td>large</td>
-<td>very small</td>
-<td>closer to 0</td>
-</tr>
-<tr>
-<td>coffee</td>
-<td>small</td>
-<td>large</td>
-<td>not closer to 0</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Computing-TF-IDF">Computing TF-IDF<a class="anchor-link" href="#Computing-TF-IDF">&#182;</a></h2><h4 id="Scikit-learn:">Scikit-learn:<a class="anchor-link" href="#Scikit-learn:">&#182;</a></h4>
-<pre><code>sklearn.feature_extraction.text.CountVectorizer
-
-sklearn.feature_extraction.text.TfidfVectorizer</code></pre>
-<p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html">http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html</a></p>
-<h4 id="NLTK">NLTK<a class="anchor-link" href="#NLTK">&#182;</a></h4><p>Supports tf-idf, but less popular</p>
-
-<pre><code>nltk.text.TextCollection</code></pre>
-<p><a href="http://www.nltk.org/api/nltk.html#nltk.text.TextCollection">http://www.nltk.org/api/nltk.html#nltk.text.TextCollection</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text5</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;This is a test.</span><span class="se">\n</span><span class="s2">&quot;</span> \
-    <span class="sa">u</span><span class="s2">&quot;The quick brown fox jumps over the lazy dog.</span><span class="se">\n</span><span class="s2">&quot;</span> \
-    <span class="sa">u</span><span class="s2">&quot;The early bird gets the worm.</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">training_set_size</span> <span class="o">+=</span> <span class="n">count</span>
+    <span class="n">training_set</span> <span class="o">+=</span> <span class="n">wordlist</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training set size: </span><span class="si">%d</span><span class="s1"> stem words, </span><span class="si">%d</span><span class="s1"> sentences&#39;</span> \
+      <span class="o">%</span> <span class="p">(</span><span class="n">training_set_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_set</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -12840,140 +12191,8 @@ sklearn.feature_extraction.text.TfidfVectorizer</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Computing-Word-Counts">Computing Word Counts<a class="anchor-link" href="#Computing-Word-Counts">&#182;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># http://scikit-learn.org/stable/modules/feature_extraction.html</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span>
-
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text5</span><span class="p">)</span>
-<span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">sent</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">]</span>
-
-<span class="c1"># Count word occurrences</span>
-<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
-
-<span class="c1"># convert sparse matrix to dense matrix</span>
-<span class="n">X_dense</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-
-<span class="n">X_dense</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># display as a dataframe</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">df_wc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_dense</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
-<span class="n">df_wc</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Computing-TF-IDF">Computing TF-IDF<a class="anchor-link" href="#Computing-TF-IDF">&#182;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># http://scikit-learn.org/stable/modules/feature_extraction.html</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfVectorizer</span>
-
-<span class="c1"># TfidfVectorizer is a combination of</span>
-<span class="c1">#   CountVectorizer + TfidfTransformer</span>
-<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
-
-<span class="c1"># convert sparse matrix to dense matrix</span>
-<span class="n">X_dense</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">X_dense</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
-<span class="n">X_dense</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for each sentence, get the highest tf-idf</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
-<span class="n">tfidf_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_dense</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">tfidf_arr</span><span class="p">[</span><span class="n">i</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="p">[</span><span class="nb">print</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">tfidf_arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sorted_idx</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h2><ol>
-<li>Get 3-5 of your own sample sentences</li>
-<li>Compute the TF-IDF</li>
-<li>Compute the TF-IDF with stop_words filtered out:</li>
-</ol>
-<p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html">http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html</a></p>
-
-<pre><code>from spacy.lang.en.stop_words import STOP_WORDS
-
-vectorizer = TfidfVectorizer(stop_words=STOP_WORDS)
-
-...</code></pre>
+<h3 id="Question-to-ponder:">Question to ponder:<a class="anchor-link" href="#Question-to-ponder:">&#182;</a></h3><p>Should we randomize the training set?</p>
+<p>Why or why not?</p>
 
 </div>
 </div>
@@ -12982,402 +12201,98 @@ vectorizer = TfidfVectorizer(stop_words=STOP_WORDS)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="N-grams">N-grams<a class="anchor-link" href="#N-grams">&#182;</a></h2><p>TF-IDF can be applied to N-grams (N words at a time), to try to capture some context information.</p>
-
-<pre><code>CountVectorizer(ngram_range=(minN, maxN)), ..)
-
-TfidfVectorizer(ngram_range=(minN, maxN)), ..)</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text5</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;This is a test.</span><span class="se">\n</span><span class="s2">&quot;</span> \
-    <span class="sa">u</span><span class="s2">&quot;The quick brown fox jumps over the lazy dog.</span><span class="se">\n</span><span class="s2">&quot;</span> \
-    <span class="sa">u</span><span class="s2">&quot;The early bird gets the worm.</span><span class="se">\n</span><span class="s2">&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[213]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text5</span><span class="p">)</span>
-<span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">sent</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">]</span>
-
-<span class="c1"># Count word occurrences using 1 and 2-grams</span>
-<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
-
-<span class="c1"># convert sparse matrix to dense matrix</span>
-<span class="n">X_dense</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X_dense</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_dense</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(3, 30)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[213]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bird</th>
-      <th>bird gets</th>
-      <th>brown</th>
-      <th>brown fox</th>
-      <th>dog</th>
-      <th>early</th>
-      <th>early bird</th>
-      <th>fox</th>
-      <th>fox jumps</th>
-      <th>gets</th>
-      <th>...</th>
-      <th>quick brown</th>
-      <th>test</th>
-      <th>the</th>
-      <th>the early</th>
-      <th>the lazy</th>
-      <th>the quick</th>
-      <th>the worm</th>
-      <th>this</th>
-      <th>this is</th>
-      <th>worm</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>...</td>
-      <td>1</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 30 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise:-TF-IDF-with-Trigrams">Exercise: TF-IDF with Trigrams<a class="anchor-link" href="#Exercise:-TF-IDF-with-Trigrams">&#182;</a></h2><ul>
-<li>Compute the TF-IDF for trigrams (1 to 3-grams), using your sample text.</li>
-<li>Try with and without stop words included</li>
+<h2 id="Train-a-word2vec-model">Train a word2vec model<a class="anchor-link" href="#Train-a-word2vec-model">&#182;</a></h2><p>(Credits: <a href="https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors">https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors</a>)</p>
+<p>With the list of nicely parsed sentences, we're ready to train the model. There are a number of parameter choices that affect the run time and the quality of the final model that is produced.</p>
+<p>For details on the algorithms below, see the <a href="https://radimrehurek.com/gensim/models/word2vec.html">word2vec API documentation</a> as well as the <a href="https://code.google.com/archive/p/word2vec/">Google documentation</a>(Performance section).</p>
+<h3 id="Domain-characteristics">Domain characteristics<a class="anchor-link" href="#Domain-characteristics">&#182;</a></h3><p>Our training set is:</p>
+<ul>
+<li>Small (under 25k words). Typically, word2vec training sets can go in hundreds of thousands.</li>
+<li>Wikipedia articles about a common topic. We'll expect some words (e.g. singapore) to appear more frequently about that topic. Whether this is something we need to worry about is unclear.</li>
 </ul>
+<h3 id="Hyperparameters">Hyperparameters<a class="anchor-link" href="#Hyperparameters">&#182;</a></h3><h4 id="Architecture:">Architecture:<a class="anchor-link" href="#Architecture:">&#182;</a></h4><p>Architecture options are skip-gram (the default: slower, better for infrequent words) or continuous bag of words (fast).</p>
+<h4 id="Training-algorithm:">Training algorithm:<a class="anchor-link" href="#Training-algorithm:">&#182;</a></h4><p>This controls which algorithm to use.</p>
+<p>Hierarchical softmax (the default: better for infrequent words) or negative sampling (better for frequent words, better with low dimensional vectors). Start with the default first.</p>
+<h4 id="Downsampling-of-frequent-words:">Downsampling of frequent words:<a class="anchor-link" href="#Downsampling-of-frequent-words:">&#182;</a></h4><p>This controls the threshold for frequent words to be removed randomly.</p>
+<p>Randomly removing frequent words in large datasets can improve both accuracy and speed.</p>
+<p>$$p = \frac{f-t}{f} - \sqrt{\frac{t}{f}}$$</p>
+<p>Where:</p>
+<ul>
+<li>$p$: probabability that word is present</li>
+<li>$f$: frequency of word in corpus</li>
+<li>$t$: the threshold (our downsampling hyperparameter)</li>
+</ul>
+<p>A smaller $t$ means more words will be randomly removed.</p>
+<p>(Source: <a href="https://levyomer.files.wordpress.com/2015/03/improving-distributional-similarity-tacl-2015.pdf">https://levyomer.files.wordpress.com/2015/03/improving-distributional-similarity-tacl-2015.pdf</a>)</p>
+<p>The <a href="https://code.google.com/archive/p/word2vec/">Google documentation</a> recommends values between 1e-3 and 1e-5. Let's try 1e-3 and then iterate from there, since our training set is small.</p>
+<h4 id="Word-vector-dimensionality:">Word vector dimensionality:<a class="anchor-link" href="#Word-vector-dimensionality:">&#182;</a></h4><p>This controls how many features the word vector should have. Higher dimensionality (more features) usually result in better models, but also longer runtimes. Reasonable values can be in the tens to hundreds. We'll try 200.</p>
+<h4 id="Context-/-window-size:">Context / window size:<a class="anchor-link" href="#Context-/-window-size:">&#182;</a></h4><p>This defines the window-size to look for related words. For skip-gram usually around 10, for CBOW around 5. More is better, up to a point.</p>
+<h3 id="Worker-threads:">Worker threads:<a class="anchor-link" href="#Worker-threads:">&#182;</a></h3><p>Number of parallel processes to run. This can significantly improve training speed.</p>
+<p>The number to choose depends on how many logical CPU cores your computer has (on Windows, Start Menu -&gt; System Information, look for Processors).</p>
+<p>Start with a number around 2-4, and then increase up if your computer is more powerful.</p>
+<h3 id="Minimum-word-count:">Minimum word count:<a class="anchor-link" href="#Minimum-word-count:">&#182;</a></h3><p>This helps limit the size of the vocabulary to meaningful words. Any word that does not occur at least this many times across all documents is ignored.</p>
+<p>Reasonable values could be between 10 and 100. Higher values also help limit run time.</p>
+<p>For wikipedia articles, we'll try a minimum wordcount of 10.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[214]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="k">import</span> <span class="n">word2vec</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfVectorizer</span>
-
-<span class="c1"># TfidfVectorizer is a combination of</span>
-<span class="c1">#   CountVectorizer + TfidfTransformer</span>
-<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
-
-<span class="c1"># convert sparse matrix to dense matrix</span>
-<span class="n">X_dense</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">X_dense</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
-<span class="n">tfidf_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_dense</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">tfidf_arr</span><span class="p">[</span><span class="n">i</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="p">[</span><span class="nb">print</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">tfidf_arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sorted_idx</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">()</span>
+word2vec.Word2Vec<span class="o">?</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(3, 42)
-[&#39;bird&#39;, &#39;bird gets&#39;, &#39;bird gets the&#39;, &#39;brown&#39;, &#39;brown fox&#39;, &#39;brown fox jumps&#39;, &#39;dog&#39;, &#39;early&#39;, &#39;early bird&#39;, &#39;early bird gets&#39;, &#39;fox&#39;, &#39;fox jumps&#39;, &#39;fox jumps over&#39;, &#39;gets&#39;, &#39;gets the&#39;, &#39;gets the worm&#39;, &#39;is&#39;, &#39;is test&#39;, &#39;jumps&#39;, &#39;jumps over&#39;, &#39;jumps over the&#39;, &#39;lazy&#39;, &#39;lazy dog&#39;, &#39;over&#39;, &#39;over the&#39;, &#39;over the lazy&#39;, &#39;quick&#39;, &#39;quick brown&#39;, &#39;quick brown fox&#39;, &#39;test&#39;, &#39;the&#39;, &#39;the early&#39;, &#39;the early bird&#39;, &#39;the lazy&#39;, &#39;the lazy dog&#39;, &#39;the quick&#39;, &#39;the quick brown&#39;, &#39;the worm&#39;, &#39;this&#39;, &#39;this is&#39;, &#39;this is test&#39;, &#39;worm&#39;]
-This is a test.
-
-is test 0.4082482904638631
-this is 0.4082482904638631
-this 0.4082482904638631
-this is test 0.4082482904638631
-is 0.4082482904638631
-test 0.4082482904638631
-early bird gets 0.0
-gets the worm 0.0
-gets the 0.0
-gets 0.0
-fox jumps over 0.0
-fox jumps 0.0
-fox 0.0
-worm 0.0
-jumps 0.0
-early 0.0
-dog 0.0
-brown fox jumps 0.0
-brown fox 0.0
-brown 0.0
-bird gets the 0.0
-bird gets 0.0
-early bird 0.0
-jumps over the 0.0
-jumps over 0.0
-lazy 0.0
-the worm 0.0
-the quick brown 0.0
-the quick 0.0
-the lazy dog 0.0
-the lazy 0.0
-the early bird 0.0
-the early 0.0
-the 0.0
-quick brown fox 0.0
-quick brown 0.0
-quick 0.0
-over the lazy 0.0
-over the 0.0
-over 0.0
-lazy dog 0.0
-bird 0.0
-
-The quick brown fox jumps over the lazy dog.
-
-the 0.30847453550092424
-jumps over the 0.20280347192512718
-quick brown fox 0.20280347192512718
-fox 0.20280347192512718
-jumps 0.20280347192512718
-jumps over 0.20280347192512718
-lazy 0.20280347192512718
-lazy dog 0.20280347192512718
-over 0.20280347192512718
-over the 0.20280347192512718
-over the lazy 0.20280347192512718
-quick 0.20280347192512718
-fox jumps over 0.20280347192512718
-quick brown 0.20280347192512718
-dog 0.20280347192512718
-brown fox jumps 0.20280347192512718
-brown fox 0.20280347192512718
-the lazy 0.20280347192512718
-the lazy dog 0.20280347192512718
-the quick 0.20280347192512718
-the quick brown 0.20280347192512718
-brown 0.20280347192512718
-fox jumps 0.20280347192512718
-early 0.0
-bird gets the 0.0
-early bird 0.0
-early bird gets 0.0
-bird gets 0.0
-worm 0.0
-gets 0.0
-gets the 0.0
-gets the worm 0.0
-is 0.0
-is test 0.0
-this is test 0.0
-test 0.0
-the early 0.0
-the early bird 0.0
-the worm 0.0
-this 0.0
-this is 0.0
-bird 0.0
-
-The early bird gets the worm.
-
-the 0.3886917427512738
-worm 0.2555414657180043
-bird gets 0.2555414657180043
-bird gets the 0.2555414657180043
-early 0.2555414657180043
-early bird 0.2555414657180043
-early bird gets 0.2555414657180043
-gets 0.2555414657180043
-gets the 0.2555414657180043
-gets the worm 0.2555414657180043
-bird 0.2555414657180043
-the early 0.2555414657180043
-the worm 0.2555414657180043
-the early bird 0.2555414657180043
-quick brown 0.0
-quick 0.0
-this is 0.0
-this 0.0
-brown 0.0
-brown fox 0.0
-brown fox jumps 0.0
-dog 0.0
-quick brown fox 0.0
-the quick brown 0.0
-the quick 0.0
-fox 0.0
-fox jumps 0.0
-fox jumps over 0.0
-the lazy dog 0.0
-the lazy 0.0
-test 0.0
-is 0.0
-is test 0.0
-jumps 0.0
-jumps over 0.0
-this is test 0.0
-lazy 0.0
-lazy dog 0.0
-over 0.0
-over the 0.0
-over the lazy 0.0
-jumps over the 0.0
-
-</pre>
 </div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Credits: https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors</span>
 
+<span class="c1"># Set values for various parameters</span>
+<span class="n">sg</span> <span class="o">=</span> <span class="mi">1</span>                <span class="c1"># Algorithm: 1: skip-gram, 0: CBOW</span>
+<span class="n">num_features</span> <span class="o">=</span> <span class="mi">200</span>    <span class="c1"># Word vector dimensionality                      </span>
+<span class="n">min_word_count</span> <span class="o">=</span> <span class="mi">10</span>   <span class="c1"># Minimum word count                        </span>
+<span class="n">num_workers</span> <span class="o">=</span> <span class="mi">2</span>       <span class="c1"># Number of threads to run in parallel</span>
+<span class="n">context</span> <span class="o">=</span> <span class="mi">10</span>          <span class="c1"># Context window size                                                                                    </span>
+<span class="n">downsampling</span> <span class="o">=</span> <span class="mf">1e-3</span>   <span class="c1"># Downsample setting for frequent words</span>
+
+<span class="c1"># Import the built-in logging module and configure it so that Word2Vec </span>
+<span class="c1"># creates nice output messages</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> : </span><span class="si">%(levelname)s</span><span class="s1"> : </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>\
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="c1"># Initialize and train the model.</span>
+<span class="c1"># This may take a while if your training set is large (e.g. 500,000 words)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Word2Vec model...&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">time</span> model = word2vec.Word2Vec(training_set, workers=num_workers, \
+            <span class="n">size</span><span class="o">=</span><span class="n">num_features</span><span class="p">,</span> <span class="n">min_count</span> <span class="o">=</span> <span class="n">min_word_count</span><span class="p">,</span> \
+            <span class="n">window</span> <span class="o">=</span> <span class="n">context</span><span class="p">,</span> <span class="n">sample</span> <span class="o">=</span> <span class="n">downsampling</span><span class="p">)</span>
+
+<span class="c1"># If you don&#39;t plan to train the model any further, calling </span>
+<span class="c1"># init_sims will make the model much more memory-efficient.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">init_sims</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># It can be helpful to create a meaningful model name and </span>
+<span class="c1"># save the model for later use. You can load it later using Word2Vec.load()</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;wikipedia_</span><span class="si">{}</span><span class="s2">features_</span><span class="si">{}</span><span class="s2">minwords_</span><span class="si">{}</span><span class="s2">context_</span><span class="si">{}</span><span class="s2">downsampling.w2v&quot;</span> \
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_features</span><span class="p">,</span> <span class="n">min_word_count</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">downsampling</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved model as </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">model_name</span><span class="p">)</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
@@ -13386,9 +12301,596 @@ jumps over the 0.0
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Workshop:-Document-Summarization">Workshop: Document Summarization<a class="anchor-link" href="#Workshop:-Document-Summarization">&#182;</a></h1>
+<h2 id="Loading-the-saved-model">Loading the saved model<a class="anchor-link" href="#Loading-the-saved-model">&#182;</a></h2><p>Here's how to load a previously saved model.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;wikipedia_100features_50minwords_10context.w2v&quot;</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Evaluating-the-model">Evaluating the model<a class="anchor-link" href="#Evaluating-the-model">&#182;</a></h2><p>The trained model contains a read-only <code>models.keyedvectors.Word2VecMeyedVectors</code> with methods for evaluating word relationships.</p>
+<p><a href="https://radimrehurek.com/gensim/models/keyedvectors.html#gensim.models.keyedvectors.Word2VecKeyedVectors">https://radimrehurek.com/gensim/models/keyedvectors.html#gensim.models.keyedvectors.Word2VecKeyedVectors</a></p>
+<p>Here are some things to try with the word2vec model:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Get the vocabulary of the model:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># number of words in the vocab</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check if a stem word is in the model's vocabulary:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+<span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;malaysia&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;korea&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find a word that doesn't match in a list of words:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="s1">&#39;raffles indian chinese malay&#39;</span>
+
+<span class="c1"># you can either use the helper function to convert to stem words</span>
+<span class="c1"># or call stemmer.stem() directly on each word</span>
+<span class="n">wordlist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">wordlist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Word that doesn&#39;t match: </span><span class="si">%s</span><span class="s2">&quot;</span>
+      <span class="o">%</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">(</span><span class="n">wordlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Get the top N most similar words:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;singapore&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;changi&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Measures the cosine distance and similarity between two words.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;changi&#39;</span><span class="p">)</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;aircraft&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;distance: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;similarity: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;changi&#39;</span><span class="p">)</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;british&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;distance: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;similarity: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span>
+      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Returns the word's representation in vector space as a 1D numpy array</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;malaysia&#39;</span><span class="p">)</span>
+
+<span class="n">raw_vectors</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">word_vec</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">use_norm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">raw_vectors</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raw_vectors</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Visualizing-Word2Vec">Visualizing Word2Vec<a class="anchor-link" href="#Visualizing-Word2Vec">&#182;</a></h1><p>Next, we'll plot the Word Vectors to see how the clusters look like:</p>
+<ol>
+<li>Use t-Distributed Stochastic Neighbor Embedding <a href="https://lvdmaaten.github.io/tsne/">TSNE</a> to reduce the high-dimensional model into 2D</li>
+<li>Plot the 2D representation of the word2vec model, with the words in its vocabulary as the labels</li>
+</ol>
+<p>Credits: <a href="https://stackoverflow.com/questions/43776572/visualise-word2vec-generated-from-gensim">https://stackoverflow.com/questions/43776572/visualise-word2vec-generated-from-gensim</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="k">import</span> <span class="n">TSNE</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">vocab</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">vocab</span><span class="p">]</span>
+
+<span class="c1"># Apply t-SNE</span>
+<span class="c1"># this can take a while (like 1 minute or more)</span>
+<span class="n">tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">%</span><span class="k">time</span> X_tsne = tsne.fit_transform(X)
+
+<span class="n">X_tsne</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Create a dataframe for the 2 dimensions,</span>
+<span class="c1"># indexed by the words in the vocab</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_tsne</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">vocab</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a zoomable interactive plot</span>
+<span class="o">%</span><span class="k">matplotlib</span> notebook
+
+<span class="c1"># Plot the 2D representation of the word2vec model,</span>
+<span class="c1"># with the words in its vocabulary as the labels</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercise---Create-Corpus-and-Train-Word2Vec">Exercise - Create Corpus and Train Word2Vec<a class="anchor-link" href="#Exercise---Create-Corpus-and-Train-Word2Vec">&#182;</a></h2><p>In this exercise, we will create our own corpus and use it to train Word2Vec.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-Corpus">Create Corpus<a class="anchor-link" href="#Create-Corpus">&#182;</a></h3><p>Create a corpus of text files, organized in a structure like this:</p>
+
+<pre><code>corpus/
+   text001.txt
+   text002.txt
+   text003.txt
+   ...</code></pre>
+<p>A sample corpus is included in the <code>corpus</code> folder, created with the first 3 chapters of Moby Dick:
+<a href="https://www.gutenberg.org/files/2701/2701-0.txt">https://www.gutenberg.org/files/2701/2701-0.txt</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Import-corpus-using-NLTK">Import corpus using NLTK<a class="anchor-link" href="#Import-corpus-using-NLTK">&#182;</a></h3><p>We will use <a href="http://www.nltk.org/howto/corpus.html"><code>nltk.corpus.reader.plaintext</code></a> to import the corpus.</p>
+<p>Credits: <a href="https://stackoverflow.com/questions/4951751/creating-a-new-corpus-with-nltk">https://stackoverflow.com/questions/4951751/creating-a-new-corpus-with-nltk</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus.reader.plaintext</span> <span class="k">import</span> <span class="n">PlaintextCorpusReader</span>
+
+<span class="c1"># directory containing the corpus</span>
+<span class="n">corpus_dir</span> <span class="o">=</span> <span class="s1">&#39;corpus/&#39;</span>
+
+<span class="c1"># PlaintextCorpusReader uses nltk.tokenize.sent_tokenize() and</span>
+<span class="c1"># nltk.tokenize.word_tokenize() to split texts into sentences and words</span>
+<span class="n">newcorpus</span> <span class="o">=</span> <span class="n">PlaintextCorpusReader</span><span class="p">(</span><span class="n">corpus_dir</span><span class="p">,</span>
+                                  <span class="s1">&#39;.*\.txt&#39;</span><span class="p">,</span>
+                                  <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span> <span class="c1"># or &#39;utf-8&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># files found by the reader</span>
+<span class="n">newcorpus</span><span class="o">.</span><span class="n">fileids</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print the first file in the corpus</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">newcorpus</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;text001.txt&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sentences in the corpus:</span>
+<span class="n">newcorpus</span><span class="o">.</span><span class="n">sents</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># number of sentences</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">newcorpus</span><span class="o">.</span><span class="n">sents</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clean_sentence_lists</span><span class="p">(</span><span class="n">sentence_lists</span><span class="p">,</span> <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cleans and converts the sentence lists</span>
+<span class="sd">    Args:</span>
+<span class="sd">        text: sentence lists</span>
+<span class="sd">        remove_stopwords: whether to remove stopwords</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple:</span>
+<span class="sd">            The cleaned sentence list</span>
+<span class="sd">            The token count</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># set of English stop words</span>
+    <span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+
+    <span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">wordcount</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentence_lists</span><span class="p">:</span>
+        <span class="c1"># Convert to lowercase</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">]</span>
+        
+        <span class="c1"># Remove stop words</span>
+        <span class="k">if</span> <span class="n">remove_stopwords</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">]</span>
+        
+        <span class="c1"># Remove non-letters and numbers</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^a-zA-Z0-9]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+        
+        <span class="c1"># Stem the words</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+        
+        <span class="n">result</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tokens</span><span class="p">]</span>
+        <span class="n">wordcount</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">wordcount</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Your Tasks:</p>
+<ol>
+<li>Convert newcorpus.sents() to sentence wordlists, using the <code>clean_sentence_lists</code> helper function</li>
+<li>Train a Word2Vec model, with initial hyperparameter settings (use your best guess)</li>
+<li>Try some word similarity queries</li>
+<li>Apply t-SNE to project the high dimensional model to 2-dimensions</li>
+<li>Plot the 2-dimensional projection of your model</li>
+<li>Tweak your model by adjusting some hyperparameters</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1. Convert newcorpus.sents() to sentence wordlists, </span>
+<span class="c1"># using the clean_sentence_lists helper function</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2. Train a Word2Vec model, with initial hyperparameter settings</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 3. Try some word similarity queries</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 4. Apply t-SNE to reduce the your model to 2 dimensions for plotting</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 5. Plot the completed Word2Vec model</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </div>
