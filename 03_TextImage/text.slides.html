@@ -11919,18 +11919,23 @@ a.anchor-link {
 <li>Named Entity Recognition</li>
 <li>Stop Words</li>
 <li>Frequency Analysis</li>
-<li>Workshop: Document Summarization</li>
+<li>Document Summarization</li>
 </ul>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="References">References<a class="anchor-link" href="#References">&#182;</a></h1><p>NLTK book: <a href="http://www.nltk.org/book/">http://www.nltk.org/book/</a></p>
-<p>spaCy 101: <a href="https://spacy.io/usage/spacy-101">https://spacy.io/usage/spacy-101</a></p>
+<h1 id="Toolkits">Toolkits<a class="anchor-link" href="#Toolkits">&#182;</a></h1><h3 id="NLTK:-NLP-toolkit">NLTK: NLP toolkit<a class="anchor-link" href="#NLTK:-NLP-toolkit">&#182;</a></h3><p>Book: <a href="http://www.nltk.org/book/">http://www.nltk.org/book/</a></p>
+<p>Wiki: <a href="https://github.com/nltk/nltk/wiki">https://github.com/nltk/nltk/wiki</a></p>
+<p>Corpus: <a href="http://www.nltk.org/nltk_data/">http://www.nltk.org/nltk_data/</a></p>
+<h3 id="spaCy:-another-NLP-toolkit">spaCy: another NLP toolkit<a class="anchor-link" href="#spaCy:-another-NLP-toolkit">&#182;</a></h3><p>Simpler to use than NLTK (but usually fewer knobs)</p>
+<p>API: <a href="https://spacy.io/api/">https://spacy.io/api/</a></p>
+<p>Models: <a href="https://spacy.io/usage/models">https://spacy.io/usage/models</a></p>
+<p>Tutorial: <a href="https://spacy.io/usage/spacy-101">https://spacy.io/usage/spacy-101</a></p>
 
 </div>
 </div>
@@ -11942,10 +11947,6 @@ a.anchor-link {
 <h1 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h1><p>Run this command from an Anaconda prompt (within the mldds03 environment):</p>
 
 <pre><code>(mldds03) conda install nltk spacy scikit-learn pandas</code></pre>
-<h3 id="NLTK:-NLP-toolkit">NLTK: NLP toolkit<a class="anchor-link" href="#NLTK:-NLP-toolkit">&#182;</a></h3><p><a href="https://www.nltk.org/install.html">https://www.nltk.org/install.html</a></p>
-<h3 id="spaCy:-another-NLP-toolkit">spaCy: another NLP toolkit<a class="anchor-link" href="#spaCy:-another-NLP-toolkit">&#182;</a></h3><p>Simpler to use than NLTK (but usually fewer knobs)</p>
-<p><a href="https://spacy.io/api/">https://spacy.io/api/</a></p>
-<p><a href="https://spacy.io/usage/spacy-101">https://spacy.io/usage/spacy-101</a></p>
 
 </div>
 </div>
@@ -13008,7 +13009,7 @@ TfidfVectorizer(ngram_range=(minN, maxN)), ..)</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[213]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span>
@@ -13033,153 +13034,6 @@ TfidfVectorizer(ngram_range=(minN, maxN)), ..)</code></pre>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(3, 30)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[213]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bird</th>
-      <th>bird gets</th>
-      <th>brown</th>
-      <th>brown fox</th>
-      <th>dog</th>
-      <th>early</th>
-      <th>early bird</th>
-      <th>fox</th>
-      <th>fox jumps</th>
-      <th>gets</th>
-      <th>...</th>
-      <th>quick brown</th>
-      <th>test</th>
-      <th>the</th>
-      <th>the early</th>
-      <th>the lazy</th>
-      <th>the quick</th>
-      <th>the worm</th>
-      <th>this</th>
-      <th>this is</th>
-      <th>worm</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>...</td>
-      <td>1</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 30 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13195,189 +13049,131 @@ TfidfVectorizer(ngram_range=(minN, maxN)), ..)</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[214]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
-
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfVectorizer</span>
-
-<span class="c1"># TfidfVectorizer is a combination of</span>
-<span class="c1">#   CountVectorizer + TfidfTransformer</span>
-<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
-
-<span class="c1"># convert sparse matrix to dense matrix</span>
-<span class="n">X_dense</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">X_dense</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
-
-<span class="n">terms</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
-<span class="n">tfidf_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_dense</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">tfidf_arr</span><span class="p">[</span><span class="n">i</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="p">[</span><span class="nb">print</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">tfidf_arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sorted_idx</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">()</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="NLTK-N-gram-support">NLTK N-gram support<a class="anchor-link" href="#NLTK-N-gram-support">&#182;</a></h3><p>You can also split text into trigrams and bigrams using NLTK.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk</span> <span class="k">import</span> <span class="n">bigrams</span><span class="p">,</span> <span class="n">trigrams</span><span class="p">,</span> <span class="n">ngrams</span><span class="p">,</span> <span class="n">word_tokenize</span>
 
-<div class="output_area">
+<span class="c1"># http://www.taleswithmorals.com/aesop-fable-the-ant-and-the-grasshopper.htm</span>
+<span class="n">text6</span> <span class="o">=</span> <span class="s2">&quot;In a field one summer&#39;s day a Grasshopper was hopping about, &quot;</span> \
+        <span class="s2">&quot;chirping and singing to its heart&#39;s content.&quot;</span>
 
-<div class="prompt"></div>
+<span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text6</span><span class="p">)</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">bigrams</span><span class="p">(</span><span class="n">words</span><span class="p">)))</span>
+</pre></div>
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(3, 42)
-[&#39;bird&#39;, &#39;bird gets&#39;, &#39;bird gets the&#39;, &#39;brown&#39;, &#39;brown fox&#39;, &#39;brown fox jumps&#39;, &#39;dog&#39;, &#39;early&#39;, &#39;early bird&#39;, &#39;early bird gets&#39;, &#39;fox&#39;, &#39;fox jumps&#39;, &#39;fox jumps over&#39;, &#39;gets&#39;, &#39;gets the&#39;, &#39;gets the worm&#39;, &#39;is&#39;, &#39;is test&#39;, &#39;jumps&#39;, &#39;jumps over&#39;, &#39;jumps over the&#39;, &#39;lazy&#39;, &#39;lazy dog&#39;, &#39;over&#39;, &#39;over the&#39;, &#39;over the lazy&#39;, &#39;quick&#39;, &#39;quick brown&#39;, &#39;quick brown fox&#39;, &#39;test&#39;, &#39;the&#39;, &#39;the early&#39;, &#39;the early bird&#39;, &#39;the lazy&#39;, &#39;the lazy dog&#39;, &#39;the quick&#39;, &#39;the quick brown&#39;, &#39;the worm&#39;, &#39;this&#39;, &#39;this is&#39;, &#39;this is test&#39;, &#39;worm&#39;]
-This is a test.
-
-is test 0.4082482904638631
-this is 0.4082482904638631
-this 0.4082482904638631
-this is test 0.4082482904638631
-is 0.4082482904638631
-test 0.4082482904638631
-early bird gets 0.0
-gets the worm 0.0
-gets the 0.0
-gets 0.0
-fox jumps over 0.0
-fox jumps 0.0
-fox 0.0
-worm 0.0
-jumps 0.0
-early 0.0
-dog 0.0
-brown fox jumps 0.0
-brown fox 0.0
-brown 0.0
-bird gets the 0.0
-bird gets 0.0
-early bird 0.0
-jumps over the 0.0
-jumps over 0.0
-lazy 0.0
-the worm 0.0
-the quick brown 0.0
-the quick 0.0
-the lazy dog 0.0
-the lazy 0.0
-the early bird 0.0
-the early 0.0
-the 0.0
-quick brown fox 0.0
-quick brown 0.0
-quick 0.0
-over the lazy 0.0
-over the 0.0
-over 0.0
-lazy dog 0.0
-bird 0.0
-
-The quick brown fox jumps over the lazy dog.
-
-the 0.30847453550092424
-jumps over the 0.20280347192512718
-quick brown fox 0.20280347192512718
-fox 0.20280347192512718
-jumps 0.20280347192512718
-jumps over 0.20280347192512718
-lazy 0.20280347192512718
-lazy dog 0.20280347192512718
-over 0.20280347192512718
-over the 0.20280347192512718
-over the lazy 0.20280347192512718
-quick 0.20280347192512718
-fox jumps over 0.20280347192512718
-quick brown 0.20280347192512718
-dog 0.20280347192512718
-brown fox jumps 0.20280347192512718
-brown fox 0.20280347192512718
-the lazy 0.20280347192512718
-the lazy dog 0.20280347192512718
-the quick 0.20280347192512718
-the quick brown 0.20280347192512718
-brown 0.20280347192512718
-fox jumps 0.20280347192512718
-early 0.0
-bird gets the 0.0
-early bird 0.0
-early bird gets 0.0
-bird gets 0.0
-worm 0.0
-gets 0.0
-gets the 0.0
-gets the worm 0.0
-is 0.0
-is test 0.0
-this is test 0.0
-test 0.0
-the early 0.0
-the early bird 0.0
-the worm 0.0
-this 0.0
-this is 0.0
-bird 0.0
-
-The early bird gets the worm.
-
-the 0.3886917427512738
-worm 0.2555414657180043
-bird gets 0.2555414657180043
-bird gets the 0.2555414657180043
-early 0.2555414657180043
-early bird 0.2555414657180043
-early bird gets 0.2555414657180043
-gets 0.2555414657180043
-gets the 0.2555414657180043
-gets the worm 0.2555414657180043
-bird 0.2555414657180043
-the early 0.2555414657180043
-the worm 0.2555414657180043
-the early bird 0.2555414657180043
-quick brown 0.0
-quick 0.0
-this is 0.0
-this 0.0
-brown 0.0
-brown fox 0.0
-brown fox jumps 0.0
-dog 0.0
-quick brown fox 0.0
-the quick brown 0.0
-the quick 0.0
-fox 0.0
-fox jumps 0.0
-fox jumps over 0.0
-the lazy dog 0.0
-the lazy 0.0
-test 0.0
-is 0.0
-is test 0.0
-jumps 0.0
-jumps over 0.0
-this is test 0.0
-lazy 0.0
-lazy dog 0.0
-over 0.0
-over the 0.0
-over the lazy 0.0
-jumps over the 0.0
-
-</pre>
+</div>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">trigrams</span><span class="p">(</span><span class="n">words</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ngrams</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="NLP-Datasets">NLP Datasets<a class="anchor-link" href="#NLP-Datasets">&#182;</a></h1><p><a href="http://www.nltk.org/nltk_data/">http://www.nltk.org/nltk_data/</a></p>
+<p><a href="https://github.com/niderhoff/nlp-datasets">https://github.com/niderhoff/nlp-datasets</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Workshop:-Paragraph-Summarization">Workshop: Paragraph Summarization<a class="anchor-link" href="#Workshop:-Paragraph-Summarization">&#182;</a></h1><ul>
+<li>Download a corpus from NLTK</li>
+<li>Split the corpus into paragraphs</li>
+<li>Compute TF-IDF score for each word in a paragraph corresponding to its level of "importance"</li>
+<li>Rank each sentence using (sum of TF-IDF(words) / number of tokens)</li>
+<li>Extract the top N highest scoring sentences and return them as our "summary"</li>
+</ul>
+<p>Credits: <a href="https://github.com/charlieg/A-Smattering-of-NLP-in-Python">https://github.com/charlieg/A-Smattering-of-NLP-in-Python</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Download-a-corpus">Download a corpus<a class="anchor-link" href="#Download-a-corpus">&#182;</a></h3><p>Select a corpus from <a href="http://www.nltk.org/nltk_data/">http://www.nltk.org/nltk_data/</a>.</p>
+<p>Suggestions:</p>
+<ul>
+<li>reuters</li>
+<li>abc</li>
+<li>gutenberg</li>
+</ul>
+<p>Example</p>
+
+<pre><code># download the corpus you selected
+import nltk
+nltk.download('abc')
+
+# update the import with the corpus you selected
+from nltk.corpus import abc as corpus</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
@@ -13386,10 +13182,297 @@ jumps over the 0.0
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Workshop:-Document-Summarization">Workshop: Document Summarization<a class="anchor-link" href="#Workshop:-Document-Summarization">&#182;</a></h1>
+<h3 id="Explore-the-corpus">Explore the corpus<a class="anchor-link" href="#Explore-the-corpus">&#182;</a></h3><p>For example, try printing the raw text of one of the files:</p>
+
+<pre><code>fileids = corpus.fileids()
+
+print(fileids)
+
+print(corpus.raw(fileids[0])</code></pre>
+
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Split-the-text-into-paragraphs">Split the text into paragraphs<a class="anchor-link" href="#Split-the-text-into-paragraphs">&#182;</a></h3><p>NLTK doesn't include a paragraph tokenizer, so we'll try to create our own.</p>
+<p>One logic that may work is this:</p>
+<ul>
+<li>a paragraph is detected if there are consecutive newline characters</li>
+</ul>
+<p>Adapt this function to your corpus, and adjust the logic if necessary to get paragraphs.</p>
+
+<pre><code>def tokenize_paragraph(text):
+    """Tokenizes text into paragraphs
+    Args:
+        text - the raw text
+    Returns:
+        A list of paragraphs for the raw text
+    """
+    # Note: you may need to customize this logic for the 
+    # corpus you selected
+    return [p for p in text.split('\n\n') if p]
+
+# test code
+paragraphs = tokenize_paragraph(corpus.raw(fileids[0]))
+print(paragraphs[:5])</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Collect-all-paragraphs-in-your-corpus">Collect all paragraphs in your corpus<a class="anchor-link" href="#Collect-all-paragraphs-in-your-corpus">&#182;</a></h3><p>Using the paragraph tokenizer, create a list containing all paragraphs for all the files in the corpus.</p>
+<p>We will be using this to train TF-IDF.</p>
+<p>Some starter code:</p>
+
+<pre><code>all_paragraphs = []
+for fileid in corpus.fileids():
+    text = corpus.raw(fileid)
+
+    # Split text into paragraphs and add to all_paragraphs
+    # You can use the syntax list1 = list1 + list2
+    #
+    # Your code here
+    ...
+
+
+# test code
+print(len(all_paragraphs))
+print(all_paragraphs[:5])</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tokenize_and_stem</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper function to tokenize and stem words in text</span>
+<span class="sd">    Arg:</span>
+<span class="sd">        text: the input text</span>
+<span class="sd">    Return:</span>
+<span class="sd">        the tokenized stem words</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="k">import</span> <span class="n">PorterStemmer</span>
+
+    <span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">)]</span>
+    <span class="n">filtered_tokens</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># filter out any tokens not containing letters (e.g., numeric tokens, raw punctuation)</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;[a-zA-Z]&#39;</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+            <span class="n">filtered_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+    <span class="n">stems</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">filtered_tokens</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">stems</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Compute-TF-IDF">Compute TF-IDF<a class="anchor-link" href="#Compute-TF-IDF">&#182;</a></h3><ul>
+<li>Treating a paragraph as a document, compute the TF-IDF using TfidfVectorizer</li>
+<li>Pass <code>tokenize_and_stem</code> as a tokenizer to TfidfVectorizer</li>
+<li>Filter out stop words in TfidfVectorizer</li>
+<li><code>fit_transform</code> the TfidfVectorizer (this may take about a minute or two)</li>
+</ul>
+
+<pre><code>from sklearn.feature_extraction.text import TfidfVectorizer
+
+vectorizer = TfidfVectorizer(tokenizer=tokenize_and_stem, stop_words='english')
+...</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Explore-the-TF-IDF-matrix">Explore the TF-IDF matrix<a class="anchor-link" href="#Explore-the-TF-IDF-matrix">&#182;</a></h3><p>Explore the TF-IDF matrix, counting the terms, documents, and printing the first few terms</p>
+
+<pre><code>feature_names = vectorizer.get_feature_names()
+
+# number of terms
+print("Number of terms:", len(feature_names))
+
+# number of documents (paragraphs)
+print("Number of paragraphs:", tfidf.shape[0])
+
+# first 20 terms
+print(feature_names[:20])</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Paragraph-Summarization">Paragraph Summarization<a class="anchor-link" href="#Paragraph-Summarization">&#182;</a></h3><ul>
+<li>Pick a random paragraph</li>
+<li>Tokenize the paragraph into sentences</li>
+<li>Rank each sentence by getting the average word score for it</li>
+<li>Extract the top N highest scoring sentences and return them as our "summary"</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Get a random index for all_paragraphs</span>
+<span class="n">paragraph_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_paragraphs</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">paragraph</span> <span class="o">=</span> <span class="n">all_paragraphs</span><span class="p">[</span><span class="n">paragraph_index</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Tokenize the selected paragraph into sentences</span>
+<span class="c1"># for each sentence, compute the sum of TF-IDF divided by tokens</span>
+<span class="n">sentence_scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">paragraph</span><span class="p">):</span>
+    <span class="n">tfidf_sum</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">sent_tokens</span> <span class="o">=</span> <span class="n">tokenize_and_stem</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="n">feature_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">sent_tokens</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">feature_names</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="n">feature_tokens</span><span class="p">:</span>
+        <span class="n">tfidf_sum</span> <span class="o">+=</span> <span class="n">tfidf</span><span class="p">[</span><span class="n">paragraph_index</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">ft</span><span class="p">)]</span>
+    
+    <span class="n">sentence_score</span> <span class="o">=</span> <span class="n">tfidf_sum</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent_tokens</span><span class="p">)</span>
+    <span class="n">sentence_scores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sentence_score</span><span class="p">,</span> <span class="n">sentence</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the top-N scores and create the summary</span>
+
+<span class="c1"># in case paragraph has less than 2 sentences</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence_scores</span><span class="p">))</span>
+
+<span class="c1"># sort by sentence_score</span>
+<span class="n">sentence_scores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*** SUMMARY ***&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">summary_sentence</span> <span class="ow">in</span> <span class="n">sentence_scores</span><span class="p">[:</span><span class="n">n</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">summary_sentence</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;(score: </span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">summary_sentence</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">*** ORIGINAL ***&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">*** SENTENCE SCORES ***&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sentence_scores</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section>
 </div>
 </div>
 
