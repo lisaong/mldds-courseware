@@ -13294,6 +13294,11 @@ where $X = [1, x, x^2, x^3, ...]$</li>
 <li>Computing metrics</li>
 <li>Plotting the curve (hint: use a scatter plot for both)</li>
 </ol>
+<p>If you prefer to plot a line for the predictions, you can create a sorted DataFrame:</p>
+
+<pre><code>df_plot = pd.DataFrame({'y_pred': y_pred}, index=X.values)
+df_plot.sort_index(inplace=True)
+df_plot.plot(ax=ax, label='predictions', color='orange')</code></pre>
 
 </div>
 </div>
@@ -13331,6 +13336,7 @@ where $X = [1, x, x^2, x^3, ...]$</li>
 
 
 
+
 <span class="c1"># 2. Predict</span>
 <span class="c1">#</span>
 <span class="c1"># Your code here</span>
@@ -13340,9 +13346,12 @@ where $X = [1, x, x^2, x^3, ...]$</li>
 
 
 
+
+
 <span class="c1"># 3. Post-process the output by un-scaling y</span>
 <span class="c1">#</span>
 <span class="c1"># Your code here</span>
+
 
 
 
@@ -13738,7 +13747,293 @@ where $X = [1, x, x^2, x^3, ...]$</li>
 </div>
 </div>
 
-</div></section></section><section><section>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Exercise:-Multi-Variate-Regression-with-UCI-dataset">Exercise: Multi-Variate Regression with UCI dataset<a class="anchor-link" href="#Exercise:-Multi-Variate-Regression-with-UCI-dataset">&#182;</a></h1><p>Since the previous exercise was unsatisfactory (in terms of our results), let's run through the steps with a (hopefully better) dataset available in the UCI repository.</p>
+<p><a href="https://archive.ics.uci.edu/ml/datasets/Concrete+Compressive+Strength">https://archive.ics.uci.edu/ml/datasets/Concrete+Compressive+Strength</a></p>
+<p>This is also a good opportunity to review what we have learnt so far.</p>
+<p>You'll practice doing these tasks:</p>
+<ol>
+<li>Explore Data</li>
+<li>Data Processing &amp; Feature Selection</li>
+<li>Training an initial model using Linear Regression with SGD<ul>
+<li>You should use learning_curve() which will give you a learning curve in parallel with training</li>
+</ul>
+</li>
+<li>Get evaluation metrics</li>
+<li>Explore improving the initial model (choose your own adventure)</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Download-dataset">Download dataset<a class="anchor-link" href="#Download-dataset">&#182;</a></h2><ol>
+<li>Go to <a href="https://archive.ics.uci.edu/ml/datasets/Concrete+Compressive+Strength">https://archive.ics.uci.edu/ml/datasets/Concrete+Compressive+Strength</a></li>
+<li>Download the dataset into a folder</li>
+</ol>
+<p>The dataset includes:</p>
+<ul>
+<li>Concrete_Data.xls: an Excel spreadsheet of the data</li>
+<li>Concrete_Readme.txt: description of the dataset columns and output variable</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Explore-data">Explore data<a class="anchor-link" href="#Explore-data">&#182;</a></h2><p>Use pandas.read_excel to read Concrete_Data.xls</p>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html</a></p>
+<p>pandas.read_excel needs the following library installed:</p>
+
+<pre><code>(mldds02) conda install xlrd</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read the data from Concrete_Data.xls using pd.read_excel</span>
+<span class="c1"># The default options should be okay, but you can be adventurous</span>
+<span class="c1"># Explore the data by using describe(), checking that values</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Visualization">Visualization<a class="anchor-link" href="#Visualization">&#182;</a></h3><p>We can't plot all the columns at the same time, but we can use PCA to reduce the X dimensions to 2 and then make a 3D plot with y.</p>
+<p><a href="http://scikit-learn.org/dev/modules/generated/sklearn.decomposition.PCA.html">http://scikit-learn.org/dev/modules/generated/sklearn.decomposition.PCA.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plotting the data</span>
+<span class="c1"># Reference: http://scikit-learn.org/dev/auto_examples/decomposition/plot_pca_iris.html</span>
+
+<span class="c1"># interactive plot</span>
+<span class="o">%</span><span class="k">matplotlib</span> notebook
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">decomposition</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">8</span><span class="p">]</span> <span class="c1"># Features</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">8</span><span class="p">]</span> <span class="c1"># Concrete compressive strength(MPa, megapascals)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">Axes3D</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">95</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">elev</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">azim</span><span class="o">=</span><span class="mi">134</span><span class="p">)</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">decomposition</span><span class="o">.</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Select your features based on the description in Concrete_Readme.txt.</p>
+<p>Here's a snippet of the important section, but you should also read through the whole file.</p>
+
+<pre><code>Variable Information:
+
+Given is the variable name, variable type, the measurement unit and a brief description. 
+The concrete compressive strength is the regression problem. The order of this listing 
+corresponds to the order of numerals along the rows of the database. 
+
+Name -- Data Type -- Measurement -- Description
+
+Cement (component 1) -- quantitative -- kg in a m3 mixture -- Input Variable
+Blast Furnace Slag (component 2) -- quantitative -- kg in a m3 mixture -- Input Variable
+Fly Ash (component 3) -- quantitative -- kg in a m3 mixture -- Input Variable
+Water (component 4) -- quantitative -- kg in a m3 mixture -- Input Variable
+Superplasticizer (component 5) -- quantitative -- kg in a m3 mixture -- Input Variable
+Coarse Aggregate (component 6) -- quantitative -- kg in a m3 mixture -- Input Variable
+Fine Aggregate (component 7) -- quantitative -- kg in a m3 mixture -- Input Variable
+Age -- quantitative -- Day (1~365) -- Input Variable
+Concrete compressive strength -- quantitative -- MPa -- Output Variable</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Select your features based on the Variable Information from Concrete_Readme.txt</span>
+<span class="c1">#</span>
+<span class="c1"># This (usually) means:</span>
+<span class="c1"># 1. Splitting the DataFrame into X and y, by selecting the appropriate columns</span>
+<span class="c1">#     iloc is easier if you didn&#39;t set column names (because the</span>
+<span class="c1">#     column names have spaces in them)</span>
+<span class="c1"># 2. Do a train/test split with shuffle</span>
+<span class="c1"># 3. Scale X_train, X_test, y_train, y_test</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Select X and y (already done above in the plotting code)</span>
+
+<span class="c1"># Train/Test split into X_train, X_test, y_train, y_test</span>
+
+
+
+
+
+
+<span class="c1"># Scale X_train, X_test, y_train, y_test</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As an initial model, we'll train a Linear Regressor using SGD to see what we get.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Train a linear regression using SGD</span>
+<span class="c1"># Use learning_curve() so that you can check the goodness-of-fit</span>
+<span class="c1"># Plot the learning curve</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Reset the interactive mode</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compute metrics on the test set:</p>
+<ul>
+<li>Call model.fit</li>
+<li>Call model.predict to get the scaled predictions (y_pred_scaled)</li>
+<li>Get the mean_squared_error and r2_score using y_test_scaled and y_pred_scaled</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
+
+<span class="c1"># Call model.fit</span>
+
+
+
+
+<span class="c1"># Call model.predict to get the scaled predictions (y_pred_scaled)</span>
+
+
+
+
+<span class="c1"># Get the mean_squared_error and r2_score using y_test_scaled and y_pred_scaled</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Explore improving the baseline model (choose your own adventure)</p>
+<ul>
+<li>Trying different learning rate schedules</li>
+<li>Trying different regularization settings in SGDRegressor</li>
+<li>Trying GridSearchCV to perform hyperparameter searches
+<a href="http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html</a></li>
+<li>Trying Polynomial features<ul>
+<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html</a></li>
+</ul>
+</li>
+<li>Trying other regressors. For example:<ul>
+<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html">http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html</a></li>
+<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.TheilSenRegressor.html">http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.TheilSenRegressor.html</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[142]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Try improving upon the baseline model, by selecting one or more</span>
+<span class="c1"># of the options above.</span>
+<span class="c1">#</span>
+<span class="c1"># Your code here</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
