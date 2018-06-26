@@ -31,6 +31,7 @@ To run the workshop exercises, you can clone this [repository](https://github.co
 
 - 2 Basic Machine Learning Algorithms
   - 2.1 Training Basics [[html](https://lisaong.github.io/mldds-courseware/02_BasicMLAlgorithms/training-basics.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/02_BasicMLAlgorithms/training-basics.ipynb)]
+  - 2.1.2 Gradient Descent Notes [[html](https://lisaong.github.io/mldds-courseware/02_BasicMLAlgorithms/gradient-descent-notes.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/02_BasicMLAlgorithms/gradient-descent-notes.ipynb)]
   - 2.2 Linear Regression [[html](https://lisaong.github.io/mldds-courseware/02_BasicMLAlgorithms/linear-regression.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/02_BasicMLAlgorithms/linear-regression.ipynb)]
   - 2.2 Classification [[html](https://lisaong.github.io/mldds-courseware/02_BasicMLAlgorithms/classification.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/02_BasicMLAlgorithms/classification.ipynb)]
   - 2.3 Clustering [[html](https://lisaong.github.io/mldds-courseware/02_BasicMLAlgorithms/clustering.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/02_BasicMLAlgorithms/clustering.ipynb)]
