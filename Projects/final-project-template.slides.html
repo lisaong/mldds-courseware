@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>word-vectors slides</title>
+<title>final-project-template slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,18 +11905,24 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Word-Vectors">Word Vectors<a class="anchor-link" href="#Word-Vectors">&#182;</a></h1>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Topics">Topics<a class="anchor-link" href="#Topics">&#182;</a></h1><ul>
-<li>Why Word Vectors exist</li>
-<li>How to use them</li>
-<li>How to train them</li>
+<h1 id="Final-Project-Template">Final Project Template<a class="anchor-link" href="#Final-Project-Template">&#182;</a></h1><p>This workbook provides the template for the final project.</p>
+<h2 id="Instructions">Instructions<a class="anchor-link" href="#Instructions">&#182;</a></h2><ul>
+<li>Work individually or in pairs</li>
+<li>Each team is to complete 1 copy of this template.<ul>
+<li>Complete all sections.</li>
+<li>Feel free to include supporting material / slides / documents as needed.</li>
+</ul>
+</li>
+<li>At the end of the project, you will get 15 minutes to present this workbook to the class.</li>
+</ul>
+<h3 id="Submission-Instructions">Submission Instructions<a class="anchor-link" href="#Submission-Instructions">&#182;</a></h3><ul>
+<li>Submit the .ipynb with the Output cells showing the results<ul>
+<li>Naming convention:
+<pre><code>  &lt;name1&gt;-&lt;name2&gt;-&lt;project_short_name&gt;.ipynb</code></pre>
+</li>
+</ul>
+</li>
+<li>If you provide your own datasets, include the data with your .ipynb</li>
 </ul>
 
 </div>
@@ -11926,1206 +11932,177 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h1><p>Run this command from an Anaconda prompt (within the mldds03 environment):</p>
-
-<pre><code>(mldds03) conda install gensim cython nltk</code></pre>
-<h3 id="gensim:-for-training-word2vec">gensim: for training word2vec<a class="anchor-link" href="#gensim:-for-training-word2vec">&#182;</a></h3><p><a href="https://radimrehurek.com/gensim/">https://radimrehurek.com/gensim/</a></p>
-<h3 id="Cython:-to-speed-up-training-word2vec">Cython: to speed up training word2vec<a class="anchor-link" href="#Cython:-to-speed-up-training-word2vec">&#182;</a></h3><p><a href="http://docs.cython.org/en/latest/src/quickstart/install.html">http://docs.cython.org/en/latest/src/quickstart/install.html</a></p>
-<h3 id="NLTK:-NLP-toolkit">NLTK: NLP toolkit<a class="anchor-link" href="#NLTK:-NLP-toolkit">&#182;</a></h3><p>Installation: <a href="https://www.nltk.org/install.html">https://www.nltk.org/install.html</a></p>
+<h2 id="Section-0:-Team-Members">Section 0: Team Members<a class="anchor-link" href="#Section-0:-Team-Members">&#182;</a></h2><ul>
+<li>Member 1</li>
+<li>Member 2</li>
+</ul>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Why-do-we-need-Word-Vectors">Why do we need Word Vectors<a class="anchor-link" href="#Why-do-we-need-Word-Vectors">&#182;</a></h2><p>To represent word meanings in an efficient way</p>
-<p>To express word meaning based on context</p>
+<h2 id="Section-1:-Project-Title">Section 1: Project Title<a class="anchor-link" href="#Section-1:-Project-Title">&#182;</a></h2><ul>
+<li>The title should 1 sentence that describes the goal of this project.</li>
+<li>Example: Clustering analysis of COE premiums and quotas</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Section-2:-Project-Definition">Section 2: Project Definition<a class="anchor-link" href="#Section-2:-Project-Definition">&#182;</a></h2><h3 id="Goals">Goals<a class="anchor-link" href="#Goals">&#182;</a></h3><p>Describe the goal of this project.</p>
+<p>Example:
+The goal of this project is to determine if the bid quotas and premiums can be &gt; used to predict the vehicle category.</p>
+<p>Important:</p>
 <ul>
-<li>Context: window of words around this word</li>
+<li>If this is your first project, keep the project definition as simple as possible. </li>
+<li>As a rule of thumb, pick something that can be completed in 2-3 days. There is always more you can add to it if you finish early. </li>
+<li>If you are not sure, use the workshop problems as a reference.</li>
 </ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Before-Word-Vectors:-Synsets">Before Word Vectors: Synsets<a class="anchor-link" href="#Before-Word-Vectors:-Synsets">&#182;</a></h2><ul>
-<li>Synsets: Lists of synonyms for a word<ul>
-<li>Someone needs to curate the list (create, update, delete)<ul>
-<li>Language-specific</li>
-</ul>
-</li>
-<li>Does not adapt as language evolves</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Uses-of-Synsets">Uses of Synsets<a class="anchor-link" href="#Uses-of-Synsets">&#182;</a></h2><ul>
-<li>Synsets are still useful in NLP<ul>
-<li>for tasks where word meaning is relatively static (e.g. dated literature)</li>
-<li>as a baseline model</li>
+<h3 id="Dataset">Dataset<a class="anchor-link" href="#Dataset">&#182;</a></h3><p>Briefly describe the source(s) of data you are using.</p>
+<ul>
+<li>Provide the URL to the data source.</li>
+<li>If you are providing your own data set, include the data with your project submission.</li>
+<li>You can find sample datasets from:<ul>
+<li><a href="http://archive.ics.uci.edu/ml/datasets.html">http://archive.ics.uci.edu/ml/datasets.html</a></li>
+<li><a href="http://data.gov.sg/">http://data.gov.sg/</a></li>
 </ul>
 </li>
 </ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Walkthrough---WordNet">Walkthrough - WordNet<a class="anchor-link" href="#Walkthrough---WordNet">&#182;</a></h1><p>WordNet is a well-known database that contains sets of synonyms of English words.</p>
-<p>In this walkthrough, we will use NLTK to query WordNet.</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<p>Example:</p>
+<p>We will use the dataset from: <a href="https://data.gov.sg/dataset/coe-bidding-results">https://data.gov.sg/dataset/coe-bidding-results</a></p>
+<h4 id="Format:-CSV">Format: CSV<a class="anchor-link" href="#Format:-CSV">&#182;</a></h4><h4 id="Columns:">Columns:<a class="anchor-link" href="#Columns:">&#182;</a></h4><table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Unit of Measure</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>month</td>
+<td>Datetime, YYYY-MM</td>
+<td>none</td>
+<td>date range: Jan 1, 2010 to Mar 31, 2018</td>
+</tr>
+<tr>
+<td>bidding_no</td>
+<td>Numeric</td>
+<td>No. of Bids</td>
+<td>Number of Bids</td>
+</tr>
+<tr>
+<td>vehicle_class</td>
+<td>Text</td>
+<td>none</td>
+<td>Vehicle category: A to E</td>
+</tr>
+<tr>
+<td>quota</td>
+<td>Numeric</td>
+<td>No. of Bids</td>
+<td>Number of Quota</td>
+</tr>
+<tr>
+<td>bids_success</td>
+<td>Numeric</td>
+<td>No. of Bids</td>
+<td>Number of Successful Bids</td>
+</tr>
+<tr>
+<td>bids_received</td>
+<td>Numeric</td>
+<td>No. of Bids</td>
+<td>Number of Bids Received</td>
+</tr>
+<tr>
+<td>premium</td>
+<td>Numeric</td>
+<td>S$</td>
+<td>COE premium</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Tasks">Tasks<a class="anchor-link" href="#Tasks">&#182;</a></h3><p>List the tasks you will perform.</p>
+<p>Example:</p>
 <ol>
-<li>Click on <a href="http://wordnetweb.princeton.edu/perl/webwn">http://wordnetweb.princeton.edu/perl/webwn</a></li>
-<li>Enter a word to search for (has to be single word)</li>
-</ol>
-<p>For example, when searching for the word "machine":</p>
-<p><img src="assets/word-vectors/wordnet-search.png" alt="wordnet"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Besides the browser, you can use NLTK to query WordNet.</p>
-<p>Examples:
-<a href="http://www.nltk.org/howto/wordnet.html">http://www.nltk.org/howto/wordnet.html</a></p>
-<p>API:
-<a href="http://www.nltk.org/_modules/nltk/corpus/reader/wordnet.html">http://www.nltk.org/_modules/nltk/corpus/reader/wordnet.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">wordnet</span> <span class="k">as</span> <span class="n">wn</span>
-
-<span class="c1"># query synsets for &#39;machine&#39;</span>
-<span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;machine&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[2]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[Synset(&#39;machine.n.01&#39;),
- Synset(&#39;machine.n.02&#39;),
- Synset(&#39;machine.n.03&#39;),
- Synset(&#39;machine.n.04&#39;),
- Synset(&#39;machine.n.05&#39;),
- Synset(&#39;car.n.01&#39;),
- Synset(&#39;machine.v.01&#39;),
- Synset(&#39;machine.v.02&#39;)]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Synsets are a set of synonyms that share a common meaning.</p>
-<p>Synset attributes, accessible via methods with the same name:</p>
-<ul>
-<li>name: The canonical name of this synset, formed using the first lemma
-of this synset. Note that this may be different from the name
-passed to the constructor if that string used a different lemma to
-identify the synset.</li>
-<li>pos: The synset's part of speech, matching one of the module level
-attributes ADJ, ADJ_SAT, ADV, NOUN or VERB.</li>
-<li>lemmas: A list of the Lemma objects for this synset.</li>
-<li>definition: The definition for this synset.</li>
-<li>examples: A list of example strings for this synset.</li>
-<li>offset: The offset in the WordNet dict file of this synset.</li>
-<li>lexname: The name of the lexicographer file containing this synset.</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Loop to print out what each synset represents</span>
-<span class="c1"># Each set is a different semantic meaning of the word &#39;machine&#39;</span>
-
-<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;machine&#39;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">hypernyms</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[Synset(&#39;device.n.01&#39;)]
-[Synset(&#39;person.n.01&#39;)]
-[Synset(&#39;organization.n.01&#39;)]
-[Synset(&#39;mechanical_device.n.01&#39;)]
-[Synset(&#39;organization.n.01&#39;)]
-[Synset(&#39;motor_vehicle.n.01&#39;)]
-[Synset(&#39;shape.v.02&#39;)]
-[Synset(&#39;produce.v.02&#39;)]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check if another word is similar to &#39;machine&#39;, using it&#39;s &#39;device&#39; meaning</span>
-<span class="c1"># larger number means more similarity</span>
-
-<span class="n">robot_synset1</span> <span class="o">=</span> <span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;robot&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;robot vs. machine similarity:&#39;</span><span class="p">,</span> <span class="n">robot_synset1</span><span class="o">.</span><span class="n">path_similarity</span><span class="p">(</span><span class="n">machine_synset1</span><span class="p">))</span>
-      
-<span class="n">sunset_synset1</span> <span class="o">=</span> <span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;sunset&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sunset vs. machine similarity:&#39;</span><span class="p">,</span> <span class="n">sunset_synset1</span><span class="o">.</span><span class="n">path_similarity</span><span class="p">(</span><span class="n">machine_synset1</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>robot vs. machine similarity: 0.25
-sunset vs. machine similarity: 0.058823529411764705
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Word-Vectors">Word Vectors<a class="anchor-link" href="#Word-Vectors">&#182;</a></h1><p>Instead of static lists of words, word vectors are trained from examples of text.</p>
-<p>The examples of text (text corpus) should be "large enough" to capture the possible meanings of the word.</p>
-<p>Anyone can train a word vector. Unlike SynSets, you don't need to be a linguist or expert in word meanings. You just need enough examples.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Pre-trained-Word-Vectors">Pre-trained Word Vectors<a class="anchor-link" href="#Pre-trained-Word-Vectors">&#182;</a></h1><p>These are available, but are usually huge downloads (GB)</p>
-<ul>
-<li><a href="https://code.google.com/archive/p/word2vec/">https://code.google.com/archive/p/word2vec/</a></li>
-<li><a href="https://github.com/Hironsan/awesome-embedding-models">https://github.com/Hironsan/awesome-embedding-models</a></li>
-</ul>
-<p>Instead, we will train our own Word Vectors. This is most flexible because you can adapt to your particular text corpus.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Workshop:-Creating-Word2Vec-Models">Workshop: Creating Word2Vec Models<a class="anchor-link" href="#Workshop:-Creating-Word2Vec-Models">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Download-training-text-corpus">Download training text corpus<a class="anchor-link" href="#Download-training-text-corpus">&#182;</a></h2><p>For demonstration purposes, we'll start with Wikipedia articles.</p>
-<p>We'll use a python library that wraps the Wikipedia APIs.</p>
-<p><a href="https://pypi.org/project/wikipedia/">https://pypi.org/project/wikipedia/</a></p>
-<p>Run this from an Anaconda prompt (within the mldds03 environment):</p>
-
-<pre><code>(mldds03) pip install wikipedia</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">wikipedia</span>
-<span class="kn">from</span> <span class="nn">wikipedia</span> <span class="k">import</span> <span class="n">search</span><span class="p">,</span> <span class="n">page</span>
-
-<span class="c1"># Get our documents: wikipedia articles</span>
-<span class="n">topic</span> <span class="o">=</span> <span class="s1">&#39;singapore&#39;</span>
-
-<span class="n">titles</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
-<span class="n">titles</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># retrieve all pages</span>
-<span class="n">wikipages</span> <span class="o">=</span> <span class="p">[</span><span class="n">page</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">]</span>
-
-<span class="c1"># inspect the first page</span>
-<span class="n">wikipages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">summary</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Process-text">Process text<a class="anchor-link" href="#Process-text">&#182;</a></h2><ul>
-<li>Split into sentences</li>
-<li>Remove special characters</li>
-<li>Convert to lowercase</li>
-<li>Tokenize the text into words</li>
-<li>Optionally remove stop words such as 'a', 'the'</li>
-<li>Stem each word</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span> <span class="c1"># python regular expressions library</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span>
-<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="k">import</span> <span class="n">PorterStemmer</span>
-
-<span class="c1"># Download NLTK corpora</span>
-<span class="c1"># List of available corpora: http://www.nltk.org/book/ch02.html#tab-corpora</span>
-
-<span class="c1"># 1. Download the Punkt sentence tokenizer</span>
-<span class="c1"># https://www.nltk.org/_modules/nltk/tokenize/punkt.html</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
-
-<span class="c1"># 2. Download the Stop Words corpus</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
-
-<span class="c1"># 3. Helper function to convert text</span>
-<span class="k">def</span> <span class="nf">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Cleans and converts text to a list of lists of tokens</span>
-<span class="sd">    Args:</span>
-<span class="sd">        text: input text</span>
-<span class="sd">        remove_stopwords: whether to remove stopwords</span>
-<span class="sd">    Returns: a tuple</span>
-<span class="sd">        A list of lists of tokens that looks like:</span>
-<span class="sd">           [[&quot;cat&quot;, &quot;say&quot;, &quot;meow&quot;], [&quot;dog&quot;, &quot;say&quot;, &quot;woof&quot;]]</span>
-<span class="sd">        Total of words</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Split into sentences</span>
-    <span class="c1"># Reference: http://www.nltk.org/api/nltk.tokenize.html</span>
-    <span class="n">sentences</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-    <span class="c1"># set of stopwords</span>
-    <span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
-
-    <span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
-    
-    <span class="n">wordcount</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-        <span class="c1"># Remove non-letters and numbers</span>
-        <span class="n">sentence</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^a-zA-Z0-9]&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
-
-        <span class="c1"># Convert to lowercase</span>
-        <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        
-        <span class="c1"># Tokenize the sentence into words</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-    
-        <span class="k">if</span> <span class="n">remove_stopwords</span><span class="p">:</span>
-            <span class="c1"># Remove stop words</span>
-            <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">]</span>
-    
-        <span class="c1"># Stem the words</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
-        
-        <span class="n">result</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tokens</span><span class="p">]</span>
-        <span class="n">wordcount</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">wordcount</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test our helper function to see what it does</span>
-<span class="n">text</span> <span class="o">=</span> <span class="n">wikipages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">summary</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;===== Original text for first article =====&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="n">wordlist</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">text</span><span class="p">,</span>
-                                             <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">===== Stem words [</span><span class="si">%d</span><span class="s1"> words] =====&#39;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">wordlist</span><span class="p">)</span>
-
-<span class="n">wordlist</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">===== Stem words - stopwords [</span><span class="si">%d</span><span class="s1"> words] =====&#39;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">wordlist</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Convert-all-articles-to-sentence-word-lists">Convert all articles to sentence word lists<a class="anchor-link" href="#Convert-all-articles-to-sentence-word-lists">&#182;</a></h3><p>Let's now convert all articles on our topic to sentence word lists.</p>
-<p>We were examining the summary for each article, let's see how we can get to the content.</p>
-<p>Looking at the wikipedia library's documentation, we can use <code>WikipediaPage.content</code> to get to the plain text content for each page: <a href="https://wikipedia.readthedocs.io/en/latest/code.html">https://wikipedia.readthedocs.io/en/latest/code.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wikipages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Converting </span><span class="si">%d</span><span class="s1"> articles to training set...&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">titles</span><span class="p">))</span>
-
-<span class="n">training_set</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">training_set_size</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">wikipage</span> <span class="ow">in</span> <span class="n">wikipages</span><span class="p">:</span>
-    <span class="n">wordlist</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">wikipage</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-    <span class="n">training_set_size</span> <span class="o">+=</span> <span class="n">count</span>
-    <span class="n">training_set</span> <span class="o">+=</span> <span class="n">wordlist</span>
-    
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training set size: </span><span class="si">%d</span><span class="s1"> stem words, </span><span class="si">%d</span><span class="s1"> sentences&#39;</span> \
-      <span class="o">%</span> <span class="p">(</span><span class="n">training_set_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_set</span><span class="p">)))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-to-ponder:">Question to ponder:<a class="anchor-link" href="#Question-to-ponder:">&#182;</a></h3><p>Should we randomize the training set?</p>
-<p>Why or why not?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Train-a-word2vec-model">Train a word2vec model<a class="anchor-link" href="#Train-a-word2vec-model">&#182;</a></h2><p>(Credits: <a href="https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors">https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors</a>)</p>
-<p>With the list of nicely parsed sentences, we're ready to train the model. There are a number of parameter choices that affect the run time and the quality of the final model that is produced.</p>
-<p>For details on the algorithms below, see the <a href="https://radimrehurek.com/gensim/models/word2vec.html">word2vec API documentation</a> as well as the <a href="https://code.google.com/archive/p/word2vec/">Google documentation</a>(Performance section).</p>
-<h3 id="Domain-characteristics">Domain characteristics<a class="anchor-link" href="#Domain-characteristics">&#182;</a></h3><p>Our training set is:</p>
-<ul>
-<li>Small (under 25k words). Typically, word2vec training sets can go in hundreds of thousands.</li>
-<li>Wikipedia articles about a common topic. We'll expect some words (e.g. singapore) to appear more frequently about that topic. Whether this is something we need to worry about is unclear.</li>
-</ul>
-<h3 id="Hyperparameters">Hyperparameters<a class="anchor-link" href="#Hyperparameters">&#182;</a></h3><h4 id="Architecture:">Architecture:<a class="anchor-link" href="#Architecture:">&#182;</a></h4><p>Architecture options are skip-gram (the default: slower, better for infrequent words) or continuous bag of words (fast).</p>
-<h4 id="Training-algorithm:">Training algorithm:<a class="anchor-link" href="#Training-algorithm:">&#182;</a></h4><p>This controls which algorithm to use.</p>
-<p>Hierarchical softmax (the default: better for infrequent words) or negative sampling (better for frequent words, better with low dimensional vectors). Start with the default first.</p>
-<h4 id="Downsampling-of-frequent-words:">Downsampling of frequent words:<a class="anchor-link" href="#Downsampling-of-frequent-words:">&#182;</a></h4><p>This controls the threshold for frequent words to be removed randomly.</p>
-<p>Randomly removing frequent words in large datasets can improve both accuracy and speed.</p>
-<p>$$p = \frac{f-t}{f} - \sqrt{\frac{t}{f}}$$</p>
-<p>Where:</p>
-<ul>
-<li>$p$: probabability that word is present</li>
-<li>$f$: frequency of word in corpus</li>
-<li>$t$: the threshold (our downsampling hyperparameter)</li>
-</ul>
-<p>A smaller $t$ means more words will be randomly removed.</p>
-<p>(Source: <a href="https://levyomer.files.wordpress.com/2015/03/improving-distributional-similarity-tacl-2015.pdf">https://levyomer.files.wordpress.com/2015/03/improving-distributional-similarity-tacl-2015.pdf</a>)</p>
-<p>The <a href="https://code.google.com/archive/p/word2vec/">Google documentation</a> recommends values between 1e-3 and 1e-5. Let's try 1e-3 and then iterate from there, since our training set is small.</p>
-<h4 id="Word-vector-dimensionality:">Word vector dimensionality:<a class="anchor-link" href="#Word-vector-dimensionality:">&#182;</a></h4><p>This controls how many features the word vector should have. Higher dimensionality (more features) usually result in better models, but also longer runtimes. Reasonable values can be in the tens to hundreds. We'll try 200.</p>
-<h4 id="Context-/-window-size:">Context / window size:<a class="anchor-link" href="#Context-/-window-size:">&#182;</a></h4><p>This defines the window-size to look for related words. For skip-gram usually around 10, for CBOW around 5. More is better, up to a point.</p>
-<h3 id="Worker-threads:">Worker threads:<a class="anchor-link" href="#Worker-threads:">&#182;</a></h3><p>Number of parallel processes to run. This can significantly improve training speed.</p>
-<p>The number to choose depends on how many logical CPU cores your computer has (on Windows, Start Menu -&gt; System Information, look for Processors).</p>
-<p>Start with a number around 2-4, and then increase up if your computer is more powerful.</p>
-<h3 id="Minimum-word-count:">Minimum word count:<a class="anchor-link" href="#Minimum-word-count:">&#182;</a></h3><p>This helps limit the size of the vocabulary to meaningful words. Any word that does not occur at least this many times across all documents is ignored.</p>
-<p>Reasonable values could be between 10 and 100. Higher values also help limit run time.</p>
-<p>For wikipedia articles, we'll try a minimum wordcount of 10.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="k">import</span> <span class="n">word2vec</span>
-
-word2vec.Word2Vec<span class="o">?</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Credits: https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors</span>
-
-<span class="c1"># Set values for various parameters</span>
-<span class="n">sg</span> <span class="o">=</span> <span class="mi">1</span>                <span class="c1"># Algorithm: 1: skip-gram, 0: CBOW</span>
-<span class="n">num_features</span> <span class="o">=</span> <span class="mi">200</span>    <span class="c1"># Word vector dimensionality                      </span>
-<span class="n">min_word_count</span> <span class="o">=</span> <span class="mi">10</span>   <span class="c1"># Minimum word count                        </span>
-<span class="n">num_workers</span> <span class="o">=</span> <span class="mi">2</span>       <span class="c1"># Number of threads to run in parallel</span>
-<span class="n">context</span> <span class="o">=</span> <span class="mi">10</span>          <span class="c1"># Context window size                                                                                    </span>
-<span class="n">downsampling</span> <span class="o">=</span> <span class="mf">1e-3</span>   <span class="c1"># Downsample setting for frequent words</span>
-
-<span class="c1"># Import the built-in logging module and configure it so that Word2Vec </span>
-<span class="c1"># creates nice output messages</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> : </span><span class="si">%(levelname)s</span><span class="s1"> : </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>\
-    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-
-<span class="c1"># Initialize and train the model.</span>
-<span class="c1"># This may take a while if your training set is large (e.g. 500,000 words)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Word2Vec model...&#39;</span><span class="p">)</span>
-<span class="o">%</span><span class="k">time</span> model = word2vec.Word2Vec(training_set, workers=num_workers, \
-            <span class="n">size</span><span class="o">=</span><span class="n">num_features</span><span class="p">,</span> <span class="n">min_count</span> <span class="o">=</span> <span class="n">min_word_count</span><span class="p">,</span> \
-            <span class="n">window</span> <span class="o">=</span> <span class="n">context</span><span class="p">,</span> <span class="n">sample</span> <span class="o">=</span> <span class="n">downsampling</span><span class="p">)</span>
-
-<span class="c1"># If you don&#39;t plan to train the model any further, calling </span>
-<span class="c1"># init_sims will make the model much more memory-efficient.</span>
-<span class="n">model</span><span class="o">.</span><span class="n">init_sims</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># It can be helpful to create a meaningful model name and </span>
-<span class="c1"># save the model for later use. You can load it later using Word2Vec.load()</span>
-<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;wikipedia_</span><span class="si">{}</span><span class="s2">features_</span><span class="si">{}</span><span class="s2">minwords_</span><span class="si">{}</span><span class="s2">context_</span><span class="si">{}</span><span class="s2">downsampling.w2v&quot;</span> \
-    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_features</span><span class="p">,</span> <span class="n">min_word_count</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">downsampling</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved model as </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">model_name</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Loading-the-saved-model">Loading the saved model<a class="anchor-link" href="#Loading-the-saved-model">&#182;</a></h2><p>Here's how to load a previously saved model.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;wikipedia_100features_50minwords_10context.w2v&quot;</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Evaluating-the-model">Evaluating the model<a class="anchor-link" href="#Evaluating-the-model">&#182;</a></h2><p>The trained model contains a read-only <code>models.keyedvectors.Word2VecMeyedVectors</code> with methods for evaluating word relationships.</p>
-<p><a href="https://radimrehurek.com/gensim/models/keyedvectors.html#gensim.models.keyedvectors.Word2VecKeyedVectors">https://radimrehurek.com/gensim/models/keyedvectors.html#gensim.models.keyedvectors.Word2VecKeyedVectors</a></p>
-<p>Here are some things to try with the word2vec model:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Get the vocabulary of the model:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># number of words in the vocab</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Check if a stem word is in the model's vocabulary:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
-<span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;malaysia&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;korea&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Find a word that doesn't match in a list of words:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="s1">&#39;raffles indian chinese malay&#39;</span>
-
-<span class="c1"># you can either use the helper function to convert to stem words</span>
-<span class="c1"># or call stemmer.stem() directly on each word</span>
-<span class="n">wordlist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">text_to_sentence_wordlists</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">wordlist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Word that doesn&#39;t match: </span><span class="si">%s</span><span class="s2">&quot;</span>
-      <span class="o">%</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">(</span><span class="n">wordlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Get the top N most similar words:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;singapore&#39;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;changi&#39;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Measures the cosine distance and similarity between two words.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;changi&#39;</span><span class="p">)</span>
-<span class="n">word2</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;aircraft&#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;distance: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span>
-      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;similarity: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span>
-      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;changi&#39;</span><span class="p">)</span>
-<span class="n">word2</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;british&#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;distance: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span>
-      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;similarity: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span>
-      <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Returns the word's representation in vector space as a 1D numpy array</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="s1">&#39;malaysia&#39;</span><span class="p">)</span>
-
-<span class="n">raw_vectors</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">word_vec</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">use_norm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">raw_vectors</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raw_vectors</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Visualizing-Word2Vec">Visualizing Word2Vec<a class="anchor-link" href="#Visualizing-Word2Vec">&#182;</a></h1><p>Next, we'll plot the Word Vectors to see how the clusters look like:</p>
-<ol>
-<li>Use t-Distributed Stochastic Neighbor Embedding <a href="https://lvdmaaten.github.io/tsne/">TSNE</a> to reduce the high-dimensional model into 2D</li>
-<li>Plot the 2D representation of the word2vec model, with the words in its vocabulary as the labels</li>
-</ol>
-<p>Credits: <a href="https://stackoverflow.com/questions/43776572/visualise-word2vec-generated-from-gensim">https://stackoverflow.com/questions/43776572/visualise-word2vec-generated-from-gensim</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="k">import</span> <span class="n">TSNE</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">vocab</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">vocab</span><span class="p">]</span>
-
-<span class="c1"># Apply t-SNE</span>
-<span class="c1"># this can take a while (like 1 minute or more)</span>
-<span class="n">tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="o">%</span><span class="k">time</span> X_tsne = tsne.fit_transform(X)
-
-<span class="n">X_tsne</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="c1"># Create a dataframe for the 2 dimensions,</span>
-<span class="c1"># indexed by the words in the vocab</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_tsne</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">vocab</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a zoomable interactive plot</span>
-<span class="o">%</span><span class="k">matplotlib</span> notebook
-
-<span class="c1"># Plot the 2D representation of the word2vec model,</span>
-<span class="c1"># with the words in its vocabulary as the labels</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
-
-<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise---Create-Corpus-and-Train-Word2Vec">Exercise - Create Corpus and Train Word2Vec<a class="anchor-link" href="#Exercise---Create-Corpus-and-Train-Word2Vec">&#182;</a></h2><p>In this exercise, we will create our own corpus and use it to train Word2Vec.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Create-Corpus">Create Corpus<a class="anchor-link" href="#Create-Corpus">&#182;</a></h3><p>Create a corpus of text files, organized in a structure like this:</p>
-
-<pre><code>corpus/
-   text001.txt
-   text002.txt
-   text003.txt
-   ...</code></pre>
-<p>A sample corpus is included in the <code>corpus</code> folder, created with the first 3 chapters of Moby Dick:
-<a href="https://www.gutenberg.org/files/2701/2701-0.txt">https://www.gutenberg.org/files/2701/2701-0.txt</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Import-corpus-using-NLTK">Import corpus using NLTK<a class="anchor-link" href="#Import-corpus-using-NLTK">&#182;</a></h3><p>We will use <a href="http://www.nltk.org/howto/corpus.html"><code>nltk.corpus.reader.plaintext</code></a> to import the corpus.</p>
-<p>Credits: <a href="https://stackoverflow.com/questions/4951751/creating-a-new-corpus-with-nltk">https://stackoverflow.com/questions/4951751/creating-a-new-corpus-with-nltk</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus.reader.plaintext</span> <span class="k">import</span> <span class="n">PlaintextCorpusReader</span>
-
-<span class="c1"># directory containing the corpus</span>
-<span class="n">corpus_dir</span> <span class="o">=</span> <span class="s1">&#39;corpus/&#39;</span>
-
-<span class="c1"># PlaintextCorpusReader uses nltk.tokenize.sent_tokenize() and</span>
-<span class="c1"># nltk.tokenize.word_tokenize() to split texts into sentences and words</span>
-<span class="n">newcorpus</span> <span class="o">=</span> <span class="n">PlaintextCorpusReader</span><span class="p">(</span><span class="n">corpus_dir</span><span class="p">,</span>
-                                  <span class="s1">&#39;.*\.txt&#39;</span><span class="p">,</span>
-                                  <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span> <span class="c1"># or &#39;utf-8&#39;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># files found by the reader</span>
-<span class="n">newcorpus</span><span class="o">.</span><span class="n">fileids</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print the first file in the corpus</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">newcorpus</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;text001.txt&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sentences in the corpus:</span>
-<span class="n">newcorpus</span><span class="o">.</span><span class="n">sents</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># number of sentences</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">newcorpus</span><span class="o">.</span><span class="n">sents</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clean_sentence_lists</span><span class="p">(</span><span class="n">sentence_lists</span><span class="p">,</span> <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Cleans and converts the sentence lists</span>
-<span class="sd">    Args:</span>
-<span class="sd">        text: sentence lists</span>
-<span class="sd">        remove_stopwords: whether to remove stopwords</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        A tuple:</span>
-<span class="sd">            The cleaned sentence list</span>
-<span class="sd">            The token count</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># set of English stop words</span>
-    <span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
-
-    <span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
-    
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">wordcount</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentence_lists</span><span class="p">:</span>
-        <span class="c1"># Convert to lowercase</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">]</span>
-        
-        <span class="c1"># Remove stop words</span>
-        <span class="k">if</span> <span class="n">remove_stopwords</span><span class="p">:</span>
-            <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">]</span>
-        
-        <span class="c1"># Remove non-letters and numbers</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^a-zA-Z0-9]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
-        
-        <span class="c1"># Stem the words</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
-        
-        <span class="n">result</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tokens</span><span class="p">]</span>
-        <span class="n">wordcount</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">wordcount</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Your Tasks:</p>
-<ol>
-<li>Convert newcorpus.sents() to sentence wordlists, using the <code>clean_sentence_lists</code> helper function</li>
-<li>Train a Word2Vec model, with initial hyperparameter settings (use your best guess)</li>
-<li>Try some word similarity queries</li>
-<li>Apply t-SNE to project the high dimensional model to 2-dimensions</li>
-<li>Plot the 2-dimensional projection of your model</li>
-<li>Tweak your model by adjusting some hyperparameters</li>
+<li>Process the dataset to convert strings into labels.</li>
+<li>Shuffle and split into train and test sets</li>
+<li>Train a clustering algorithm, using Gaussian Mixture Model with 5 components, where each component is a vehicle category.</li>
+<li>Compute the metrics for the algorithm.</li>
+<li>Perform analysis for possible improvements.</li>
 </ol>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1. Convert newcorpus.sents() to sentence wordlists, </span>
-<span class="c1"># using the clean_sentence_lists helper function</span>
-<span class="c1">#</span>
-<span class="c1"># Your code here</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2. Train a Word2Vec model, with initial hyperparameter settings</span>
-<span class="c1">#</span>
-<span class="c1"># Your code here</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 3. Try some word similarity queries</span>
-<span class="c1"># Your code here</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 4. Apply t-SNE to reduce the your model to 2 dimensions for plotting</span>
-<span class="c1"># Your code here</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 5. Plot the completed Word2Vec model</span>
-<span class="c1"># Your code here</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="References">References<a class="anchor-link" href="#References">&#182;</a></h1><p>NLTK book: <a href="http://www.nltk.org/book/">http://www.nltk.org/book/</a></p>
-<p>CS224d 2015 Lecture 2: Word Vectors: <a href="https://youtu.be/T8tQZChniMk">https://youtu.be/T8tQZChniMk</a></p>
+<h2 id="Section-3:-Prepare-Dataset">Section 3: Prepare Dataset<a class="anchor-link" href="#Section-3:-Prepare-Dataset">&#182;</a></h2><p>Write your code below to prepare the dataset using pandas</p>
 
 </div>
 </div>
-</div></section></section>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Section-4:-Select-Features">Section 4: Select Features<a class="anchor-link" href="#Section-4:-Select-Features">&#182;</a></h2><p>Write your code below to create X_train, X_test, y_train, y_test</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Section-5:-Train-the-algorithm(s)">Section 5: Train the algorithm(s)<a class="anchor-link" href="#Section-5:-Train-the-algorithm(s)">&#182;</a></h2><p>Write your code below to initialize and train the algorithm(s)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Section-6:-Evaluate-metrics">Section 6: Evaluate metrics<a class="anchor-link" href="#Section-6:-Evaluate-metrics">&#182;</a></h2><p>Write your code below to evaluate metrics for the trained algorithm(s).</p>
+<p>Feel free to plot the algorithm to visualize it, as appropriately.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Section-7:-Observations-and-analysis">Section 7: Observations and analysis<a class="anchor-link" href="#Section-7:-Observations-and-analysis">&#182;</a></h2><p>Answer the following questions:</p>
+<ol>
+<li><p>How did you measure the algorithm? Specify the metrics you used.</p>
+</li>
+<li><p>What is the outcome of the measurement? Explain the interpretation of the metrics.</p>
+<ul>
+<li>Is there overfitting or underfitting?</li>
+<li>Is there low accuracy or high error? If so, why do you think this is the case?</li>
+</ul>
+</li>
+<li><p>What improvements do you propose?</p>
+</li>
+<li><p>What is the most challenging part of this project?</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
 </div>
 </div>
 
