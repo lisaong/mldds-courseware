@@ -11914,19 +11914,10 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Topics">Topics<a class="anchor-link" href="#Topics">&#182;</a></h1><ul>
-<li>Why Word Vectors</li>
-<li>Workshop: Training Word2Vec</li>
+<li>Why Word Vectors exist</li>
+<li>How to use them</li>
+<li>How to train them</li>
 </ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="References">References<a class="anchor-link" href="#References">&#182;</a></h1><p>NLTK book: <a href="http://www.nltk.org/book/">http://www.nltk.org/book/</a></p>
-<p>CS224d 2015 Lecture 2: Word Vectors:<a href="https://www.youtube.com/watch?v=T8tQZChniMk&amp;index=28&amp;list=PLppspYHk_mI3RzQd16if8skxZgK1woubt&amp;t=0s">https://www.youtube.com/watch?v=T8tQZChniMk&amp;index=28&amp;list=PLppspYHk_mI3RzQd16if8skxZgK1woubt&amp;t=0s</a></p>
 
 </div>
 </div>
@@ -11949,10 +11940,68 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Word-Vectors">Word Vectors<a class="anchor-link" href="#Word-Vectors">&#182;</a></h1><p><a href="https://spacy.io/usage/vectors-similarity">https://spacy.io/usage/vectors-similarity</a></p>
-<p><a href="https://github.com/charlieg/A-Smattering-of-NLP-in-Python">https://github.com/charlieg/A-Smattering-of-NLP-in-Python</a></p>
-<p>Video: <a href="https://youtu.be/T8tQZChniMk">https://youtu.be/T8tQZChniMk</a></p>
-<p><a href="http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html">http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html</a></p>
+<h2 id="Why-do-we-need-Word-Vectors">Why do we need Word Vectors<a class="anchor-link" href="#Why-do-we-need-Word-Vectors">&#182;</a></h2><p>To represent word meanings in an efficient way</p>
+<p>To express word meaning based on context</p>
+<ul>
+<li>Context: window of words around this word</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Before-Word-Vectors:-Synsets">Before Word Vectors: Synsets<a class="anchor-link" href="#Before-Word-Vectors:-Synsets">&#182;</a></h2><ul>
+<li>Synsets: Lists of synonyms for a word<ul>
+<li>Someone needs to curate the list (create, update, delete)<ul>
+<li>Language-specific</li>
+</ul>
+</li>
+<li>Does not adapt as language evolves</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Uses-of-Synsets">Uses of Synsets<a class="anchor-link" href="#Uses-of-Synsets">&#182;</a></h2><ul>
+<li>Synsets are still useful in NLP<ul>
+<li>for tasks where word meaning is relatively static (e.g. dated literature)</li>
+<li>as a baseline model</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Walkthrough---WordNet">Walkthrough - WordNet<a class="anchor-link" href="#Walkthrough---WordNet">&#182;</a></h1><p>WordNet is a well-known database that contains sets of synonyms of English words.</p>
+<p>In this walkthrough, we will use NLTK to query WordNet.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>Click on <a href="http://wordnetweb.princeton.edu/perl/webwn">http://wordnetweb.princeton.edu/perl/webwn</a></li>
+<li>Enter a word to search for (has to be single word)</li>
+</ol>
+<p>For example, when searching for the word "machine":</p>
+<p><img src="assets/word-vectors/wordnet-search.png" alt="wordnet"></p>
 
 </div>
 </div>
@@ -11961,17 +12010,170 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Workshop:-Creating-Word2Vec-Models">Workshop: Creating Word2Vec Models<a class="anchor-link" href="#Workshop:-Creating-Word2Vec-Models">&#182;</a></h1><p>Credits:</p>
+<p>Besides the browser, you can use NLTK to query WordNet.</p>
+<p>Examples:
+<a href="http://www.nltk.org/howto/wordnet.html">http://www.nltk.org/howto/wordnet.html</a></p>
+<p>API:
+<a href="http://www.nltk.org/_modules/nltk/corpus/reader/wordnet.html">http://www.nltk.org/_modules/nltk/corpus/reader/wordnet.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">wordnet</span> <span class="k">as</span> <span class="n">wn</span>
+
+<span class="c1"># query synsets for &#39;machine&#39;</span>
+<span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;machine&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[Synset(&#39;machine.n.01&#39;),
+ Synset(&#39;machine.n.02&#39;),
+ Synset(&#39;machine.n.03&#39;),
+ Synset(&#39;machine.n.04&#39;),
+ Synset(&#39;machine.n.05&#39;),
+ Synset(&#39;car.n.01&#39;),
+ Synset(&#39;machine.v.01&#39;),
+ Synset(&#39;machine.v.02&#39;)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Synsets are a set of synonyms that share a common meaning.</p>
+<p>Synset attributes, accessible via methods with the same name:</p>
 <ul>
-<li><a href="https://codesachin.wordpress.com/2015/10/09/generating-a-word2vec-model-from-a-block-of-text-using-gensim-python/">https://codesachin.wordpress.com/2015/10/09/generating-a-word2vec-model-from-a-block-of-text-using-gensim-python/</a></li>
-<li><a href="https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors">https://www.kaggle.com/c/word2vec-nlp-tutorial#part-2-word-vectors</a></li>
+<li>name: The canonical name of this synset, formed using the first lemma
+of this synset. Note that this may be different from the name
+passed to the constructor if that string used a different lemma to
+identify the synset.</li>
+<li>pos: The synset's part of speech, matching one of the module level
+attributes ADJ, ADJ_SAT, ADV, NOUN or VERB.</li>
+<li>lemmas: A list of the Lemma objects for this synset.</li>
+<li>definition: The definition for this synset.</li>
+<li>examples: A list of example strings for this synset.</li>
+<li>offset: The offset in the WordNet dict file of this synset.</li>
+<li>lexname: The name of the lexicographer file containing this synset.</li>
 </ul>
-<p>Word2Vec</p>
-<ul>
-<li>Semantic learning of text representations</li>
-<li>Neural network </li>
-<li>Cosine similarity</li>
-</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Loop to print out what each synset represents</span>
+<span class="c1"># Each set is a different semantic meaning of the word &#39;machine&#39;</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;machine&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">hypernyms</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[Synset(&#39;device.n.01&#39;)]
+[Synset(&#39;person.n.01&#39;)]
+[Synset(&#39;organization.n.01&#39;)]
+[Synset(&#39;mechanical_device.n.01&#39;)]
+[Synset(&#39;organization.n.01&#39;)]
+[Synset(&#39;motor_vehicle.n.01&#39;)]
+[Synset(&#39;shape.v.02&#39;)]
+[Synset(&#39;produce.v.02&#39;)]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check if another word is similar to &#39;machine&#39;, using it&#39;s &#39;device&#39; meaning</span>
+<span class="c1"># larger number means more similarity</span>
+
+<span class="n">robot_synset1</span> <span class="o">=</span> <span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;robot&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;robot vs. machine similarity:&#39;</span><span class="p">,</span> <span class="n">robot_synset1</span><span class="o">.</span><span class="n">path_similarity</span><span class="p">(</span><span class="n">machine_synset1</span><span class="p">))</span>
+      
+<span class="n">sunset_synset1</span> <span class="o">=</span> <span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;sunset&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sunset vs. machine similarity:&#39;</span><span class="p">,</span> <span class="n">sunset_synset1</span><span class="o">.</span><span class="n">path_similarity</span><span class="p">(</span><span class="n">machine_synset1</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>robot vs. machine similarity: 0.25
+sunset vs. machine similarity: 0.058823529411764705
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Word-Vectors">Word Vectors<a class="anchor-link" href="#Word-Vectors">&#182;</a></h1><p>Instead of static lists of words, word vectors are trained from examples of text.</p>
+<p>The examples of text (text corpus) should be "large enough" to capture the possible meanings of the word.</p>
+<p>Anyone can train a word vector. Unlike SynSets, you don't need to be a linguist or expert in word meanings. You just need enough examples.</p>
 
 </div>
 </div>
@@ -11980,7 +12182,29 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Download-text">Download text<a class="anchor-link" href="#Download-text">&#182;</a></h2><p>For demonstration purposes, we'll start with Wikipedia articles.</p>
+<h1 id="Pre-trained-Word-Vectors">Pre-trained Word Vectors<a class="anchor-link" href="#Pre-trained-Word-Vectors">&#182;</a></h1><p>These are available, but are usually huge downloads (GB)</p>
+<ul>
+<li><a href="https://code.google.com/archive/p/word2vec/">https://code.google.com/archive/p/word2vec/</a></li>
+<li><a href="https://github.com/Hironsan/awesome-embedding-models">https://github.com/Hironsan/awesome-embedding-models</a></li>
+</ul>
+<p>Instead, we will train our own Word Vectors. This is most flexible because you can adapt to your particular text corpus.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Workshop:-Creating-Word2Vec-Models">Workshop: Creating Word2Vec Models<a class="anchor-link" href="#Workshop:-Creating-Word2Vec-Models">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Download-training-text-corpus">Download training text corpus<a class="anchor-link" href="#Download-training-text-corpus">&#182;</a></h2><p>For demonstration purposes, we'll start with Wikipedia articles.</p>
 <p>We'll use a python library that wraps the Wikipedia APIs.</p>
 <p><a href="https://pypi.org/project/wikipedia/">https://pypi.org/project/wikipedia/</a></p>
 <p>Run this from an Anaconda prompt (within the mldds03 environment):</p>
@@ -12891,7 +13115,17 @@ word2vec.Word2Vec<span class="o">?</span>
 </div>
 </div>
 
+</div><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="References">References<a class="anchor-link" href="#References">&#182;</a></h1><p>NLTK book: <a href="http://www.nltk.org/book/">http://www.nltk.org/book/</a></p>
+<p>CS224d 2015 Lecture 2: Word Vectors: <a href="https://youtu.be/T8tQZChniMk">https://youtu.be/T8tQZChniMk</a></p>
+
+</div>
+</div>
+</div></section></section>
 </div>
 </div>
 
