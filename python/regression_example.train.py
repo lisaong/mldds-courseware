@@ -53,6 +53,6 @@ print('R2:', r2_score(test_y_scaled, pred_scaled)) # higher and close to 1 is be
 # Save model and scalers so that we can load them upon deployment
 # http://scikit-learn.org/stable/modules/model_persistence.html
 import pickle
-pickle.dump(X_scaler, open('X_scaler.sav', 'wb'))
-pickle.dump(y_scaler, open('y_scaler.sav', 'wb'))
-pickle.dump(lin, open('model.sav', 'wb'))
+pickle.dump(X_scaler, open('X_scaler.pickle', 'wb'))
+pickle.dump(y_scaler, open('y_scaler.pickle', 'wb'))
+pickle.dump(lin, open('model.pickle', 'wb'))

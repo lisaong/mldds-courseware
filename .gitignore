@@ -11,6 +11,7 @@ desktop.ini
 *.lnk
 *.log
 *.npy
+*.pickle
 *.pb
 *.pdf
 *.pyc
