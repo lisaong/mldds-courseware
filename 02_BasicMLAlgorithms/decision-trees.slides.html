@@ -12025,15 +12025,21 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="AdaBoost">AdaBoost<a class="anchor-link" href="#AdaBoost">&#182;</a></h3><ul>
 <li><a href="http://scikit-learn.org/stable/modules/ensemble.html#adaboost">http://scikit-learn.org/stable/modules/ensemble.html#adaboost</a></li>
-<li>Fit a sequence of small decision trees on repeatedly modified versions of data<ul>
-<li>apply weights on the training samples<ul>
-<li>incorrectly predicted training sample: increase its weight</li>
-<li>correctly predicted sample: decrease its weight</li>
+<li><p>Fit a sequence of small decision trees on repeatedly modified versions of data</p>
+<ul>
+<li>adjust weights on the training samples<ul>
+<li>incorrectly predicted training sample =&gt; more weight</li>
+<li>correctly predicted sample =&gt; less weight</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Combine predictions using sum or majority vote</li>
+</ul>
+<ul>
+<li><p>Combine predictions using sum or majority vote</p>
+</li>
+<li><p>"Samples that were gotten wrong get more attention"</p>
+</li>
 </ul>
 
 </div>
@@ -12071,6 +12077,22 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Gradient-Boosting">Gradient Boosting<a class="anchor-link" href="#Gradient-Boosting">&#182;</a></h3><p><img src="assets/trees/blog_Gradient-Boosting-Image.png" alt="really?"></p>
 <p>(image: <a href="http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/">http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/</a>)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Gradient-Boosting:-Concept">Gradient Boosting: Concept<a class="anchor-link" href="#Gradient-Boosting:-Concept">&#182;</a></h3><ol>
+<li><p>Nth tree has some prediction error.</p>
+</li>
+<li><p>Train the next (N+1)th tree to "boost" the model so that it can compensate for the gap (error) from the Nth tree.</p>
+</li>
+<li><p>Add up the predictions from the all trees to fill up the gaps.</p>
+</li>
+</ol>
 
 </div>
 </div>
@@ -12240,7 +12262,7 @@ $$F_m(x) = F_{m-1}(x) + \gamma_mh_m(x)$$</li>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/research-and-development-expenditure-by-type-of-cost/research-and-development-expenditure-by-type-of-cost.csv&#39;</span><span class="p">,</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/research-and-development-expenditure-by-type-of-cost/research-and-development-expenditure-by-type-of-cost.csv&#39;</span><span class="p">,</span>
 
                  <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_expenditure&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_cost&#39;</span><span class="p">,</span> <span class="s1">&#39;rnd_expenditure&#39;</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -12278,29 +12300,9 @@ $$F_m(x) = F_{m-1}(x) + \gamma_mh_m(x)$$</li>
 
 <span class="c1"># encode sector from strings to integer labels</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sector_c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;type_of_expenditure_c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type_of_expenditure&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;type_of_cost_c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type_of_cost&#39;</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exercise:-Label-Encoding">Exercise: Label Encoding<a class="anchor-link" href="#Exercise:-Label-Encoding">&#182;</a></h3><p>Encode the <code>type_of_expenditure</code> and <code>type_of_cost</code> columns in a similar way as above.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
 </pre></div>
 
 </div>
@@ -12352,7 +12354,7 @@ $$F_m(x) = F_{m-1}(x) + \gamma_mh_m(x)$$</li>
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">sector_c</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># make a copy so as not to affect our original df</span>
-<span class="n">unbalanced_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">unbalanced_df</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">sector_c</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">unbalanced_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">sector_c</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># show the unbalanced dataset, sector_c = 0 will have double the number of entries</span>
 <span class="n">unbalanced_df</span><span class="p">[</span><span class="s1">&#39;sector_c&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -12544,22 +12546,6 @@ $$F_m(x) = F_{m-1}(x) + \gamma_mh_m(x)$$</li>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12608,7 +12594,7 @@ $$F_m(x) = F_{m-1}(x) + \gamma_mh_m(x)$$</li>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feature_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rnd_expenditure&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_expenditure&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_cost&#39;</span><span class="p">]</span>
 <span class="n">target_names</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;govt_sector_by_expenditure_tree.dot&#39;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;../data/govt_sector_by_expenditure_tree.dot&#39;</span>
 
 <span class="n">visualize_tree</span><span class="p">(</span><span class="n">dtc</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 </pre></div>
@@ -12836,20 +12822,6 @@ RandomForestClassifier<span class="o">?</span>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_estimator_</span>
 </pre></div>
 
@@ -12880,7 +12852,7 @@ RandomForestClassifier<span class="o">?</span>
 <span class="n">rfc</span> <span class="o">=</span> <span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_estimator_</span>
 
 <span class="n">visualize_tree</span><span class="p">(</span><span class="n">rfc</span><span class="o">.</span><span class="n">estimators_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span>
-               <span class="s1">&#39;govt_sector_by_expenditure_rf_first.dot&#39;</span><span class="p">)</span>
+               <span class="s1">&#39;../data/research-and-development-expenditure-by-type-of-cost/govt_sector_by_expenditure_rf_first.dot&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12895,7 +12867,7 @@ RandomForestClassifier<span class="o">?</span>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Visualize the last tree in the forest</span>
 <span class="n">visualize_tree</span><span class="p">(</span><span class="n">rfc</span><span class="o">.</span><span class="n">estimators_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span>
-               <span class="s1">&#39;govt_sector_by_expenditure_rf_last.dot&#39;</span><span class="p">)</span>
+               <span class="s1">&#39;../data/research-and-development-expenditure-by-type-of-cost/govt_sector_by_expenditure_rf_last.dot&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12978,20 +12950,6 @@ RandomForestClassifier<span class="o">?</span>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -13032,7 +12990,7 @@ RandomForestClassifier<span class="o">?</span>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/Facebook_metrics/dataset_Facebook.csv&#39;</span><span class="p">,</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/Facebook_metrics/dataset_Facebook.csv&#39;</span><span class="p">,</span>
                  <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span>
                  <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Page total likes&#39;</span><span class="p">,</span> <span class="s1">&#39;Type&#39;</span><span class="p">,</span> <span class="s1">&#39;Category&#39;</span><span class="p">,</span>
                          <span class="s1">&#39;Post Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Post Weekday&#39;</span><span class="p">,</span> <span class="s1">&#39;Post Hour&#39;</span><span class="p">,</span> <span class="s1">&#39;Paid&#39;</span><span class="p">,</span>
@@ -13049,7 +13007,8 @@ RandomForestClassifier<span class="o">?</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Prepare-Dataset">Prepare Dataset<a class="anchor-link" href="#Prepare-Dataset">&#182;</a></h2><h3 id="Convert-string-columns">Convert string columns<a class="anchor-link" href="#Convert-string-columns">&#182;</a></h3><p>There are two options for the <code>Type</code> column.</p>
+<h2 id="Prepare-Dataset">Prepare Dataset<a class="anchor-link" href="#Prepare-Dataset">&#182;</a></h2><h3 id="Handle-NaN-values">Handle NaN values<a class="anchor-link" href="#Handle-NaN-values">&#182;</a></h3><p>Check for NaN values and decide what to do with them.</p>
+<h3 id="Convert-string-columns">Convert string columns<a class="anchor-link" href="#Convert-string-columns">&#182;</a></h3><p>There are two options for the <code>Type</code> column.</p>
 <ol>
 <li>Convert to dummy columns.</li>
 <li>Encode the labels to numbers.</li>
@@ -13063,6 +13022,54 @@ RandomForestClassifier<span class="o">?</span>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Handle-NaN-values">Handle NaN values<a class="anchor-link" href="#Handle-NaN-values">&#182;</a></h3><p>Check for NaN values and decide what to do with them.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13196,51 +13203,12 @@ RandomForestClassifier<span class="o">?</span>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Inspect the other discrete columns as an optional exercise.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise:-Select-Features">Exercise: Select Features<a class="anchor-link" href="#Exercise:-Select-Features">&#182;</a></h2><p>We will now select the features X and y from <code>balanced_df</code>.</p>
-<p>X should be these columns:</p>
-<ul>
-<li><code>Page total likes</code></li>
-<li><code>Category</code></li>
-<li><code>Post Month</code></li>
-<li><code>Post Weekday</code></li>
-<li><code>Post Hour</code></li>
-<li><code>Paid</code></li>
-<li><code>Link</code></li>
-<li><code>Photo</code></li>
-<li><code>Status</code></li>
-<li><code>Video</code></li>
-</ul>
-<p>y should be:</p>
-<ul>
-<li><code>Lifetime Post Total Reach</code></li>
-</ul>
-<p>Hint: you can do something like:</p>
-
-<pre><code>X = balanced_df[['col 1', 'col 2',  ...]]</code></pre>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Select the columns to create the dataframe X</span>
-<span class="c1"># Your code here</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balanced_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -13253,8 +13221,34 @@ RandomForestClassifier<span class="o">?</span>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Select the columns to create the dataframe y</span>
-<span class="c1"># Your code here</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Label Encode</span>
+<span class="n">type_le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">balanced_df</span><span class="o">.</span><span class="n">Type</span> <span class="o">=</span> <span class="n">type_le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">balanced_df</span><span class="o">.</span><span class="n">Type</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Select-Features">Select Features<a class="anchor-link" href="#Select-Features">&#182;</a></h2><p>Select the features X and y from <code>balanced_df</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">balanced_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">balanced_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">!=</span> <span class="s1">&#39;Lifetime Post Total Reach&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">balanced_df</span><span class="p">[</span><span class="s1">&#39;Lifetime Post Total Reach&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13281,24 +13275,25 @@ RandomForestClassifier<span class="o">?</span>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
 
-<span class="n">train_X</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</pre></div>
+<span class="n">train_X</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
-</div>
-</div>
-</div>
+<span class="n">X_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">train_X_scaled</span> <span class="o">=</span> <span class="n">X_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_X</span><span class="p">)</span>
+<span class="n">test_X_scaled</span> <span class="o">=</span> <span class="n">X_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="n">y_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">train_y_scaled</span> <span class="o">=</span> <span class="n">y_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_y</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">test_y_scaled</span> <span class="o">=</span> <span class="n">y_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_y</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="n">dtr</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
-<span class="n">dtr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span> <span class="c1"># Errors</span>
+<span class="n">dtr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X_scaled</span><span class="p">,</span> <span class="n">train_y_scaled</span><span class="p">)</span>
+<span class="n">pred_y_scaled</span> <span class="o">=</span> <span class="n">dtr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_X_scaled</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test_y_scaled</span><span class="p">,</span> <span class="n">pred_y_scaled</span><span class="p">),</span>
+      <span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">test_y_scaled</span><span class="p">,</span> <span class="n">pred_y_scaled</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -13310,76 +13305,13 @@ RandomForestClassifier<span class="o">?</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Troubleshooting-Data-Errors">Troubleshooting Data Errors<a class="anchor-link" href="#Troubleshooting-Data-Errors">&#182;</a></h3>
-<pre><code>Input contains NaN, infinity or a value too large for dtype('float32').</code></pre>
-<p>Let's print the data types for X (the input)</p>
+<p>Note: if you want to silence the warning about int64, you can use something like this to convert to int32:</p>
+<p><a href="https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.astype.html">https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.astype.html</a></p>
+
+<pre><code>df['Page total likes'] = df['Page total likes'].astype('int32')</code></pre>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">balanced_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">balanced_df</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's convert the input to the supported data type (<code>float32</code>)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balanced_df</span><span class="p">[</span><span class="s1">&#39;Paid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">balanced_df</span><span class="p">[</span><span class="s1">&#39;Paid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-
-<span class="c1"># Verify the dtypes are now fixed</span>
-<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">balanced_df</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Retrain the decision tree.</p>
-<p>Note that we didn't have to update train_X or test_X, because these are <em>views</em> on balanced_df, not copies.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dtr</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
-<span class="n">dtr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span> <span class="c1"># ok</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13438,10 +13370,9 @@ RandomForestClassifier<span class="o">?</span>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generate the learning curve for decision tree classifier, using 3-fold Cross Validation</span>
-<span class="n">random_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
 <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
-    <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span><span class="p">),</span> <span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+    <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
@@ -13459,9 +13390,50 @@ RandomForestClassifier<span class="o">?</span>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The Training R2 Score is constant. Can you think of a reason why?</p>
+<p>hint: consider how a decision tree would be created on the training set</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_scores</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The Validation R2 score isn't very good.</p>
+<p>Ways to improve:</p>
+<ul>
+<li>Try Random Forest or XGBoost (typically will perform better)</li>
+<li>Use a non-decision tree algorithm (Linear Regression, anyone?)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">validation_scores</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13482,9 +13454,11 @@ RandomForestClassifier<span class="o">?</span>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">feature_names</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span>
-<span class="n">target_names</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">columns</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;facebook_likes_regressor.dot&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">feature_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">balanced_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">feature_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;Lifetime Post Total Reach&#39;</span><span class="p">)</span>
+<span class="n">target_names</span> <span class="o">=</span> <span class="s1">&#39;Lifetime Post Total Reach&#39;</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;../data/Facebook_metrics/facebook_likes_regressor.dot&#39;</span>
 
 <span class="n">visualize_tree</span><span class="p">(</span><span class="n">dtr</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 </pre></div>
