@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>decision-trees slides</title>
+<title>plot-decision-boundaries slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,1100 +11905,211 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Trees,-Forests,-and-Ensembles">Trees, Forests, and Ensembles<a class="anchor-link" href="#Trees,-Forests,-and-Ensembles">&#182;</a></h1><p><img src="assets/trees/japanese-maple-2947680_640.jpg" alt="japanese maple"></p>
-<p>(image: <a href="https://pixabay.com/en/japanese-maple-foliage-green-leaves-2947680/">pixabay</a>)</p>
+<h1 id="Plotting-Decision-Boundaries">Plotting Decision Boundaries<a class="anchor-link" href="#Plotting-Decision-Boundaries">&#182;</a></h1><p>This supplementary notebook explains the logic behind the rather complicated-looking 'plot_decision_boundary' function.</p>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Topics">Topics<a class="anchor-link" href="#Topics">&#182;</a></h1><ul>
-<li>Decision Trees</li>
-<li>Ensemble Forests</li>
-<li>Classification</li>
-<li>Regression</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Where-are-we?">Where are we?<a class="anchor-link" href="#Where-are-we?">&#182;</a></h2><p>(lost in the forest?)</p>
-<p><img src="assets/linear-regression/machine-learning-cheet-sheet.png" alt="spot the trees"></p>
-<p>(image: <a href="https://www.sas.com/en_us/insights/analytics/machine-learning.html">sas.com</a>)</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Decision-Trees">Decision Trees<a class="anchor-link" href="#Decision-Trees">&#182;</a></h2><ul>
-<li>Classification: predicts a class</li>
-<li>Regression: predicts a number</li>
-</ul>
-<p><a href="http://scikit-learn.org/stable/modules/tree.html">http://scikit-learn.org/stable/modules/tree.html</a></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Decision-Trees">Decision Trees<a class="anchor-link" href="#Decision-Trees">&#182;</a></h2><p>Advantanges:</p>
+<h3 id="When-is-it-used">When is it used<a class="anchor-link" href="#When-is-it-used">&#182;</a></h3><p>Plotting decision boundaries is a useful visualization technique for the following tasks:</p>
 <ul>
-<li>Easy to visualize and understand</li>
-<li>$O(log(N))$ prediction cost</li>
-<li>Flexible for simple tasks: binary / multi-class classification, regression</li>
+<li><p>Classification: when classes are labelled (supervised learning), helps visualize where the classifier predicts the boundaries between the class</p>
+</li>
+<li><p>Clustering: when no classes are labelled (unsupervised learning), helps visualize where one possible cluster begins and another cluster ends.</p>
+</li>
 </ul>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Decision-Trees">Decision Trees<a class="anchor-link" href="#Decision-Trees">&#182;</a></h2><p>Disadvantages:</p>
+<h2 id="Outline">Outline<a class="anchor-link" href="#Outline">&#182;</a></h2><p>First we'll cover how the plot works in steps.</p>
+<p>Then we'll walk through an example dataset for each step.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="How-the-plot-works">How the plot works<a class="anchor-link" href="#How-the-plot-works">&#182;</a></h3><ol>
+<li><p>If the feature ranges are very different, we apply StandardScaler to scale the features. Otherwise, the boundary plot can take a long time to process, or the plot will look skewed.</p>
+</li>
+<li><p>If the features are multi-dimensional, we first reduce the dimension of the features to 2D.  This is done using PCA (commonly) or t-SNE (if text-based and therefore sparse).</p>
 <ul>
-<li>Overfitting</li>
-<li>Unbalanced dataset can cause biased trees</li>
-<li>Instability: small changes in data can result in completely different tree</li>
+<li>What about 3D? Same technique applies, except the matplotlib axes are in 3D.</li>
+<li>What about 1D? Well, visualizing the boundary in 1D involves plotting a vertical line.  It's not as intuitive to visualize than 2D, and won't work for clustering, where there are no y-values (no classes).</li>
 </ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Ensemble-Methods">Ensemble Methods<a class="anchor-link" href="#Ensemble-Methods">&#182;</a></h2><p><img src="assets/trees/teamwork-2499638_960_720.jpg" alt="ensemble"></p>
-<p>(image: <a href="https://pixabay.com/en/teamwork-team-gear-board-chalk-2499638/">pixabay</a>)</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Ensemble-Methods">Ensemble Methods<a class="anchor-link" href="#Ensemble-Methods">&#182;</a></h2><p>"Teaming up weaker models to create a stronger model"</p>
-<ul>
-<li>Random Forest</li>
-<li>AdaBoost</li>
-<li>Gradient Boosted Trees</li>
-<li>etc</li>
-</ul>
-<p><a href="http://scikit-learn.org/stable/modules/ensemble.html">http://scikit-learn.org/stable/modules/ensemble.html</a></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Random-Forests">Random Forests<a class="anchor-link" href="#Random-Forests">&#182;</a></h3><ul>
-<li>Fits a few decision trees on subsets of the dataset, then averages the results<ul>
-<li>Improves accuracy and reduces overfitting</li>
-</ul>
-</li>
-<li>Classifier: <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html</a></li>
-<li>Regressor: <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html</a></li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="AdaBoost">AdaBoost<a class="anchor-link" href="#AdaBoost">&#182;</a></h3><ul>
-<li><a href="http://scikit-learn.org/stable/modules/ensemble.html#adaboost">http://scikit-learn.org/stable/modules/ensemble.html#adaboost</a></li>
-<li><p>Fit a sequence of small decision trees on repeatedly modified versions of data</p>
-<ul>
-<li>adjust weights on the training samples<ul>
-<li>incorrectly predicted training sample =&gt; more weight</li>
-<li>correctly predicted sample =&gt; less weight</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>Combine predictions using sum or majority vote</p>
-</li>
-<li><p>"Samples that were gotten wrong get more attention"</p>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="AdaBoost">AdaBoost<a class="anchor-link" href="#AdaBoost">&#182;</a></h3><ul>
-<li>Classifier: <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html">http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html</a></li>
-<li>Regressor: <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html">http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html</a></li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Gradient-Boosted-Trees">Gradient Boosted Trees<a class="anchor-link" href="#Gradient-Boosted-Trees">&#182;</a></h3><ul>
-<li>Optimized using Gradient Descent</li>
-<li>Better generalization</li>
-<li>Classifier: <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html</a></li>
-<li>Regressor: <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html">http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html</a></li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Gradient-Boosting">Gradient Boosting<a class="anchor-link" href="#Gradient-Boosting">&#182;</a></h3><p><img src="assets/trees/blog_Gradient-Boosting-Image.png" alt="really?"></p>
-<p>(image: <a href="http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/">http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/</a>)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Gradient-Boosting:-Concept">Gradient Boosting: Concept<a class="anchor-link" href="#Gradient-Boosting:-Concept">&#182;</a></h3><ol>
-<li><p>Nth tree has some prediction error.</p>
-</li>
-<li><p>Train the next (N+1)th tree to "boost" the model so that it can compensate for the gap (error) from the Nth tree.</p>
-</li>
-<li><p>Add up the predictions from the all trees to fill up the gaps.</p>
 </li>
 </ol>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Gradient-Boosting:-Concept">Gradient Boosting: Concept<a class="anchor-link" href="#Gradient-Boosting:-Concept">&#182;</a></h3><ol>
-<li>Train first tree, measure training error ("residuals")
-$$F_1(x) = y$$</li>
-<li>Train second tree on the residuals, using dataset $\big(x, y-F_1(x)\big)$
-$$h_1(x) = y - F_1(x)$$</li>
-<li>Combine to get a better model
-$$F_2(x) = F_1(x) + h_1(x)$$</li>
-</ol>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Gradient-Boosting:-Concept">Gradient Boosting: Concept<a class="anchor-link" href="#Gradient-Boosting:-Concept">&#182;</a></h3><p>General formulation:
-$$F_{m+1}(x) = F_m(x) + h_m(x) = y$$</p>
-<p>Where $m$ is tuned by cross validation</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Gradient-Boosting:-Gradient-Descent">Gradient Boosting: Gradient Descent<a class="anchor-link" href="#Gradient-Boosting:-Gradient-Descent">&#182;</a></h3><ul>
-<li>Objective: minimize cost function: $L\big(y, F(x)\big)$</li>
-<li>Apply Tree Boosting, but compute residuals from the <strong>gradients of the cost function</strong></li>
-<li>$n$ training examples $(x_1, ... x_n)$</li>
-<li>Residual for the $i^{th}$ example, $m^{th}$ tree:</li>
-</ul>
-<p>$$r_{im} = -\biggl[\frac{\partial{L\big(y_i, F_{m-1}(x_i)\big)}}{\partial{F_{m-1}(x_i)}}\biggr]$$</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Gradient-Boosting:-Algorithm">Gradient Boosting: Algorithm<a class="anchor-link" href="#Gradient-Boosting:-Algorithm">&#182;</a></h3><ol>
-<li>Compute residual using $F_{m-1}(x_i)$ and $y_i$</li>
-<li>Train decision tree $h_m(x)$, using dataset ${(x_i, r_{im})}$</li>
-<li>Compute update multiplier:
-$$\gamma_m = \underset{\gamma}{\arg \min} \sum^n_{i=1} L\big(y, F_{m-1} + \gamma h_{m}(x)\big)$$</li>
-<li>Get next model using multiplier:
-$$F_m(x) = F_{m-1}(x) + \gamma_mh_m(x)$$</li>
-</ol>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="XGBoost">XGBoost<a class="anchor-link" href="#XGBoost">&#182;</a></h3><p>eXtreme Gradient Boosting</p>
-<ul>
-<li>A parallel, distributed gradient boosting library</li>
-<li><a href="https://github.com/dmlc/xgboost">https://github.com/dmlc/xgboost</a></li>
-<li><a href="https://xgboost.readthedocs.io/en/latest/model.html">https://xgboost.readthedocs.io/en/latest/model.html</a></li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Evaluation-Metrics">Evaluation Metrics<a class="anchor-link" href="#Evaluation-Metrics">&#182;</a></h2><ul>
-<li>General metrics for Classification and Regression</li>
-<li>Decision Tree-specific metrics</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Decision-Tree-specific-Metrics">Decision Tree-specific Metrics<a class="anchor-link" href="#Decision-Tree-specific-Metrics">&#182;</a></h3><ul>
-<li>Gini: gini impurity, which measures the quality of a split<ul>
-<li>greater than 0: split needed</li>
-<li>0: all cases fall in 1 category</li>
-</ul>
-</li>
-<li>Information gain / entropy<ul>
-<li>pick the split with the highest information gain</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Workshop:-Classification-with-Decision-Trees">Workshop: Classification with Decision Trees<a class="anchor-link" href="#Workshop:-Classification-with-Decision-Trees">&#182;</a></h2><p>Credits: <a href="http://scikit-learn.org/stable/modules/tree.html#classification">http://scikit-learn.org/stable/modules/tree.html#classification</a></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h2><p>We'll be using Graphviz to visualize the decision tree after training it.</p>
-<p>Add this module to your <code>mldds02</code> conda environment:</p>
-
-<pre><code>conda install python-graphviz</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Goal">Goal<a class="anchor-link" href="#Goal">&#182;</a></h2><p>Train and compare decision tree-based classifiers to predict the <code>sector</code> from research and development expenditure type, cost type, and expenditure amount.</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dataset">Dataset<a class="anchor-link" href="#Dataset">&#182;</a></h2><h4 id="Research-and-Development-Expenditure-by-Type-of-Cost">Research and Development Expenditure by Type of Cost<a class="anchor-link" href="#Research-and-Development-Expenditure-by-Type-of-Cost">&#182;</a></h4><p><a href="https://data.gov.sg/dataset/research-and-development-expenditure-by-type-of-cost">https://data.gov.sg/dataset/research-and-development-expenditure-by-type-of-cost</a></p>
+<p>The rest of the discussion assumes we are doing 2D plots.</p>
 <ol>
-<li>Download dataset from the above URL</li>
-<li>Extract the folder and note the path for use in <code>read_csv</code> below.</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Prepare-Dataset">Prepare Dataset<a class="anchor-link" href="#Prepare-Dataset">&#182;</a></h2><ol>
-<li>Encode string labels to numbers</li>
-<li>Ensure dataset is balanced</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/research-and-development-expenditure-by-type-of-cost/research-and-development-expenditure-by-type-of-cost.csv&#39;</span><span class="p">,</span>
-
-                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_expenditure&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_cost&#39;</span><span class="p">,</span> <span class="s1">&#39;rnd_expenditure&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Label-Encoding-for-Classification">Label Encoding for Classification<a class="anchor-link" href="#Label-Encoding-for-Classification">&#182;</a></h3><p>Training data needs to be numeric.</p>
-<p>To convert string labels to numbers, we will do something called "label encoding".</p>
-<p>There are multiple ways to do this: <a href="http://pbpython.com/categorical-encoding.html">http://pbpython.com/categorical-encoding.html</a></p>
-<ul>
-<li>Dummy columns</li>
-<li>Integer labels</li>
+<li>For each feature (X_2d[:, 0] and X_2d[:, 1]), find the max and min values to create a bounding box: x_min, x_max, y_min, y_max<ul>
+<li>x_min, x_max are the left and right limits of the plot</li>
+<li>y_min, y_max are the lower and upper limits of the plot</li>
 </ul>
-<p>For this dataset, we'll try assigning integer labels to each unique string value in the column.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">LabelEncoder</span>
-
-<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
-
-<span class="c1"># encode sector from strings to integer labels</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sector_c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;type_of_expenditure_c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type_of_expenditure&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;type_of_cost_c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type_of_cost&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ensuring-Balanced-Dataset-for-Decision-Tree-Algorithms">Ensuring Balanced Dataset for Decision Tree Algorithms<a class="anchor-link" href="#Ensuring-Balanced-Dataset-for-Decision-Tree-Algorithms">&#182;</a></h3><p>For decision trees, it is important to balance the dataset to reduce class bias.</p>
-<p>If a dataset contains too many samples of one sector (e.g. 'Private Sector', the tree will learn to pick that sector more frequently, which means it's no better than random selection.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Detect if a dataset is unbalanced</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sector_c&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We got lucky here with the dataset, as there are equal numbers of value_counts for each sector.</p>
-<p>Suppose we need to balance the dataset, we can use this technique:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># simulate an unbalanced dataset by replicating columns for sector_c=0</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">sector_c</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># make a copy so as not to affect our original df</span>
-<span class="n">unbalanced_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">sector_c</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># show the unbalanced dataset, sector_c = 0 will have double the number of entries</span>
-<span class="n">unbalanced_df</span><span class="p">[</span><span class="s1">&#39;sector_c&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sector_groups</span> <span class="o">=</span> <span class="n">unbalanced_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;sector_c&#39;</span><span class="p">)</span>
-
-<span class="c1"># use pandas.DataFrame.sample to create a DataFrame</span>
-<span class="c1"># where all sector groups are re-sampled to the smallest sized group</span>
-<span class="n">balanced_df</span> <span class="o">=</span> <span class="n">sector_groups</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sector_groups</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()))</span><span class="o">.</span>\
-    <span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># show the balanced_df, all sectors are balanced</span>
-<span class="n">balanced_df</span><span class="p">[</span><span class="s1">&#39;sector_c&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Select-Features">Select Features<a class="anchor-link" href="#Select-Features">&#182;</a></h2><p>We'll now break our DataFrame into data and target.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;rnd_expenditure&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_expenditure_c&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_cost_c&#39;</span><span class="p">]]</span>
-<span class="n">target</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sector_c&#39;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">target</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Train-the-Decision-Tree-Classifier">Train the Decision Tree Classifier<a class="anchor-link" href="#Train-the-Decision-Tree-Classifier">&#182;</a></h2><ol>
-<li>Shuffle and split the data set into train and test</li>
-<li>Train a <code>DecisionTreeClassifier</code></li>
+</li>
 </ol>
-<p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html">http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
-
-<span class="n">train_X</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">DecisionTreeClassifier</span>
-
-<span class="n">dtc</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
-<span class="n">dtc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dtc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Probabilities are expressed as a</span>
-<span class="c1"># fraction of samples of the same class in a leaf</span>
-<span class="n">dtc</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Evaluate-Metrics:-Classification-Accuracy">Evaluate Metrics: Classification Accuracy<a class="anchor-link" href="#Evaluate-Metrics:-Classification-Accuracy">&#182;</a></h2><p>Since this is a classification task, the metrics we used for Logistic Regression also apply here, such as</p>
-<ul>
-<li>Precision, recall</li>
-<li>Confusion matrix</li>
-<li>Accuracy</li>
-</ul>
-<p>References:</p>
-<ul>
-<li><a href="http://scikit-learn.org/stable/modules/classes.html#classification-metrics">http://scikit-learn.org/stable/modules/classes.html#classification-metrics</a></li>
-<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_fscore_support.html">http://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_fscore_support.html</a></li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
-
-<span class="n">pred_y</span> <span class="o">=</span> <span class="n">dtc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">))</span>
-
-<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Visualizing-the-Decision-Tree">Visualizing the Decision Tree<a class="anchor-link" href="#Visualizing-the-Decision-Tree">&#182;</a></h2><p>We'll visualize the learned decision tree using graphviz, to see what type of rules it has learnt from the training data.</p>
-<p><a href="https://graphviz.readthedocs.io/en/stable/api.html">https://graphviz.readthedocs.io/en/stable/api.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">export_graphviz</span>
-<span class="kn">import</span> <span class="nn">graphviz</span>
-
-<span class="k">def</span> <span class="nf">visualize_tree</span><span class="p">(</span><span class="n">fitted_tree</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Args:</span>
-<span class="sd">        fitted_tree: the fitted decision tree. If using ensemble methods</span>
-<span class="sd">            pick the first estimator using model.estimators[0]</span>
-<span class="sd">        feature_names: array containing the feature names</span>
-<span class="sd">        target_names: array containing the target labels</span>
-<span class="sd">        filename: the filename to save the .dot file</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">export_graphviz</span><span class="p">(</span><span class="n">fitted_tree</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
-                    <span class="n">feature_names</span><span class="o">=</span><span class="n">feature_names</span><span class="p">,</span>
-                    <span class="n">class_names</span><span class="o">=</span><span class="n">target_names</span><span class="p">,</span>
-                    <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="n">source</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">source</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">view</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">feature_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rnd_expenditure&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_expenditure&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_cost&#39;</span><span class="p">]</span>
-<span class="n">target_names</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;../data/govt_sector_by_expenditure_tree.dot&#39;</span>
-
-<span class="n">visualize_tree</span><span class="p">(</span><span class="n">dtc</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise---Decision-Tree-Classification-using-Entropy">Exercise - Decision Tree Classification using Entropy<a class="anchor-link" href="#Exercise---Decision-Tree-Classification-using-Entropy">&#182;</a></h2><p>Repeat the steps above to:</p>
 <ol>
-<li>Train a decision tree using the 'entropy' criteria using the training set</li>
-<li>Evaluate the classification metrics</li>
-<li>Visualize the decision tree</li>
+<li>Now comes the most complex part. Ideally, for boundaries we also want to colour the classes or clusters according to the class id or cluster id. Something like countries on a map. </li>
 </ol>
-<p>Which criteria performs better?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Your code here</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Visualizing-Decision-Tree-Surfaces">Visualizing Decision Tree Surfaces<a class="anchor-link" href="#Visualizing-Decision-Tree-Surfaces">&#182;</a></h2><p>Here's a neat trick to try in lieu of what we saw with clustering.</p>
-<p>Credits: <a href="http://scikit-learn.org/stable/auto_examples/tree/plot_iris.html">http://scikit-learn.org/stable/auto_examples/tree/plot_iris.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Adapted from: http://scikit-learn.org/stable/auto_examples/tree/plot_iris.html</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">plot_decision_surface</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plots a decision surface using pair-wise combination</span>
-<span class="sd">    of features</span>
-<span class="sd">    Args:</span>
-<span class="sd">        classifier - the decision tree classifier</span>
-<span class="sd">        n_classes - the number of classes</span>
-<span class="sd">        X - the data</span>
-<span class="sd">        y - the labels</span>
-<span class="sd">        title - the plot title</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">plot_colors</span> <span class="o">=</span> <span class="s1">&#39;ryb&#39;</span>
-    <span class="n">plot_step</span> <span class="o">=</span> <span class="mf">0.02</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">pairidx</span><span class="p">,</span> <span class="n">pair</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]):</span>
-        <span class="c1"># We only take the two corresponding features</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="n">pair</span><span class="p">]</span>
-
-        <span class="n">clf</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-        <span class="c1"># Plot the decision boundary</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">pairidx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-        <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">plot_step</span><span class="p">),</span>
-                             <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">plot_step</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">h_pad</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">w_pad</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
-
-        <span class="n">Z</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
-        <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">cs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">RdYlBu</span><span class="p">)</span>
-
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">feature_names</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">feature_names</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-
-        <span class="c1"># Plot the training points</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">),</span> <span class="n">plot_colors</span><span class="p">):</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">target_names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                        <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">RdYlBu</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">borderpad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">handletextpad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
-<span class="n">plot_decision_surface</span><span class="p">(</span><span class="n">DecisionTreeClassifier</span><span class="p">(),</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span>
-                      <span class="s2">&quot;Decision surface of a Decision Tree classifier using paired features&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># To get the category label mapping</span>
-<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;type_of_expenditure&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_expenditure_c&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;type_of_cost&#39;</span><span class="p">,</span> <span class="s1">&#39;type_of_cost_c&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;sector&#39;</span><span class="p">,</span> <span class="s1">&#39;sector_c&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Random-Forest-Classifier-with-GridSearchCV">Random Forest Classifier with GridSearchCV<a class="anchor-link" href="#Random-Forest-Classifier-with-GridSearchCV">&#182;</a></h2><p>Now that we have our baseline tree, the next step is to try an ensemble method, such as Random Forest.</p>
-<p>Let's also maximize our chances of getting the best model by doing Grid Search cross-validation.</p>
-<p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span>
-
-RandomForestClassifier<span class="o">?</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
-
-<span class="c1"># Use GridSearchCV to select the optimum hyperparameters</span>
-<span class="n">gs_rfc</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">RandomForestClassifier</span><span class="p">(),</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
-                                                 <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]},</span>
-                      <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">gs_rfc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
-
-<span class="c1"># select the best estimator</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best score:&#39;</span><span class="p">,</span> <span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best parameters:&#39;</span><span class="p">,</span> <span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
-
-<span class="c1"># predict</span>
-<span class="n">pred_y</span> <span class="o">=</span> <span class="n">gs_rfc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
-
-<span class="c1"># evaluation metrics</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">))</span>
-<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_estimator_</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">estimators_</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Visualize the first tree in the forest</span>
-<span class="n">rfc</span> <span class="o">=</span> <span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_estimator_</span>
-
-<span class="n">visualize_tree</span><span class="p">(</span><span class="n">rfc</span><span class="o">.</span><span class="n">estimators_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span>
-               <span class="s1">&#39;../data/research-and-development-expenditure-by-type-of-cost/govt_sector_by_expenditure_rf_first.dot&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Visualize the last tree in the forest</span>
-<span class="n">visualize_tree</span><span class="p">(</span><span class="n">rfc</span><span class="o">.</span><span class="n">estimators_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span>
-               <span class="s1">&#39;../data/research-and-development-expenditure-by-type-of-cost/govt_sector_by_expenditure_rf_last.dot&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot the decision surface for pair-wise features, using</span>
-<span class="c1"># the best estimator found by GridSearchCV</span>
-<span class="n">best_n_estimators</span> <span class="o">=</span> <span class="n">n_estimators</span><span class="o">=</span><span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">]</span>
-<span class="n">best_max_depth</span> <span class="o">=</span> <span class="n">n_estimators</span><span class="o">=</span><span class="n">gs_rfc</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;max_depth&#39;</span><span class="p">]</span>
-
-<span class="n">plot_decision_surface</span><span class="p">(</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="n">best_n_estimators</span><span class="p">,</span>
-                                             <span class="n">max_depth</span><span class="o">=</span><span class="n">best_max_depth</span><span class="p">),</span>
-                      <span class="n">n_classes</span><span class="p">,</span> <span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span>
-                      <span class="s2">&quot;Decision surface of a Random Forest classifier using paired features&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="XGBoost-Classifier-with-GridSearchCV">XGBoost Classifier with GridSearchCV<a class="anchor-link" href="#XGBoost-Classifier-with-GridSearchCV">&#182;</a></h2><p>Finally, let's try XGBoost on our dataset, to see how well it does.</p>
-<h3 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h3><p>XGBoost is a separate library from sklearn (<a href="https://xgboost.readthedocs.io/en/latest/build.html">https://xgboost.readthedocs.io/en/latest/build.html</a>)</p>
-
-<pre><code>conda install -c anaconda py-xgboost</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="XGBoost-and-Scikit-learn">XGBoost and Scikit-learn<a class="anchor-link" href="#XGBoost-and-Scikit-learn">&#182;</a></h3><p>XGBoost has its own API, but includes an sklearn wrapper for convenience.</p>
-<p><a href="https://github.com/dmlc/xgboost/blob/master/demo/guide-python/sklearn_examples.py">https://github.com/dmlc/xgboost/blob/master/demo/guide-python/sklearn_examples.py</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
-
-<span class="c1"># Use GridSearchCV to select the optimum hyperparameters</span>
-<span class="n">gs_xgb</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(),</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
-                                            <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]},</span>
-                      <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">gs_xgb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
-
-<span class="c1"># select the best estimator</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best score:&#39;</span><span class="p">,</span> <span class="n">gs_xgb</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best parameters:&#39;</span><span class="p">,</span> <span class="n">gs_xgb</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
-
-<span class="c1"># predict</span>
-<span class="n">pred_y</span> <span class="o">=</span> <span class="n">gs_xgb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
-
-<span class="c1"># evaluation metrics</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">))</span>
-<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Workshop:-Regression-with-Decision-Trees">Workshop: Regression with Decision Trees<a class="anchor-link" href="#Workshop:-Regression-with-Decision-Trees">&#182;</a></h2><p>In this workshop, we will apply decision tree-related algorithms to a multi-variate linear regression problem.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Goal">Goal<a class="anchor-link" href="#Goal">&#182;</a></h2><p>Train a regression model to predict the <code>Lifetime Post Total Reach</code> of a Facebook post to seven input features (category, page total likes, type, month, hour, weekday, paid).</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dataset">Dataset<a class="anchor-link" href="#Dataset">&#182;</a></h2><h4 id="Facebook-metrics-Data-Set">Facebook metrics Data Set<a class="anchor-link" href="#Facebook-metrics-Data-Set">&#182;</a></h4><p><a href="https://archive.ics.uci.edu/ml/datasets/Facebook+metrics">https://archive.ics.uci.edu/ml/datasets/Facebook+metrics</a></p>
-<p>The data is related to posts' published during the year of 2014 on the Facebook's page of a renowned cosmetics brand.</p>
+<p>The way to accomplish this is to:
+ a. Create a 2D matrix with the following specifications:</p>
+<ul>
+<li>np.arange(x_min, x_min, 0.05) on the horizontal axis</li>
+<li>np.arange(y_min, y_max, 0.05) on the vertical axis</li>
+<li>Every value in that 2D matrix is 0.05 step apart (units don't matter as much here, because we will be plotting PCA)</li>
+<li><p>We use <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.meshgrid.html">np.meshgrid</a>, to generate the matrix.</p>
+<ul>
+<li>Depending on the data (i.e. X_2d), you may need to adjust the step size larger (if the data is spaced out), or smaller (if the data is close together).</li>
+<li>Note that a smaller step size can run very slowly. </li>
+</ul>
+<p>b. For each value in the 2D matrix, run predict() using either the classifier or the clustering algorithm.</p>
+<p>c. Plot the predicted values <em>as an image</em>, using the predicted values as the colours.</p>
+<ul>
+<li>This is done using <a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.imshow.html">imshow</a>.</li>
+<li>In the "empty" spaces between the 0.05 steps, the colours are filled in using interpolation. This creates the solid colours characteristic of a boundary plot.</li>
+</ul>
+</li>
+</ul>
 <ol>
-<li>Download dataset from the above URL</li>
-<li>Extract the folder and note the path for use in read_csv below.</li>
+<li>Last step of the boundary plot is to scatter plot the values:<ul>
+<li>The actual samples.</li>
+<li>For clustering using k-means the centroids are also plotted.</li>
+</ul>
+</li>
 </ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Example-dataset">Example dataset<a class="anchor-link" href="#Example-dataset">&#182;</a></h3><p>We'll use the COE dataset from the clustering lecture.</p>
+<p>It can be found at: <a href="https://data.gov.sg/dataset/coe-bidding-results">https://data.gov.sg/dataset/coe-bidding-results</a></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/Facebook_metrics/dataset_Facebook.csv&#39;</span><span class="p">,</span>
-                 <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span>
-                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Page total likes&#39;</span><span class="p">,</span> <span class="s1">&#39;Type&#39;</span><span class="p">,</span> <span class="s1">&#39;Category&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;Post Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Post Weekday&#39;</span><span class="p">,</span> <span class="s1">&#39;Post Hour&#39;</span><span class="p">,</span> <span class="s1">&#39;Paid&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;Lifetime Post Total Reach&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;D:/tmp/coe-bidding-results/coe-results.csv&#39;</span><span class="p">,</span> <span class="c1"># fix to your path</span>
+                 <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;quota&#39;</span><span class="p">,</span> <span class="s1">&#39;premium&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[19]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>quota</th>
+      <th>premium</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>985.000000</td>
+      <td>985.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>551.541117</td>
+      <td>46445.775635</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>452.628678</td>
+      <td>26065.702205</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>140.000000</td>
+      <td>852.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>294.000000</td>
+      <td>31006.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>373.000000</td>
+      <td>50502.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>559.000000</td>
+      <td>65001.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2272.000000</td>
+      <td>97889.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13007,63 +12118,25 @@ RandomForestClassifier<span class="o">?</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Prepare-Dataset">Prepare Dataset<a class="anchor-link" href="#Prepare-Dataset">&#182;</a></h2><h3 id="Handle-NaN-values">Handle NaN values<a class="anchor-link" href="#Handle-NaN-values">&#182;</a></h3><p>Check for NaN values and decide what to do with them.</p>
-<h3 id="Convert-string-columns">Convert string columns<a class="anchor-link" href="#Convert-string-columns">&#182;</a></h3><p>There are two options for the <code>Type</code> column.</p>
 <ol>
-<li>Convert to dummy columns.</li>
-<li>Encode the labels to numbers.</li>
+<li>Scale the features</li>
 </ol>
-<p>Either option is fine because the number of labels is small (4). Since we've demonstrated label encoding, we'll try the dummy column approach.</p>
-<h3 id="Balance-dataset">Balance dataset<a class="anchor-link" href="#Balance-dataset">&#182;</a></h3><p>This is a regression task, so we don't need to balance the <code>Lifetime Post Total Reach</code> output, because it is a continuous variable.</p>
-<ul>
-<li>Instead, we'll check that the discrete columns (<code>Type</code>, <code>Category</code>, <code>Paid</code>) values are balanced.</li>
-<li>It's less critical, but a good idea to also check the <code>Post Month</code>, <code>Post Weekday</code> and <code>Post Hour</code> columns, just in case.</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Handle-NaN-values">Handle NaN values<a class="anchor-link" href="#Handle-NaN-values">&#182;</a></h3><p>Check for NaN values and decide what to do with them.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
 
-</div>
-</div>
-</div>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;quota&#39;</span><span class="p">,</span> <span class="s1">&#39;premium&#39;</span><span class="p">]]</span>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
-</pre></div>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13075,422 +12148,482 @@ RandomForestClassifier<span class="o">?</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Convert-string-columns">Convert string columns<a class="anchor-link" href="#Convert-string-columns">&#182;</a></h3><p>Convert <code>Type</code> to dummy columns and append to DataFrame</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_type_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">])</span>
-<span class="n">df_type_dummies</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Append to existing dataset</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df_type_dummies</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Balance-dataset">Balance dataset<a class="anchor-link" href="#Balance-dataset">&#182;</a></h2><p>Check that these discrete columns are balanced</p>
-<ul>
-<li><code>Type</code></li>
-<li><code>Category</code></li>
-<li><code>Paid</code></li>
-</ul>
-<p>Optionally, check that these discrete columns are balanced</p>
-<ul>
-<li><code>Post Month</code></li>
-<li><code>Post Weekday</code></li>
-<li><code>Post Hour</code></li>
-</ul>
-<p>Balanced means that the counts for each discrete values are not overly biased to one or two values. As a rule of thumb, overly means 10x or larger.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Detect if the `Type` column is balanced</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Instead of dropping all the columns, let&#39;s reduce just the `Photo` rows by a random sample of 90 entries</span>
-<span class="n">num_photo_rows</span> <span class="o">=</span> <span class="mi">90</span>
-<span class="n">photos_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">Type</span> <span class="o">==</span> <span class="s1">&#39;Photo&#39;</span><span class="p">]</span>
-
-<span class="n">indices_to_keep</span> <span class="o">=</span> <span class="n">photos_df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_photo_rows</span><span class="p">)</span><span class="o">.</span><span class="n">index</span> <span class="c1"># random sample the indices</span>
-<span class="n">indices_to_drop</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">photos_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">indices_to_keep</span><span class="p">))</span>
-
-<span class="n">balanced_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">indices_to_drop</span><span class="p">])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balanced_df</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balanced_df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balanced_df</span><span class="p">[</span><span class="s1">&#39;Paid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balanced_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Label Encode</span>
-<span class="n">type_le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
-<span class="n">balanced_df</span><span class="o">.</span><span class="n">Type</span> <span class="o">=</span> <span class="n">type_le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">balanced_df</span><span class="o">.</span><span class="n">Type</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Select-Features">Select Features<a class="anchor-link" href="#Select-Features">&#182;</a></h2><p>Select the features X and y from <code>balanced_df</code>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">balanced_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">balanced_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">!=</span> <span class="s1">&#39;Lifetime Post Total Reach&#39;</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">balanced_df</span><span class="p">[</span><span class="s1">&#39;Lifetime Post Total Reach&#39;</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Train-the-Decision-Tree-Regressor">Train the Decision Tree Regressor<a class="anchor-link" href="#Train-the-Decision-Tree-Regressor">&#182;</a></h2><ol>
-<li>Shuffle and split the data set into train and test</li>
-<li>Train a <code>DecisionTreeRegressor</code></li>
+<ol>
+<li>PCA is skipped because X (and therefore X_scaled) is already in 2D</li>
 </ol>
-<p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html">http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html</a></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
-
-<span class="n">train_X</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-
-<span class="n">X_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
-<span class="n">train_X_scaled</span> <span class="o">=</span> <span class="n">X_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_X</span><span class="p">)</span>
-<span class="n">test_X_scaled</span> <span class="o">=</span> <span class="n">X_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
-
-<span class="n">y_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
-<span class="n">train_y_scaled</span> <span class="o">=</span> <span class="n">y_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_y</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">test_y_scaled</span> <span class="o">=</span> <span class="n">y_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_y</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-
-<span class="n">dtr</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
-<span class="n">dtr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X_scaled</span><span class="p">,</span> <span class="n">train_y_scaled</span><span class="p">)</span>
-<span class="n">pred_y_scaled</span> <span class="o">=</span> <span class="n">dtr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_X_scaled</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test_y_scaled</span><span class="p">,</span> <span class="n">pred_y_scaled</span><span class="p">),</span>
-      <span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">test_y_scaled</span><span class="p">,</span> <span class="n">pred_y_scaled</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X_scaled</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(985, 2)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Note: if you want to silence the warning about int64, you can use something like this to convert to int32:</p>
-<p><a href="https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.astype.html">https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.astype.html</a></p>
-
-<pre><code>df['Page total likes'] = df['Page total likes'].astype('int32')</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Evaluate-Metrics:-Regression">Evaluate Metrics: Regression<a class="anchor-link" href="#Evaluate-Metrics:-Regression">&#182;</a></h2><p>We'll now plot the learning curve for regression to see how well the decision tree performed</p>
+<ol>
+<li>Find the bounding box of our 2D plot</li>
+</ol>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">learning_curve</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># left and right plot limits</span>
+<span class="c1"># (x_ just denotes horizontal axis on the plot, unrelated to X)</span>
 
-<span class="k">def</span> <span class="nf">plot_learning_curve</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">tr_sizes</span><span class="p">,</span> <span class="n">tr_scores</span><span class="p">,</span> <span class="n">val_scores</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plots the learning curve for a training session</span>
-<span class="sd">    Arg:</span>
-<span class="sd">        axis: axis to plot</span>
-<span class="sd">        title: plot title</span>
-<span class="sd">        tr_sizes: sizes of the training set</span>
-<span class="sd">        tr_scores: training scores</span>
-<span class="sd">        val_scores: validation scores</span>
+<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X_scaled</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;plot left limit: </span><span class="si">%.3f</span><span class="s1">, plot right limit: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>plot left limit: -1.910, plot right limit: 4.803
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># upper and lower plot limits</span>
+<span class="c1"># (y_ just denotes vertical axis on the plot, unrelated to our labels)</span>
+
+<span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X_scaled</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;plot lower limit: </span><span class="si">%.3f</span><span class="s1">, plot upper limit: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>plot lower limit: -2.750, plot upper limit: 2.975
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>4a. Create a 2D matrix with the following specifications:</p>
+<ul>
+<li>np.arange(x_min, x_min, 0.25) on the horizontal axis</li>
+<li>np.arange(y_min, y_max, 0.25) on the vertical axis</li>
+<li>Every value in that 2D matrix is 0.25 step apart (units don't matter as much here, because we will be plotting PCA)</li>
+<li>We use <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.meshgrid.html">np.meshgrid</a>, to generate the matrix.</li>
+<li>Depending on the data (i.e. X_2d), you may need to adjust the step size larger (if the data is spaced out), or smaller (if the data is close together).</li>
+<li>Note that a smaller step size can run very slowly. </li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">step</span> <span class="o">=</span> <span class="o">.</span><span class="mi">05</span>
+
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+
+<span class="c1"># a. flatten xx using ravel into [xx0, xx1, .., xxN]</span>
+<span class="c1"># b. flatten yy using ravel into [yy0, yy1, .., yyN]</span>
+<span class="c1"># c. column stack into a 2-D array</span>
+<span class="c1">#    (turn xx, yy into column vectors and then stack column-wise)</span>
+<span class="c1">#</span>
+<span class="c1">#   [[xx0, yy0],</span>
+<span class="c1">#    [xx1, yy1],</span>
+<span class="c1">#    ..</span>
+<span class="c1">#    [xxN, yyN]]</span>
+<span class="c1">#</span>
+
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+<span class="n">mesh</span>
+
+<span class="c1"># this also works, but easy to forget what it does</span>
+<span class="c1"># mesh = np.c_[xx.ravel(), yy.ravel()]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[85]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[-1.90968646, -2.75007514],
+       [-1.85968646, -2.75007514],
+       [-1.80968646, -2.75007514],
+       ...,
+       [ 4.69031354,  2.94992486],
+       [ 4.74031354,  2.94992486],
+       [ 4.79031354,  2.94992486]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mesh</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[63]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(15525, 2)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>4b. For each value in the 2D matrix, run predict() using either the classifier or the clustering algorithm.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
+
+<span class="c1"># first, fit on our dataset (note: not the mesh)</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+
+<span class="c1"># next, predict on our mesh</span>
+<span class="n">clusters</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="n">clusters</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[79]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([3, 3, 3, ..., 2, 2, 2])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>4c. Plot the predicted values <em>as an image</em>, using the predicted values as the colours.</p>
+<ul>
+<li>This is done using <a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.imshow.html">imshow</a>.</li>
+<li>In the "empty" spaces between the 0.05 steps, the colours are filled in using interpolation. This creates the solid colours characteristic of a boundary plot.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># convert to 2D array for image</span>
+<span class="n">clusters_image</span> <span class="o">=</span> <span class="n">clusters</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">clusters_image</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
+          <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+          <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Pastel2</span><span class="p">,</span>
+          <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="c1"># image aspect ratio</span>
+          <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span> <span class="c1"># origin of image is bottom left</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;COE dataset K-means boundary plot (k=</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">n_clusters</span><span class="p">,</span>
+       <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">),</span>
+       <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>Last step of the boundary plot is to scatter plot the values:<ul>
+<li>The actual samples.</li>
+<li>For clustering using k-means the centroids are also plotted.</li>
+</ul>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">clusters_image</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
+          <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+          <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Pastel2</span><span class="p">,</span>
+          <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+          <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_scaled</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">centroids</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">169</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;centroids&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;COE dataset K-means boundary plot (k=</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">n_clusters</span><span class="p">,</span>
+       <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">),</span>
+       <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Helper-Function">Helper Function<a class="anchor-link" href="#Helper-Function">&#182;</a></h2><p>This is the helper function that combines steps 3, 4, and 5. The variables are named somewhat differently, but the steps are the same.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">plot_decision_boundaries</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">kmeans_model</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots the decision boundaries for a fitted k-means model</span>
+<span class="sd">    Args:</span>
+<span class="sd">        ax: subplot axis</span>
+<span class="sd">        title: subplot title</span>
+<span class="sd">        kmeans_model: a fitted sklearn.cluster.KMeans model</span>
+<span class="sd">        data: 2-dimensional input data to cluster and plot</span>
+<span class="sd"> </span>
+<span class="sd">    Based on: http://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tr_scores_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tr_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">tr_scores_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">tr_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">val_scores_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">val_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">val_scores_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">val_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="n">axis</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">tr_sizes</span><span class="p">,</span> <span class="n">tr_scores_mean</span> <span class="o">-</span> <span class="n">tr_scores_std</span><span class="p">,</span>
-                    <span class="n">tr_scores_mean</span> <span class="o">+</span> <span class="n">tr_scores_std</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
-    <span class="n">axis</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">tr_sizes</span><span class="p">,</span> <span class="n">val_scores_mean</span> <span class="o">-</span> <span class="n">val_scores_std</span><span class="p">,</span>
-                    <span class="n">val_scores_mean</span> <span class="o">+</span> <span class="n">val_scores_std</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">)</span>
-    <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr_sizes</span><span class="p">,</span> <span class="n">tr_scores_mean</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training score&quot;</span><span class="p">)</span>
-    <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr_sizes</span><span class="p">,</span> <span class="n">val_scores_mean</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cross-validation score&quot;</span><span class="p">)</span>
-    <span class="n">axis</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
-           <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Training examples&#39;</span><span class="p">,</span>
-           <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;R2 Scores&#39;</span><span class="p">)</span>
-    <span class="n">axis</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="n">axis</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="c1"># Step size of the mesh. Decrease to increase the quality of the VQ.</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>     <span class="c1"># point in the mesh [x_min, x_max]x[y_min, y_max].</span>
+
+    <span class="c1"># Plot the decision boundary. For that, we will assign a color to each</span>
+    <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+
+    <span class="c1"># Obtain labels for each point in mesh using the trained model.</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">kmeans_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+
+    <span class="c1"># Put the result into a color plot</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
+              <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+              <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Pastel2</span><span class="p">,</span>
+              <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="c1"># Plot the centroids as a red X</span>
+    <span class="n">centroids</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+               <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">169</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;centroids&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+           <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">),</span>
+           <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generate the learning curve for decision tree classifier, using 3-fold Cross Validation</span>
-<span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
-    <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-
-<span class="n">plot_learning_curve</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;Learning Curve: Decision Tree Regressor&#39;</span><span class="p">,</span>
-                    <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">validation_scores</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The Training R2 Score is constant. Can you think of a reason why?</p>
-<p>hint: consider how a decision tree would be created on the training set</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_scores</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The Validation R2 score isn't very good.</p>
-<p>Ways to improve:</p>
-<ul>
-<li>Try Random Forest or XGBoost (typically will perform better)</li>
-<li>Use a non-decision tree algorithm (Linear Regression, anyone?)</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">validation_scores</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Visualizing-the-Decision-Tree">Visualizing the Decision Tree<a class="anchor-link" href="#Visualizing-the-Decision-Tree">&#182;</a></h2><p>Finally, we'll visualize the decision tree.</p>
-<p>This tree will look very complicated, because:</p>
-<ol>
-<li>There are many features</li>
-<li>We didn't place any limits on max_depth (which we should to make the tree more robust and less likely to overfit)</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">feature_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">balanced_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-<span class="n">feature_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;Lifetime Post Total Reach&#39;</span><span class="p">)</span>
-<span class="n">target_names</span> <span class="o">=</span> <span class="s1">&#39;Lifetime Post Total Reach&#39;</span>
-
-<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;../data/Facebook_metrics/facebook_likes_regressor.dot&#39;</span>
-
-<span class="n">visualize_tree</span><span class="p">(</span><span class="n">dtr</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Optional-Exercises">Optional Exercises<a class="anchor-link" href="#Optional-Exercises">&#182;</a></h2><p>This is a loooong workshop, but if you desire to learn more about Decision Trees, try the following:</p>
-<ol>
-<li><p>XGBoost regression</p>
-<ul>
-<li>Replace <code>DecisionTreeRegressor()</code> with <code>xgb.Regressor()</code> with optional <code>GridSearchCV()</code></li>
-<li><a href="https://github.com/dmlc/xgboost/blob/master/demo/guide-python/sklearn_examples.py">https://github.com/dmlc/xgboost/blob/master/demo/guide-python/sklearn_examples.py</a></li>
-</ul>
-</li>
-<li><p>Random Forest Regressor</p>
-<ul>
-<li>Replace <code>DecisionTreeRegressor()</code> with <code>RandomForestRegressor()</code> with optional <code>GridSearchCV()</code></li>
-</ul>
-</li>
-<li><p>Try other Decision Tree algorithms.</p>
-</li>
-</ol>
-
-</div>
-</div>
 </div>
 </div>
 </div>
