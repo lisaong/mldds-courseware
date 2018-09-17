@@ -45,18 +45,10 @@ To run the workshop exercises, you can clone this [repository](https://github.co
   - 3.4 Adversarial Learning [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/adversarial.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/adversarial.ipynb)]
   - 3.5 Text Processing [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/text.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/text.ipynb)]
   - 3.6 Word Vectors [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/word-vectors.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/word-vectors.ipynb)]
-  - 3.7 Recurrent Neural Networks
-  - 3.8 Text Sentiment
 
-- 4 Time Series Forecasting and Speech Recognition
+- 4 RNNs, Time Series Forecasting and Speech Recognition
   - 4.1 Time Series Forecasting [[html](https://lisaong.github.io/mldds-courseware/04_SpeechTimeSeries/timeseries.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/04_SpeechTimeSeries/timeseries.ipynb)]
   - 4.2 Speech Recognition [[html](https://lisaong.github.io/mldds-courseware/04_SpeechTimeSeries/speech.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/04_SpeechTimeSeries/speech.ipynb)]
-
-- 5 Best Practices
-  - 5.1 Data Gathering
-  - 5.2 Data Analysis
-  - 5.3 Feature Engineering
-  - 5.4 Debugging
 
 ### Viewing Slides
 The non-coding portions of the Jupyter notebooks can be presented as a slide show. To view as a slide show:
