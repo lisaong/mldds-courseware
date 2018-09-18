@@ -1,6 +1,0 @@
-NA     4.   133.0      115.0      3090.      17.5   70.  2.	"citroen ds-21 pallas"
-NA     8.   350.0      165.0      4142.      11.5   70.  1.	"chevrolet chevelle concours (sw)"
-NA     8.   351.0      153.0      4034.      11.0   70.  1.	"ford torino (sw)"
-NA     8.   383.0      175.0      4166.      10.5   70.  1.	"plymouth satellite (sw)"
-NA     8.   360.0      175.0      3850.      11.0   70.  1.	"amc rebel sst (sw)"
-NA     8.   302.0      140.0      3353.       8.0   70.  1.	"ford mustang boss 302"
