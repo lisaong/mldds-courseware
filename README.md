@@ -51,12 +51,12 @@ To run the workshop exercises, you can clone this [repository](https://github.co
   - 4.2 Speech Recognition [[html](https://lisaong.github.io/mldds-courseware/04_SpeechTimeSeries/speech.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/04_SpeechTimeSeries/speech.ipynb)]
 
 - 5 Deployment
-  - 5.1 Deploying an Scikit-learn model [[train](https://lisaong.github.io/mldds-courseware/05_Deploy/sklearn_example.train.py), [deploy](https://lisaong.github.io/mldds-courseware/05_Deploy/sklearn_example.deploy.py)]
-  - 5.2 Deploying a Keras model [[train](https://lisaong.github.io/mldds-courseware/05_Deploy/keras_example.train.py), [deploy](https://lisaong.github.io/mldds-courseware/05_Deploy/keras_example.deploy.py)]
+  - 5.1 Deploying an Scikit-learn model [[train](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/sklearn_example.train.py), [deploy](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/sklearn_example.deploy.py)]
+  - 5.2 Deploying a Keras model [[train](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/keras_example.train.py), [deploy](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/keras_example.deploy.py)]
   - 5.3 Setting up Tensorflow with GPU [[html](https://lisaong.github.io/mldds-courseware/05_Deploy/tensorflow_gpu.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/tensorflow_gpu.ipynb)]
 
 - 6 Project
-  - 6.1 Template [[html](https://lisaong.github.io/mldds-courseware/06_Project/project-template.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/06_Project/project-template.ipynb)
+  - 6.1 Template [[html](https://lisaong.github.io/mldds-courseware/06_Project/project-template.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/06_Project/project-template.ipynb)]
 
 ##### StackUp | Institute of Systems Science | National University of Singapore
 
