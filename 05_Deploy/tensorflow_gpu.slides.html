@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>project-template slides</title>
+<title>tensorflow_gpu slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,203 +11905,99 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Practice-Project-Template">Practice Project Template<a class="anchor-link" href="#Practice-Project-Template">&#182;</a></h1><p>This workbook provides the template for the practice project.</p>
-<h2 id="Instructions">Instructions<a class="anchor-link" href="#Instructions">&#182;</a></h2><ul>
-<li>Work in pairs</li>
-<li>Each team is to complete 1 copy of this template.<ul>
-<li>Complete all sections.</li>
-<li>Feel free to include supporting material / slides / documents as needed.</li>
-</ul>
-</li>
-<li>At the end of the project, you will get 5-10 minutes to present this workbook to the class.</li>
-</ul>
-<h3 id="Submission-Instructions">Submission Instructions<a class="anchor-link" href="#Submission-Instructions">&#182;</a></h3><ul>
-<li>Submit the .ipynb with the Output cells showing the results<ul>
-<li>Naming convention:
-<pre><code>  &lt;name1&gt;-&lt;name2&gt;-&lt;project_short_name&gt;.ipynb</code></pre>
-</li>
-</ul>
-</li>
-<li>If you provide your own datasets, include the data with your .ipynb</li>
-</ul>
+<p>Setup:</p>
+
+<pre><code>conda install -y jupyter keras-gpu</code></pre>
+<p><a href="https://stackoverflow.com/questions/38009682/how-to-tell-if-tensorflow-is-using-gpu-acceleration-from-inside-python-shell">https://stackoverflow.com/questions/38009682/how-to-tell-if-tensorflow-is-using-gpu-acceleration-from-inside-python-shell</a></p>
+<p><a href="https://stackoverflow.com/questions/45662253/can-i-run-keras-model-on-gpu">https://stackoverflow.com/questions/45662253/can-i-run-keras-model-on-gpu</a></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Section-0:-Team-Members">Section 0: Team Members<a class="anchor-link" href="#Section-0:-Team-Members">&#182;</a></h2><ul>
-<li>Member 1</li>
-<li>Member 2</li>
-</ul>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;/gpu:0&#39;</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+</pre></div>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[22. 28.]
+ [49. 64.]]
+</pre>
 </div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Section-1:-Project-Title">Section 1: Project Title<a class="anchor-link" href="#Section-1:-Project-Title">&#182;</a></h2><ul>
-<li>The title should 1 sentence that describes the goal of this project.</li>
-<li>Example: Clustering analysis of COE premiums and quotas</li>
-</ul>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras</span> <span class="k">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<span class="n">K</span><span class="o">.</span><span class="n">tensorflow_backend</span><span class="o">.</span><span class="n">_get_available_gpus</span><span class="p">()</span>
+</pre></div>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Using TensorFlow backend.
+</pre>
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Section-2:-Project-Definition">Section 2: Project Definition<a class="anchor-link" href="#Section-2:-Project-Definition">&#182;</a></h2><h3 id="Goals">Goals<a class="anchor-link" href="#Goals">&#182;</a></h3><p>Describe the goal of this project.</p>
-<p>Example:
-The goal of this project is to determine if the bid quotas and premiums can be &gt; used to predict the vehicle category.</p>
-<p>Important:</p>
-<ul>
-<li>If this is your first project, keep the project definition as simple as possible. </li>
-<li>As a rule of thumb, pick something that can be completed in 3-5 hours. There is always more you can add to it if you finish early. </li>
-<li>If you are not sure, use the workshop problems as a reference.</li>
-</ul>
-<h3 id="Dataset">Dataset<a class="anchor-link" href="#Dataset">&#182;</a></h3><p>Briefly describe the source(s) of data you are using.</p>
-<ul>
-<li>Provide the URL to the data source.</li>
-<li>If you are providing your own data set, include the data with your project submission.</li>
-<li>You can find sample datasets from:<ul>
-<li><a href="http://archive.ics.uci.edu/ml/datasets.html">http://archive.ics.uci.edu/ml/datasets.html</a></li>
-<li><a href="http://data.gov.sg/">http://data.gov.sg/</a></li>
-</ul>
-</li>
-</ul>
-<p>Example:</p>
-<p>We will use the dataset from: <a href="https://data.gov.sg/dataset/coe-bidding-results">https://data.gov.sg/dataset/coe-bidding-results</a></p>
-<h4 id="Format:-CSV">Format: CSV<a class="anchor-link" href="#Format:-CSV">&#182;</a></h4><h4 id="Columns:">Columns:<a class="anchor-link" href="#Columns:">&#182;</a></h4><table>
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Unit of Measure</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>month</td>
-<td>Datetime, YYYY-MM</td>
-<td>none</td>
-<td>date range: Jan 1, 2010 to Mar 31, 2018</td>
-</tr>
-<tr>
-<td>bidding_no</td>
-<td>Numeric</td>
-<td>No. of Bids</td>
-<td>Number of Bids</td>
-</tr>
-<tr>
-<td>vehicle_class</td>
-<td>Text</td>
-<td>none</td>
-<td>Vehicle category: A to E</td>
-</tr>
-<tr>
-<td>quota</td>
-<td>Numeric</td>
-<td>No. of Bids</td>
-<td>Number of Quota</td>
-</tr>
-<tr>
-<td>bids_success</td>
-<td>Numeric</td>
-<td>No. of Bids</td>
-<td>Number of Successful Bids</td>
-</tr>
-<tr>
-<td>bids_received</td>
-<td>Numeric</td>
-<td>No. of Bids</td>
-<td>Number of Bids Received</td>
-</tr>
-<tr>
-<td>premium</td>
-<td>Numeric</td>
-<td>S$</td>
-<td>COE premium</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Tasks">Tasks<a class="anchor-link" href="#Tasks">&#182;</a></h3><p>List the tasks you will perform.</p>
-<p>Example:</p>
-<ol>
-<li>Process the dataset to convert strings into labels.</li>
-<li>Shuffle and split into train and test sets</li>
-<li>Train a clustering algorithm, using Gaussian Mixture Model with 5 components, where each component is a vehicle category.</li>
-<li>Compute the metrics for the algorithm.</li>
-<li>Perform analysis for possible improvements.</li>
-</ol>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;/job:localhost/replica:0/task:0/device:GPU:0&#39;,
+ &#39;/job:localhost/replica:0/task:0/device:GPU:1&#39;]</pre>
+</div>
+
+</div>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Section-3:-Prepare-Dataset">Section 3: Prepare Dataset<a class="anchor-link" href="#Section-3:-Prepare-Dataset">&#182;</a></h2><p>Write your code below to prepare the dataset using pandas</p>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Section-4:-Select-Features">Section 4: Select Features<a class="anchor-link" href="#Section-4:-Select-Features">&#182;</a></h2><p>Write your code below to create X_train, X_test, y_train, y_test</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Section-5:-Train-the-algorithm(s)">Section 5: Train the algorithm(s)<a class="anchor-link" href="#Section-5:-Train-the-algorithm(s)">&#182;</a></h2><p>Write your code below to initialize and train the algorithm(s)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Section-6:-Evaluate-metrics">Section 6: Evaluate metrics<a class="anchor-link" href="#Section-6:-Evaluate-metrics">&#182;</a></h2><p>Write your code below to evaluate metrics for the trained algorithm(s).</p>
-<p>Feel free to plot the algorithm to visualize it, as appropriately.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Section-7:-Observations-and-analysis">Section 7: Observations and analysis<a class="anchor-link" href="#Section-7:-Observations-and-analysis">&#182;</a></h2><p>Answer the following questions:</p>
-<ol>
-<li><p>How did you measure the algorithm? Specify the metrics you used.</p>
-</li>
-<li><p>What is the outcome of the measurement? Explain the interpretation of the metrics.</p>
-<ul>
-<li>Is there overfitting or underfitting?</li>
-<li>Is there low accuracy or high error? If so, why do you think this is the case?</li>
-</ul>
-</li>
-<li><p>What improvements do you propose?</p>
-</li>
-<li><p>What is the most challenging part of this project?</p>
-</li>
-</ol>
-
-</div>
-</div>
 </div>
 </div>
 </div>
