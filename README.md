@@ -15,6 +15,10 @@ Slides and Workshop material (under development) for the Machine Learning classe
 
 [![MacOS Setup](https://img.youtube.com/vi/fjzx9HKGEzQ/0.jpg)](https://www.youtube.com/watch?v=fjzx9HKGEzQ)
 
+### Slides
+
+Slides are now on [Google Drive](https://drive.google.com/open?id=1uauf1-ai_tusU8A4COTEBmYdGoXnDNP1)
+
 ### Module index
 
 The index contains links to HTML renderings of the Jupyter notebooks for browsing convenience.
