@@ -11921,7 +11921,7 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[171]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">IFrame</span>
@@ -11935,48 +11935,10 @@ a.anchor-link {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>HDB Resale Price Index (Univariate)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[171]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-        <iframe
-            width="600"
-            height="400"
-            src="https://data.gov.sg/dataset/hdb-resale-price-index/resource/52e93430-01b7-4de0-80df-bc83d0afed40/view/14c47d07-1395-4661-8466-728abce27f5f"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
-        
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[172]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">IFrame</span>
@@ -11990,44 +11952,15 @@ a.anchor-link {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Annual Average Weekly Paid Hours Worked Per Employee, By Industry And Type Of Employment (Multi-variate)
-</pre>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[172]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-        <iframe
-            width="600"
-            height="400"
-            src="https://data.gov.sg/dataset/average-weekly-paid-hours-worked-per-employee-by-industry-and-type-of-employment-annual/resource/dd2147ce-20b7-401c-ac8f-8dbcc0d8e0d9/view/431f44b1-e58d-4131-998d-7e7aeee14479"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
-        
-</div>
-
-</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Time-Series-Introduction-and-Concepts">Time Series Introduction and Concepts<a class="anchor-link" href="#Time-Series-Introduction-and-Concepts">&#182;</a></h2><p><a href="https://otexts.org/fpp2/intro.html">https://otexts.org/fpp2/intro.html</a></p>
 
 </div>
 </div>
-
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12062,6 +11995,8 @@ a.anchor-link {
 <p>We will use the <a href="https://www.statsmodels.org/stable/index.html">StatsModels</a> Python library to perform the decomposition.</p>
 <p>This library will also be used later to perform statistical analysis. <a href="https://pandas.pydata.org/pandas-docs/stable/timeseries.html">Pandas</a> is also useful for manipulating time series data.</p>
 
+<pre><code>(mldds03) pip install statsmodels</code></pre>
+
 </div>
 </div>
 </div>
@@ -12081,7 +12016,7 @@ a.anchor-link {
 <span class="c1"># Dataset URL: https://data.gov.sg/dataset/hdb-resale-price-index</span>
 <span class="c1">#</span>
 <span class="c1"># Update this path to match your actual path</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;D:</span><span class="se">\\</span><span class="s1">tmp</span><span class="se">\\</span><span class="s1">hdb-resale-price-index</span><span class="se">\\</span><span class="s1">housing-and-development-board-resale-price-index-1q2009-100-quarterly.csv&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/hdb-resale-price-index/housing-and-development-board-resale-price-index-1q2009-100-quarterly.csv&#39;</span>
 
 <span class="c1"># load data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -12193,6 +12128,7 @@ a.anchor-link {
 <li>The purpose of decomposition is to "subtract" known variability and simpilify creating models. For example, we can ignore the seasonal component and focus on predicting the trend.</li>
 <li><code>series_decompose</code> uses a naive implementation. For a more advanced decomposition library, see <a href="https://github.com/jrmontag/STLDecompose/blob/master/STL%20usage%20example.ipynb">STLDecompose</a></li>
 </ul>
+<h2 id="Frequency">Frequency<a class="anchor-link" href="#Frequency">&#182;</a></h2><p><a href="https://github.com/statsmodels/statsmodels/blob/master/statsmodels/tsa/tsatools.py#L755">https://github.com/statsmodels/statsmodels/blob/master/statsmodels/tsa/tsatools.py#L755</a></p>
 
 </div>
 </div>
@@ -12307,7 +12243,7 @@ a.anchor-link {
 <span class="c1"># Dataset URL: https://data.gov.sg/dataset/hdb-resale-price-index</span>
 <span class="c1">#</span>
 <span class="c1"># Update this path to match your actual path</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;D:</span><span class="se">\\</span><span class="s1">tmp</span><span class="se">\\</span><span class="s1">hdb-resale-price-index</span><span class="se">\\</span><span class="s1">housing-and-development-board-resale-price-index-1q2009-100-quarterly.csv&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/hdb-resale-price-index/housing-and-development-board-resale-price-index-1q2009-100-quarterly.csv&#39;</span>
 
 <span class="c1"># load data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -12938,7 +12874,7 @@ $$score = MSE(y, \hat{y})$$</p>
 <span class="c1"># Dataset URL: https://data.gov.sg/dataset/hdb-resale-price-index</span>
 <span class="c1">#</span>
 <span class="c1"># Update this path to match your actual path</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;D:</span><span class="se">\\</span><span class="s1">tmp</span><span class="se">\\</span><span class="s1">hdb-resale-price-index</span><span class="se">\\</span><span class="s1">housing-and-development-board-resale-price-index-1q2009-100-quarterly.csv&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/hdb-resale-price-index/housing-and-development-board-resale-price-index-1q2009-100-quarterly.csv&#39;</span>
 
 <span class="c1"># load data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -13165,7 +13101,7 @@ $$score = MSE(y, \hat{y})$$</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">order_arima</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train_ts</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train_ts</span><span class="p">,</span> <span class="n">order_arima</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> arima_model = model.fit()
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AIC:&quot;</span><span class="p">,</span> <span class="n">arima_model</span><span class="o">.</span><span class="n">aic</span><span class="p">,</span> <span class="s2">&quot;BIC:&quot;</span><span class="p">,</span> <span class="n">arima_model</span><span class="o">.</span><span class="n">bic</span><span class="p">)</span>
 </pre></div>
@@ -13303,7 +13239,7 @@ $$score = MSE(y, \hat{y})$$</p>
 <span class="c1"># Dataset URL: https://data.gov.sg/dataset/average-weekly-paid-hours-worked-per-employee-by-industry-and-type-of-employment-annual</span>
 <span class="c1">#</span>
 <span class="c1"># Update this path to match your actual path</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;D:</span><span class="se">\\</span><span class="s1">tmp</span><span class="se">\\</span><span class="s1">weekly-paid-hours</span><span class="se">\\</span><span class="s1">average-weekly-paid-hours-worked-per-employee-by-type-of-employment-topline.csv&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/weekly-paid-hours/average-weekly-paid-hours-worked-per-employee-by-type-of-employment-topline.csv&#39;</span>
 
 <span class="c1"># load data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>

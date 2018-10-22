@@ -12649,7 +12649,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Accuracy">Accuracy<a class="anchor-link" href="#Accuracy">&#182;</a></h3><p>$$accuracy(y\_true, y\_pred) = \frac{true\_positives + true\_negatives}{total}$$</p>
+<h3 id="Accuracy">Accuracy<a class="anchor-link" href="#Accuracy">&#182;</a></h3><p>Meaning: what proportion of the samples did the classifier predict correctly?</p>
+<p>$$accuracy(y\_true, y\_pred) = \frac{true\_positives + true\_negatives}{total}$$</p>
 <p>What's the accuracy in our example?</p>
 
 </div>
@@ -12659,7 +12660,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Precision">Precision<a class="anchor-link" href="#Precision">&#182;</a></h3><p>$$precision(y\_true, y\_pred) = \frac{true\_positives}{true\_positives + false\_positives}$$</p>
+<h3 id="Precision">Precision<a class="anchor-link" href="#Precision">&#182;</a></h3><p>Meaning: of the samples the classifier predicted TRUE, what proportion did it get correct (i.e. actually true)? The goal is to reduce false positives.</p>
+<p>$$precision(y\_true, y\_pred) = \frac{true\_positives}{true\_positives + false\_positives}$$</p>
 <p>What's the precision in our example?</p>
 
 </div>
@@ -12669,7 +12671,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Recall-(True-Positive-Rate-/-Sensitivity)">Recall (True Positive Rate / Sensitivity)<a class="anchor-link" href="#Recall-(True-Positive-Rate-/-Sensitivity)">&#182;</a></h3><p>$$recall(y\_true, y\_pred) = \frac{true\_positives}{true\_positives + false\_negatives}$$</p>
+<h3 id="Recall-(True-Positive-Rate-/-Sensitivity)">Recall (True Positive Rate / Sensitivity)<a class="anchor-link" href="#Recall-(True-Positive-Rate-/-Sensitivity)">&#182;</a></h3><p>Meaning: of all the TRUE samples, what proprtion did the classifier predict to be TRUE? (How many of the TRUE predictions did the classifier recall)</p>
+<p>$$recall(y\_true, y\_pred) = \frac{true\_positives}{true\_positives + false\_negatives}$$</p>
 <p>What's the recall in our example?</p>
 
 </div>
@@ -12679,7 +12682,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Specificity-(1---True-Negative-Rate)">Specificity (1 - True Negative Rate)<a class="anchor-link" href="#Specificity-(1---True-Negative-Rate)">&#182;</a></h3><p>$$specificity(y\_true, y\_pred) = \frac{true\_negatives}{true\_negatives + false\_positives}$$</p>
+<h3 id="Specificity-(True-Negative-Rate)">Specificity (True Negative Rate)<a class="anchor-link" href="#Specificity-(True-Negative-Rate)">&#182;</a></h3><p>Meaning: of all the FALSE samples, what proportion did the clasifier predict to be FALSE?</p>
+<p>$$specificity(y\_true, y\_pred) = \frac{true\_negatives}{true\_negatives + false\_positives}$$</p>
 <p>What's the specificity in our example?</p>
 
 </div>
@@ -12689,7 +12693,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="F1-score-/-F-measure">F1 score / F measure<a class="anchor-link" href="#F1-score-/-F-measure">&#182;</a></h3><p>$$F(y\_true, y\_pred) = 2 * \frac{precision * recall}{precision + recall}$$</p>
+<h3 id="F1-score-/-F-measure">F1 score / F measure<a class="anchor-link" href="#F1-score-/-F-measure">&#182;</a></h3><p>Meaning: a combination of both Precision and Recall in 1 number. This is a harmonic mean of two numbers that uses the standard equation 2AB/(A+B).</p>
+<p>$$F(y\_true, y\_pred) = 2 * \frac{precision * recall}{precision + recall}$$</p>
 
 </div>
 </div>

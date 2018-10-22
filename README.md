@@ -15,6 +15,10 @@ Slides and Workshop material (under development) for the Machine Learning classe
 
 [![MacOS Setup](https://img.youtube.com/vi/fjzx9HKGEzQ/0.jpg)](https://www.youtube.com/watch?v=fjzx9HKGEzQ)
 
+### Slides
+
+Slides are now on [Google Drive](https://drive.google.com/open?id=1uauf1-ai_tusU8A4COTEBmYdGoXnDNP1)
+
 ### Module index
 
 The index contains links to HTML renderings of the Jupyter notebooks for browsing convenience.
@@ -45,30 +49,18 @@ To run the workshop exercises, you can clone this [repository](https://github.co
   - 3.4 Adversarial Learning [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/adversarial.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/adversarial.ipynb)]
   - 3.5 Text Processing [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/text.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/text.ipynb)]
   - 3.6 Word Vectors [[html](https://lisaong.github.io/mldds-courseware/03_TextImage/word-vectors.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/03_TextImage/word-vectors.ipynb)]
-  - 3.7 Recurrent Neural Networks
-  - 3.8 Text Sentiment
 
-- 4 Time Series Forecasting and Speech Recognition
+- 4 Recurrent Networks, Time Series Forecasting and Speech Recognition
   - 4.1 Time Series Forecasting [[html](https://lisaong.github.io/mldds-courseware/04_SpeechTimeSeries/timeseries.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/04_SpeechTimeSeries/timeseries.ipynb)]
   - 4.2 Speech Recognition [[html](https://lisaong.github.io/mldds-courseware/04_SpeechTimeSeries/speech.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/04_SpeechTimeSeries/speech.ipynb)]
 
-- 5 Best Practices
-  - 5.1 Data Gathering
-  - 5.2 Data Analysis
-  - 5.3 Feature Engineering
-  - 5.4 Debugging
+- 5 Deployment
+  - 5.1 Deploying an Scikit-learn model [[train](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/sklearn_example.train.py), [deploy](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/sklearn_example.deploy.py)]
+  - 5.2 Deploying a Keras model [[train](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/keras_example.train.py), [deploy](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/keras_example.deploy.py)]
+  - 5.3 Setting up Tensorflow with GPU [[html](https://lisaong.github.io/mldds-courseware/05_Deploy/tensorflow_gpu.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/05_Deploy/tensorflow_gpu.ipynb)]
 
-### Viewing Slides
-The non-coding portions of the Jupyter notebooks can be presented as a slide show. To view as a slide show:
-```
-conda install -c damianavila82 rise
-```
-
-Then from the Jupyter notebook:
-- Alt-r, "Enter/Exit Live Reveal Slideshow
-- Shift-i, Toggle slide
-- Shift-u, Toggle subslide
-- Shift-f, Toggle fragment
+- 6 Project
+  - 6.1 Template [[html](https://lisaong.github.io/mldds-courseware/06_Project/project-template.slides.html), [ipynb](https://github.com/lisaong/mldds-courseware/blob/master/06_Project/project-template.ipynb)]
 
 ##### StackUp | Institute of Systems Science | National University of Singapore
 

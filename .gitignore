@@ -1,5 +1,6 @@
 node_modules/
 desktop.ini
+.DS_Store
 .vscode
 *.binary
 *.docx

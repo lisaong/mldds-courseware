@@ -11973,7 +11973,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h3><p>Install the Python image library:</p>
+<h3 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h3><p>Install the Python image library from your conda environment:</p>
 
 <pre><code>conda install pillow</code></pre>
 
@@ -12053,7 +12053,7 @@ a.anchor-link {
 
 <span class="c1"># display the image</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;moar food (224x224)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;moar smaller (224x224)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -12394,6 +12394,33 @@ a.anchor-link {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># inspect somewhere in the middle of image (that&#39;s not black)</span>
+<span class="n">input_arr</span><span class="p">[</span><span class="mi">112</span><span class="p">:</span><span class="mi">114</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sigmoid</span><span class="p">(</span><span class="n">input_arr</span><span class="p">[</span><span class="mi">112</span><span class="p">:</span><span class="mi">114</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -12403,6 +12430,32 @@ a.anchor-link {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">input_arr</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + tanh&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_arr</span><span class="p">[</span><span class="mi">112</span><span class="p">:</span><span class="mi">114</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sigmoid</span><span class="p">(</span><span class="n">input_arr</span><span class="p">[</span><span class="mi">112</span><span class="p">:</span><span class="mi">114</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12438,6 +12491,32 @@ a.anchor-link {
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_arr</span><span class="p">[</span><span class="mi">112</span><span class="p">:</span><span class="mi">114</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">relu</span><span class="p">(</span><span class="n">input_arr</span><span class="p">[</span><span class="mi">112</span><span class="p">:</span><span class="mi">114</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12462,6 +12541,19 @@ x &amp; if\,x &gt; 0 \\
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">leaky_relu</span><span class="p">(</span><span class="n">input_arr</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;edges + Leaky ReLU&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">leaky_relu</span><span class="p">(</span><span class="n">input_arr</span><span class="p">[</span><span class="mi">112</span><span class="p">:</span><span class="mi">114</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12509,7 +12601,7 @@ x &amp; if\,x &gt; 0 \\
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Walkthrough---Pooling">Walkthrough - Pooling<a class="anchor-link" href="#Walkthrough---Pooling">&#182;</a></h2><p>Let's see what happens when we pass our convolved + activated image through various pooling functions.</p>
-<h3 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h3><p>Install the skimage library:</p>
+<h3 id="Setup">Setup<a class="anchor-link" href="#Setup">&#182;</a></h3><p>Install the skimage library in your conda environment:</p>
 
 <pre><code>conda install scikit-image</code></pre>
 
@@ -12549,13 +12641,96 @@ x &amp; if\,x &gt; 0 \\
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After activation:&#39;</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="c1"># (2, 2) will halve the size of the output</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After pooling (2, 2):&#39;</span><span class="p">,</span> <span class="n">max_pool</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After max pooling (2, 2):&#39;</span><span class="p">,</span> <span class="n">max_pool</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Max-Pool">Max Pool<a class="anchor-link" href="#Max-Pool">&#182;</a></h3><p>pool_size=(2, 2) means that it takes a 2x2 square and outputs 1 number.</p>
+<p>The number is the maximum of the 4 numbers in that 2x2 square.</p>
+<p>If the size is not divisible by pool_size, there are two choices:</p>
+<ul>
+<li>With zero padding: pad by zeros to make the size divisible. Then perform MaxPooling operation</li>
+<li>Without zero padding: behavior is not defined. Some libraries will drop these "edge" values.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">edges</span><span class="p">[</span><span class="mi">70</span><span class="p">:</span><span class="mi">71</span><span class="p">]</span> <span class="c1"># somewhere in middle of image</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">)[</span><span class="mi">70</span><span class="p">:</span><span class="mi">71</span><span class="p">]</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">max_pool</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">))[</span><span class="mi">70</span><span class="p">:</span><span class="mi">71</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before maxpool&#39;</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">)[</span><span class="mi">70</span><span class="p">:</span><span class="mi">71</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After maxpool (shape / 2)&#39;</span><span class="p">,</span> <span class="n">max_pool</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">edges</span><span class="p">))[</span><span class="mi">70</span><span class="p">:</span><span class="mi">71</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Average-Pool">Average Pool<a class="anchor-link" href="#Average-Pool">&#182;</a></h3><p>pool_size=(2, 2) means that it takes a 2x2 square and outputs 1 number.</p>
+<p>The number is the average of the 4 numbers in that 2x2 square.</p>
+<p>If the size is not divisible by the pool size, there are two choices:</p>
+<ul>
+<li>With zero padding: pad by zeros to make the size divisible. Then perform MaxPooling operation</li>
+<li>Without zero padding: behavior is not defined. Some libraries will drop these "edge" values.</li>
+</ul>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -12779,7 +12954,7 @@ x &amp; if\,x &gt; 0 \\
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># update this path to your own image</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;D:/tmp/mldds-courseware/03_TextImage/assets/image/cat.jpg&#39;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;assets/image/cat.jpg&#39;</span>
 </pre></div>
 
 </div>
@@ -12817,7 +12992,7 @@ x &amp; if\,x &gt; 0 \\
 <span class="sd">    Returns:</span>
 <span class="sd">        the resulting image</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageOps</span>
+    <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageOps</span>
     
     <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
@@ -12835,6 +13010,7 @@ x &amp; if\,x &gt; 0 \\
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Preprocess image input</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">keras.preprocessing.image</span> <span class="k">import</span> <span class="n">img_to_array</span>
 <span class="kn">from</span> <span class="nn">keras.applications.vgg16</span> <span class="k">import</span> <span class="n">preprocess_input</span><span class="p">,</span> <span class="n">decode_predictions</span>
 
