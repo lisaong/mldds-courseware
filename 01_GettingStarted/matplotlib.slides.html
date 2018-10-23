@@ -12348,8 +12348,7 @@ See: <a href="https://matplotlib.org/api/axes_api.html#appearance">https://matpl
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># we can get the Series for number of cases for one disease</span>
-<span class="n">df_diarrhoea</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">disease</span> <span class="o">==</span> <span class="s1">&#39;Acute Diarrhoea&#39;</span><span class="p">]</span>
-<span class="n">diarrhoea_cases</span> <span class="o">=</span> <span class="n">df_diarrhoea</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df_diarrhoea</span><span class="o">.</span><span class="n">index</span><span class="p">)[</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">diarrhoea_cases</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">disease</span> <span class="o">==</span> <span class="s1">&#39;Acute Diarrhoea&#39;</span><span class="p">,</span> <span class="s1">&#39;cases&#39;</span><span class="p">]</span>
 
 <span class="n">diarrhoea_cases</span>
 </pre></div>
@@ -12365,9 +12364,10 @@ See: <a href="https://matplotlib.org/api/axes_api.html#appearance">https://matpl
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># List comprehension will give us a list of Series</span>
-<span class="n">cases_per_disease</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">disease</span> <span class="o">==</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
-    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">disease</span> <span class="o">==</span> <span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)[</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
- <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">disease</span><span class="o">.</span><span class="n">unique</span><span class="p">()]</span>
+<span class="n">cases_per_disease</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">disease</span> <span class="o">==</span> <span class="n">d</span><span class="p">][</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">disease</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="p">]</span>
 
 <span class="n">cases_per_disease</span>
 </pre></div>
@@ -12485,9 +12485,7 @@ See: <a href="https://matplotlib.org/api/axes_api.html#appearance">https://matpl
 <span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2015-01-11&#39;</span><span class="p">)</span>
 <span class="n">means</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">date</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;disease&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-<span class="c1"># make sure we know how to access these values</span>
-<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">means</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="n">means</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">d</span><span class="p">][</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">means</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -12505,10 +12503,10 @@ See: <a href="https://matplotlib.org/api/axes_api.html#appearance">https://matpl
 <span class="c1"># Note: Recall that loc must be used in order to modify the actual DataFrame</span>
 <span class="c1"># otherwise you&#39;ll get a warning about modifying a copy of the DataFrame</span>
 
-<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">means</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">mean</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">means</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
     <span class="c1"># loc(row_selector, column_selector)</span>
     <span class="c1"># the division by 2 is so that their combined sum is the average value</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">date</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">disease</span> <span class="o">==</span> <span class="n">d</span><span class="p">),</span> <span class="s1">&#39;cases&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">means</span><span class="p">[</span><span class="n">means</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">d</span><span class="p">][</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">date</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">disease</span> <span class="o">==</span> <span class="n">d</span><span class="p">),</span> <span class="s1">&#39;cases&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">/</span> <span class="mi">2</span>
     
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">date</span><span class="p">,</span> <span class="p">:]</span>
 </pre></div>
