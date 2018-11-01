@@ -1,11 +1,9 @@
-Data source: https://secure.mas.gov.sg/msb/InterestRatesOfBanksAndFinanceCompanies.aspx
-
+Data source: [Monetary Authority of Singapore](https://secure.mas.gov.sg/msb/InterestRatesOfBanksAndFinanceCompanies.aspx)
 
 ## Dataset: prime_lending_rates_1983-2018_6mth_window.csv
 
 Attributes:
-
-- current_date: the current year and month (for reference)
+- current_date: the current year and month (for reference only, do NOT use for training/prediction)
 - t-5: interest rate at (current_date - 5 months), in % p.a.
 - t-4: interest rate at (current_date - 4 months), in % p.a.
 - t-3: interest rate at (current_date - 3 months), in % p.a.
