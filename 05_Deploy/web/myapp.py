@@ -19,8 +19,18 @@ def hello():
 @app.route('/form', methods=['GET', 'POST'])
 def form_example():
     if request.method == 'POST':
-        cylinders = request.form['cylinders']
-        return f"""{cylinders}"""
+        X = [int(request.form.get('cylinders')),
+            float(request.form.get('displacement')),
+            float(request.form.get('horsepower')),
+            float(request.form.get('weight')),
+            float(request.form.get('acceleration')),
+            int(request.form.get('model_year')),
+            int(request.form.get('origin'))]
+
+        prediction = model.predict([X]).ravel()[0]
+
+        return f"""Prediction for {dict(request.form)}:<br>
+             {prediction:.3f} mpg"""
 
     # render a jinja template using pre-defined parameters
     return render_template('form.html',
