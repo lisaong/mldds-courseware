@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import pandas as pd
 
 from models import AutoMpg_Sklearn
@@ -18,7 +18,11 @@ def hello():
 
 @app.route('/form', methods=['GET', 'POST'])
 def form_example():
-    # render a jinja template using pre-defined options lists
+    if request.method == 'POST':
+        cylinders = request.form['cylinders']
+        return f"""{cylinders}"""
+
+    # render a jinja template using pre-defined parameters
     return render_template('form.html',
         model_year_min=70, model_year_max=82,
         cylinder_options=[4, 6, 8],
