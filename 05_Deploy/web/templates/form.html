@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fuel Efficiency Predictor</title>
+</head>
+<body>
+<h1>Fuel Efficiency Predictor</h1>
+<form method="POST">
+    <table>
+        <tr>
+          <td>Cylinders</td>
+          <td>
+            <select name="cylinders">
+              {% for each in cylinder_options %}
+                <option value="{{each}}">{{each}}</option>
+              {% endfor %}
+            </select>
+          </td> 
+        </tr>
+        <tr>
+          <td>Displacement (e.g. 300.0)</td>
+          <td><input type="text" name="displacement"></td> 
+        </tr>
+        <tr>
+          <td>Horsepower (e.g. 150.0)</td>
+          <td><input type="text" name="horsepower"></td> 
+        </tr>
+        <tr>
+          <td>Weight (e.g. 2000)</td>
+          <td><input type="text" name="weight"></td> 
+        </tr>
+        <tr>
+          <td>Acceleration (e.g. 19.5)</td>
+          <td><input type="text" name="acceleration"></td> 
+        </tr>
+        <tr>
+          <td>Model Year</td>
+          <td>
+            <div id="model_year_value" style="display:inline;"></div>
+            <input type="range" min="{{model_year_min}}" max="{{model_year_max}}"
+              value="{{model_year_min}}" id="model_year_slider" name="model_year">
+          </td> 
+        </tr>
+        <tr>
+          <td>Origin Country Code</td>
+          <td><select name="origin">
+              {% for each in origin_options %}
+                <option value="{{each}}">{{each}}</option>
+              {% endfor %}
+            </select>
+          </td> 
+        </tr>
+      </table>
+    <input type="submit" value="Submit"><br>
+</form>
+
+<script>
+    var slider = document.getElementById("model_year_slider");
+    var output = document.getElementById("model_year_value");
+    output.innerHTML = slider.value;
+    
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+</script>
+
+</body>
+</html>
