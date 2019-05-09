@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fuel Efficiency Predictor</title>
+</head>
+<body>
+<h1>Fuel Efficiency Predictor</h1>
+{% for key, value in parameters.items() %}
+  <div>{{key}}: {{value[0]}}</div>
+{% endfor %}
+
+<h2>Prediction: {{prediction}} mpg</h2>
+
+</body>
+</html>
