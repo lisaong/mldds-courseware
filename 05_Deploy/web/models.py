@@ -26,7 +26,7 @@ class AutoMpg_Sklearn:
 
 if __name__ == '__main__':
     # for testing purposes
-    m = AutoMpgSklearnModel()
+    m = AutoMpg_Sklearn()
 
     df = pd.read_csv('../auto-mpg.data-nans.txt',
                     delim_whitespace=True, # the data uses whitespaces as separators instead of commas
