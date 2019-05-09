@@ -1,0 +1,163 @@
+# Metadata for National Library Board Infopedia Articles
+---
+Identifier: 'df3de44c-c93b-4f31-8f13-ee2dceabf1ec'
+Name: 'national-library-board-infopedia-articles'
+Title: 'National Library Board Infopedia Articles'
+Description:
+  - 'A list of Singapore Infopedia Articles by National Library Board.'
+  - ''
+  - 'Singapore Infopedia is an electronic encyclopedia on Singapore published by the
+    National Library Board (NLB). It holds a collection of articles on Singapore and
+    covers a wide range of topics, including but not limited to historical events,
+    arts, culture, economy, government and key personalities. The number of articles
+    continues to grow as new entries are added regularly.'
+  - ''
+  - 'The articles are written for the general reader, including students, with each
+    article providing an overview of the topic. However, every article is accompanied
+    by references that may be used to research the topic further. Related images in
+    selected articles and cross-referencing between related articles help to create
+    a more complete understanding of a particular topic.'
+  - ''
+  - 'All entries are based on verifiable, authoritative sources and are accurate as
+    far as we are able to ascertain at the time of publication. The articles present
+    information objectively and do not contain the writer''s or the editor''s personal
+    experiences or opinions.'
+Topics:
+  - 'Education'
+  - 'Society'
+Keywords:
+  - 'Arts'
+  - 'Catalogue'
+  - 'Culture'
+  - 'History'
+  - 'Lifestyle'
+  - 'NLB'
+  - 'Politics'
+Publisher:
+  Name: 'National Library Board'
+  Admin 1:
+    Name: 'Kayes Lim'
+    Department: 'Technology and Service Innovation'
+    Email: 'kayes_lim@nlb.gov.sg'
+  Admin 2:
+    Name: 'Patrick Cher'
+    Department: 'Technology and Service Innovation'
+    Email: 'patrick_cher@nlb.gov.sg'
+Sources:
+  - 'National Library Board'
+Source Url: 'http://www.nlb.gov.sg/labs/'
+License: 'https://data.gov.sg/open-data-licence'
+Frequency: 'Ad-hoc'
+Coverage: '2017-02-23 to 2017-02-23'
+Last Updated: '2018-11-05T01:44:59.608098'
+Resources:
+  -
+    Identifier: 'd0d710c6-5209-45ce-84f9-682f47088fcd'
+    Title: 'National Library Board Infopedia Articles'
+    Url: 'https://storage.data.gov.sg/national-library-board-infopedia-articles/resources/national-library-board-infopedia-articles-2018-11-05T01-44-58Z.csv'
+    Format: 'CSV'
+    Coverage: '2017-02-23 to 2017-02-23'
+    Description: '####Data is refreshed weekly at http://opendata.nlb.gov.sg/content/opds/datagovsg/sg-infopedia.csv'
+    Last Updated: '2018-11-05T01:44:58.428383'
+    Schema:
+      -
+        Name: 'uid'
+        Title: 'Uid'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: 'Unique ID of the item'
+      -
+        Name: 'book_title'
+        Title: 'Book title'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: 'Title of the item'
+      -
+        Name: 'subject'
+        Title: 'Subject'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - 'Subject of the item.'
+          - 'There may be multiple subjects separated by "|" characters.'
+          - '"na" : unknown or not available'
+      -
+        Name: 'summary'
+        Title: 'Summary'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: 'A short summary of the item'
+      -
+        Name: 'original_publisher'
+        Title: 'Original publisher'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - 'Original publisher of the item'
+          - '"na" : unknown or not available'
+      -
+        Name: 'digital_publisher'
+        Title: 'Digital publisher'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - 'Digital publisher of the item'
+          - '"na" : unknown or not available'
+      -
+        Name: 'format'
+        Title: 'Format'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: 'The format of the item'
+      -
+        Name: 'language'
+        Title: 'Language'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - 'The language the item is in.'
+          - 'The column uses ISO 639 3 letters code as per http://www.iso.org/iso/home/standards/language_codes.htm'
+          - '"na" : unknown or not available'
+      -
+        Name: 'copyright'
+        Title: 'Copyright'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - 'The copyright description of the item'
+          - '"na" : unknown or not available'
+      -
+        Name: 'author_name'
+        Title: 'Author name'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - 'Name of the creator of the item.'
+          - 'If there are multiple creators, they will be separated by the "|" character.'
+      -
+        Name: 'published'
+        Title: 'Published'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - 'The date of publication of the item, can be blank if it is unknown.'
+          - 'The value are documented according to MARC standard at http://www.marc21.ca/index-e.html'
+          - '"na" : unknown or not available'
+      -
+        Name: 'resource_url'
+        Title: 'Resource URL'
+        Type: 'text'
+        Sub Type: 'url'
+        Description: 'Link to the article page.'
+      -
+        Name: 'cover'
+        Title: 'Cover'
+        Type: 'text'
+        Sub Type: 'url'
+        Description: 'The URL to the cover image of the item'
+      -
+        Name: 'thumbnail'
+        Title: 'Thumbnail'
+        Type: 'text'
+        Sub Type: 'url'
+        Description: 'The URL to the thumbnail of the cover image of the item'
