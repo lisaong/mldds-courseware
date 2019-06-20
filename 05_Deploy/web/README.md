@@ -27,9 +27,10 @@ Go to http://127.0.0.1:5000 from your browser.
 
 ## Deploy
 
-To keep the deployment size small, it is a good practice to create another conda environment (or virtual environment) that only contains the python packages that are used in the Flask app. You can refer to requirements.txt to see the required packages.
-
-Update zappa_settings.json to point to your AWS credentials (stored in %UserProfile%\.aws or ~/.aws), see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for details.
+1. To keep the deployment size small, it is a good practice to create another conda environment (or virtual environment) that only contains the python packages that are used in the Flask app. You can refer to requirements.txt to see the required packages.
+2. Update zappa_settings.json to point to your AWS credentials (stored in %UserProfile%\.aws or ~/.aws), see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for details.
+3. Upload the pickle files to the S3 bucket for the Lambda.
+4. Ensure that the MODEL_PATH environment is set to `/tmp` for the Lambda.
 
 ```
 set VIRTUAL_ENV=/path/to/virtual/env
@@ -40,7 +41,6 @@ To view deployment errors:
 ```
 zappa tail
 ```
-
 
 ## Code Layout:
 * myapp.py: a simple Flask application. This supports a POST and GET request to a form that receives user input. Note that this form is just an example of one way to receive input. A more automated way is to define a REST API that receives the input in JSON format. 
