@@ -27,15 +27,13 @@ class AutoMpg_Sklearn:
 
 def get_model_files():
     dest_path = os.getenv('MODEL_PATH', None)
-    if dest_path is not None:
+    bucket_name = os.getenv('S3_BUCKET', None)
+    if bucket_name is not None:
         s3 = boto3.resource('s3')
-        dest_path = '/tmp'
-        s3.download_file('zappa-8u6bzdej6', 'X_scaler.pickle', 
-            f'{dest_path}/X_scaler.pickle')
-        s3.download_file('zappa-8u6bzdej6', 'y_scaler.pickle',
-            f'{dest_path}/y_scaler.pickle')
-        s3.download_file('zappa-8u6bzdej6', 'model.pickle',
-            f'{dest_path}/model.pickle')
+        bucket = s3.Bucket(bucket_name)
+        bucket.download_file('X_scaler.pickle', f'{dest_path}/X_scaler.pickle')
+        bucket.download_file('y_scaler.pickle', f'{dest_path}/y_scaler.pickle')
+        bucket.download_file('model.pickle', f'{dest_path}/model.pickle')
     else:
         dest_path = '..' # try a local relative path
     return dest_path
