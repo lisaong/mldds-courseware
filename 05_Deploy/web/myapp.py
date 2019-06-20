@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
 import pandas as pd
+import os
 
-from models import AutoMpg_Sklearn
+from models import AutoMpg_Sklearn, get_model_files
 
 app = Flask(__name__)
-model = AutoMpg_Sklearn()
+model_path = get_model_files()
+model = AutoMpg_Sklearn(model_path=model_path)
 
 @app.route('/', methods=['GET', 'POST'])
 def form_example():
