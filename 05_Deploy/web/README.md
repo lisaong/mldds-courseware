@@ -28,16 +28,24 @@ Go to http://127.0.0.1:5000 from your browser.
 ## Deploy
 
 1. To keep the deployment size small, it is a good practice to create another conda environment (or virtual environment) that only contains the python packages that are used in the Flask app. You can refer to requirements.txt to see the required packages.
-2. Update zappa_settings.json to point to your AWS credentials (stored in %UserProfile%\.aws or ~/.aws), see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for details.
-3. Upload the pickle files to the S3 bucket for the Lambda.
-4. Ensure that the following environments are setup for the Lambda:
+2. Update `zappa_settings.json` to:
+  - Your AWS credentials (stored in %UserProfile%\.aws or ~/.aws), see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html for how to use the aws-cli
+  - Your S3 bucket name
+3. Ensure that the following environments are setup for the Lambda in AWS console:
   - MODEL_PATH to `/tmp`
-  - S3_BUCKET to the S3 bucket used in `zappa_settings.json`
+  - S3_BUCKET to the S3 bucket set in `zappa_settings.json`
 
+  For example:
+  ![config](lambda_config.png)
+
+4. Deploy the app
 ```
 set VIRTUAL_ENV=/path/to/virtual/env
 zappa deploy dev
 ```
+
+5. From AWS console, upload the pickle files to your S3 bucket that is created in step 4
+
 
 To view deployment errors:
 ```
