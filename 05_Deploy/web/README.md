@@ -42,6 +42,9 @@ To view deployment errors:
 zappa tail
 ```
 
+One common error is Flask not found. This can appear if `slim_handler` is set to true, due to a bug / limitation in Zappa (see: https://github.com/Miserlou/Zappa/issues/1491, for example).
+
+
 ## Code Layout:
 * myapp.py: a simple Flask application. This supports a POST and GET request to a form that receives user input. Note that this form is just an example of one way to receive input. A more automated way is to define a REST API that receives the input in JSON format. 
 * models.py: a python class that loads a pre-trained model (trained using sklearn_example.train.py in the parent folder), and uses the model to perform predictions.

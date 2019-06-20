@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 import pandas as pd
-import boto3
 import os
 
 from models import AutoMpg_Sklearn, get_model_files

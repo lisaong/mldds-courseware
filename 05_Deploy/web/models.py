@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import os
+import boto3
 
 class AutoMpg_Sklearn:
     def __init__(self, model_path):
