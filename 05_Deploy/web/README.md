@@ -8,24 +8,20 @@ Using the browser or a mobile app, a user sends raw input data to the web applic
 
 ## Setup
 ```
+conda create -n zappa python=3.6
+conda activate zappa
 pip install Flask zappa
+conda install scikit-learn pandas
 ```
 
-## Generate model
-```
-pushd ..
-python sklearn_example.train.py
-popd
-```
-
-## Run
+## Run locally
 ```
 python myapp.py
 ```
 
 Go to http://127.0.0.1:5000 from your browser.
 
-## Deploy
+## Deploy to AWS
 
 1. To keep the deployment size small, it is a good practice to create another conda environment (or virtual environment) that only contains the python packages that are used in the Flask app. You can refer to requirements.txt to see the required packages.
 2. Update `zappa_settings.json` to:
@@ -44,7 +40,19 @@ set VIRTUAL_ENV=/path/to/virtual/env
 zappa deploy dev
 ```
 
-5. From AWS console, upload the pickle files to your S3 bucket that is created in step 4
+Once deployed once, you need to use `update` to update the app
+```
+set VIRTUAL_ENV=/path/to/virtual/env
+zappa update dev
+```
+
+5. From AWS console, upload the pickle files to your S3 bucket that is created in step 4. Once the files are uploaded to S3, you can also test the model locally to verify that it can access S3:
+
+```
+set MODEL_PATH=tmp
+set S3_BUCKET=zappa-8u6bzdej6
+python myapp.py
+```
 
 
 To view deployment errors:
