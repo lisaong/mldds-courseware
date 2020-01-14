@@ -1,0 +1,13 @@
+{
+  "embeddings": [
+    {
+      "tensorName": "Cuisine Embeddings",
+      "tensorShape": [
+        2189,
+        10
+      ],
+      "tensorPath": "https://raw.githubusercontent.com/lisaong/mldds-courseware/master/04_SpeechTimeSeries/files/cusine_embedding/embeddings.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/lisaong/mldds-courseware/master/04_SpeechTimeSeries/files/cusine_embedding/embedding_metadata.tsv"
+    }
+  ]
+}
